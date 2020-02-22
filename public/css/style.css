@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+
+.layer-one {
+    display: flex;
+    flex-flow: row wrap;
+    height: 100vh;
+}
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.main-container {
+    color: #ECF3F7;
+}
+
+.layer-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: 0.01em;
+    margin-bottom: 2.5em;
+}
+
+.layer-label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+}
+
+body {
+    font-family: 'Nunito Sans';
+    max-height: 100vh;
+}
+
+.form-control {
+    background: #ECF3F7;
+    border-radius: 4px;
+}
+
+.form-group {
+    width: 280px;
+    height: 318px;
+}
+
+.one-layer {
+    width: 365px;
+    background-color: #174865;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.forget-pass {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #ECF3F7;
+}
+
+.forget-pass:hover {
+    color: lightgrey;
+}
+
+.btn-rentpaid {
+    width: 280px;
+    height: 40px;
+    left: 43px;
+    top: 644px;
+
+    background: #F7C50D;
+    border-radius: 4px;
+}
+
+.layer-two {
+    position: absolute;
+    width: 361px;
+    height: 95vh;
+    left: 24px;
+    top: 24px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background: #F7C50D;
+    z-index: -3;
+}
+
+.main-logo {
+    height: 100vh;
+    padding-top: 10vh;
+}

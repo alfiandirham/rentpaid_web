@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -65,6 +65,38 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div> --}}
+
+<div class="main-container container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="one-layer">
+                <div class="layer-one flex-column justify-content-center align-content-center">
+                    <div class="form-group">
+                        <h2 class="layer-title text-center">Masuk Akun</h2>
+                        <form action="" method="POST" class="form">
+                            <label class="layer-label" for="username">Username</label>
+                            <input class="form-control layer-form" placeholder="Masukan username atau no hp" name="username" type="text">
+                            <label for="password" class="layer-label mt-4">Password</label>
+                            <input type="password" placeholder="Masukan password" class="layer-form form-control">
+                            <a href="#" class="btn mt-3 float-right forget-pass">Lupa Password ?</a>
+                            <br>
+                            <input type="submit" class="btn mt-3 btn-rentpaid" value="Masuk Akun">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layer-two"></div>
+        <div class="float-right">
+                <div class=" float-right container col-md-9">
+                    <div class="main-logo">
+                        <img src="{{asset('img/logo 2.png')}}" class="img-fluid" alt="">
+                        <img class="img-fluid pt-5" src="{{asset('img/payment_illustration.png')}}" alt="">
+                    </div>
+                </div>
         </div>
     </div>
 </div>
