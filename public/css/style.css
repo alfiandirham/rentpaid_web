@@ -42,13 +42,27 @@ body {
     border-radius: 4px;
 }
 
-.form-group {
+.form-group-layer {
     width: 280px;
     height: 318px;
 }
 
+@media only screen and (max-width:991px) {
+    .form-group-layer {
+        width: 17em;
+    }
+
+    .btn-rentpaid {
+        width: 17em !important;
+    }
+
+    .one-layer {
+        width: 18em !important;
+    }
+}
+
 .one-layer {
-    width: 365px;
+    width: 22em;
     background-color: #174865;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -83,7 +97,7 @@ body {
 
 .layer-two {
     position: absolute;
-    width: 361px;
+    width: 21.4em;
     height: 95vh;
     left: 24px;
     top: 24px;
@@ -96,4 +110,45 @@ body {
 .main-logo {
     height: 100vh;
     padding-top: 10vh;
+}
+
+.row-sm {
+    display: flex;
+    max-height: 640px;
+    flex-flow: column wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.logo-sm {
+    display: flex;
+    align-items: center;
+    height: 254px;
+}
+
+.layer-sm-one {
+    display: flex;
+    justify-content: start;
+    padding-top: 4em;
+    align-items: center;
+    height: 100vh;
+}
+
+.bg-rentpaid {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: #174865;
+}
+
+.layer-two-sm {
+    margin-left: 2vh;
+    margin-right: 2vh;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 19px;
+    background: #F7C50D;
+}
+
+.main-container-sm {
+    color: #ECF3F7;
 }
