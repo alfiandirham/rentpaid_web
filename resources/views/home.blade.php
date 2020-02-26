@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.vuexy')
 
 @section('content')
 <div class="container">

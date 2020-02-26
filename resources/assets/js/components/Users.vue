@@ -1,256 +1,696 @@
 <template>
-    <div class="container">
-        <div class="row mt-5" v-if="$gate.isAdminOrAuthor()">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Users Table</h3>
-
-                <div class="card-tools">
-                    <button class="btn btn-success" @click="newModal">Add New <i class="fas fa-user-plus fa-fw"></i></button>
+  <div class="user">
+    <!-- users list start -->
+    <section class="users-list-wrapper">
+      <!-- users filter start -->
+      <div>
+        <h2 class="head-text">Users > List User</h2>
+      </div>
+      <div class="head-title">
+        <button
+          type="button"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+          class="btn btn-primary"
+        >
+          <i class="fa fa-user-plus"></i>
+          Tambah User
+        </button>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModalCenter"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog float-right modal-dialog-scrollable modal-nav-dialog"
+            role="document"
+          >
+            <div class="modal-nav">
+              <div class="modal-header modal-nav-header">
+                <h2>TAMBAH USER</h2>
+                <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
+              </div>
+              <div class="modal-body modal-nav-body">
+                <div class="row align-items-end" style="margin-left:0px;">
+                  <div class="col-4">
+                    <form
+                      action="#"
+                      class="dropzone dropzone-area row flex-column justify-content-between align-items-center"
+                      id="dpz-btn-select-files"
+                    >
+                      <div class="dz-message">Upload file</div>
+                      <i class="fa fa-cloud-upload"></i>
+                    </form>
+                  </div>
+                  <div class="col-8">
+                    <button id="select-files" class="btn btn-primary mb-1">
+                      <i class="icon-file2"></i> Ganti Foto
+                    </button>
+                  </div>
                 </div>
+                <form class="form mt-1 form-vertical">
+                  <div class="form-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label for="fname" class="clr-blue">Nama Lengkap</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="fname"
+                            placeholder="Nama Lengkap"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="ktp" placeholder="No. KTP" />
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="contact"
+                            placeholder="No. Telepon"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input type="email" class="form-control" name="email" placeholder="Email" />
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input
+                            type="password"
+                            class="form-control"
+                            name="contact"
+                            placeholder="Password"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <p>Tipe User</p>
+                        <ul class="list-unstyled mb-0">
+                          <li class="d-inline-block mr-2">
+                            <fieldset>
+                              <div class="vs-radio-con">
+                                <input type="radio" name="type" checked value="admin" />
+                                <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class>Sys Admin</span>
+                              </div>
+                            </fieldset>
+                          </li>
+                          <li class="d-inline-block mr-2">
+                            <fieldset>
+                              <div class="vs-radio-con">
+                                <input type="radio" name="type" value="staff" />
+                                <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class>Company Staff</span>
+                              </div>
+                            </fieldset>
+                          </li>
+                          <li class="d-inline-block mr-2">
+                            <fieldset>
+                              <div class="vs-radio-con">
+                                <input type="radio" name="type" value="user" />
+                                <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class>Collector</span>
+                              </div>
+                            </fieldset>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-12">
+                        <p>Status</p>
+                        <ul class="list-unstyled mb-0">
+                          <li class="d-inline-block mr-2">
+                            <fieldset>
+                              <div class="vs-radio-con">
+                                <input type="radio" name="status" checked value="true" />
+                                <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class>Aktif</span>
+                              </div>
+                            </fieldset>
+                          </li>
+                          <li class="d-inline-block mr-2">
+                            <fieldset>
+                              <div class="vs-radio-con">
+                                <input type="radio" name="status" value="false" />
+                                <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class>Tidak Aktif</span>
+                              </div>
+                            </fieldset>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover">
-                  <tbody>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Type</th>
-                        <th>Registered At</th>
-                        <th>Modify</th>
-                  </tr>
-
-
-                  <tr v-for="user in users.data" :key="user.id">
-
-                    <td>{{user.id}}</td>
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.type | upText}}</td>
-                    <td>{{user.created_at | myDate}}</td>
-
-                    <td>
-                        <a href="#" @click="editModal(user)">
-                            <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="#" @click="deleteUser(user.id)">
-                            <i class="fa fa-trash red"></i>
-                        </a>
-
-                    </td>
-                  </tr>
-                </tbody></table>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                  <pagination :data="users" @pagination-change-page="getResults"></pagination>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
               </div>
             </div>
-            <!-- /.card -->
           </div>
         </div>
-
-        <div v-if="!$gate.isAdminOrAuthor()">
-            <not-found></not-found>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Filters</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+            <ul class="list-inline mb-0">
+              <li>
+                <a data-action="collapse">
+                  <i class="feather icon-chevron-down"></i>
+                </a>
+              </li>
+              <li>
+                <a data-action>
+                  <i class="feather icon-rotate-cw users-data-filter"></i>
+                </a>
+              </li>
+              <li>
+                <a data-action="close">
+                  <i class="feather icon-x"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-
-    <!-- Modal -->
-            <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" v-show="!editmode" id="addNewLabel">Add New</h5>
-                    <h5 class="modal-title" v-show="editmode" id="addNewLabel">Update User's Info</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="users-list-filter">
+              <form>
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-role">Role</label>
+                    <fieldset class="form-group">
+                      <select class="form-control" id="users-list-role">
+                        <option value>All</option>
+                        <option value="user">User</option>
+                        <option value="staff">Staff</option>
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-status">Status</label>
+                    <fieldset class="form-group">
+                      <select class="form-control" id="users-list-status">
+                        <option value>All</option>
+                        <option value="Active">Active</option>
+                        <option value="Blocked">Blocked</option>
+                        <option value="deactivated">Deactivated</option>
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-verified">Verified</label>
+                    <fieldset class="form-group">
+                      <select class="form-control" id="users-list-verified">
+                        <option value>All</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-department">Department</label>
+                    <fieldset class="form-group">
+                      <select class="form-control" id="users-list-department">
+                        <option value>All</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Devlopment">Devlopment</option>
+                        <option value="Management">Management</option>
+                      </select>
+                    </fieldset>
+                  </div>
                 </div>
-                <form @submit.prevent="editmode ? updateUser() : createUser()">
-                <div class="modal-body">
-                     <div class="form-group">
-                        <input v-model="form.name" type="text" name="name"
-                            placeholder="Name"
-                            class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
-                        <has-error :form="form" field="name"></has-error>
-                    </div>
-
-                     <div class="form-group">
-                        <input v-model="form.email" type="email" name="email"
-                            placeholder="Email Address"
-                            class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
-                        <has-error :form="form" field="email"></has-error>
-                    </div>
-
-                     <div class="form-group">
-                        <textarea v-model="form.bio" name="bio" id="bio"
-                        placeholder="Short bio for user (Optional)"
-                        class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
-                        <has-error :form="form" field="bio"></has-error>
-                    </div>
-
-
-                    <div class="form-group">
-                        <select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
-                            <option value="">Select User Role</option>
-                            <option value="admin">Admin</option>
-                            <option value="user">Standard User</option>
-                            <option value="author">Author</option>
-                        </select>
-                        <has-error :form="form" field="type"></has-error>
-                    </div>
-
-                    <div class="form-group">
-                        <input v-model="form.password" type="password" name="password" id="password"
-                        class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
-                        <has-error :form="form" field="password"></has-error>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
-                    <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
-                </div>
-
-                </form>
-
-                </div>
+              </form>
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- users filter end -->
+      <!-- Ag Grid users list section start -->
+      <div id="basic-examples">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
+                    <div class="dropdown sort-dropdown mb-1 mb-sm-0">
+                      <button
+                        class="btn btn-white filter-btn dropdown-toggle border text-dark"
+                        type="button"
+                        id="dropdownMenuButton6"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >1 - 20 of 50</button>
+                      <div
+                        class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownMenuButton6"
+                      >
+                        <a class="dropdown-item" href="#">20</a>
+                        <a class="dropdown-item" href="#">50</a>
+                      </div>
+                    </div>
+                    <div class="ag-btns d-flex flex-wrap">
+                      <input
+                        type="text"
+                        class="ag-grid-filter form-control w-50 mr-1 mb-1 mb-sm-0"
+                        id="filter-text-box"
+                        placeholder="Search...."
+                      />
+                      <div class="action-btns">
+                        <div class="btn-dropdown">
+                          <div class="btn-group dropdown actions-dropodown">
+                            <button
+                              type="button"
+                              class="btn btn-white px-2 py-75 dropdown-toggle waves-effect waves-light"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >Actions</button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">
+                                <i class="feather icon-trash-2"></i>
+                                Delete
+                              </a>
+                              <a class="dropdown-item" href="#">
+                                <i class="feather icon-clipboard"></i>
+                                Archive
+                              </a>
+                              <a class="dropdown-item" href="#">
+                                <i class="feather icon-printer"></i>
+                                Print
+                              </a>
+                              <a class="dropdown-item" href="#">
+                                <i class="feather icon-download"></i>
+                                CSV
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="myGrid" class="aggrid ag-theme-material"></div>
             </div>
-    </div>
-
-
-
+          </div>
+        </div>
+      </div>
+      <!-- Ag Grid users list section end -->
+    </section>
+    <!-- users list ends -->
+  </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                editmode: false,
-                users : {},
-                form: new Form({
-                    id:'',
-                    name : '',
-                    email: '',
-                    password: '',
-                    type: '',
-                    bio: '',
-                    photo: ''
-                })
-            }
-        },
-        methods: {
-            getResults(page = 1) {
-                        axios.get('api/user?page=' + page)
-                            .then(response => {
-                                this.users = response.data;
-                            });
-                },
-            updateUser(){
-                this.$Progress.start();
-                // console.log('Editing data');
-                this.form.put('api/user/'+this.form.id)
-                .then(() => {
-                    // success
-                    $('#addNew').modal('hide');
-                     swal(
-                        'Updated!',
-                        'Information has been updated.',
-                        'success'
-                        )
-                        this.$Progress.finish();
-                         Fire.$emit('AfterCreate');
-                })
-                .catch(() => {
-                    this.$Progress.fail();
-                });
-
-            },
-            editModal(user){
-                this.editmode = true;
-                this.form.reset();
-                $('#addNew').modal('show');
-                this.form.fill(user);
-            },
-            newModal(){
-                this.editmode = false;
-                this.form.reset();
-                $('#addNew').modal('show');
-            },
-            deleteUser(id){
-                swal({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-
-                        // Send request to the server
-                         if (result.value) {
-                                this.form.delete('api/user/'+id).then(()=>{
-                                        swal(
-                                        'Deleted!',
-                                        'Your file has been deleted.',
-                                        'success'
-                                        )
-                                    Fire.$emit('AfterCreate');
-                                }).catch(()=> {
-                                    swal("Failed!", "There was something wronge.", "warning");
-                                });
-                         }
-                    })
-            },
-            loadUsers(){
-                if(this.$gate.isAdminOrAuthor()){
-                    axios.get("api/user").then(({ data }) => (this.users = data));
-                }
-            },
-
-            createUser(){
-                this.$Progress.start();
-
-                this.form.post('api/user')
-                .then(()=>{
-                    Fire.$emit('AfterCreate');
-                    $('#addNew').modal('hide')
-
-                    toast({
-                        type: 'success',
-                        title: 'User Created in successfully'
-                        })
-                    this.$Progress.finish();
-
-                })
-                .catch(()=>{
-                    this.$Progress.fail();
-                })
-            }
-        },
-        created() {
-            Fire.$on('searching',() => {
-                let query = this.$parent.search;
-                axios.get('api/findUser?q=' + query)
-                .then((data) => {
-                    this.users = data.data
-                })
-                .catch(() => {
-
-                })
+export default {
+  data() {
+    return {
+      editmode: false,
+      users: {},
+      form: new Form({
+        id: "",
+        name: "",
+        email: "",
+        password: "",
+        type: "",
+        bio: "",
+        photo: ""
+      })
+    };
+  },
+  methods: {
+    updateUser() {
+      this.$Progress.start();
+      // console.log('Editing data');
+      this.form
+        .put("api/user/" + this.form.id)
+        .then(() => {
+          // success
+          $("#addNew").modal("hide");
+          swal("Updated!", "Information has been updated.", "success");
+          this.$Progress.finish();
+          Fire.$emit("AfterCreate");
+        })
+        .catch(() => {
+          this.$Progress.fail();
+        });
+    },
+    deleteUser(id) {
+      swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        // Send request to the server
+        if (result.value) {
+          this.form
+            .delete("api/user/" + id)
+            .then(() => {
+              swal("Deleted!", "Your file has been deleted.", "success");
+              Fire.$emit("AfterCreate");
             })
-           this.loadUsers();
-           Fire.$on('AfterCreate',() => {
-               this.loadUsers();
-           });
-        //    setInterval(() => this.loadUsers(), 3000);
+            .catch(() => {
+              swal("Failed!", "There was something wronge.", "warning");
+            });
+        }
+      });
+    },
+
+    createUser() {
+      this.$Progress.start();
+
+      this.form
+        .post("api/user")
+        .then(() => {
+          Fire.$emit("AfterCreate");
+          $("#addNew").modal("hide");
+
+          toast({
+            type: "success",
+            title: "User Created in successfully"
+          });
+          this.$Progress.finish();
+        })
+        .catch(() => {
+          this.$Progress.fail();
+        });
+    }
+  },
+  created() {
+    Fire.$on("searching", () => {
+      let query = this.$parent.search;
+      axios
+        .get("api/findUser?q=" + query)
+        .then(data => {
+          this.users = data.data;
+        })
+        .catch(() => {});
+    });
+    Fire.$on("AfterCreate", () => {});
+    //    setInterval(() => this.loadUsers(), 3000);
+  },
+  mounted() {
+    $(document).ready(function() {
+      var isRtl;
+      if ($("html").attr("data-textdirection") == "rtl") {
+        isRtl = true;
+      } else {
+        isRtl = false;
+      }
+
+      //  Rendering badge in status column
+      var customBadgeHTML = function(params) {
+        var color = "";
+        if (params.value == "active") {
+          color = "success";
+          return (
+            "<div class='badge badge-pill badge-light-" +
+            color +
+            "' >" +
+            params.value +
+            "</div>"
+          );
+        } else if (params.value == "blocked") {
+          color = "danger";
+          return (
+            "<div class='badge badge-pill badge-light-" +
+            color +
+            "' >" +
+            params.value +
+            "</div>"
+          );
+        } else if (params.value == "deactivated") {
+          color = "warning";
+          return (
+            "<div class='badge badge-pill badge-light-" +
+            color +
+            "' >" +
+            params.value +
+            "</div>"
+          );
+        }
+      };
+
+      //  Rendering bullet in verified column
+      var customBulletHTML = function(params) {
+        var color = "";
+        if (params.value == true) {
+          color = "success";
+          return (
+            "<div class='bullet bullet-sm bullet-" + color + "' >" + "</div>"
+          );
+        } else if (params.value == false) {
+          color = "secondary";
+          return (
+            "<div class='bullet bullet-sm bullet-" + color + "' >" + "</div>"
+          );
+        }
+      };
+
+      // Renering Icons in Actions column
+      var customIconsHTML = function(params) {
+        var usersIcons = document.createElement("span");
+        var editIconHTML =
+          "<a href='app-user-edit.html'><i class= 'users-edit-icon feather icon-edit-1 mr-50'></i></a>";
+        var deleteIconHTML = document.createElement("i");
+        var attr = document.createAttribute("class");
+        attr.value = "users-delete-icon feather icon-trash-2";
+        deleteIconHTML.setAttributeNode(attr);
+        // selected row delete functionality
+        deleteIconHTML.addEventListener("click", function() {
+          deleteArr = [params.data];
+          // var selectedData = gridOptions.api.getSelectedRows();
+          gridOptions.api.updateRowData({
+            remove: deleteArr
+          });
+        });
+        usersIcons.appendChild($.parseHTML(editIconHTML)[0]);
+        usersIcons.appendChild(deleteIconHTML);
+        return usersIcons;
+      };
+
+      //  Rendering avatar in username column
+      var customAvatarHTML = function(params) {
+        return (
+          "<span class='avatar'><img src='" +
+          params.data.avatar +
+          "' height='32' width='32'></span>" +
+          params.value
+        );
+      };
+
+      // ag-grid
+      /*** COLUMN DEFINE ***/
+
+      var columnDefs = [
+        {
+          headerName: "Name",
+          field: "name",
+          checkboxSelection: true,
+          headerCheckboxSelectionFilteredOnly: true,
+          headerCheckboxSelection: true,
+          width: 200
+        },
+        {
+          headerName: "Email",
+          field: "email",
+          width: 225
+        },
+        {
+          headerName: "No HP",
+          field: "nohp",
+          width: 150
+        },
+        {
+          headerName: "Tipe User",
+          field: "type",
+          width: 150
+        },
+        {
+          headerName: "Status",
+          field: "status",
+          width: 150,
+          cellRenderer: customBadgeHTML,
+          cellStyle: {
+            "text-align": "center"
+          }
+        },
+        {
+          headerName: "Actions",
+          width: 150,
+          cellRenderer: customIconsHTML
+        }
+      ];
+
+      /*** GRID OPTIONS ***/
+      var gridOptions = {
+        defaultColDef: {
+          sortable: true
+        },
+        enableRtl: isRtl,
+        columnDefs: columnDefs,
+        rowSelection: "multiple",
+        filter: true,
+        pagination: true,
+        paginationPageSize: 20,
+        pivotPanelShow: "always",
+        colResizeDefault: "shift",
+        animateRows: true,
+        resizable: true
+      };
+      if (document.getElementById("myGrid")) {
+        /*** DEFINED TABLE VARIABLE ***/
+        var gridTable = document.getElementById("myGrid");
+
+        axios.get("api/user").then(({ data }) => {
+          gridOptions.api.setRowData(data.data);
+        });
+
+        /*** FILTER TABLE ***/
+        function updateSearchQuery(val) {
+          gridOptions.api.setQuickFilter(val);
         }
 
-    }
+        $(".ag-grid-filter").on("keyup", function() {
+          updateSearchQuery($(this).val());
+        });
+
+        /*** CHANGE DATA PER PAGE ***/
+        function changePageSize(value) {
+          gridOptions.api.paginationSetPageSize(Number(value));
+        }
+
+        $(".sort-dropdown .dropdown-item").on("click", function() {
+          var $this = $(this);
+          changePageSize($this.text());
+          $(".filter-btn").text("1 - " + $this.text() + " of 50");
+        });
+
+        /*** EXPORT AS CSV BTN ***/
+        $(".ag-grid-export-btn").on("click", function(params) {
+          gridOptions.api.exportDataAsCsv();
+        });
+
+        //  filter data function
+        var filterData = function agSetColumnFilter(column, val) {
+          var filter = gridOptions.api.getFilterInstance(column);
+          var modelObj = null;
+          if (val !== "all") {
+            modelObj = {
+              type: "equals",
+              filter: val
+            };
+          }
+          filter.setModel(modelObj);
+          gridOptions.api.onFilterChanged();
+        };
+        //  filter inside role
+        $("#users-list-role").on("change", function() {
+          var usersListRole = $("#users-list-role").val();
+          filterData("role", usersListRole);
+        });
+        //  filter inside verified
+        $("#users-list-verified").on("change", function() {
+          var usersListVerified = $("#users-list-verified").val();
+          filterData("is_verified", usersListVerified);
+        });
+        //  filter inside status
+        $("#users-list-status").on("change", function() {
+          var usersListStatus = $("#users-list-status").val();
+          filterData("status", usersListStatus);
+        });
+        //  filter inside department
+        $("#users-list-department").on("change", function() {
+          var usersListDepartment = $("#users-list-department").val();
+          filterData("department", usersListDepartment);
+        });
+        // filter reset
+        $(".users-data-filter").click(function() {
+          $("#users-list-role").prop("selectedIndex", 0);
+          $("#users-list-role").change();
+          $("#users-list-status").prop("selectedIndex", 0);
+          $("#users-list-status").change();
+          $("#users-list-verified").prop("selectedIndex", 0);
+          $("#users-list-verified").change();
+          $("#users-list-department").prop("selectedIndex", 0);
+          $("#users-list-department").change();
+        });
+
+        /*** INIT TABLE ***/
+        new agGrid.Grid(gridTable, gridOptions);
+      }
+      // users language select
+      if ($("#users-language-select2").length > 0) {
+        $("#users-language-select2").select2({
+          dropdownAutoWidth: true,
+          width: "100%"
+        });
+      }
+      // users music select
+      if ($("#users-music-select2").length > 0) {
+        $("#users-music-select2").select2({
+          dropdownAutoWidth: true,
+          width: "100%"
+        });
+      }
+      // users movies select
+      if ($("#users-movies-select2").length > 0) {
+        $("#users-movies-select2").select2({
+          dropdownAutoWidth: true,
+          width: "100%"
+        });
+      }
+      // users birthdate date
+      if ($(".birthdate-picker").length > 0) {
+        $(".birthdate-picker").pickadate({
+          format: "mmmm, d, yyyy"
+        });
+      }
+      // Input, Select, Textarea validations except submit button validation initialization
+      if ($(".users-edit").length > 0) {
+        $("input,select,textarea")
+          .not("[type=submit]")
+          .jqBootstrapValidation();
+      }
+    });
+  }
+};
 </script>

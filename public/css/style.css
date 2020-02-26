@@ -152,3 +152,93 @@ body {
 .main-container-sm {
     color: #ECF3F7;
 }
+
+.bg-header {
+    display: flex;
+    align-content: center;
+    width: 187px;
+    height: 38px;
+    background: #F7C50D;
+    border-radius: 6px;
+}
+
+.text-header {
+    font-family: 'Nunito Sans';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 13px;
+}
+
+.head-title {
+    margin-bottom: 2.2rem;
+}
+
+.head-text {
+    margin-bottom: 1.2rem;
+}
+
+.btn-primary {
+    background-color: #3895CC !important;
+    border-color: rgb(60, 148, 199) !important;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 8px 25px -8px rgb(60, 148, 199);
+}
+
+.modal-nav {
+    position: absolute;
+    background: #F7F7F7;
+    width: 595px;
+    right: 0px;
+    top: 0px;
+    height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    pointer-events: auto;
+    background-color: #FFFFFF;
+    background-clip: padding-box;
+    border: 1px solid rgba(34, 41, 47, 0.2);
+    border-radius: 0.6rem;
+    outline: 0;
+}
+
+.modal-nav-dialog {
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 1.75rem;
+}
+
+.modal-nav-body {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.modal-nav-header {
+    padding: 25px 40px 20px 40px !important;
+    background: #Fff !important;
+    border-bottom: 1px solid #CCD8DE !important;
+}
+
+.dropzone {
+    min-height: 150px;
+}
+
+.form-control {
+    background: #fff;
+}
+
+.form-control:focus {
+    border-color: #3895CC;
+}
+
+.clr-blue {
+    color: #3895CC;
+}
