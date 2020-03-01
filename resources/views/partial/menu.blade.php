@@ -15,9 +15,9 @@
                 </li>
                 <li class=" navigation-header"><span>MASTER</span>
                 </li>
-                <li class=" nav-item"><a href="#"><i class="fa fa-map-marker"></i><span class="menu-title" data-i18n="Email">Lokasi</span></a>
+                <li class=" nav-item"><router-link to="/locations"><i class="fa fa-map-marker"></i><span class="menu-title" data-i18n="Email">Lokasi</span></router-link>
                 </li>
-                <li class=" nav-item"><a href="app-chat.html"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Chat">Tenant</span></a>
+                <li class=" nav-item"><router-link to="/tenant"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Chat">Tenant</span></router-link>
                 </li>
                 <li class=" nav-item"><router-link to="/users"><i class="feather icon-users"></i><span class="menu-title" data-i18n="Todo">Users</span></router-link>
                 </li>

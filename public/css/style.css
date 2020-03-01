@@ -242,3 +242,11 @@ body {
 .clr-blue {
     color: #3895CC;
 }
+
+.map-section {
+    width: 515px;
+    height: 266px;
+
+    background: url(./back.png);
+    border-radius: 6px;
+}

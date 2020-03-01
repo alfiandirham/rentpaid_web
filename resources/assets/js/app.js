@@ -54,7 +54,11 @@ let routes = [{
     },
     {
         path: '/users',
-        component: require('./components/Users.vue')
+        component: require('./components/user/Users.vue')
+    },
+    {
+        path: '/locations',
+        component: require('./components/lokasi/Lokasi.vue')
     },
     {
         path: '/profile',
