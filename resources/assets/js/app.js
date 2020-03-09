@@ -61,6 +61,10 @@ let routes = [{
         component: require('./components/lokasi/Lokasi.vue')
     },
     {
+        path: '/tenants',
+        component: require('./components/tenant/Tenant.vue')
+    },
+    {
         path: '/profile',
         component: require('./components/Profile.vue')
     },

@@ -11,13 +11,13 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a href="#"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
+                <li class=" nav-item"><router-link to="/dashboard"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></router-link>
                 </li>
                 <li class=" navigation-header"><span>MASTER</span>
                 </li>
                 <li class=" nav-item"><router-link to="/locations"><i class="fa fa-map-marker"></i><span class="menu-title" data-i18n="Email">Lokasi</span></router-link>
                 </li>
-                <li class=" nav-item"><router-link to="/tenant"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Chat">Tenant</span></router-link>
+                <li class=" nav-item"><router-link to="/tenants"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Chat">Tenant</span></router-link>
                 </li>
                 <li class=" nav-item"><router-link to="/users"><i class="feather icon-users"></i><span class="menu-title" data-i18n="Todo">Users</span></router-link>
                 </li>

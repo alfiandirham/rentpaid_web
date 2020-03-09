@@ -51,7 +51,7 @@ const setup = (url) => {
         var customIconsHTML = function (params) {
             var usersIcons = document.createElement("span");
             var editIconHTML =
-                "<a href='app-user-edit.html'><i class= 'users-edit-icon feather icon-edit-1 mr-50'></i></a>";
+                `<a @click="editModal(user)"><i class= 'users-edit-icon feather icon-edit-1 mr-50'></i></a>`;
             var deleteIconHTML = document.createElement("i");
             var attr = document.createAttribute("class");
             attr.value = "users-delete-icon feather icon-trash-2";

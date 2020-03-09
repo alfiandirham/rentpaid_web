@@ -7,19 +7,14 @@
         <h2 class="head-text">Users > List User</h2>
       </div>
       <div class="head-title">
-        <button
-          type="button"
-          data-toggle="modal"
-          data-target="#exampleModalCenter"
-          class="btn btn-primary"
-        >
+        <button type="button" @click="newModal" class="btn btn-primary">
           <i class="fa fa-user-plus fa-lg pr-1"></i>
           Tambah User
         </button>
         <!-- Modal -->
         <div
           class="modal fade"
-          id="exampleModalCenter"
+          id="addNew"
           tabindex="-1"
           role="dialog"
           aria-labelledby="exampleModalCenterTitle"
@@ -34,25 +29,28 @@
                 <h2>TAMBAH USER</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
-              <div class="modal-body modal-nav-body">
-                <div class="row align-items-end" style="margin-left:0px;">
-                  <div class="col-4">
-                    <form
-                      action="#"
-                      class="dropzone dropzone-area row flex-column justify-content-between align-items-center"
-                      id="dpz-btn-select-files"
-                    >
-                      <div class="dz-message">Upload file</div>
-                      <i class="fa fa-cloud-upload"></i>
-                    </form>
+              <form
+                @submit.prevent="editmode ? updateUser() : createUser()"
+                class="form mt-1 form-vertical"
+              >
+                <div class="modal-body modal-nav-body">
+                  <div class="row align-items-end" style="margin-left:0px;">
+                    <div class="col-4">
+                      <form
+                        action="#"
+                        class="dropzone dropzone-area row flex-column justify-content-between align-items-center"
+                        id="dpz-btn-select-files"
+                      >
+                        <div class="dz-message">Upload file</div>
+                        <i class="fa fa-cloud-upload"></i>
+                      </form>
+                    </div>
+                    <div class="col-8">
+                      <button id="select-files" class="btn btn-primary mb-1">
+                        <i class="icon-file2"></i> Ganti Foto
+                      </button>
+                    </div>
                   </div>
-                  <div class="col-8">
-                    <button id="select-files" class="btn btn-primary mb-1">
-                      <i class="icon-file2"></i> Ganti Foto
-                    </button>
-                  </div>
-                </div>
-                <form class="form mt-1 form-vertical">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-12">
@@ -60,15 +58,26 @@
                           <label for="fname" class="clr-blue">Nama Lengkap</label>
                           <input
                             type="text"
-                            class="form-control"
                             name="fname"
+                            v-model="form.name"
                             placeholder="Nama Lengkap"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('name') }"
                           />
+                          <has-error :form="form" field="name"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" name="ktp" placeholder="No. KTP" />
+                          <input
+                            type="text"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('ktp') }"
+                            v-model="form.ktp"
+                            name="ktp"
+                            placeholder="No. KTP"
+                          />
+                          <has-error :form="form" field="ktp"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -76,24 +85,38 @@
                           <input
                             type="number"
                             class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('nohp') }"
+                            v-model="form.nohp"
                             name="contact"
                             placeholder="No. Telepon"
                           />
+                          <has-error :form="form" field="nohp"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input type="email" class="form-control" name="email" placeholder="Email" />
+                          <input
+                            v-model="form.email"
+                            type="email"
+                            :class="{ 'is-invalid': form.errors.has('email') }"
+                            class="form-control"
+                            name="email"
+                            placeholder="Email"
+                          />
+                          <has-error :form="form" field="email"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
                           <input
                             type="password"
+                            v-model="form.password"
+                            :class="{ 'is-invalid': form.errors.has('password') }"
                             class="form-control"
                             name="contact"
                             placeholder="Password"
                           />
+                          <has-error :form="form" field="password"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -102,7 +125,13 @@
                           <li class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
-                                <input type="radio" name="type" checked value="admin" />
+                                <input
+                                  type="radio"
+                                  v-model="form.type"
+                                  name="type"
+                                  checked
+                                  value="superadmin"
+                                />
                                 <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -114,7 +143,7 @@
                           <li class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
-                                <input type="radio" name="type" value="staff" />
+                                <input type="radio" v-model="form.type" name="type" value="admin" />
                                 <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -126,7 +155,12 @@
                           <li class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
-                                <input type="radio" name="type" value="user" />
+                                <input
+                                  type="radio"
+                                  v-model="form.type"
+                                  name="type"
+                                  value="collector"
+                                />
                                 <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -136,6 +170,7 @@
                             </fieldset>
                           </li>
                         </ul>
+                        <has-error :form="form" field="type"></has-error>
                       </div>
                       <div class="col-12">
                         <p>Status</p>
@@ -143,7 +178,13 @@
                           <li class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
-                                <input type="radio" name="status" checked value="true" />
+                                <input
+                                  type="radio"
+                                  v-model="form.status"
+                                  name="status"
+                                  checked
+                                  value="true"
+                                />
                                 <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -155,7 +196,12 @@
                           <li class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
-                                <input type="radio" name="status" value="false" />
+                                <input
+                                  type="radio"
+                                  name="status"
+                                  v-model="form.status"
+                                  value="false"
+                                />
                                 <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -165,14 +211,15 @@
                             </fieldset>
                           </li>
                         </ul>
+                        <has-error :form="form" field="status"></has-error>
                       </div>
                     </div>
                   </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
-              </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Accept</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -348,7 +395,9 @@ export default {
         email: "",
         password: "",
         type: "",
-        bio: "",
+        nohp: "",
+        status: "",
+        ktp: "",
         photo: ""
       })
     };
@@ -396,6 +445,17 @@ export default {
             });
         }
       });
+    },
+    editModal(user) {
+      this.editmode = true;
+      this.form.reset();
+      $("#addNew").modal("show");
+      this.form.fill(user);
+    },
+    newModal() {
+      this.editmode = false;
+      this.form.reset();
+      $("#addNew").modal("show");
     },
 
     createUser() {

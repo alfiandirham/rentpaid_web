@@ -21,6 +21,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/ag-grid/ag-theme-material.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/ui/prism.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">    
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
     
     <!-- END: Vendor CSS-->
     
@@ -38,6 +40,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/app-user.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/aggrid.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/file-uploaders/dropzone.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/data-list-view.css')}}">
     <!-- END: Page CSS-->
     
     <!-- BEGIN: Custom CSS-->
@@ -91,6 +94,12 @@
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{asset('app-assets/vendors/js/tables/ag-grid/ag-grid-community.min.noStyle.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/extensions/dropzone.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.buttons.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/tables/datatable/dataTables.select.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js')}}"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->

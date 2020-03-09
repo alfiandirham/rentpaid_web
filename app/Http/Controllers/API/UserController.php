@@ -33,12 +33,15 @@ class UserController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
+        ($request['status'] == 'false') ? $request->merge(['status' => 0]) : $request->merge(['status' => 1]);
+
         return User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'type' => $request['type'],
-            'bio' => $request['bio'],
-            'photo' => $request['photo'],
+            'nohp' => $request['nohp'],
+            'status' => $request['status'],
+            'ktp' => $request['ktp'],
             'password' => Hash::make($request['password']),
         ]);
     }
