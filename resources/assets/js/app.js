@@ -58,11 +58,11 @@ let routes = [{
     },
     {
         path: '/locations',
-        component: require('./components/lokasi/Lokasi.vue')
+        component: require('./components/location/Locations.vue')
     },
     {
         path: '/tenants',
-        component: require('./components/tenant/Tenant.vue')
+        component: require('./components/tenan/Tenant.vue')
     },
     {
         path: '/profile',

@@ -1,25 +1,18 @@
 <template>
-  <div class="user">
-    <!-- users list start -->
+  <div class="location">
     <section class="users-list-wrapper">
-      <!-- users filter start -->
       <div>
         <h2 class="head-text">Lokasi > List Lokasi</h2>
       </div>
       <div class="head-title">
-        <button
-          type="button"
-          data-toggle="modal"
-          data-target="#exampleModalCenter"
-          class="btn btn-primary"
-        >
+        <button type="button" data-toggle="modal" data-target="#addNew" class="btn btn-primary">
           <i class="fa fa-map-marker fa-lg pr-1"></i>
           Tambah Lokasi
         </button>
         <!-- Modal -->
         <div
           class="modal fade"
-          id="exampleModalCenter"
+          id="addNew"
           tabindex="-1"
           role="dialog"
           aria-labelledby="exampleModalCenterTitle"
@@ -30,12 +23,15 @@
             role="document"
           >
             <div class="modal-nav">
-              <div class="modal-header modal-nav-header">
-                <h2>TAMBAH LOKASI</h2>
-                <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
-              </div>
-              <div class="modal-body modal-nav-body">
-                <form class="form mt-1 form-vertical">
+              <form
+                @submit.prevent="editmode ? updateData() : createData()"
+                class="form mt-1 form-vertical"
+              >
+                <div class="modal-header modal-nav-header">
+                  <h2>TAMBAH LOKASI</h2>
+                  <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
+                </div>
+                <div class="modal-body modal-nav-body">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-12">
@@ -45,22 +41,11 @@
                             type="text"
                             class="form-control"
                             name="fname"
+                            v-model="form.lokasi"
                             placeholder="Nama Lokasi"
+                            :class="{ 'is-invalid': form.errors.has('lokasi') }"
                           />
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <label for="fname" style="color: #606060;">Pilih Lokasi</label>
-                          <div class="map-section">
-                            <div class="py-2 px-4">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Ketik Nama Lokasi"
-                              />
-                            </div>
-                          </div>
+                          <has-error :form="form" field="lokasi"></has-error>
                         </div>
                       </div>
                       <div class="col-6">
@@ -68,9 +53,12 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="lat"
+                            name="fname"
+                            v-model="form.lat"
                             placeholder="Latitude"
+                            :class="{ 'is-invalid': form.errors.has('lat') }"
                           />
+                          <has-error :form="form" field="lat"></has-error>
                         </div>
                       </div>
                       <div class="col-6">
@@ -78,9 +66,12 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="long"
+                            name="fname"
+                            v-model="form.long"
                             placeholder="Longitude"
+                            :class="{ 'is-invalid': form.errors.has('long') }"
                           />
+                          <has-error :form="form" field="long"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -88,9 +79,11 @@
                           <input
                             type="text"
                             class="form-control"
-                            name="email"
+                            v-model="form.provinsi"
                             placeholder="Provinsi"
+                            :class="{ 'is-invalid': form.errors.has('provinsi') }"
                           />
+                          <has-error :form="form" field="provinsi"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -98,9 +91,11 @@
                           <input
                             type="text"
                             class="form-control"
-                            name="kab"
+                            v-model="form.kab"
                             placeholder="Kabupaten/Kota"
+                            :class="{ 'is-invalid': form.errors.has('kab') }"
                           />
+                          <has-error :form="form" field="kab"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -108,9 +103,11 @@
                           <input
                             type="text"
                             class="form-control"
-                            name="kec"
+                            v-model="form.kec"
                             placeholder="Kecematan"
+                            :class="{ 'is-invalid': form.errors.has('kec') }"
                           />
+                          <has-error :form="form" field="kec"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -118,28 +115,39 @@
                           <input
                             type="text"
                             class="form-control"
-                            name="desa"
+                            v-model="form.kel"
                             placeholder="Desa/Kelurahan"
+                            :class="{ 'is-invalid': form.errors.has('kel') }"
                           />
+                          <has-error :form="form" field="kel"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
+                          <label for="owner">Pilih Owner</label>
+                          <select
                             name="owner"
+                            class="form-control"
+                            v-model="form.user_id"
                             placeholder="Pilih Owner"
-                          />
+                            :class="{ 'is-invalid': form.errors.has('user_id') }"
+                          >
+                            <option
+                              v-for="user in users.data"
+                              :value="user.id"
+                              :key="user.id"
+                            >{{user.id}}</option>
+                          </select>
+                          <has-error :form="form" field="user_id"></has-error>
                         </div>
                       </div>
                     </div>
                   </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
-              </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Accept</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -211,30 +219,17 @@
               <div class="row">
                 <div class="col-12">
                   <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
-                    <div class="dropdown sort-dropdown mb-1 mb-sm-0">
-                      <button
-                        class="btn btn-white filter-btn dropdown-toggle border text-dark"
-                        type="button"
-                        id="dropdownMenuButton6"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >1 - 20 of 50</button>
-                      <div
-                        class="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="dropdownMenuButton6"
-                      >
-                        <a class="dropdown-item" href="#">20</a>
-                        <a class="dropdown-item" href="#">50</a>
-                      </div>
-                    </div>
-                    <div class="ag-btns d-flex flex-wrap">
+                    <div class="mb-1 mb-sm-0">
                       <input
-                        type="text"
-                        class="ag-grid-filter form-control w-50 mr-1 mb-1 mb-sm-0"
+                        type="search"
+                        @keyup="searchit"
+                        v-model="search"
+                        class="ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0"
                         id="filter-text-box"
                         placeholder="Search...."
                       />
+                    </div>
+                    <div class="ag-btns d-flex flex-wrap">
                       <div class="action-btns">
                         <div class="btn-dropdown">
                           <div class="btn-group dropdown actions-dropodown">
@@ -270,7 +265,53 @@
                   </div>
                 </div>
               </div>
-              <div id="myGrid" class="aggrid ag-theme-material"></div>
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>
+                        <input type="checkbox" @click="checkall" v-model="cekall" />
+                      </th>
+                      <th>Id</th>
+                      <th>Nama Lokasi</th>
+                      <th>Alamat</th>
+                      <th>Status</th>
+                      <th>Owner Id / Name</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="location in locations.data" :key="location.id">
+                      <th scope="row">
+                        <input type="checkbox" :checked="cekall" />
+                      </th>
+                      <td>{{location.id}}</td>
+                      <td>{{location.lokasi}}</td>
+                      <td>{{location.lokasi}}</td>
+                      <td v-if="location.status === 1">
+                        <div class="badge badge-pill badge-light-success">Active</div>
+                      </td>
+                      <td v-if="location.status === 0">
+                        <div class="badge badge-pill badge-light-warning">Non Active</div>
+                      </td>
+                      <td>{{location.user_id}}</td>
+                      <td>
+                        <a @click="editModal(location)">
+                          <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
+                        </a>
+                        <a @click="deleteData(location.id)">
+                          <i class="users-delete-icon feather icon-trash-2"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <div class="mt-2 pl-1">
+                      <pagination :limit="5" :data="locations" @pagination-change-page="getResults"></pagination>
+                    </div>
+                  </tfoot>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -278,39 +319,47 @@
       <!-- Ag Grid users list section end -->
     </section>
     <!-- users list ends -->
+    <!-- <div v-if="!$gate.isAdminOrAuthor()">
+      <not-found></not-found>
+    </div>-->
   </div>
 </template>
 
 <script>
-const setupD = require("./setup");
 export default {
   data() {
     return {
+      cekall: false,
+      search: "",
       editmode: false,
       users: {},
+      locations: {},
       form: new Form({
         id: "",
-        name: "",
-        email: "",
-        password: "",
-        type: "",
-        bio: "",
-        photo: ""
+        lokasi: "",
+        lat: "",
+        long: "",
+        status: "",
+        provinsi: "",
+        kec: "",
+        kel: "",
+        kab: "",
+        user_id: ""
       })
     };
   },
   methods: {
-    setup() {
-      setupD.setup("api/user");
+    checkall() {
+      this.cekall ? (this.cekall = false) : (this.cekall = true);
     },
-    updateUser() {
+    updateData() {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("api/user/" + this.form.id)
+        .put("api/lokasi/" + this.form.id)
         .then(() => {
           // success
-          $("#myGrid").modal("hide");
+          $("#addNew").modal("hide");
           swal("Updated!", "Information has been updated.", "success");
           this.$Progress.finish();
           Fire.$emit("AfterCreate");
@@ -319,7 +368,7 @@ export default {
           this.$Progress.fail();
         });
     },
-    deleteUser(id) {
+    deleteData(id) {
       swal({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -332,7 +381,7 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form
-            .delete("api/user/" + id)
+            .delete("api/lokasi/" + id)
             .then(() => {
               swal("Deleted!", "Your file has been deleted.", "success");
               Fire.$emit("AfterCreate");
@@ -343,32 +392,63 @@ export default {
         }
       });
     },
-
-    createUser() {
+    editModal(user) {
+      this.editmode = true;
+      this.form.reset();
+      $("#addNew").modal("show");
+      this.form.fill(user);
+    },
+    newModal() {
+      this.editmode = false;
+      this.form.reset();
+      $("#addNew").modal("show");
+    },
+    getResults(page = 1) {
+      axios.get("api/lokasi?page=" + page).then(response => {
+        this.users = response.data;
+      });
+    },
+    loadData() {
+      if (this.$gate.isAdminOrAuthor()) {
+        axios.get("api/user").then(({ data }) => (this.users = data));
+        axios.get("api/lokasi").then(({ data }) => (this.locations = data));
+      }
+    },
+    createData() {
       this.$Progress.start();
-
       this.form
-        .post("api/user")
+        .post("api/lokasi")
         .then(() => {
           Fire.$emit("AfterCreate");
-          $("#myGrid").modal("hide");
-
+          $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "User Created in successfully"
+            title: "Data Created in successfully"
           });
           this.$Progress.finish();
         })
         .catch(() => {
           this.$Progress.fail();
         });
-    }
+    },
+    searchit: _.debounce(() => {
+      Fire.$emit("searching");
+    }, 1000)
   },
   created() {
-    Fire.$on("AfterCreate", () => {
-      this.setup();
+    Fire.$on("searching", () => {
+      let query = this.search;
+      axios
+        .get("api/findLocation?q=" + query)
+        .then(data => {
+          this.locations = data.data;
+        })
+        .catch(() => {});
     });
-    this.setup();
+    Fire.$on("AfterCreate", () => {
+      this.loadData();
+    });
+    this.loadData();
   }
 };
 </script>

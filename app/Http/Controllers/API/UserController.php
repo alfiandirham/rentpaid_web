@@ -105,6 +105,7 @@ class UserController extends Controller
         if(!empty($request->password)){
             $request->merge(['password' => Hash::make($request['password'])]);
         }
+        ($request['status'] == 'false') ? $request->merge(['status' => 0]) : $request->merge(['status' => 1]);
 
         $user->update($request->all());
         return ['message' => 'Updated the user info'];
@@ -131,7 +132,7 @@ class UserController extends Controller
                         ->orWhere('email','LIKE',"%$search%");
             })->paginate(20);
         }else{
-            $users = User::latest()->paginate(5);
+            $users = User::latest()->paginate(20);
         }
 
         return $users;

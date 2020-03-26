@@ -1,6 +1,7 @@
 <template>
   <div class="user">
     <!-- users list start -->
+    <!-- <section class="users-list-wrapper" v-if="$gate.isAdminOrAuthor()"> -->
     <section class="users-list-wrapper">
       <!-- users filter start -->
       <div>
@@ -238,11 +239,6 @@
                 </a>
               </li>
               <li>
-                <a data-action>
-                  <i class="feather icon-rotate-cw users-data-filter"></i>
-                </a>
-              </li>
-              <li>
                 <a data-action="close">
                   <i class="feather icon-x"></i>
                 </a>
@@ -312,30 +308,17 @@
               <div class="row">
                 <div class="col-12">
                   <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
-                    <div class="dropdown sort-dropdown mb-1 mb-sm-0">
-                      <button
-                        class="btn btn-white filter-btn dropdown-toggle border text-dark"
-                        type="button"
-                        id="dropdownMenuButton6"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >1 - 20 of 50</button>
-                      <div
-                        class="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="dropdownMenuButton6"
-                      >
-                        <a class="dropdown-item" href="#">20</a>
-                        <a class="dropdown-item" href="#">50</a>
-                      </div>
-                    </div>
-                    <div class="ag-btns d-flex flex-wrap">
+                    <div class="mb-1 mb-sm-0">
                       <input
-                        type="text"
-                        class="ag-grid-filter form-control w-50 mr-1 mb-1 mb-sm-0"
+                        type="search"
+                        @keyup="searchit"
+                        v-model="search"
+                        class="ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0"
                         id="filter-text-box"
                         placeholder="Search...."
                       />
+                    </div>
+                    <div class="ag-btns d-flex flex-wrap">
                       <div class="action-btns">
                         <div class="btn-dropdown">
                           <div class="btn-group dropdown actions-dropodown">
@@ -371,7 +354,53 @@
                   </div>
                 </div>
               </div>
-              <div id="myGrid" class="aggrid ag-theme-material"></div>
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>
+                        <input type="checkbox" @click="checkall" v-model="cekall" />
+                      </th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>No Hp</th>
+                      <th>Tipe User</th>
+                      <th>Status</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="user in users.data" :key="user.id">
+                      <th scope="row">
+                        <input type="checkbox" :checked="cekall" />
+                      </th>
+                      <td>{{user.name}}</td>
+                      <td>{{user.email}}</td>
+                      <td>{{user.nohp}}</td>
+                      <td>{{user.type}}</td>
+                      <td v-if="user.status === 1">
+                        <div class="badge badge-pill badge-light-success">Active</div>
+                      </td>
+                      <td v-if="user.status === 0">
+                        <div class="badge badge-pill badge-light-warning">Non Active</div>
+                      </td>
+                      <td>
+                        <a @click="editModal(user)">
+                          <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
+                        </a>
+                        <a @click="deleteUser(user.id)">
+                          <i class="users-delete-icon feather icon-trash-2"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <div class="mt-2 pl-1">
+                      <pagination :limit="5" :data="users" @pagination-change-page="getResults"></pagination>
+                    </div>
+                  </tfoot>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -379,14 +408,18 @@
       <!-- Ag Grid users list section end -->
     </section>
     <!-- users list ends -->
+    <!-- <div v-if="!$gate.isAdminOrAuthor()">
+      <not-found></not-found>
+    </div>-->
   </div>
 </template>
 
 <script>
-const setupD = require("./setup");
 export default {
   data() {
     return {
+      cekall: false,
+      search: "",
       editmode: false,
       users: {},
       form: new Form({
@@ -403,8 +436,8 @@ export default {
     };
   },
   methods: {
-    setup() {
-      setupD.setup("api/user");
+    checkall() {
+      this.cekall ? (this.cekall = false) : (this.cekall = true);
     },
     updateUser() {
       this.$Progress.start();
@@ -413,7 +446,7 @@ export default {
         .put("api/user/" + this.form.id)
         .then(() => {
           // success
-          $("#myGrid").modal("hide");
+          $("#addNew").modal("hide");
           swal("Updated!", "Information has been updated.", "success");
           this.$Progress.finish();
           Fire.$emit("AfterCreate");
@@ -457,16 +490,23 @@ export default {
       this.form.reset();
       $("#addNew").modal("show");
     },
-
+    getResults(page = 1) {
+      axios.get("api/user?page=" + page).then(response => {
+        this.users = response.data;
+      });
+    },
+    loadData() {
+      if (this.$gate.isAdminOrAuthor()) {
+        axios.get("api/user").then(({ data }) => (this.users = data));
+      }
+    },
     createUser() {
       this.$Progress.start();
-
       this.form
         .post("api/user")
         .then(() => {
           Fire.$emit("AfterCreate");
-          $("#myGrid").modal("hide");
-
+          $("#addNew").modal("hide");
           toast({
             type: "success",
             title: "User Created in successfully"
@@ -476,13 +516,25 @@ export default {
         .catch(() => {
           this.$Progress.fail();
         });
-    }
+    },
+    searchit: _.debounce(() => {
+      Fire.$emit("searching");
+    }, 1000)
   },
   created() {
-    Fire.$on("AfterCreate", () => {
-      this.setup();
+    Fire.$on("searching", () => {
+      let query = this.search;
+      axios
+        .get("api/findUser?q=" + query)
+        .then(data => {
+          this.users = data.data;
+        })
+        .catch(() => {});
     });
-    this.setup();
+    Fire.$on("AfterCreate", () => {
+      this.loadData();
+    });
+    this.loadData();
   }
 };
 </script>
