@@ -33,6 +33,6 @@ class User extends Authenticatable
     }
 
     public function tenant() {
-        return $this->belongTo('App\Tenant');
+        return $this->hasMany('App\Tenant');
     }
 }

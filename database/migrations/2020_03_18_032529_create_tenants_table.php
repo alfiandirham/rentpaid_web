@@ -20,6 +20,7 @@ class CreateTenantsTable extends Migration
             $table->float('harga');
             $table->boolean('status')->default(true);
             $table->bigInteger('lokasi_id');
+            $table->bigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }

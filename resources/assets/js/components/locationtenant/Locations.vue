@@ -2,13 +2,9 @@
   <div class="location">
     <section class="users-list-wrapper">
       <div>
-        <h2 class="head-text">Lokasi > List Lokasi</h2>
+        <h2 class="head-text">Tenant > {{tenants.data[0].lokasi}}</h2>
       </div>
       <div class="head-title">
-        <button type="button" data-toggle="modal" data-target="#addNew" class="btn btn-primary">
-          <i class="fa fa-map-marker fa-lg pr-1"></i>
-          Tambah Lokasi
-        </button>
         <!-- Modal -->
         <div
           class="modal fade"
@@ -272,42 +268,50 @@
                       <th>
                         <input type="checkbox" @click="checkall" v-model="cekall" />
                       </th>
-                      <th>Id</th>
-                      <th>Nama Lokasi</th>
-                      <th>Alamat</th>
+                      <th>Kategori Tenant</th>
+                      <th>Nomor Tenant</th>
+                      <th>Harga Sewa</th>
                       <th>Status</th>
-                      <th>Owner Id / Name</th>
-                      <th>Aksi</th>
+                      <th>Penyewa</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="location in locations.data" :key="location.id">
+                    <tr v-for="tenant in tenants.data" :key="tenant.id">
                       <th scope="row">
                         <input type="checkbox" :checked="cekall" />
                       </th>
-                      <td>{{location.id}}</td>
-                      <td>{{location.lokasi}}</td>
-                      <td>{{location.lokasi}}</td>
-                      <td v-if="location.status === 1">
-                        <div class="badge badge-pill badge-light-success">Active</div>
+                      <td>{{tenant.kategori}}</td>
+                      <td>{{tenant.nomor}}</td>
+                      <td>Rp. {{tenant.harga}}</td>
+                      <td v-if="tenant.status === 1">
+                        <div class="badge badge-pill badge-light-success">Tersedia</div>
                       </td>
-                      <td v-if="location.status === 0">
-                        <div class="badge badge-pill badge-light-warning">Non Active</div>
+                      <td v-if="tenant.status === 0">
+                        <div class="badge badge-pill badge-light-warning">Disewa</div>
                       </td>
-                      <td>{{location.user_id}}</td>
                       <td>
-                        <a @click="editModal(location)">
+                        <select id="tenant" @change="upData(tenant.id)" class="form-control before">
+                          <option :value="tenant.user_id">{{tenant.penyewa}}</option>
+                          <option
+                            v-for="user in users.data"
+                            :key="user.id"
+                            :value="user.id"
+                          >{{user.name}}</option>
+                        </select>
+                      </td>
+                      <!-- <td>
+                        <a @click="editModal(tenant)">
                           <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
                         </a>
-                        <a @click="deleteData(location.id)">
+                        <a @click="deleteData(tenant.id)">
                           <i class="users-delete-icon feather icon-trash-2"></i>
                         </a>
-                      </td>
+                      </td>-->
                     </tr>
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="locations" @pagination-change-page="getResults"></pagination>
+                  <pagination :limit="5" :data="tenants" @pagination-change-page="getResults"></pagination>
                 </div>
               </div>
             </div>
@@ -327,22 +331,16 @@
 export default {
   data() {
     return {
+      sewa: "",
       cekall: false,
       search: "",
       editmode: false,
       users: {},
-      locations: {},
+      tenants: {},
       form: new Form({
         id: "",
-        lokasi: "",
-        lat: "",
-        long: "",
-        status: "",
-        provinsi: "",
-        kec: "",
-        kel: "",
-        kab: "",
-        user_id: ""
+        user_id: "",
+        status: ""
       })
     };
   },
@@ -354,7 +352,7 @@ export default {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("api/lokasi/" + this.form.id)
+        .put("/api/lokasi/" + this.form.id)
         .then(() => {
           // success
           $("#addNew").modal("hide");
@@ -379,9 +377,36 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form
-            .delete("api/lokasi/" + id)
+            .delete("/api/lokasi/" + id)
             .then(() => {
               swal("Deleted!", "Your file has been deleted.", "success");
+              Fire.$emit("AfterCreate");
+            })
+            .catch(() => {
+              swal("Failed!", "There was something wronge.", "warning");
+            });
+        }
+      });
+    },
+    upData(id) {
+      let getVal = document.getElementById("tenant");
+      swal({
+        title: "Anda Yakin?",
+        text: "Pastikan Penyewa Benar!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Okay!"
+      }).then(result => {
+        // Send request to the server
+        if (result.value) {
+          this.form.status = 0;
+          this.form.user_id = getVal.value;
+          this.form
+            .put("/api/tenan/" + id)
+            .then(() => {
+              swal("Disewa!", "Tenant berhasil disewa.", "success");
               Fire.$emit("AfterCreate");
             })
             .catch(() => {
@@ -402,20 +427,24 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/lokasi?page=" + page).then(response => {
-        this.locations = response.data;
-      });
+      axios
+        .get("/api/lokasitenan/" + this.$route.params.id + "?page=" + page)
+        .then(response => {
+          this.tenants = response.data;
+        });
     },
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/user").then(({ data }) => (this.users = data));
-        axios.get("api/lokasi").then(({ data }) => (this.locations = data));
+        axios.get("/api/collector").then(({ data }) => (this.users = data));
+        axios
+          .get("/api/lokasitenan/" + this.$route.params.id)
+          .then(({ data }) => (this.tenants = data));
       }
     },
     createData() {
       this.$Progress.start();
       this.form
-        .post("api/lokasi")
+        .post("/api/lokasi")
         .then(() => {
           Fire.$emit("AfterCreate");
           $("#addNew").modal("hide");
@@ -437,9 +466,9 @@ export default {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
-        .get("api/findLocation?q=" + query)
+        .get("/api/findLocation?q=" + query)
         .then(data => {
-          this.locations = data.data;
+          this.tenants = data.data;
         })
         .catch(() => {});
     });
@@ -450,3 +479,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.before {
+  background-color: #ecf3f7;
+}
+</style>

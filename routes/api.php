@@ -22,6 +22,9 @@ Route::apiResources(['lokasi' => 'API\LocationController']);
 Route::apiResources(['tenan' => 'API\TenantController']);
 
 Route::get('lokasitenan', 'API\TenantController@lokasiTenant');
+Route::get('lokasitenan/{id}', 'API\TenantController@lokasiTenantId');
+
+Route::get('collector', 'API\UserController@collector');
 
 Route::get('findUser', 'API\UserController@search');
 Route::get('findLocation', 'API\LocationController@search');

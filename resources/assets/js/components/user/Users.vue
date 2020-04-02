@@ -394,12 +394,10 @@
                       </td>
                     </tr>
                   </tbody>
-                  <tfoot>
-                    <div class="mt-2 pl-1">
-                      <pagination :limit="5" :data="users" @pagination-change-page="getResults"></pagination>
-                    </div>
-                  </tfoot>
                 </table>
+                <div class="mt-2 pl-1">
+                  <pagination :limit="5" :data="users" @pagination-change-page="getResults"></pagination>
+                </div>
               </div>
             </div>
           </div>

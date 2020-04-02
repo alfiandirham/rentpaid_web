@@ -61,11 +61,11 @@
               <th class="pl-1">
                 <input type="checkbox" @click="checkall" v-model="cekall" />
               </th>
-              <th style="padding-left:18px">Id</th>
               <th>Nama Lokasi</th>
-              <th>Alamat</th>
-              <th>Status</th>
-              <th>Owner Id / Name</th>
+              <th>Jumlah Tenant</th>
+              <th>Sudah Disewakan</th>
+              <th>Jumlah Tersedia</th>
+              <th>Owner</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -74,16 +74,13 @@
               <th scope="row">
                 <input type="checkbox" :checked="cekall" />
               </th>
-              <td>{{tenant.id}}</td>
-              <td>{{tenant.lokasi}}</td>
-              <td>{{tenant.lokasi}}</td>
-              <td v-if="tenant.status === 1">
-                <div class="badge badge-pill badge-light-success">Active</div>
+              <td>
+                <router-link :to="`tenant/${tenant.id}`">{{tenant.lokasi}}</router-link>
               </td>
-              <td v-if="tenant.status === 0">
-                <div class="badge badge-pill badge-light-warning">Non Active</div>
-              </td>
-              <td>{{tenant.user_id}}</td>
+              <td>{{tenant.jumlah}}</td>
+              <td>{{tenant.disewa}}</td>
+              <td>{{tenant.tersedia}}</td>
+              <td>{{tenant.owner}}</td>
               <td>
                 <a @click="editModal(tenant)">
                   <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
@@ -94,12 +91,10 @@
               </td>
             </tr>
           </tbody>
-          <tfoot>
-            <div class="mt-2 pl-1">
-              <pagination :limit="5" :data="tenants" @pagination-change-page="getResults"></pagination>
-            </div>
-          </tfoot>
         </table>
+        <div class="mt-2 pl-1">
+          <pagination :limit="5" :data="tenants" @pagination-change-page="getResults"></pagination>
+        </div>
       </div>
       <div
         class="modal fade"
@@ -228,7 +223,7 @@ export default {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("api/tenant/" + this.form.id)
+        .put("api/tenan/" + this.form.id)
         .then(() => {
           // success
           $("#addNew").modal("hide");

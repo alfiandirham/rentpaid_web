@@ -18,12 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name',45);
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('type',['superuser', 'admin', 'collector']);
+            $table->enum('type',['superuser', 'admin', 'collector'])->default('collector');
             $table->string('nohp',14)->nullable();
             $table->string('ktp',18)->nullable();
             $table->boolean('status')->default(true);
             $table->string('photo')->default('profile.png')->nullable();
-            $table->bigInteger('tenant_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

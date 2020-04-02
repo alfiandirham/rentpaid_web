@@ -9,20 +9,29 @@ use App\User;
 use App\Lokasi;
 use App\Http\Resources\TenantCollections;
 use App\Http\Resources\TenantCollection;
+use App\Http\Resources\Tenant as TenantResource;
 
 class TenantController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth:api');
+        $this->middleware('auth:api');
     }
 
     public function index()
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            return TenantResource::collection(Tenant::latest()->paginate(20));
         }
-        return TenantCollection::collection(Lokasi::latest()->paginate(20));
+    }
+
+    public function show($id)
+    {
+        // $this->authorize('isAdmin');
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            return new TenantResource(Tenant::findOrfail($id));
+        }
     }
 
     public function lokasiTenant()
@@ -30,6 +39,14 @@ class TenantController extends Controller
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
             return TenantCollections::collection(Lokasi::latest()->paginate(20));
+        }
+    }
+
+    public function lokasiTenantId($id)
+    {
+        // $this->authorize('isAdmin');
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            return TenantResource::collection(Lokasi::findOrFail($id)->tenant()->paginate(20));
         }
     }
 
@@ -62,15 +79,11 @@ class TenantController extends Controller
         $user = Tenant::findOrFail($id);
 
         $this->validate($request,[
-            'kategori' => 'required', 
-            'nomor' => 'required', 
-            'harga' => 'required', 
             'status' => 'required', 
-            'lokasi_id' => 'required'
         ]);
 
         $user->update($request->all());
-        return ['message' => 'Updated the user info'];
+        return ['message' => 'Updated data', 'data' => $user];
     }
 
     public function destroy($id)

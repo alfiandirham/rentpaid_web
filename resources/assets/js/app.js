@@ -61,6 +61,10 @@ let routes = [{
         component: require('./components/location/Locations.vue')
     },
     {
+        path: '/tenant/:id',
+        component: require('./components/locationtenant/Locations.vue')
+    },
+    {
         path: '/tenants',
         component: require('./components/tenan/Tenant.vue')
     },

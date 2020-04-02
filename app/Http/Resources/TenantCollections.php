@@ -17,11 +17,13 @@ class TenantCollections extends JsonResource
         return [
             'id' => $this->id,
             'lokasi' => $this->lokasi,
-            'alamat' => $this->lokasi,
+            'jumlah' => $this->tenant->count(),
+            'disewa' => $this->tenant->where('status', false)->count(),
+            'tersedia' => $this->tenant->where('status', true)->count(),
             'status' => $this->status,
+            'owner' => $this->user->name,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
-            'owner' => $this->user->name
         ];
     }
 }

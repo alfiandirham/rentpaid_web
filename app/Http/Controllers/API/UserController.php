@@ -24,6 +24,15 @@ class UserController extends Controller
 
     }
 
+    public function collector()
+    {
+        // $this->authorize('isAdmin');
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            return User::where('type', 'collector')->latest()->paginate(20);
+        }
+
+    }
+
     public function store(Request $request)
     {
 
