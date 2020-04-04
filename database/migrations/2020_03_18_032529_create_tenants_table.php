@@ -16,11 +16,11 @@ class CreateTenantsTable extends Migration
         Schema::create('tenants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('penyewa_id')->unsigned()->nullable();
+            $table->bigInteger('lokasi_id');
             $table->string('kategori',7);
             $table->integer('nomor');
             $table->float('harga');
             $table->boolean('status')->default(true);
-            $table->bigInteger('lokasi_id');
             $table->foreign('penyewa_id')->references('id')->on('penyewas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('lokasi_id')->references('id')->on('lokasis')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
