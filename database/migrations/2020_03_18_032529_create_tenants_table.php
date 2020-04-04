@@ -22,7 +22,6 @@ class CreateTenantsTable extends Migration
             $table->float('harga');
             $table->boolean('status')->default(true);
             $table->foreign('penyewa_id')->references('id')->on('penyewas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('lokasi_id')->references('id')->on('lokasis')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
