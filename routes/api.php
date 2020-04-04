@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResources(['user' => 'API\UserController']);
+Route::apiResources(['penyewa' => 'API\PenyewaController']);
 Route::apiResources(['lokasi' => 'API\LocationController']);
 Route::apiResources(['tenan' => 'API\TenantController']);
 
@@ -27,6 +28,8 @@ Route::get('lokasitenan/{id}', 'API\TenantController@lokasiTenantId');
 Route::get('collector', 'API\UserController@collector');
 
 Route::get('findUser', 'API\UserController@search');
+Route::get('findTenan/{id}', 'API\TenantController@search');
+Route::get('findPenyewa', 'API\PenyewaController@search');
 Route::get('findLocation', 'API\LocationController@search');
-Route::get('findLocationTenant', 'API\LocationController@search');
+Route::get('findLocationTenant', 'API\LocationController@search2');
 

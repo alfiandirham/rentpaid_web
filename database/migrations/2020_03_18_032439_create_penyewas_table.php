@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLokasisTable extends Migration
+class CreatePenyewasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateLokasisTable extends Migration
      */
     public function up()
     {
-        Schema::create('lokasis', function (Blueprint $table) {
+        Schema::create('penyewas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
-            $table->string('lokasi');
-            $table->float('lat');
-            $table->float('long');
+            $table->string('nama');
+            $table->string('hp');
+            $table->string('ktp');
             $table->text('alamat');
             $table->boolean('status')->default(true);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreateLokasisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lokasis');
+        Schema::dropIfExists('penyewas');
     }
 }

@@ -5,7 +5,7 @@
         <h2 class="head-text">Lokasi > List Lokasi</h2>
       </div>
       <div class="head-title">
-        <button type="button" data-toggle="modal" data-target="#addNew" class="btn btn-primary">
+        <button type="button" @click="newModal()" class="btn btn-primary">
           <i class="fa fa-map-marker fa-lg pr-1"></i>
           Tambah Lokasi
         </button>
@@ -28,7 +28,7 @@
                 class="form mt-1 form-vertical"
               >
                 <div class="modal-header modal-nav-header">
-                  <h2>TAMBAH LOKASI</h2>
+                  <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} LOKASI</h2>
                   <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
                 </div>
                 <div class="modal-body modal-nav-body">
@@ -79,47 +79,11 @@
                           <input
                             type="text"
                             class="form-control"
-                            v-model="form.provinsi"
-                            placeholder="Provinsi"
+                            v-model="form.alamat"
+                            placeholder="Alamat"
                             :class="{ 'is-invalid': form.errors.has('provinsi') }"
                           />
                           <has-error :form="form" field="provinsi"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="form.kab"
-                            placeholder="Kabupaten/Kota"
-                            :class="{ 'is-invalid': form.errors.has('kab') }"
-                          />
-                          <has-error :form="form" field="kab"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="form.kec"
-                            placeholder="Kecematan"
-                            :class="{ 'is-invalid': form.errors.has('kec') }"
-                          />
-                          <has-error :form="form" field="kec"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="form.kel"
-                            placeholder="Desa/Kelurahan"
-                            :class="{ 'is-invalid': form.errors.has('kel') }"
-                          />
-                          <has-error :form="form" field="kel"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -136,7 +100,7 @@
                               v-for="user in users.data"
                               :value="user.id"
                               :key="user.id"
-                            >{{user.id}}</option>
+                            >{{user.name}}</option>
                           </select>
                           <has-error :form="form" field="user_id"></has-error>
                         </div>
@@ -186,21 +150,29 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="location-list-owner">Owner</label>
                     <fieldset class="form-group">
-                      <select class="form-control" id="location-list-owner">
-                        <option value>All</option>
-                        <option value="user">User</option>
-                        <option value="staff">Staff</option>
+                      <select
+                        @change="filtering(filter.owner)"
+                        v-model="filter.owner"
+                        class="form-control"
+                      >
+                        <option
+                          v-for="user in users.data"
+                          :value="user.id"
+                          :key="user.id"
+                        >{{user.name}}</option>
                       </select>
                     </fieldset>
                   </div>
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="location-list-status">Status</label>
                     <fieldset class="form-group">
-                      <select class="form-control" id="location-list-status">
-                        <option value>All</option>
-                        <option value="Active">Active</option>
-                        <option value="Blocked">Blocked</option>
-                        <option value="deactivated">Deactivated</option>
+                      <select
+                        @change="filtering(filter.status)"
+                        v-model="filter.status"
+                        class="form-control"
+                      >
+                        <option value="1">Active</option>
+                        <option value="0">Deactivated</option>
                       </select>
                     </fieldset>
                   </div>
@@ -276,7 +248,7 @@
                       <th>Nama Lokasi</th>
                       <th>Alamat</th>
                       <th>Status</th>
-                      <th>Owner Id / Name</th>
+                      <th>Owner Name</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -287,14 +259,14 @@
                       </th>
                       <td>{{location.id}}</td>
                       <td>{{location.lokasi}}</td>
-                      <td>{{location.lokasi}}</td>
+                      <td>{{location.alamat}}</td>
                       <td v-if="location.status === 1">
                         <div class="badge badge-pill badge-light-success">Active</div>
                       </td>
                       <td v-if="location.status === 0">
                         <div class="badge badge-pill badge-light-warning">Non Active</div>
                       </td>
-                      <td>{{location.user_id}}</td>
+                      <td>{{location.owner}}</td>
                       <td>
                         <a @click="editModal(location)">
                           <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
@@ -331,6 +303,10 @@ export default {
       search: "",
       editmode: false,
       users: {},
+      filter: {
+        owner: "",
+        status: ""
+      },
       locations: {},
       form: new Form({
         id: "",
@@ -338,7 +314,7 @@ export default {
         lat: "",
         long: "",
         status: "",
-        provinsi: "",
+        alamat: "",
         kec: "",
         kel: "",
         kab: "",
@@ -347,6 +323,16 @@ export default {
     };
   },
   methods: {
+    filtering(q) {
+      if (this.$gate.isAdminOrAuthor()) {
+        axios
+          .get("api/findLocation?q=" + q)
+          .then(data => {
+            this.locations = data.data;
+          })
+          .catch(() => {});
+      }
+    },
     checkall() {
       this.cekall ? (this.cekall = false) : (this.cekall = true);
     },
@@ -408,7 +394,7 @@ export default {
     },
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/user").then(({ data }) => (this.users = data));
+        axios.get("api/collector").then(({ data }) => (this.users = data));
         axios.get("api/lokasi").then(({ data }) => (this.locations = data));
       }
     },

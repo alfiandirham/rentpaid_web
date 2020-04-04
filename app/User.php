@@ -31,8 +31,4 @@ class User extends Authenticatable
     public function location() {
         return $this->hasMany('App\Lokasi');
     }
-
-    public function tenant() {
-        return $this->hasMany('App\Tenant');
-    }
 }

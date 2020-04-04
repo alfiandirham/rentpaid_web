@@ -21,7 +21,6 @@ class UserController extends Controller
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
             return User::latest()->paginate(20);
         }
-
     }
 
     public function collector()
@@ -30,7 +29,6 @@ class UserController extends Controller
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
             return User::where('type', 'collector')->latest()->paginate(20);
         }
-
     }
 
     public function store(Request $request)
@@ -42,9 +40,22 @@ class UserController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
+        if($request->photo){
+            $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+
+            \Image::make($request->photo)->save(public_path('img/profile/').$name);
+            $request->merge(['photo' => $name]);
+
+            $userPhoto = public_path('img/profile/').$currentPhoto;
+            if(file_exists($userPhoto)){
+                @unlink($userPhoto);
+            }
+        }
+
         ($request['status'] == 'false') ? $request->merge(['status' => 0]) : $request->merge(['status' => 1]);
 
         return User::create([
+            'photo' => $request['photo'] ? $request['photo'] : '',
             'name' => $request['name'],
             'email' => $request['email'],
             'type' => $request['type'],
@@ -60,16 +71,13 @@ class UserController extends Controller
     {
         $user = auth('api')->user();
 
-
         $this->validate($request,[
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
             'password' => 'sometimes|required|min:6'
         ]);
 
-
         $currentPhoto = $user->photo;
-
 
         if($request->photo != $currentPhoto){
             $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
@@ -81,14 +89,11 @@ class UserController extends Controller
             if(file_exists($userPhoto)){
                 @unlink($userPhoto);
             }
-
         }
-
 
         if(!empty($request->password)){
             $request->merge(['password' => Hash::make($request['password'])]);
         }
-
 
         $user->update($request->all());
         return ['message' => "Success"];
@@ -102,7 +107,6 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $user = User::findOrFail($id);
 
         $this->validate($request,[
@@ -110,6 +114,20 @@ class UserController extends Controller
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
             'password' => 'sometimes|min:6'
         ]);
+        
+        $currentPhoto = $user->photo;
+
+        if($request->photo != $currentPhoto){
+            $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+
+            \Image::make($request->photo)->save(public_path('img/profile/').$name);
+            $request->merge(['photo' => $name]);
+
+            $userPhoto = public_path('img/profile/').$currentPhoto;
+            if(file_exists($userPhoto)){
+                @unlink($userPhoto);
+            }
+        }
 
         if(!empty($request->password)){
             $request->merge(['password' => Hash::make($request['password'])]);
@@ -134,17 +152,17 @@ class UserController extends Controller
     }
 
     public function search(){
-
         if ($search = \Request::get('q')) {
             $users = User::where(function($query) use ($search){
                 $query->where('name','LIKE',"%$search%")
-                        ->orWhere('email','LIKE',"%$search%");
+                        ->orWhere('email','LIKE',"%$search%")
+                        ->orWhere('status',$search)
+                        ->orWhere('type',$search);
             })->paginate(20);
         }else{
             $users = User::latest()->paginate(20);
         }
 
         return $users;
-
     }
 }

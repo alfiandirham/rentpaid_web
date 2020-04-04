@@ -21,6 +21,8 @@
                 </li>
                 <li class=" nav-item"><router-link to="/users"><i class="feather icon-users"></i><span class="menu-title" data-i18n="Todo">Users</span></router-link>
                 </li>
+                <li class=" nav-item"><router-link to="/penyewa"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Todo">Penyewa</span></router-link>
+                </li>
                 <li class=" navigation-header"><span>REPORT</span>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="fa fa-usd"></i><span class="menu-title" data-i18n="Data List">Transaksi</span></a>

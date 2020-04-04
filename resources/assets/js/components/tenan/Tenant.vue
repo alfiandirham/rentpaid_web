@@ -75,7 +75,8 @@
                 <input type="checkbox" :checked="cekall" />
               </th>
               <td>
-                <router-link :to="`tenant/${tenant.id}`">{{tenant.lokasi}}</router-link>
+                <router-link v-if="tenant.jumlah != 0" :to="`tenant/${tenant.id}`">{{tenant.lokasi}}</router-link>
+                <p v-if="tenant.jumlah == 0">{{tenant.lokasi}}</p>
               </td>
               <td>{{tenant.jumlah}}</td>
               <td>{{tenant.disewa}}</td>
@@ -277,10 +278,7 @@ export default {
     },
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/lokasitenan").then(({ data }) => {
-          this.tenants = data;
-          console.log(this.tenants);
-        });
+        axios.get("api/lokasitenan").then(({ data }) => (this.tenants = data));
         axios.get("api/lokasi").then(({ data }) => (this.locations = data));
       }
     },
@@ -309,9 +307,9 @@ export default {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
-        .get("api/findLocation?q=" + query)
+        .get("api/findLocationTenant?q=" + query)
         .then(data => {
-          this.users = data.data;
+          this.tenants = data.data;
         })
         .catch(() => {});
     });

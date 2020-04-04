@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lokasi extends Model
 {
     protected $fillable = [
-        'lokasi', 'lat', 'long', 'provinsi', 'kab',
-        'kec', 'kel', 'user_id', 'status',
+        'lokasi', 'lat', 'long', 'alamat', 'user_id', 'status',
     ];
 
     public function user(){

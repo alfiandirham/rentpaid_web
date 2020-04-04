@@ -5,12 +5,12 @@
     <section class="users-list-wrapper">
       <!-- users filter start -->
       <div>
-        <h2 class="head-text">Users > List User</h2>
+        <h2 class="head-text">Penyewa > List Penyewa</h2>
       </div>
       <div class="head-title">
         <button type="button" @click="newModal" class="btn btn-primary">
           <i class="fa fa-user-plus fa-lg pr-1"></i>
-          Tambah User
+          Tambah Penyewa
         </button>
         <!-- Modal -->
         <div
@@ -27,7 +27,7 @@
           >
             <div class="modal-nav">
               <div class="modal-header modal-nav-header">
-                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} USER</h2>
+                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} PENYEWA</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
               <form
@@ -39,27 +39,16 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <label for="gambar" class="clr-blue">Gambar</label>
-                          <input
-                            type="file"
-                            @change="updateGambar"
-                            name="gambar"
-                            class="form-control fileup"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group">
                           <label for="fname" class="clr-blue">Nama Lengkap</label>
                           <input
                             type="text"
                             name="fname"
-                            v-model="form.name"
+                            v-model="form.nama"
                             placeholder="Nama Lengkap"
                             class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('name') }"
+                            :class="{ 'is-invalid': form.errors.has('nama') }"
                           />
-                          <has-error :form="form" field="name"></has-error>
+                          <has-error :form="form" field="nama"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -80,92 +69,26 @@
                           <input
                             type="number"
                             class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('nohp') }"
-                            v-model="form.nohp"
+                            :class="{ 'is-invalid': form.errors.has('hp') }"
+                            v-model="form.hp"
                             name="contact"
                             placeholder="No. Telepon"
                           />
-                          <has-error :form="form" field="nohp"></has-error>
+                          <has-error :form="form" field="hp"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
                           <input
-                            v-model="form.email"
-                            type="email"
-                            :class="{ 'is-invalid': form.errors.has('email') }"
+                            v-model="form.alamat"
+                            type="text"
+                            :class="{ 'is-invalid': form.errors.has('alamat') }"
                             class="form-control"
-                            name="email"
-                            placeholder="Email"
+                            name="alamat"
+                            placeholder="Alamat"
                           />
-                          <has-error :form="form" field="email"></has-error>
+                          <has-error :form="form" field="alamat"></has-error>
                         </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="password"
-                            v-model="form.password"
-                            :class="{ 'is-invalid': form.errors.has('password') }"
-                            class="form-control"
-                            name="contact"
-                            placeholder="Password"
-                          />
-                          <has-error :form="form" field="password"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <p>Tipe User</p>
-                        <ul class="list-unstyled mb-0">
-                          <li class="d-inline-block mr-2">
-                            <fieldset>
-                              <div class="vs-radio-con">
-                                <input
-                                  type="radio"
-                                  v-model="form.type"
-                                  name="type"
-                                  checked
-                                  value="superuser"
-                                />
-                                <span class="vs-radio">
-                                  <span class="vs-radio--border"></span>
-                                  <span class="vs-radio--circle"></span>
-                                </span>
-                                <span class>Sys Admin</span>
-                              </div>
-                            </fieldset>
-                          </li>
-                          <li class="d-inline-block mr-2">
-                            <fieldset>
-                              <div class="vs-radio-con">
-                                <input type="radio" v-model="form.type" name="type" value="admin" />
-                                <span class="vs-radio">
-                                  <span class="vs-radio--border"></span>
-                                  <span class="vs-radio--circle"></span>
-                                </span>
-                                <span class>Company Staff</span>
-                              </div>
-                            </fieldset>
-                          </li>
-                          <li class="d-inline-block mr-2">
-                            <fieldset>
-                              <div class="vs-radio-con">
-                                <input
-                                  type="radio"
-                                  v-model="form.type"
-                                  name="type"
-                                  value="collector"
-                                />
-                                <span class="vs-radio">
-                                  <span class="vs-radio--border"></span>
-                                  <span class="vs-radio--circle"></span>
-                                </span>
-                                <span class>Collector</span>
-                              </div>
-                            </fieldset>
-                          </li>
-                        </ul>
-                        <has-error :form="form" field="type"></has-error>
                       </div>
                       <div class="col-12">
                         <p>Status</p>
@@ -245,20 +168,6 @@
             <div class="users-list-filter">
               <form>
                 <div class="row">
-                  <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="users-list-role">Role</label>
-                    <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.role)"
-                        v-model="filter.role"
-                        class="form-control"
-                      >
-                        <option value="collector">User</option>
-                        <option value="admin">Staff</option>
-                        <option value="superuser">SysAdmin</option>
-                      </select>
-                    </fieldset>
-                  </div>
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="users-list-status">Status</label>
                     <fieldset class="form-group">
@@ -340,10 +249,10 @@
                       <th>
                         <input type="checkbox" @click="checkall" v-model="cekall" />
                       </th>
-                      <th>Name</th>
-                      <th>Email</th>
+                      <th>Nama</th>
+                      <th>Ktp</th>
                       <th>No Hp</th>
-                      <th>Tipe User</th>
+                      <th>Alamat</th>
                       <th>Status</th>
                       <th>Aksi</th>
                     </tr>
@@ -353,10 +262,10 @@
                       <th scope="row">
                         <input type="checkbox" :checked="cekall" />
                       </th>
-                      <td>{{user.name}}</td>
-                      <td>{{user.email}}</td>
-                      <td>{{user.nohp}}</td>
-                      <td>{{user.type}}</td>
+                      <td>{{user.nama}}</td>
+                      <td>{{user.ktp}}</td>
+                      <td>{{user.hp}}</td>
+                      <td>{{user.alamat}}</td>
                       <td v-if="user.status === 1">
                         <div class="badge badge-pill badge-light-success">Active</div>
                       </td>
@@ -400,20 +309,15 @@ export default {
       editmode: false,
       users: {},
       filter: {
-        status: "",
-        role: ""
+        status: ""
       },
       form: new Form({
         id: "",
-        name: "",
-        email: "",
-        password: "",
-        type: "",
-        nohp: "",
-        photo: "",
+        nama: "",
+        alamat: "",
+        hp: "",
         status: "",
-        ktp: "",
-        photo: ""
+        ktp: ""
       })
     };
   },
@@ -421,7 +325,7 @@ export default {
     filtering(q) {
       if (this.$gate.isAdminOrAuthor()) {
         axios
-          .get("api/findUser?q=" + q)
+          .get("api/findPenyewa?q=" + q)
           .then(data => {
             this.users = data.data;
           })
@@ -435,7 +339,7 @@ export default {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("api/user/" + this.form.id)
+        .put("api/penyewa/" + this.form.id)
         .then(() => {
           // success
           $("#addNew").modal("hide");
@@ -460,7 +364,7 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form
-            .delete("api/user/" + id)
+            .delete("api/penyewa/" + id)
             .then(() => {
               swal("Deleted!", "Your file has been deleted.", "success");
               Fire.$emit("AfterCreate");
@@ -483,38 +387,19 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/user?page=" + page).then(response => {
+      axios.get("api/penyewa?page=" + page).then(response => {
         this.users = response.data;
       });
     },
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/user").then(({ data }) => (this.users = data));
+        axios.get("api/penyewa").then(({ data }) => (this.users = data));
       }
-    },
-    updateGambar(e) {
-      let file = e.target.files[0];
-      let reader = new FileReader();
-
-      let limit = 1024 * 1024 * 2;
-      if (file["size"] > limit) {
-        swal({
-          type: "error",
-          title: "Oops...",
-          text: "You are uploading a large file"
-        });
-        return false;
-      }
-
-      reader.onloadend = file => {
-        this.form.photo = reader.result;
-      };
-      reader.readAsDataURL(file);
     },
     createUser() {
       this.$Progress.start();
       this.form
-        .post("api/user")
+        .post("api/penyewa")
         .then(() => {
           Fire.$emit("AfterCreate");
           $("#addNew").modal("hide");
@@ -536,7 +421,7 @@ export default {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
-        .get("api/findUser?q=" + query)
+        .get("api/findPenyewa?q=" + query)
         .then(data => {
           this.users = data.data;
         })
@@ -549,11 +434,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.fileup {
-  height: 5em;
-  padding-top: 1.5rem;
-  width: fit-content;
-}
-</style>

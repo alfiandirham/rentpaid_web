@@ -57,6 +57,10 @@ let routes = [{
         component: require('./components/user/Users.vue')
     },
     {
+        path: '/penyewa',
+        component: require('./components/penyewa/Users.vue')
+    },
+    {
         path: '/locations',
         component: require('./components/location/Locations.vue')
     },

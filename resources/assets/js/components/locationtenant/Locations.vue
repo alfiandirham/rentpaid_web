@@ -180,23 +180,15 @@
               <form>
                 <div class="row">
                   <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="location-list-owner">Owner</label>
-                    <fieldset class="form-group">
-                      <select class="form-control" id="location-list-owner">
-                        <option value>All</option>
-                        <option value="user">User</option>
-                        <option value="staff">Staff</option>
-                      </select>
-                    </fieldset>
-                  </div>
-                  <div class="col-12 col-sm-6 col-lg-3">
                     <label for="location-list-status">Status</label>
                     <fieldset class="form-group">
-                      <select class="form-control" id="location-list-status">
-                        <option value>All</option>
-                        <option value="Active">Active</option>
-                        <option value="Blocked">Blocked</option>
-                        <option value="deactivated">Deactivated</option>
+                      <select
+                        @change="filtering(filter.status)"
+                        v-model="filter.status"
+                        class="form-control"
+                      >
+                        <option value="1">Tersedia</option>
+                        <option value="0">Disewa</option>
                       </select>
                     </fieldset>
                   </div>
@@ -290,13 +282,17 @@
                         <div class="badge badge-pill badge-light-warning">Disewa</div>
                       </td>
                       <td>
-                        <select id="tenant" @change="upData(tenant.id)" class="form-control before">
-                          <option :value="tenant.user_id">{{tenant.penyewa}}</option>
+                        <select
+                          :id="`tenant${tenant.id}`"
+                          @change="upData(tenant.id)"
+                          class="form-control before"
+                        >
+                          <option :value="tenant.penyewa_id">{{tenant.penyewa}}</option>
                           <option
                             v-for="user in users.data"
                             :key="user.id"
                             :value="user.id"
-                          >{{user.name}}</option>
+                          >{{user.nama}}</option>
                         </select>
                       </td>
                       <!-- <td>
@@ -336,15 +332,28 @@ export default {
       search: "",
       editmode: false,
       users: {},
+      filter: {
+        status: ""
+      },
       tenants: {},
       form: new Form({
         id: "",
-        user_id: "",
+        penyewa_id: "",
         status: ""
       })
     };
   },
   methods: {
+    filtering(q) {
+      if (this.$gate.isAdminOrAuthor()) {
+        axios
+          .get("/api/findTenan/" + this.$route.params.id + "?q=" + q)
+          .then(data => {
+            this.tenants = data;
+          })
+          .catch(() => {});
+      }
+    },
     checkall() {
       this.cekall ? (this.cekall = false) : (this.cekall = true);
     },
@@ -389,7 +398,7 @@ export default {
       });
     },
     upData(id) {
-      let getVal = document.getElementById("tenant");
+      let getVal = document.getElementById("tenant" + id);
       swal({
         title: "Anda Yakin?",
         text: "Pastikan Penyewa Benar!",
@@ -402,10 +411,11 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form.status = 0;
-          this.form.user_id = getVal.value;
+          this.form.penyewa_id = getVal.value;
           this.form
             .put("/api/tenan/" + id)
             .then(() => {
+              getVal.className = "form-control after";
               swal("Disewa!", "Tenant berhasil disewa.", "success");
               Fire.$emit("AfterCreate");
             })
@@ -435,7 +445,7 @@ export default {
     },
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("/api/collector").then(({ data }) => (this.users = data));
+        axios.get("/api/penyewa").then(({ data }) => (this.users = data));
         axios
           .get("/api/lokasitenan/" + this.$route.params.id)
           .then(({ data }) => (this.tenants = data));
@@ -466,7 +476,7 @@ export default {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
-        .get("/api/findLocation?q=" + query)
+        .get("/api/findTenan/" + this.$route.params.id + "?q=" + query)
         .then(data => {
           this.tenants = data.data;
         })
@@ -483,5 +493,9 @@ export default {
 <style scoped>
 .before {
   background-color: #ecf3f7;
+}
+
+.after {
+  background-color: #ffe2e2;
 }
 </style>

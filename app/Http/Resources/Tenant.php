@@ -21,7 +21,7 @@ class Tenant extends JsonResource
             "harga" => $this->harga,
             "status" => $this->status,
             "user_id" => $this->user_id,
-            "penyewa" => ($this->user) ? $this->user->name : 'kosong',
+            "penyewa" => ($this->penyewa) ? $this->penyewa->nama : 'kosong',
             "lokasi" => $this->lokasi->lokasi,
             "created_at" => (string) $this->created_at,
             "updated_at" => (string) $this->updated_at

@@ -80,6 +80,7 @@ class TenantController extends Controller
 
         $this->validate($request,[
             'status' => 'required', 
+            'penyewa_id' => 'required|integer', 
         ]);
 
         $user->update($request->all());
@@ -98,15 +99,16 @@ class TenantController extends Controller
         return ['message' => 'Tenant Deleted'];
     }
 
-    public function search(){
+    public function search($id){
 
         if ($search = \Request::get('q')) {
-            $users = Tenant::where(function($query) use ($search){
-                $query->where('status','LIKE',"%$search%")
-                        ->orWhere('nomor','LIKE',"%$search%");
-            })->paginate(20);
+            $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->where(function($query) use ($search){
+                $query->where('status', $search)
+                        ->orWhere('nomor', $search)
+                        ->orWhere('kategori', $search);
+            })->paginate(20));
         }else{
-            $users = Tenant::latest()->paginate(20);
+            $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->latest()->paginate(20));
         }
 
         return $users;

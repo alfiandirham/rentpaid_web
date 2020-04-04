@@ -13,4 +13,4 @@ Route::get('invoice', function(){
 });
 
 Route::get('{path}',"HomeController@index")->where( 'path', '[A-Za-z]+' );
-Route::get('/tenant/{path}',"HomeController@index")->where( 'path', '[A-Za-z2]+' );
+Route::get('/tenant/{path}',"HomeController@index")->where( 'path', '[0-9]+' );

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Location;
+use App\Http\Resources\TenantCollections;
 use App\Lokasi;
 
 class LocationController extends Controller
@@ -17,9 +19,8 @@ class LocationController extends Controller
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return Lokasi::latest()->paginate(20);
+            return Location::collection(Lokasi::latest()->paginate(20));
         }
-
     }
 
     public function store(Request $request)
@@ -29,10 +30,7 @@ class LocationController extends Controller
             'lokasi' => 'required', 
             'lat' => 'required', 
             'long' => 'required', 
-            'provinsi' => 'required', 
-            'kab' => 'required',
-            'kec' => 'required', 
-            'kel' => 'required', 
+            'alamat' => 'required', 
             'user_id' => 'required'
         ]);
 
@@ -50,10 +48,7 @@ class LocationController extends Controller
             'lokasi' => 'required', 
             'lat' => 'required', 
             'long' => 'required', 
-            'provinsi' => 'required', 
-            'kab' => 'required',
-            'kec' => 'required', 
-            'kel' => 'required', 
+            'alamat' => 'required', 
             'user_id' => 'required'
         ]);
 
@@ -78,12 +73,29 @@ class LocationController extends Controller
     public function search(){
 
         if ($search = \Request::get('q')) {
-            $users = Lokasi::where(function($query) use ($search){
+            $users = Location::collection(Lokasi::where(function($query) use ($search){
                 $query->where('lokasi','LIKE',"%$search%")
+                        ->orWhere('status','LIKE',"%$search%")
                         ->orWhere('user_id','LIKE',"%$search%");
-            })->paginate(20);
+            })->paginate(20));
         }else{
-            $users = Lokasi::latest()->paginate(20);
+            $users = Location::collection(Lokasi::latest()->paginate(20));
+        }
+
+        return $users;
+
+    }
+
+    public function search2(){
+
+        if ($search = \Request::get('q')) {
+            $users = TenantCollections::collection(Lokasi::where(function($query) use ($search){
+                $query->where('lokasi','LIKE',"%$search%")
+                        ->orWhere('status','LIKE',"%$search%")
+                        ->orWhere('user_id','LIKE',"%$search%");
+            })->paginate(20));
+        }else{
+            $users = TenantCollections::collection(Lokasi::latest()->paginate(20));
         }
 
         return $users;
