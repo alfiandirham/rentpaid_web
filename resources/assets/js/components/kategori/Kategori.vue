@@ -70,7 +70,7 @@
                               v-for="tarif in tarifs.data"
                               :value="tarif.id"
                               :key="tarif.id"
-                            >{{tarif.nama}}</option>
+                            >{{tarif.nama}} - Rp. {{tarif.sampah + tarif.barang + tarif.listrik + tarif.air + tarif.bop}}</option>
                           </select>
                         </div>
                       </div>

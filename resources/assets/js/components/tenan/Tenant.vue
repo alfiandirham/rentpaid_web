@@ -114,11 +114,8 @@
               <h2>TAMBAH TENANT</h2>
               <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
             </div>
-            <form
-              @submit.prevent="editmode ? updateData() : createData()"
-              class="form mt-1 form-vertical"
-            >
-              <div class="modal-body modal-nav-body">
+            <div class="modal-body modal-nav-body">
+              <form class="form mt-1 form-vertical">
                 <div class="form-body">
                   <div class="row">
                     <div class="col-12">
@@ -141,56 +138,60 @@
                       </div>
                       <hr />
                     </div>
-                    <div class="row" style="padding-left:13px; align-items: baseline;">
-                      <div class="col-4">
+                    <div
+                      v-for="i of is"
+                      :key="i"
+                      class="row"
+                      style="padding-left:13px; align-items: baseline;"
+                    >
+                      <div class="col-6">
                         <div class="form-group">
-                          <input
-                            type="text"
+                          <select
                             class="form-control"
-                            v-model="form.kategori"
-                            placeholder="Kategori Tenant"
+                            :id="'kategori'+i"
+                            @change="jumlahData(i)"
+                            placeholder="Pilih Lokasi"
                             :class="{ 'is-invalid': form.errors.has('kategori') }"
-                          />
+                          >
+                            <option value="pilih">Pilih Kategori</option>
+                            <option
+                              v-for="kategori in kategoris.data"
+                              :value="kategori.id"
+                              :key="kategori.id"
+                            >{{kategori.kode}}</option>
+                          </select>
                           <has-error :form="form" field="kategori"></has-error>
                         </div>
                       </div>
-                      <div class="col-4">
+                      <div class="col-5">
                         <div class="form-group">
                           <input
                             type="number"
                             class="form-control"
-                            v-model="form.jumlah"
+                            :id="'jumlah'+i"
                             placeholder="Jumlah Tenant"
                             :class="{ 'is-invalid': form.errors.has('jumlah') }"
                           />
                           <has-error :form="form" field="jumlah"></has-error>
                         </div>
                       </div>
-                      <div class="col-3">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="form.harga"
-                            placeholder="Harga Sewa"
-                            :class="{ 'is-invalid': form.errors.has('harga') }"
-                          />
-                          <has-error :form="form" field="harga"></has-error>
-                        </div>
-                      </div>
                       <div class="col-1">
-                        <a>
+                        <a @click="popData(i)">
                           <i class="fa danger fa-trash"></i>
                         </a>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Accept</button>
-              </div>
-            </form>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                @click="editmode ? updateData() : createData()"
+                class="btn btn-primary"
+              >Accept</button>
+            </div>
           </div>
         </div>
       </div>
@@ -202,21 +203,30 @@
 export default {
   data() {
     return {
+      inc: 0,
+      is: [0],
       cekall: false,
       search: "",
       editmode: false,
       tenants: {},
+      kategoris: {},
       locations: {},
       form: new Form({
         id: "",
-        kategori: "",
-        harga: "",
+        kategori_id: "",
         jumlah: "",
         lokasi_id: ""
       })
     };
   },
   methods: {
+    popData(i) {
+      this.is = this.is.filter(item => item !== i);
+    },
+    jumlahData(i) {
+      this.inc += 1;
+      this.is.push(this.inc);
+    },
     checkall() {
       this.cekall ? (this.cekall = false) : (this.cekall = true);
     },
@@ -279,25 +289,30 @@ export default {
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
         axios.get("api/lokasitenan").then(({ data }) => (this.tenants = data));
+        axios.get("api/kategori").then(({ data }) => (this.kategoris = data));
         axios.get("api/lokasi").then(({ data }) => (this.locations = data));
       }
     },
     createData() {
-      this.$Progress.start();
-      this.form
-        .post("api/tenan")
-        .then(() => {
-          Fire.$emit("AfterCreate");
-          $("#addNew").modal("hide");
-          toast({
-            type: "success",
-            title: "Data Created in successfully"
+      this.is.forEach(i => {
+        this.$Progress.start();
+        this.form.jumlah = document.getElementById("jumlah" + i).value;
+        this.form.kategori_id = document.getElementById("kategori" + i).value;
+        this.form
+          .post("api/tenan")
+          .then(() => {
+            Fire.$emit("AfterCreate");
+            $("#addNew").modal("hide");
+            toast({
+              type: "success",
+              title: "Data Created in successfully"
+            });
+            this.$Progress.finish();
+          })
+          .catch(() => {
+            this.$Progress.fail();
           });
-          this.$Progress.finish();
-        })
-        .catch(() => {
-          this.$Progress.fail();
-        });
+      });
     },
     searchit: _.debounce(() => {
       Fire.$emit("searching");

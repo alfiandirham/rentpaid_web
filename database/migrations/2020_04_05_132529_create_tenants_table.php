@@ -19,9 +19,9 @@ class CreateTenantsTable extends Migration
             $table->foreign('penyewa_id')->references('id')->on('penyewas')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('lokasi_id')->unsigned()->nullable();
             $table->foreign('lokasi_id')->references('id')->on('lokasis')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('kategori',7);
+            $table->bigInteger('kategori_id')->unsigned();
+            $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('nomor');
-            $table->float('harga');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

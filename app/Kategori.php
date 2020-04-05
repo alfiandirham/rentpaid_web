@@ -13,4 +13,8 @@ class Kategori extends Model
     public function tarif(){
         return $this->belongsTo('App\Tarif');
     }
+
+    public function tenant(){
+        return $this->hasMany('App\Tenant');
+    }
 }

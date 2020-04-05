@@ -16,9 +16,13 @@ class Tenant extends JsonResource
     {
         return [
             "id" => $this->id,
-            "kategori" => $this->kategori,
+            "kategori" => $this->kategori->kode,
             "nomor" => $this->nomor,
-            "harga" => $this->harga,
+            "harga" => ($this->kategori->tarif->bop 
+                            + $this->kategori->tarif->barang 
+                            + $this->kategori->tarif->listrik 
+                            + $this->kategori->tarif->sampah 
+                            + $this->kategori->tarif->air),
             "status" => $this->status,
             "user_id" => $this->user_id,
             "penyewa" => ($this->penyewa) ? $this->penyewa->nama : 'kosong',

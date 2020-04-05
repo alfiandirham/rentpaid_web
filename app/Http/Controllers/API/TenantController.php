@@ -54,9 +54,8 @@ class TenantController extends Controller
     {
 
         $this->validate($request,[
-            'kategori' => 'required', 
+            'kategori_id' => 'required', 
             'jumlah' => 'required', 
-            'harga' => 'required', 
             'lokasi_id' => 'required'
         ]);
 
@@ -64,8 +63,7 @@ class TenantController extends Controller
 
         for($i=1; $i<= $request->jumlah; $i++){
             $lokasi->tenant()->create([
-                'kategori' => $request->kategori,
-                'harga' => $request->harga,
+                'kategori_id' => $request->kategori_id,
                 'nomor' => $i
             ]);
         }

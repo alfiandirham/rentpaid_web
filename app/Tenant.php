@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Tenant extends Model
 {
     protected $fillable = [
-        'kategori', 'nomor', 'harga', 'status', 'lokasi_id', 'penyewa_id'
+        'kategori_id', 'nomor', 'status', 'lokasi_id', 'penyewa_id'
     ];
 
     public function penyewa(){
         return $this->belongsTo('App\Penyewa');
+    }
+
+    public function kategori(){
+        return $this->belongsTo('App\Kategori');
     }
 
     public function lokasi(){
