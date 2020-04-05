@@ -15,6 +15,7 @@ class Kategori extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'nama' => $this->nama,
             'kode' => $this->kode,
             'tarif' => ($this->tarif) ? ($this->tarif->bop 
