@@ -1,14 +1,13 @@
 <template>
-  <div class="location">
+  <div class="user">
+    <!-- users list start -->
+    <!-- <section class="users-list-wrapper" v-if="$gate.isAdminOrAuthor()"> -->
     <section class="users-list-wrapper">
       <div>
-        <h2 class="head-text">Lokasi > List Lokasi</h2>
+        <h2 class="head-text">Tenant > Tarif</h2>
       </div>
       <div class="head-title">
-        <button type="button" @click="newModal()" class="btn btn-primary">
-          <i class="fa fa-map-marker fa-lg pr-1"></i>
-          Tambah Lokasi
-        </button>
+        <button type="button" @click="newModal" class="btn btn-primary">Tambah Tarif</button>
         <!-- Modal -->
         <div
           class="modal fade"
@@ -24,7 +23,7 @@
           >
             <div class="modal-nav">
               <div class="modal-header modal-nav-header">
-                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} LOKASI</h2>
+                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} TARIF</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
               <div class="modal-body modal-nav-body">
@@ -33,73 +32,77 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <label for="fname" class="clr-blue">Nama Lokasi</label>
                           <input
                             type="text"
-                            class="form-control"
                             name="fname"
-                            v-model="form.lokasi"
-                            placeholder="Nama Lokasi"
-                            :class="{ 'is-invalid': form.errors.has('lokasi') }"
-                          />
-                          <has-error :form="form" field="lokasi"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="form-group">
-                          <input
-                            type="number"
+                            v-model="form.nama"
+                            placeholder="Nama Tarif"
                             class="form-control"
-                            name="fname"
-                            v-model="form.lat"
-                            placeholder="Latitude"
-                            :class="{ 'is-invalid': form.errors.has('lat') }"
+                            :class="{ 'is-invalid': form.errors.has('nama') }"
                           />
-                          <has-error :form="form" field="lat"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            name="fname"
-                            v-model="form.long"
-                            placeholder="Longitude"
-                            :class="{ 'is-invalid': form.errors.has('long') }"
-                          />
-                          <has-error :form="form" field="long"></has-error>
+                          <has-error :form="form" field="nama"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
                           <input
-                            type="text"
+                            type="number"
                             class="form-control"
-                            v-model="form.alamat"
-                            placeholder="Alamat"
-                            :class="{ 'is-invalid': form.errors.has('provinsi') }"
+                            :class="{ 'is-invalid': form.errors.has('bop') }"
+                            v-model="form.bop"
+                            name="bop"
+                            placeholder="Jumlah Tarif BOP"
                           />
-                          <has-error :form="form" field="provinsi"></has-error>
+                          <has-error :form="form" field="bop"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <label for="owner">Pilih Owner</label>
-                          <select
-                            name="owner"
+                          <input
+                            type="number"
                             class="form-control"
-                            v-model="form.user_id"
-                            placeholder="Pilih Owner"
-                            :class="{ 'is-invalid': form.errors.has('user_id') }"
-                          >
-                            <option
-                              v-for="user in users.data"
-                              :value="user.id"
-                              :key="user.id"
-                            >{{user.name}}</option>
-                          </select>
-                          <has-error :form="form" field="user_id"></has-error>
+                            :class="{ 'is-invalid': form.errors.has('air') }"
+                            v-model="form.air"
+                            name="air"
+                            placeholder="Jumlah Tarif Air"
+                          />
+                          <has-error :form="form" field="air"></has-error>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input
+                            type="number"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('listrik') }"
+                            v-model="form.listrik"
+                            placeholder="Jumlah Tarif Listrik"
+                          />
+                          <has-error :form="form" field="listrik"></has-error>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input
+                            type="number"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('barang') }"
+                            v-model="form.barang"
+                            placeholder="Jumlah Tarif Barang Masuk"
+                          />
+                          <has-error :form="form" field="barang"></has-error>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input
+                            type="number"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('sampah') }"
+                            v-model="form.sampah"
+                            placeholder="Jumlah Tarif Sampah"
+                          />
+                          <has-error :form="form" field="sampah"></has-error>
                         </div>
                       </div>
                     </div>
@@ -109,7 +112,7 @@
               <div class="modal-footer">
                 <button
                   type="button"
-                  @click="editmode ? updateData() : createData()"
+                  @click="editmode ? updateUser() : createUser()"
                   class="btn btn-primary"
                 >Accept</button>
               </div>
@@ -117,73 +120,6 @@
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Filters</h4>
-          <a class="heading-elements-toggle">
-            <i class="fa fa-ellipsis-v font-medium-3"></i>
-          </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="feather icon-chevron-down"></i>
-                </a>
-              </li>
-              <li>
-                <a data-action>
-                  <i class="feather icon-rotate-cw users-data-filter"></i>
-                </a>
-              </li>
-              <li>
-                <a data-action="close">
-                  <i class="feather icon-x"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-content collapse show">
-          <div class="card-body">
-            <div class="users-list-filter">
-              <form>
-                <div class="row">
-                  <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="location-list-owner">Owner</label>
-                    <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.owner)"
-                        v-model="filter.owner"
-                        class="form-control"
-                      >
-                        <option
-                          v-for="user in users.data"
-                          :value="user.id"
-                          :key="user.id"
-                        >{{user.name}}</option>
-                      </select>
-                    </fieldset>
-                  </div>
-                  <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="location-list-status">Status</label>
-                    <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.status)"
-                        v-model="filter.status"
-                        class="form-control"
-                      >
-                        <option value="1">Active</option>
-                        <option value="0">Deactivated</option>
-                      </select>
-                    </fieldset>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- users filter end -->
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
         <div class="card">
@@ -245,40 +181,38 @@
                       <th>
                         <input type="checkbox" @click="checkall" v-model="cekall" />
                       </th>
-                      <th>Nama Lokasi</th>
-                      <th>Alamat</th>
-                      <th>Status</th>
-                      <th>Owner Name</th>
+                      <th>Nama Tarif</th>
+                      <th>BOP</th>
+                      <th>Air</th>
+                      <th>Listrik</th>
+                      <th>Brg Masuk</th>
+                      <th>Sampah</th>
+                      <th>Total Sewa</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="location in locations.data" :key="location.id">
+                    <tr v-for="tarif in tarifs.data" :key="tarif.id">
                       <th scope="row">
                         <input type="checkbox" :checked="cekall" />
                       </th>
-                      <td>{{location.lokasi}}</td>
-                      <td>{{location.alamat}}</td>
-                      <td v-if="location.status === 1">
-                        <div class="badge badge-pill badge-light-success">Active</div>
-                      </td>
-                      <td v-if="location.status === 0">
-                        <div class="badge badge-pill badge-light-warning">Non Active</div>
-                      </td>
-                      <td>{{location.owner}}</td>
+                      <td>{{tarif.nama}}</td>
+                      <td>Rp. {{tarif.bop}}</td>
+                      <td>Rp. {{tarif.air}}</td>
+                      <td>Rp. {{tarif.listrik}}</td>
+                      <td>Rp. {{tarif.barang}}</td>
+                      <td>Rp. {{tarif.sampah}}</td>
+                      <td>Rp. {{tarif.sampah + tarif.barang + tarif.listrik + tarif.air + tarif.bop}}</td>
                       <td>
-                        <a @click="editModal(location)">
-                          <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
-                        </a>
-                        <a @click="deleteData(location.id)">
-                          <i class="users-delete-icon feather icon-trash-2"></i>
+                        <a @click="editModal(tarif)">
+                          <i class="feather icon-edit-1 mr-50"></i>
                         </a>
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="locations" @pagination-change-page="getResults"></pagination>
+                  <pagination :limit="5" :data="tarifs" @pagination-change-page="getResults"></pagination>
                 </div>
               </div>
             </div>
@@ -301,45 +235,28 @@ export default {
       cekall: false,
       search: "",
       editmode: false,
-      users: {},
-      filter: {
-        owner: "",
-        status: ""
-      },
-      locations: {},
+      tarifs: {},
       form: new Form({
         id: "",
-        lokasi: "",
-        lat: "",
-        long: "",
-        status: "",
-        alamat: "",
-        kec: "",
-        kel: "",
-        kab: "",
-        user_id: ""
+        nama: "",
+        air: "",
+        bop: "",
+        air: "",
+        listrik: "",
+        barang: "",
+        sampah: ""
       })
     };
   },
   methods: {
-    filtering(q) {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios
-          .get("api/findLocation?q=" + q)
-          .then(data => {
-            this.locations = data.data;
-          })
-          .catch(() => {});
-      }
-    },
     checkall() {
       this.cekall ? (this.cekall = false) : (this.cekall = true);
     },
-    updateData() {
+    updateUser() {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("api/lokasi/" + this.form.id)
+        .put("api/tarif/" + this.form.id)
         .then(() => {
           // success
           $("#addNew").modal("hide");
@@ -351,7 +268,7 @@ export default {
           this.$Progress.fail();
         });
     },
-    deleteData(id) {
+    deleteUser(id) {
       swal({
         title: "Are you sure?",
         text: "Disable this data!",
@@ -364,7 +281,7 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form
-            .delete("api/lokasi/" + id)
+            .delete("api/tarif/" + id)
             .then(() => {
               swal("Disabled!", "Your data has been disabled.", "success");
               Fire.$emit("AfterCreate");
@@ -387,26 +304,25 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/lokasi?page=" + page).then(response => {
-        this.locations = response.data;
+      axios.get("api/tarif?page=" + page).then(response => {
+        this.tarifs = response.data;
       });
     },
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/owner").then(({ data }) => (this.users = data));
-        axios.get("api/lokasi").then(({ data }) => (this.locations = data));
+        axios.get("api/tarif").then(({ data }) => (this.tarifs = data));
       }
     },
-    createData() {
+    createUser() {
       this.$Progress.start();
       this.form
-        .post("api/lokasi")
+        .post("api/tarif")
         .then(() => {
           Fire.$emit("AfterCreate");
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "Data Created in successfully"
+            title: "User Created in successfully"
           });
           this.$Progress.finish();
         })
@@ -422,9 +338,9 @@ export default {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
-        .get("api/findLocation?q=" + query)
+        .get("api/findTarif?q=" + query)
         .then(data => {
-          this.locations = data.data;
+          this.tarifs = data.data;
         })
         .catch(() => {});
     });

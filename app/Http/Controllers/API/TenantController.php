@@ -94,7 +94,8 @@ class TenantController extends Controller
 
         $user = Tenant::findOrFail($id);
 
-        $user->delete();
+        $user->status = 0;
+        $user->save();
 
         return ['message' => 'Tenant Deleted'];
     }

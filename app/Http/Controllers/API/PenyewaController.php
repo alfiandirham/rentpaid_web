@@ -74,7 +74,8 @@ class PenyewaController extends Controller
         $user = User::findOrFail($id);
         // delete the user
 
-        $user->delete();
+        $$user->status = 0;
+        $user->save();
 
         return ['message' => 'User Deleted'];
     }

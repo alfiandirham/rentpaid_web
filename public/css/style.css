@@ -270,3 +270,8 @@ table.data-thumb-view.dataTable {
 .data-thumb-view-header .add-new-data-sidebar .add-new-data .new-data-title {
     padding-bottom: 1.54rem;
 }
+
+a.router-link-exact-active.router-link-active {
+    background: rgba(247, 197, 13, 0.4);
+    border-radius: 4px;
+}

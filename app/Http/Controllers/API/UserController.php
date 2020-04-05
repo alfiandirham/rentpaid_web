@@ -23,11 +23,11 @@ class UserController extends Controller
         }
     }
 
-    public function collector()
+    public function owner()
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return User::where('type', 'collector')->latest()->paginate(20);
+            return User::where('type', 'owner')->latest()->paginate(20);
         }
     }
 
@@ -146,7 +146,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         // delete the user
 
-        $user->delete();
+        $user->status = 0;
+        $user->save();
 
         return ['message' => 'User Deleted'];
     }

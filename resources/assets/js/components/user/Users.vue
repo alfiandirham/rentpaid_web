@@ -30,11 +30,8 @@
                 <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} USER</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
-              <form
-                @submit.prevent="editmode ? updateUser() : createUser()"
-                class="form mt-1 form-vertical"
-              >
-                <div class="modal-body modal-nav-body">
+              <div class="modal-body modal-nav-body">
+                <form class="form mt-1 form-vertical">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-12">
@@ -164,6 +161,18 @@
                               </div>
                             </fieldset>
                           </li>
+                          <li class="d-inline-block mr-2">
+                            <fieldset>
+                              <div class="vs-radio-con">
+                                <input type="radio" v-model="form.type" name="type" value="owner" />
+                                <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class>Owner</span>
+                              </div>
+                            </fieldset>
+                          </li>
                         </ul>
                         <has-error :form="form" field="type"></has-error>
                       </div>
@@ -210,11 +219,15 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">Accept</button>
-                </div>
-              </form>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  @click="editmode ? updateUser() : createUser()"
+                  class="btn btn-primary"
+                >Accept</button>
+              </div>
             </div>
           </div>
         </div>
@@ -253,7 +266,8 @@
                         v-model="filter.role"
                         class="form-control"
                       >
-                        <option value="collector">User</option>
+                        <option value="owner">Owner</option>
+                        <option value="collector">Collector</option>
                         <option value="admin">Staff</option>
                         <option value="superuser">SysAdmin</option>
                       </select>
@@ -450,19 +464,19 @@ export default {
     deleteUser(id) {
       swal({
         title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        text: "Disabled this data!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Yes"
       }).then(result => {
         // Send request to the server
         if (result.value) {
           this.form
             .delete("api/user/" + id)
             .then(() => {
-              swal("Deleted!", "Your file has been deleted.", "success");
+              swal("Disabled!", "Your data has been disabled.", "success");
               Fire.$emit("AfterCreate");
             })
             .catch(() => {

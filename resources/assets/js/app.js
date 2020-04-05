@@ -73,6 +73,14 @@ let routes = [{
         component: require('./components/tenan/Tenant.vue')
     },
     {
+        path: '/tarif',
+        component: require('./components/tarif/Tarif.vue')
+    },
+    {
+        path: '/kategori',
+        component: require('./components/kategori/Kategori.vue')
+    },
+    {
         path: '/profile',
         component: require('./components/Profile.vue')
     },

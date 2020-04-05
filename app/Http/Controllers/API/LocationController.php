@@ -65,7 +65,8 @@ class LocationController extends Controller
 
         $user = Lokasi::findOrFail($id);
 
-        $user->delete();
+        $user->status = 0;
+        $user->save();
 
         return ['message' => 'Lokasi Deleted'];
     }

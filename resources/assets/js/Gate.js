@@ -1,31 +1,31 @@
-export default class Gate{
+export default class Gate {
 
-    constructor(user){
+    constructor(user) {
         this.user = user;
     }
 
 
-    isAdmin(){
+    isAdmin() {
         return this.user.type === 'admin';
     }
 
-    isUser(){
+    isAuthor() {
+        return this.user.type === 'superuser';
+    }
+
+    isUser() {
         return this.user.type === 'user';
     }
-    isAdminOrAuthor(){
-        if(this.user.type === 'admin' || this.user.type === 'author'){
+    isAdminOrAuthor() {
+        if (this.user.type === 'admin' || this.user.type === 'superuser') {
             return true;
         }
 
     }
-    isAuthorOrUser(){
-        if(this.user.type === 'user' || this.user.type === 'author'){
+    isAuthorOrUser() {
+        if (this.user.type === 'user' || this.user.type === 'superuser') {
             return true;
         }
 
     }
-
-
-
 }
-

@@ -66,7 +66,7 @@
               <th>Sudah Disewakan</th>
               <th>Jumlah Tersedia</th>
               <th>Owner</th>
-              <th>Aksi</th>
+              <!-- <th>Aksi</th> -->
             </tr>
           </thead>
           <tbody>
@@ -82,14 +82,14 @@
               <td>{{tenant.disewa}}</td>
               <td>{{tenant.tersedia}}</td>
               <td>{{tenant.owner}}</td>
-              <td>
+              <!-- <td>
                 <a @click="editModal(tenant)">
                   <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
                 </a>
                 <a @click="deleteData(tenant.id)">
                   <i class="users-delete-icon feather icon-trash-2"></i>
                 </a>
-              </td>
+              </td>-->
             </tr>
           </tbody>
         </table>

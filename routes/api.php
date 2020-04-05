@@ -21,15 +21,18 @@ Route::apiResources(['user' => 'API\UserController']);
 Route::apiResources(['penyewa' => 'API\PenyewaController']);
 Route::apiResources(['lokasi' => 'API\LocationController']);
 Route::apiResources(['tenan' => 'API\TenantController']);
+Route::apiResources(['tarif' => 'API\TarifController']);
+Route::apiResources(['kategori' => 'API\KategoriController']);
 
 Route::get('lokasitenan', 'API\TenantController@lokasiTenant');
 Route::get('lokasitenan/{id}', 'API\TenantController@lokasiTenantId');
 
-Route::get('collector', 'API\UserController@collector');
+Route::get('owner', 'API\UserController@owner');
 
 Route::get('findUser', 'API\UserController@search');
 Route::get('findTenan/{id}', 'API\TenantController@search');
 Route::get('findPenyewa', 'API\PenyewaController@search');
+Route::get('findTarif', 'API\TarifController@search');
+Route::get('findKategori', 'API\KategoriController@search');
 Route::get('findLocation', 'API\LocationController@search');
 Route::get('findLocationTenant', 'API\LocationController@search2');
-

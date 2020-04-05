@@ -11,7 +11,7 @@ class Tenant extends Model
     ];
 
     public function penyewa(){
-        return $this->belongsto('App\Penyewa');
+        return $this->belongsTo('App\Penyewa');
     }
 
     public function lokasi(){
