@@ -28,6 +28,7 @@ Route::get('lokasitenan', 'API\TenantController@lokasiTenant');
 Route::get('lokasitenan/{id}', 'API\TenantController@lokasiTenantId');
 
 Route::get('owner', 'API\UserController@owner');
+Route::post('photo/{id}', 'API\UserController@update');
 
 Route::get('findUser', 'API\UserController@search');
 Route::get('findTenan/{id}', 'API\TenantController@search');

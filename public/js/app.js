@@ -70309,7 +70309,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$Progress.start();
       // console.log('Editing data');
-      this.form.put("api/user/" + this.form.id).then(function () {
+      this.form.post("api/photo/" + this.form.id).then(function () {
         // success
         $("#addNew").modal("hide");
         swal("Updated!", "Information has been updated.", "success");

@@ -449,7 +449,7 @@ export default {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("api/user/" + this.form.id)
+        .post("api/photo/" + this.form.id)
         .then(() => {
           // success
           $("#addNew").modal("hide");
