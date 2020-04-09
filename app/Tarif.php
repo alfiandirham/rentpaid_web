@@ -11,6 +11,6 @@ class Tarif extends Model
     ];
 
     public function kategori(){
-        return $this->hasOne('App\Kategori');
+        return $this->hasMany('App\Kategori');
     }
 }

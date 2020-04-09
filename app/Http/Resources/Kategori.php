@@ -18,6 +18,7 @@ class Kategori extends JsonResource
             'id' => $this->id,
             'nama' => $this->nama,
             'kode' => $this->kode,
+            'tarif_id' => $this->tarif_id,
             'tarif' => ($this->tarif) ? ($this->tarif->bop
                             + $this->tarif->permeter
                             + ($this->tarif->bop * 0.1) 

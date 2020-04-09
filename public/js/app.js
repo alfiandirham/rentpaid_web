@@ -78729,11 +78729,11 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "col-12" },
-                            [
-                              _c("div", { staticClass: "form-group" }, [
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
                                 _c("label", { attrs: { for: "tarif_id" } }, [
                                   _vm._v("Pilih Tarif")
                                 ]),
@@ -78817,15 +78817,15 @@ var render = function() {
                                     )
                                   }),
                                   0
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "tarif" }
-                              })
-                            ],
-                            1
-                          ),
+                                ),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "tarif_id" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [
                             _c("div", { staticClass: "row" }, [

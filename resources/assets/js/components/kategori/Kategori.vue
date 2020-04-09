@@ -74,8 +74,8 @@
                               + tarif.air + tarif.bop + (tarif.bop * 0.1) + tarif.permeter}}
                             </option>
                           </select>
+                          <has-error :form="form" field="tarif_id"></has-error>
                         </div>
-                        <has-error :form="form" field="tarif"></has-error>
                       </div>
                       <div class="col-12">
                         <div class="row">
