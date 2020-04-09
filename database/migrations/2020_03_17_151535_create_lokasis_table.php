@@ -17,9 +17,11 @@ class CreateLokasisTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->string('lokasi');
-            $table->float('lat');
-            $table->float('long');
+            $table->string('kode',3)->unique();
+            $table->float('luas');
             $table->text('alamat');
+            $table->string('kecamatan');
+            $table->string('desa');
             $table->boolean('status')->default(true);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

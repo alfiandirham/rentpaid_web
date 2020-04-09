@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lokasi extends Model
 {
     protected $fillable = [
-        'lokasi', 'lat', 'long', 'alamat', 'user_id', 'status',
+        'lokasi', 'luas', 'kode', 'kecamatan', 'desa', 'alamat', 'user_id', 'status',
     ];
 
     public function user(){
@@ -16,5 +16,9 @@ class Lokasi extends Model
 
     public function tenant(){
         return $this->hasMany('App\Tenant');
+    }
+
+    public function collector(){
+        return $this->hasMany('App\User');
     }
 }

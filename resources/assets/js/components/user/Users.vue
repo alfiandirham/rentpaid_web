@@ -121,7 +121,7 @@
                                   type="radio"
                                   v-model="form.type"
                                   name="type"
-                                  checked
+                                  @change="showLocat()"
                                   value="superuser"
                                 />
                                 <span class="vs-radio">
@@ -135,7 +135,13 @@
                           <li class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
-                                <input type="radio" v-model="form.type" name="type" value="admin" />
+                                <input
+                                  type="radio"
+                                  v-model="form.type"
+                                  @change="showLocat()"
+                                  name="type"
+                                  value="admin"
+                                />
                                 <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -150,6 +156,7 @@
                                 <input
                                   type="radio"
                                   v-model="form.type"
+                                  @change="showLocation()"
                                   name="type"
                                   value="collector"
                                 />
@@ -164,7 +171,13 @@
                           <li class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
-                                <input type="radio" v-model="form.type" name="type" value="owner" />
+                                <input
+                                  type="radio"
+                                  v-model="form.type"
+                                  @change="showLocat()"
+                                  name="type"
+                                  value="owner"
+                                />
                                 <span class="vs-radio">
                                   <span class="vs-radio--border"></span>
                                   <span class="vs-radio--circle"></span>
@@ -175,6 +188,25 @@
                           </li>
                         </ul>
                         <has-error :form="form" field="type"></has-error>
+                      </div>
+                      <div v-if="showLokasi" class="col-12">
+                        <div class="form-group">
+                          <label for="owner">Pilih Lokasi</label>
+                          <select
+                            name="owner"
+                            class="form-control"
+                            v-model="form.lokasi_id"
+                            placeholder="Pilih Lokasi"
+                            :class="{ 'is-invalid': form.errors.has('lokasi_id') }"
+                          >
+                            <option
+                              v-for="lokasi in locations.data"
+                              :value="lokasi.id"
+                              :key="lokasi.id"
+                            >{{lokasi.lokasi}}</option>
+                          </select>
+                          <has-error :form="form" field="lokasi_id"></has-error>
+                        </div>
                       </div>
                       <div class="col-12">
                         <p>Status</p>
@@ -411,8 +443,10 @@ export default {
     return {
       cekall: false,
       search: "",
+      showLokasi: false,
       editmode: false,
       users: {},
+      locations: {},
       filter: {
         status: "",
         role: ""
@@ -427,11 +461,18 @@ export default {
         photo: "",
         status: "",
         ktp: "",
-        photo: ""
+        photo: "",
+        lokasi_id: ""
       })
     };
   },
   methods: {
+    showLocation() {
+      this.showLokasi = true;
+    },
+    showLocat() {
+      this.showLokasi = false;
+    },
     filtering(q) {
       if (this.$gate.isAdminOrAuthor()) {
         axios
@@ -504,6 +545,7 @@ export default {
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
         axios.get("api/user").then(({ data }) => (this.users = data));
+        axios.get("api/lokasi").then(({ data }) => (this.locations = data));
       }
     },
     updateGambar(e) {

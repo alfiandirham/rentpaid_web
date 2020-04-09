@@ -17,7 +17,7 @@ class PenyewaController extends Controller
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return User::latest()->paginate(20);
+            return User::where('status', true)->latest()->paginate(20);
         }
 
     }

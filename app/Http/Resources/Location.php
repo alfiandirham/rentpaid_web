@@ -17,8 +17,10 @@ class Location extends JsonResource
         return [
             'id' => $this->id,
             'lokasi' => $this->lokasi, 
-            'lat' => $this->lat, 
-            'long' => $this->long, 
+            'luas' => $this->luas, 
+            'kode' => $this->kode, 
+            'kecamatan' => $this->kecamatan, 
+            'desa' => $this->desa, 
             'alamat' => $this->alamat, 
             'user_id' => $this->user_id, 
             'owner' => $this->user->name, 

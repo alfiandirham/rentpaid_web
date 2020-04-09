@@ -45,30 +45,18 @@
                           <has-error :form="form" field="lokasi"></has-error>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-12">
                         <div class="form-group">
                           <input
-                            type="number"
+                            type="text"
                             class="form-control"
-                            name="fname"
-                            v-model="form.lat"
-                            placeholder="Latitude"
-                            :class="{ 'is-invalid': form.errors.has('lat') }"
+                            v-model="form.kode"
+                            placeholder="Kode Lokasi"
+                            minlength="3"
+                            maxlength="3"
+                            :class="{ 'is-invalid': form.errors.has('kode') }"
                           />
-                          <has-error :form="form" field="lat"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            name="fname"
-                            v-model="form.long"
-                            placeholder="Longitude"
-                            :class="{ 'is-invalid': form.errors.has('long') }"
-                          />
-                          <has-error :form="form" field="long"></has-error>
+                          <has-error :form="form" field="kode"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -78,9 +66,45 @@
                             class="form-control"
                             v-model="form.alamat"
                             placeholder="Alamat"
-                            :class="{ 'is-invalid': form.errors.has('provinsi') }"
+                            :class="{ 'is-invalid': form.errors.has('alamat') }"
                           />
-                          <has-error :form="form" field="provinsi"></has-error>
+                          <has-error :form="form" field="alamat"></has-error>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input
+                            type="number"
+                            class="form-control"
+                            v-model="form.luas"
+                            placeholder="Luas Tanah"
+                            :class="{ 'is-invalid': form.errors.has('luas') }"
+                          />
+                          <has-error :form="form" field="luas"></has-error>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="form.kecamatan"
+                            placeholder="Kecamatan"
+                            :class="{ 'is-invalid': form.errors.has('kecamatan') }"
+                          />
+                          <has-error :form="form" field="kecamatan"></has-error>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="form.desa"
+                            placeholder="Desa/Kelurahan"
+                            :class="{ 'is-invalid': form.errors.has('desa') }"
+                          />
+                          <has-error :form="form" field="desa"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -246,6 +270,7 @@
                         <input type="checkbox" @click="checkall" v-model="cekall" />
                       </th>
                       <th>Nama Lokasi</th>
+                      <th>Kode Lokasi</th>
                       <th>Alamat</th>
                       <th>Status</th>
                       <th>Owner Name</th>
@@ -258,6 +283,7 @@
                         <input type="checkbox" :checked="cekall" />
                       </th>
                       <td>{{location.lokasi}}</td>
+                      <td>{{location.kode}}</td>
                       <td>{{location.alamat}}</td>
                       <td v-if="location.status === 1">
                         <div class="badge badge-pill badge-light-success">Active</div>
@@ -310,13 +336,12 @@ export default {
       form: new Form({
         id: "",
         lokasi: "",
-        lat: "",
-        long: "",
+        luas: "",
+        kode: "",
+        desa: "",
+        kecamatan: "",
         status: "",
         alamat: "",
-        kec: "",
-        kel: "",
-        kab: "",
         user_id: ""
       })
     };

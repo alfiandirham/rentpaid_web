@@ -18,8 +18,13 @@ class UserController extends Controller
     public function index()
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return User::latest()->paginate(20);
+        if (\Gate::allows('isAdmin')) {
+            $user = auth('api')->user();
+            return User::where("status", true)->where("id", '!=', $user->id)->latest()->paginate(20);
+        }
+        if (\Gate::allows('isAuthor')) {
+            $user = auth('api')->user();
+            return User::where("id", '!=', $user->id)->latest()->paginate(20);
         }
     }
 
@@ -27,7 +32,7 @@ class UserController extends Controller
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return User::where('type', 'owner')->latest()->paginate(20);
+            return User::where("status", true)->where('type', 'owner')->latest()->paginate(20);
         }
     }
 
@@ -51,6 +56,7 @@ class UserController extends Controller
 
         return User::create([
             'photo' => $request['photo'] ? $request['photo'] : '',
+            'lokasi_id' => $request['lokasi_id'] ? $request['lokasi_id'] : '',
             'name' => $request['name'],
             'email' => $request['email'],
             'type' => $request['type'],

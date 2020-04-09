@@ -21,7 +21,13 @@ class CreateTenantsTable extends Migration
             $table->foreign('lokasi_id')->references('id')->on('lokasis')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('kategori_id')->unsigned();
             $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('nomor');
+            $table->string('kode')->unique();
+            $table->float('luas')->nullable();
+            $table->float('harga')->nullable();
+            $table->string('barat')->nullable();
+            $table->string('timur')->nullable();
+            $table->string('utara')->nullable();
+            $table->string('selatan')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ class LocationController extends Controller
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return Location::collection(Lokasi::latest()->paginate(20));
+            return Location::collection(Lokasi::where('status', true)->latest()->paginate(20));
         }
     }
 
@@ -28,8 +28,10 @@ class LocationController extends Controller
 
         $this->validate($request,[
             'lokasi' => 'required', 
-            'lat' => 'required', 
-            'long' => 'required', 
+            'kode' => 'required|unique:lokasis', 
+            'luas' => 'required', 
+            'kecamatan' => 'required', 
+            'desa' => 'required', 
             'alamat' => 'required', 
             'user_id' => 'required'
         ]);
@@ -46,8 +48,10 @@ class LocationController extends Controller
 
         $this->validate($request,[
             'lokasi' => 'required', 
-            'lat' => 'required', 
-            'long' => 'required', 
+            'kode' => 'required|unique', 
+            'luas' => 'required', 
+            'kecamatan' => 'required', 
+            'desa' => 'required', 
             'alamat' => 'required', 
             'user_id' => 'required'
         ]);

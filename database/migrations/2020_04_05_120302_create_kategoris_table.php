@@ -18,7 +18,7 @@ class CreateKategorisTable extends Migration
             $table->bigInteger('tarif_id')->unsigned();
             $table->foreign('tarif_id')->references('id')->on('tarifs')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama');
-            $table->string('kode');
+            $table->string('kode',3)->unique();
             $table->timestamps();
         });
     }

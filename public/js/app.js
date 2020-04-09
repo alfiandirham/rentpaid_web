@@ -70265,19 +70265,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
+    var _ref;
+
     return {
       cekall: false,
       search: "",
+      showLokasi: false,
       editmode: false,
       users: {},
+      locations: {},
       filter: {
         status: "",
         role: ""
       },
-      form: new Form(_defineProperty({
+      form: new Form((_ref = {
         id: "",
         name: "",
         email: "",
@@ -70287,11 +70323,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         photo: "",
         status: "",
         ktp: ""
-      }, "photo", ""))
+      }, _defineProperty(_ref, "photo", ""), _defineProperty(_ref, "lokasi_id", ""), _ref))
     };
   },
 
   methods: {
+    showLocation: function showLocation() {
+      this.showLokasi = true;
+    },
+    showLocat: function showLocat() {
+      this.showLokasi = false;
+    },
     filtering: function filtering(q) {
       var _this = this;
 
@@ -70369,6 +70411,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         axios.get("api/user").then(function (_ref2) {
           var data = _ref2.data;
           return _this5.users = data;
+        });
+        axios.get("api/lokasi").then(function (_ref3) {
+          var data = _ref3.data;
+          return _this5.locations = data;
         });
       }
     },
@@ -70781,7 +70827,6 @@ var render = function() {
                                             attrs: {
                                               type: "radio",
                                               name: "type",
-                                              checked: "",
                                               value: "superuser"
                                             },
                                             domProps: {
@@ -70791,13 +70836,18 @@ var render = function() {
                                               )
                                             },
                                             on: {
-                                              change: function($event) {
-                                                return _vm.$set(
-                                                  _vm.form,
-                                                  "type",
-                                                  "superuser"
-                                                )
-                                              }
+                                              change: [
+                                                function($event) {
+                                                  return _vm.$set(
+                                                    _vm.form,
+                                                    "type",
+                                                    "superuser"
+                                                  )
+                                                },
+                                                function($event) {
+                                                  return _vm.showLocat()
+                                                }
+                                              ]
                                             }
                                           }),
                                           _vm._v(" "),
@@ -70840,13 +70890,18 @@ var render = function() {
                                               )
                                             },
                                             on: {
-                                              change: function($event) {
-                                                return _vm.$set(
-                                                  _vm.form,
-                                                  "type",
-                                                  "admin"
-                                                )
-                                              }
+                                              change: [
+                                                function($event) {
+                                                  return _vm.$set(
+                                                    _vm.form,
+                                                    "type",
+                                                    "admin"
+                                                  )
+                                                },
+                                                function($event) {
+                                                  return _vm.showLocat()
+                                                }
+                                              ]
                                             }
                                           }),
                                           _vm._v(" "),
@@ -70891,13 +70946,18 @@ var render = function() {
                                               )
                                             },
                                             on: {
-                                              change: function($event) {
-                                                return _vm.$set(
-                                                  _vm.form,
-                                                  "type",
-                                                  "collector"
-                                                )
-                                              }
+                                              change: [
+                                                function($event) {
+                                                  return _vm.$set(
+                                                    _vm.form,
+                                                    "type",
+                                                    "collector"
+                                                  )
+                                                },
+                                                function($event) {
+                                                  return _vm.showLocation()
+                                                }
+                                              ]
                                             }
                                           }),
                                           _vm._v(" "),
@@ -70940,13 +71000,18 @@ var render = function() {
                                               )
                                             },
                                             on: {
-                                              change: function($event) {
-                                                return _vm.$set(
-                                                  _vm.form,
-                                                  "type",
-                                                  "owner"
-                                                )
-                                              }
+                                              change: [
+                                                function($event) {
+                                                  return _vm.$set(
+                                                    _vm.form,
+                                                    "type",
+                                                    "owner"
+                                                  )
+                                                },
+                                                function($event) {
+                                                  return _vm.showLocat()
+                                                }
+                                              ]
                                             }
                                           }),
                                           _vm._v(" "),
@@ -70966,6 +71031,90 @@ var render = function() {
                             ],
                             1
                           ),
+                          _vm._v(" "),
+                          _vm.showLokasi
+                            ? _c("div", { staticClass: "col-12" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("label", { attrs: { for: "owner" } }, [
+                                      _vm._v("Pilih Lokasi")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.lokasi_id,
+                                            expression: "form.lokasi_id"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "lokasi_id"
+                                          )
+                                        },
+                                        attrs: {
+                                          name: "owner",
+                                          placeholder: "Pilih Lokasi"
+                                        },
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              _vm.form,
+                                              "lokasi_id",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      _vm._l(_vm.locations.data, function(
+                                        lokasi
+                                      ) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key: lokasi.id,
+                                            domProps: { value: lokasi.id }
+                                          },
+                                          [_vm._v(_vm._s(lokasi.lokasi))]
+                                        )
+                                      }),
+                                      0
+                                    ),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: {
+                                        form: _vm.form,
+                                        field: "lokasi_id"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -73272,6 +73421,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -73288,13 +73463,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       form: new Form({
         id: "",
         lokasi: "",
-        lat: "",
-        long: "",
+        luas: "",
+        kode: "",
+        desa: "",
+        kecamatan: "",
         status: "",
         alamat: "",
-        kec: "",
-        kel: "",
-        kab: "",
         user_id: ""
       })
     };
@@ -73546,7 +73720,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-6" }, [
+                          _c("div", { staticClass: "col-12" }, [
                             _c(
                               "div",
                               { staticClass: "form-group" },
@@ -73556,20 +73730,21 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.form.lat,
-                                      expression: "form.lat"
+                                      value: _vm.form.kode,
+                                      expression: "form.kode"
                                     }
                                   ],
                                   staticClass: "form-control",
                                   class: {
-                                    "is-invalid": _vm.form.errors.has("lat")
+                                    "is-invalid": _vm.form.errors.has("kode")
                                   },
                                   attrs: {
-                                    type: "number",
-                                    name: "fname",
-                                    placeholder: "Latitude"
+                                    type: "text",
+                                    placeholder: "Kode Lokasi",
+                                    minlength: "3",
+                                    maxlength: "3"
                                   },
-                                  domProps: { value: _vm.form.lat },
+                                  domProps: { value: _vm.form.kode },
                                   on: {
                                     input: function($event) {
                                       if ($event.target.composing) {
@@ -73577,7 +73752,7 @@ var render = function() {
                                       }
                                       _vm.$set(
                                         _vm.form,
-                                        "lat",
+                                        "kode",
                                         $event.target.value
                                       )
                                     }
@@ -73585,53 +73760,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("has-error", {
-                                  attrs: { form: _vm.form, field: "lat" }
-                                })
-                              ],
-                              1
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-6" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.long,
-                                      expression: "form.long"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has("long")
-                                  },
-                                  attrs: {
-                                    type: "number",
-                                    name: "fname",
-                                    placeholder: "Longitude"
-                                  },
-                                  domProps: { value: _vm.form.long },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "long",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "long" }
+                                  attrs: { form: _vm.form, field: "kode" }
                                 })
                               ],
                               1
@@ -73654,9 +73783,7 @@ var render = function() {
                                   ],
                                   staticClass: "form-control",
                                   class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "provinsi"
-                                    )
+                                    "is-invalid": _vm.form.errors.has("alamat")
                                   },
                                   attrs: {
                                     type: "text",
@@ -73678,7 +73805,144 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("has-error", {
-                                  attrs: { form: _vm.form, field: "provinsi" }
+                                  attrs: { form: _vm.form, field: "alamat" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.luas,
+                                      expression: "form.luas"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("luas")
+                                  },
+                                  attrs: {
+                                    type: "number",
+                                    placeholder: "Luas Tanah"
+                                  },
+                                  domProps: { value: _vm.form.luas },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "luas",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "luas" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.kecamatan,
+                                      expression: "form.kecamatan"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "kecamatan"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    placeholder: "Kecamatan"
+                                  },
+                                  domProps: { value: _vm.form.kecamatan },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "kecamatan",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "kecamatan" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.desa,
+                                      expression: "form.desa"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("desa")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    placeholder: "Desa/Kelurahan"
+                                  },
+                                  domProps: { value: _vm.form.desa },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "desa",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "desa" }
                                 })
                               ],
                               1
@@ -74006,6 +74270,8 @@ var render = function() {
                       _vm._v(" "),
                       _c("th", [_vm._v("Nama Lokasi")]),
                       _vm._v(" "),
+                      _c("th", [_vm._v("Kode Lokasi")]),
+                      _vm._v(" "),
                       _c("th", [_vm._v("Alamat")]),
                       _vm._v(" "),
                       _c("th", [_vm._v("Status")]),
@@ -74028,6 +74294,8 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(location.lokasi))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(location.kode))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(location.alamat))]),
                         _vm._v(" "),
