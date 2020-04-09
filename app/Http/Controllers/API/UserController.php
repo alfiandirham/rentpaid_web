@@ -56,7 +56,7 @@ class UserController extends Controller
 
         return User::create([
             'photo' => $request['photo'] ? $request['photo'] : '',
-            'lokasi_id' => $request['lokasi_id'] ? $request['lokasi_id'] : '',
+            'lokasi_id' => $request['lokasi_id'] ? $request['lokasi_id'] : null,
             'name' => $request['name'],
             'email' => $request['email'],
             'type' => $request['type'],

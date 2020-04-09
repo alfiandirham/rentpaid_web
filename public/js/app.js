@@ -76986,8 +76986,37 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -77221,19 +77250,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    var _ref;
-
     return {
       cekall: false,
       search: "",
       editmode: false,
       tarifs: {},
-      form: new Form((_ref = {
+      form: new Form({
         id: "",
         nama: "",
         air: "",
-        bop: ""
-      }, _defineProperty(_ref, "air", ""), _defineProperty(_ref, "listrik", ""), _defineProperty(_ref, "barang", ""), _defineProperty(_ref, "sampah", ""), _ref))
+        bop: "",
+        permeter: "",
+        listrik: "",
+        barang: "",
+        sampah: ""
+      })
     };
   },
 
@@ -77303,8 +77334,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this4 = this;
 
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/tarif").then(function (_ref2) {
-          var data = _ref2.data;
+        axios.get("api/tarif").then(function (_ref) {
+          var data = _ref.data;
           return _this4.tarifs = data;
         });
       }
@@ -77464,6 +77495,54 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
+                                      value: _vm.form.permeter,
+                                      expression: "form.permeter"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "permeter"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "number",
+                                    name: "permeter",
+                                    placeholder: "Harga sewa per m2"
+                                  },
+                                  domProps: { value: _vm.form.permeter },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "permeter",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "permeter" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-6" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
                                       value: _vm.form.bop,
                                       expression: "form.bop"
                                     }
@@ -77499,6 +77578,8 @@ var render = function() {
                               1
                             )
                           ]),
+                          _vm._v(" "),
+                          _vm._m(1),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [
                             _c(
@@ -77679,6 +77760,36 @@ var render = function() {
                               ],
                               1
                             )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("label", [_vm._v("Total Tarif")]),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              {
+                                staticClass: "lead",
+                                staticStyle: {
+                                  "padding-left": "0.2em",
+                                  "padding-top": "1em"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Rp. " +
+                                    _vm._s(
+                                      parseFloat(_vm.form.permeter) +
+                                        parseFloat(_vm.form.bop) +
+                                        parseFloat(_vm.form.bop * 0.1) +
+                                        parseFloat(_vm.form.air) +
+                                        parseFloat(_vm.form.listrik) +
+                                        parseFloat(_vm.form.barang) +
+                                        parseFloat(_vm.form.sampah)
+                                    ) +
+                                    "\n                      "
+                                )
+                              ]
+                            )
                           ])
                         ])
                       ])
@@ -77750,7 +77861,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _vm._m(2)
                     ]
                   )
                 ])
@@ -77803,7 +77914,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("th", [_vm._v("Nama Tarif")]),
                       _vm._v(" "),
-                      _c("th", [_vm._v("BOP")]),
+                      _c("th", [_vm._v("BOP / (PPN 10%)")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Permeter")]),
                       _vm._v(" "),
                       _c("th", [_vm._v("Air")]),
                       _vm._v(" "),
@@ -77832,7 +77945,20 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(tarif.nama))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(tarif.bop))]),
+                        _c("td", [
+                          _vm._v(
+                            "\n                      Rp. " +
+                              _vm._s(tarif.bop) +
+                              " / (" +
+                              _vm._s(
+                                parseFloat(tarif.bop) +
+                                  parseFloat(tarif.bop * 0.1)
+                              ) +
+                              ")\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Rp. " + _vm._s(tarif.permeter))]),
                         _vm._v(" "),
                         _c("td", [_vm._v("Rp. " + _vm._s(tarif.air))]),
                         _vm._v(" "),
@@ -77904,6 +78030,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Tenant > Tarif")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "number", disabled: "", placeholder: "PPN 10%" }
+        })
+      ])
     ])
   },
   function() {
@@ -78026,6 +78165,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -78480,6 +78621,8 @@ var render = function() {
                                     },
                                     attrs: {
                                       type: "text",
+                                      minlength: "3",
+                                      maxlength: "3",
                                       name: "kode",
                                       placeholder: "Kode Kategori"
                                     },

@@ -23,7 +23,6 @@ class CreateTenantsTable extends Migration
             $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade')->onUpdate('cascade');
             $table->string('kode')->unique();
             $table->float('luas')->nullable();
-            $table->float('harga')->nullable();
             $table->string('barat')->nullable();
             $table->string('timur')->nullable();
             $table->string('utara')->nullable();

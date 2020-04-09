@@ -48,12 +48,30 @@
                           <input
                             type="number"
                             class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('permeter') }"
+                            v-model="form.permeter"
+                            name="permeter"
+                            placeholder="Harga sewa per m2"
+                          />
+                          <has-error :form="form" field="permeter"></has-error>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <input
+                            type="number"
+                            class="form-control"
                             :class="{ 'is-invalid': form.errors.has('bop') }"
                             v-model="form.bop"
                             name="bop"
                             placeholder="Jumlah Tarif BOP"
                           />
                           <has-error :form="form" field="bop"></has-error>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <input type="number" class="form-control" disabled placeholder="PPN 10%" />
                         </div>
                       </div>
                       <div class="col-12">
@@ -104,6 +122,14 @@
                           />
                           <has-error :form="form" field="sampah"></has-error>
                         </div>
+                      </div>
+                      <div class="col-12">
+                        <label>Total Tarif</label>
+                        <p class="lead" style="padding-left:0.2em; padding-top:1em;">
+                          Rp. {{parseFloat(form.permeter) + parseFloat(form.bop)
+                          + parseFloat(form.bop * 0.1) + parseFloat(form.air)
+                          + parseFloat(form.listrik) + parseFloat(form.barang) + parseFloat(form.sampah)}}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -182,7 +208,8 @@
                         <input type="checkbox" @click="checkall" v-model="cekall" />
                       </th>
                       <th>Nama Tarif</th>
-                      <th>BOP</th>
+                      <th>BOP / (PPN 10%)</th>
+                      <th>Permeter</th>
                       <th>Air</th>
                       <th>Listrik</th>
                       <th>Brg Masuk</th>
@@ -197,7 +224,11 @@
                         <input type="checkbox" :checked="cekall" />
                       </th>
                       <td>{{tarif.nama}}</td>
-                      <td>Rp. {{tarif.bop}}</td>
+                      <td>
+                        Rp. {{tarif.bop}} / ({{parseFloat(tarif.bop)
+                        + parseFloat(tarif.bop * 0.1)}})
+                      </td>
+                      <td>Rp. {{tarif.permeter}}</td>
                       <td>Rp. {{tarif.air}}</td>
                       <td>Rp. {{tarif.listrik}}</td>
                       <td>Rp. {{tarif.barang}}</td>
@@ -241,7 +272,7 @@ export default {
         nama: "",
         air: "",
         bop: "",
-        air: "",
+        permeter: "",
         listrik: "",
         barang: "",
         sampah: ""

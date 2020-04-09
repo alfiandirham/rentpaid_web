@@ -36,6 +36,7 @@ class TarifController extends Controller
             'nama' => 'required', 
             'air' => 'required', 
             'bop' => 'required', 
+            'permeter' => 'required', 
             'barang' => 'required', 
             'listrik' => 'required', 
             'sampah' => 'required'
@@ -52,6 +53,7 @@ class TarifController extends Controller
         $this->validate($request,[
             'nama' => 'required', 
             'bop' => 'required', 
+            'permeter' => 'required', 
             'air' => 'required', 
             'barang' => 'required', 
             'listrik' => 'required', 
