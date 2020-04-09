@@ -77947,14 +77947,11 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [
                           _vm._v(
-                            "\n                      Rp. " +
+                            "Rp. " +
                               _vm._s(tarif.bop) +
                               " / (" +
-                              _vm._s(
-                                parseFloat(tarif.bop) +
-                                  parseFloat(tarif.bop * 0.1)
-                              ) +
-                              ")\n                    "
+                              _vm._s(tarif.bop + tarif.bop * 0.1) +
+                              ")"
                           )
                         ]),
                         _vm._v(" "),
@@ -77970,14 +77967,17 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [
                           _vm._v(
-                            "Rp. " +
+                            "\n                      Rp. " +
                               _vm._s(
                                 tarif.sampah +
                                   tarif.barang +
                                   tarif.listrik +
                                   tarif.air +
-                                  tarif.bop
-                              )
+                                  tarif.bop +
+                                  tarif.bop * 0.1 +
+                                  tarif.permeter
+                              ) +
+                              "\n                    "
                           )
                         ]),
                         _vm._v(" "),
@@ -78359,12 +78359,85 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       cekall: false,
       search: "",
+      tarif: {},
       editmode: false,
       tarifs: {},
       kategoris: {},
@@ -78378,11 +78451,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    setTarif: function setTarif() {
+      var _this = this;
+
+      if (this.$gate.isAdminOrAuthor()) {
+        axios.get("api/tarif/" + this.form.tarif_id).then(function (_ref) {
+          var data = _ref.data;
+          return _this.tarif = data;
+        });
+      }
+    },
     checkall: function checkall() {
       this.cekall ? this.cekall = false : this.cekall = true;
     },
     updateUser: function updateUser() {
-      var _this = this;
+      var _this2 = this;
 
       this.$Progress.start();
       // console.log('Editing data');
@@ -78390,14 +78473,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // success
         $("#addNew").modal("hide");
         swal("Updated!", "Information has been updated.", "success");
-        _this.$Progress.finish();
+        _this2.$Progress.finish();
         Fire.$emit("AfterCreate");
       }).catch(function () {
-        _this.$Progress.fail();
+        _this2.$Progress.fail();
       });
     },
     deleteUser: function deleteUser(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       swal({
         title: "Are you sure?",
@@ -78410,7 +78493,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (result) {
         // Send request to the server
         if (result.value) {
-          _this2.form.delete("api/kategori/" + id).then(function () {
+          _this3.form.delete("api/kategori/" + id).then(function () {
             swal("Disabled!", "Your data has been disabled.", "success");
             Fire.$emit("AfterCreate");
           }).catch(function () {
@@ -78431,30 +78514,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       $("#addNew").modal("show");
     },
     getResults: function getResults() {
-      var _this3 = this;
+      var _this4 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
       axios.get("api/kategori?page=" + page).then(function (response) {
-        _this3.kategoris = response.data;
+        _this4.kategoris = response.data;
       });
     },
     loadData: function loadData() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/kategori").then(function (_ref) {
-          var data = _ref.data;
-          return _this4.kategoris = data;
-        });
-        axios.get("api/tarif").then(function (_ref2) {
+        axios.get("api/kategori").then(function (_ref2) {
           var data = _ref2.data;
-          return _this4.tarifs = data;
+          return _this5.kategoris = data;
+        });
+        axios.get("api/tarif").then(function (_ref3) {
+          var data = _ref3.data;
+          return _this5.tarifs = data;
         });
       }
     },
     createUser: function createUser() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.$Progress.start();
       this.form.post("api/kategori").then(function () {
@@ -78464,9 +78547,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           type: "success",
           title: "User Created in successfully"
         });
-        _this5.$Progress.finish();
+        _this6.$Progress.finish();
       }).catch(function () {
-        _this5.$Progress.fail();
+        _this6.$Progress.fail();
       });
     },
 
@@ -78475,16 +78558,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }, 1000)
   },
   created: function created() {
-    var _this6 = this;
+    var _this7 = this;
 
     Fire.$on("searching", function () {
-      var query = _this6.search;
+      var query = _this7.search;
       axios.get("api/findKategori?q=" + query).then(function (data) {
-        _this6.kategoris = data.data;
+        _this7.kategoris = data.data;
       }).catch(function () {});
     });
     Fire.$on("AfterCreate", function () {
-      _this6.loadData();
+      _this7.loadData();
     });
     this.loadData();
   }
@@ -78551,105 +78634,105 @@ var render = function() {
                   _c("div", { staticClass: "modal-body modal-nav-body" }, [
                     _c("form", { staticClass: "form mt-1 form-vertical" }, [
                       _c("div", { staticClass: "form-body" }, [
-                        _c(
-                          "div",
-                          { staticClass: "row" },
-                          [
-                            _c("div", { staticClass: "col-12" }, [
-                              _c(
-                                "div",
-                                { staticClass: "form-group" },
-                                [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.nama,
-                                        expression: "form.nama"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    class: {
-                                      "is-invalid": _vm.form.errors.has("nama")
-                                    },
-                                    attrs: {
-                                      type: "text",
-                                      name: "fname",
-                                      placeholder: "Nama Kategori"
-                                    },
-                                    domProps: { value: _vm.form.nama },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.form,
-                                          "nama",
-                                          $event.target.value
-                                        )
-                                      }
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.nama,
+                                      expression: "form.nama"
                                     }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("has-error", {
-                                    attrs: { form: _vm.form, field: "nama" }
-                                  })
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-12" }, [
-                              _c(
-                                "div",
-                                { staticClass: "form-group" },
-                                [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.kode,
-                                        expression: "form.kode"
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("nama")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "fname",
+                                    placeholder: "Nama Kategori"
+                                  },
+                                  domProps: { value: _vm.form.nama },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
                                       }
-                                    ],
-                                    staticClass: "form-control",
-                                    class: {
-                                      "is-invalid": _vm.form.errors.has("kode")
-                                    },
-                                    attrs: {
-                                      type: "text",
-                                      minlength: "3",
-                                      maxlength: "3",
-                                      name: "kode",
-                                      placeholder: "Kode Kategori"
-                                    },
-                                    domProps: { value: _vm.form.kode },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.form,
-                                          "kode",
-                                          $event.target.value
-                                        )
-                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "nama",
+                                        $event.target.value
+                                      )
                                     }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("has-error", {
-                                    attrs: { form: _vm.form, field: "kode" }
-                                  })
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-12" }, [
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "nama" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.kode,
+                                      expression: "form.kode"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("kode")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    minlength: "3",
+                                    maxlength: "3",
+                                    name: "kode",
+                                    placeholder: "Kode Kategori"
+                                  },
+                                  domProps: { value: _vm.form.kode },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "kode",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "kode" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-12" },
+                            [
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "tarif_id" } }, [
                                   _vm._v("Pilih Tarif")
@@ -78677,26 +78760,34 @@ var render = function() {
                                       placeholder: "Pilih Tarif"
                                     },
                                     on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.form,
-                                          "tarif_id",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
+                                      change: [
+                                        function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "tarif_id",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        },
+                                        function($event) {
+                                          return _vm.setTarif()
+                                        }
+                                      ]
                                     }
                                   },
                                   _vm._l(_vm.tarifs.data, function(tarif) {
@@ -78708,30 +78799,130 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          _vm._s(tarif.nama) +
+                                          "\n                            " +
+                                            _vm._s(tarif.nama) +
                                             " - Rp. " +
                                             _vm._s(
                                               tarif.sampah +
                                                 tarif.barang +
                                                 tarif.listrik +
                                                 tarif.air +
-                                                tarif.bop
-                                            )
+                                                tarif.bop +
+                                                tarif.bop * 0.1 +
+                                                tarif.permeter
+                                            ) +
+                                            "\n                          "
                                         )
                                       ]
                                     )
                                   }),
                                   0
                                 )
+                              ]),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "tarif" }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("h6", [
+                                  _vm._v("Rp. " + _vm._s(_vm.tarif.permeter))
+                                ])
                               ])
                             ]),
                             _vm._v(" "),
-                            _c("has-error", {
-                              attrs: { form: _vm.form, field: "tarif" }
-                            })
-                          ],
-                          1
-                        )
+                            _vm._m(2),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(3),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("h6", [
+                                  _vm._v("Rp. " + _vm._s(_vm.tarif.bop))
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(4),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("h6", [
+                                  _vm._v("Rp. " + _vm._s(_vm.tarif.bop * 0.1))
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(5),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("h6", [
+                                  _vm._v("Rp. " + _vm._s(_vm.tarif.air))
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(6),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("h6", [
+                                  _vm._v("Rp. " + _vm._s(_vm.tarif.listrik))
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(7),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("h6", [
+                                  _vm._v("Rp. " + _vm._s(_vm.tarif.barang))
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(8),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("h6", [
+                                  _vm._v("Rp. " + _vm._s(_vm.tarif.sampah))
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(9),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("h6", [
+                                  _vm._v(
+                                    "\n                            Rp. " +
+                                      _vm._s(
+                                        _vm.tarif.sampah +
+                                          _vm.tarif.barang +
+                                          _vm.tarif.listrik +
+                                          _vm.tarif.air +
+                                          _vm.tarif.bop +
+                                          _vm.tarif.bop * 0.1 +
+                                          _vm.tarif.permeter
+                                      ) +
+                                      "\n                          "
+                                  )
+                                ])
+                              ])
+                            ])
+                          ])
+                        ])
                       ])
                     ])
                   ]),
@@ -78801,7 +78992,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _vm._m(10)
                     ]
                   )
                 ])
@@ -78928,6 +79119,76 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Tenant > Kategori")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("p", { staticClass: "lead" }, [_vm._v("Harga per m2")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6" }, [_c("hr")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("p", { staticClass: "lead" }, [_vm._v("BOP")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("p", { staticClass: "lead" }, [_vm._v("PPN BOP")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("p", { staticClass: "lead" }, [_vm._v("Air")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("p", { staticClass: "lead" }, [_vm._v("Listrik")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("p", { staticClass: "lead" }, [_vm._v("Barang Masuk")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("p", { staticClass: "lead" }, [_vm._v("Sampah")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("p", { staticClass: "lead" }, [_vm._v("Total Iuran Harian")])
     ])
   },
   function() {

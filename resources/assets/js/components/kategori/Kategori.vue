@@ -65,18 +65,90 @@
                             name="tarif_id"
                             class="form-control"
                             v-model="form.tarif_id"
+                            @change="setTarif()"
                             placeholder="Pilih Tarif"
                             :class="{ 'is-invalid': form.errors.has('tarif_id') }"
                           >
-                            <option
-                              v-for="tarif in tarifs.data"
-                              :value="tarif.id"
-                              :key="tarif.id"
-                            >{{tarif.nama}} - Rp. {{tarif.sampah + tarif.barang + tarif.listrik + tarif.air + tarif.bop}}</option>
+                            <option v-for="tarif in tarifs.data" :value="tarif.id" :key="tarif.id">
+                              {{tarif.nama}} - Rp. {{tarif.sampah + tarif.barang + tarif.listrik
+                              + tarif.air + tarif.bop + (tarif.bop * 0.1) + tarif.permeter}}
+                            </option>
                           </select>
                         </div>
+                        <has-error :form="form" field="tarif"></has-error>
                       </div>
-                      <has-error :form="form" field="tarif"></has-error>
+                      <div class="col-12">
+                        <div class="row">
+                          <div class="col-5">
+                            <p class="lead">Harga per m2</p>
+                          </div>
+                          <div class="col-6">
+                            <h6>Rp. {{tarif.permeter}}</h6>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <hr />
+                        </div>
+                        <div class="row">
+                          <div class="col-5">
+                            <p class="lead">BOP</p>
+                          </div>
+                          <div class="col-6">
+                            <h6>Rp. {{tarif.bop}}</h6>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-5">
+                            <p class="lead">PPN BOP</p>
+                          </div>
+                          <div class="col-6">
+                            <h6>Rp. {{tarif.bop * 0.1}}</h6>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-5">
+                            <p class="lead">Air</p>
+                          </div>
+                          <div class="col-6">
+                            <h6>Rp. {{tarif.air}}</h6>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-5">
+                            <p class="lead">Listrik</p>
+                          </div>
+                          <div class="col-6">
+                            <h6>Rp. {{tarif.listrik}}</h6>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-5">
+                            <p class="lead">Barang Masuk</p>
+                          </div>
+                          <div class="col-6">
+                            <h6>Rp. {{tarif.barang}}</h6>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-5">
+                            <p class="lead">Sampah</p>
+                          </div>
+                          <div class="col-6">
+                            <h6>Rp. {{tarif.sampah}}</h6>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-5">
+                            <p class="lead">Total Iuran Harian</p>
+                          </div>
+                          <div class="col-6">
+                            <h6>
+                              Rp. {{tarif.sampah + tarif.barang + tarif.listrik
+                              + tarif.air + tarif.bop + (tarif.bop * 0.1) + tarif.permeter}}
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </form>
@@ -198,6 +270,7 @@ export default {
     return {
       cekall: false,
       search: "",
+      tarif: {},
       editmode: false,
       tarifs: {},
       kategoris: {},
@@ -210,6 +283,13 @@ export default {
     };
   },
   methods: {
+    setTarif() {
+      if (this.$gate.isAdminOrAuthor()) {
+        axios
+          .get("api/tarif/" + this.form.tarif_id)
+          .then(({ data }) => (this.tarif = data));
+      }
+    },
     checkall() {
       this.cekall ? (this.cekall = false) : (this.cekall = true);
     },

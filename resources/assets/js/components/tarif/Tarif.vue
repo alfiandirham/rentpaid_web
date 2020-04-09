@@ -224,16 +224,16 @@
                         <input type="checkbox" :checked="cekall" />
                       </th>
                       <td>{{tarif.nama}}</td>
-                      <td>
-                        Rp. {{tarif.bop}} / ({{parseFloat(tarif.bop)
-                        + parseFloat(tarif.bop * 0.1)}})
-                      </td>
+                      <td>Rp. {{tarif.bop}} / ({{tarif.bop + (tarif.bop * 0.1)}})</td>
                       <td>Rp. {{tarif.permeter}}</td>
                       <td>Rp. {{tarif.air}}</td>
                       <td>Rp. {{tarif.listrik}}</td>
                       <td>Rp. {{tarif.barang}}</td>
                       <td>Rp. {{tarif.sampah}}</td>
-                      <td>Rp. {{tarif.sampah + tarif.barang + tarif.listrik + tarif.air + tarif.bop}}</td>
+                      <td>
+                        Rp. {{tarif.sampah + tarif.barang + tarif.listrik + tarif.air
+                        + tarif.bop + (tarif.bop * 0.1) + tarif.permeter}}
+                      </td>
                       <td>
                         <a @click="editModal(tarif)">
                           <i class="feather icon-edit-1 mr-50"></i>

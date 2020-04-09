@@ -16,7 +16,7 @@ class CreateTarifsTable extends Migration
         Schema::create('tarifs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('permeter');
+            $table->float('permeter');
             $table->float('bop');
             $table->float('air');
             $table->float('barang');
