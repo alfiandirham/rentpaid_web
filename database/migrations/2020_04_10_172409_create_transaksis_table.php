@@ -19,6 +19,8 @@ class CreateTransaksisTable extends Migration
             $table->foreign('penyewa_id')->references('id')->on('penyewas')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('tenant_id')->unsigned();
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('status');
             $table->float('dibayar');
             $table->float('sisa');
