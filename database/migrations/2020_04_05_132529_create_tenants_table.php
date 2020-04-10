@@ -28,6 +28,7 @@ class CreateTenantsTable extends Migration
             $table->string('utara')->nullable();
             $table->string('selatan')->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('disewa')->default(false);
             $table->timestamps();
         });
     }

@@ -144,7 +144,7 @@
                       class="row"
                       style="padding-left:13px; align-items: baseline;"
                     >
-                      <div class="col-6">
+                      <div class="col-4">
                         <div class="form-group">
                           <select
                             class="form-control"
@@ -163,7 +163,7 @@
                           <has-error :form="form" field="kategori"></has-error>
                         </div>
                       </div>
-                      <div class="col-5">
+                      <div class="col-4">
                         <div class="form-group">
                           <input
                             type="number"
@@ -173,6 +173,17 @@
                             :class="{ 'is-invalid': form.errors.has('jumlah') }"
                           />
                           <has-error :form="form" field="jumlah"></has-error>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            :id="'harga'+i"
+                            disabled
+                            placeholder="Harga Sewa"
+                          />
                         </div>
                       </div>
                       <div class="col-1">
@@ -224,6 +235,14 @@ export default {
       this.is = this.is.filter(item => item !== i);
     },
     jumlahData(i) {
+      if (this.$gate.isAdminOrAuthor()) {
+        axios
+          .get("api/kategori/" + document.getElementById("kategori" + i).value)
+          .then(({ data }) => {
+            document.getElementById("harga" + i).value =
+              "Rp. " + data.data.tarif;
+          });
+      }
       this.inc += 1;
       this.is.push(this.inc);
     },

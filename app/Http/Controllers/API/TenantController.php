@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Tenant;
 use App\User;
 use App\Lokasi;
+use App\Kategori;
 use App\Http\Resources\TenantCollections;
 use App\Http\Resources\TenantCollection;
 use App\Http\Resources\Tenant as TenantResource;
@@ -60,11 +61,15 @@ class TenantController extends Controller
         ]);
 
         $lokasi = Lokasi::findOrFail($request->lokasi_id);
-
+        $kategori = Kategori::findOrFail($request->kategori_id);
+        
         for($i=1; $i<= $request->jumlah; $i++){
+            $inc = $lokasi->tenant()->orderBy('id', 'desc')->first();
+            $inc = $inc ? $inc->id + 1 : 1;
+            $kode = $lokasi->kode.$kategori->kode.$inc;
             $lokasi->tenant()->create([
                 'kategori_id' => $request->kategori_id,
-                'nomor' => $i
+                'kode' => $kode
             ]);
         }
 
@@ -76,10 +81,7 @@ class TenantController extends Controller
 
         $user = Tenant::findOrFail($id);
 
-        $this->validate($request,[
-            'status' => 'required', 
-            'penyewa_id' => 'required|integer', 
-        ]);
+        ($request['status'] == 'false') ? $request->merge(['status' => 0]) : $request->merge(['status' => 1]);
 
         $user->update($request->all());
         return ['message' => 'Updated data', 'data' => $user];
