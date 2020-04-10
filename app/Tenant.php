@@ -21,4 +21,8 @@ class Tenant extends Model
     public function lokasi(){
         return $this->belongsTo('App\Lokasi');
     }
+
+    public function transaksi() {
+        return $this->hasMany('App\Transaksi');
+    }
 }
