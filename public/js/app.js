@@ -75023,7 +75023,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         kode: "",
         luas: 0,
         permeter: "",
-        kategori_id: "",
         harga: "",
         utara: "",
         timur: "",

@@ -425,7 +425,6 @@ export default {
         kode: "",
         luas: 0,
         permeter: "",
-        kategori_id: "",
         harga: "",
         utara: "",
         timur: "",
