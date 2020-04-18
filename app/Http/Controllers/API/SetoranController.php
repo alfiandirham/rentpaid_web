@@ -41,10 +41,9 @@ class SetoranController extends Controller
             'tanggal' => 'required|date',
             'jumlah' => 'required',
         ]);
-
-        $req->merge(['staff_id' => $staff->id]);
-
-        return $setoran->update($req->all());
+        $setoran->update($req->all());
+        
+        return ["message" => 'sukses'];
     }
 
     public function destroy($id)
