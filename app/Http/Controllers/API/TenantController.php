@@ -41,6 +41,9 @@ class TenantController extends Controller
         if (\Gate::allows('isAdmin')) {
             return TenantCollections::collection(Lokasi::where('status', true)->latest()->paginate(20));
         }
+        if (\Gate::allows('isAuthor')) {
+            return TenantCollections::collection(Lokasi::latest()->paginate(20));
+        }
     }
 
     public function lokasiTenantId($id)
@@ -90,14 +93,14 @@ class TenantController extends Controller
     public function destroy($id)
     {
 
-        $this->authorize('isAdmin');
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $user = Tenant::findOrFail($id);
 
-        $user = Tenant::findOrFail($id);
+            $user->status = 0;
+            $user->save();
 
-        $user->status = 0;
-        $user->save();
-
-        return ['message' => 'Tenant Deleted'];
+            return ['message' => 'Tenant Deleted'];
+        }
     }
 
     public function search($id){

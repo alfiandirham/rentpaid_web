@@ -19,7 +19,9 @@ class PenyewaController extends Controller
         if (\Gate::allows('isAdmin')) {
             return User::where('status', true)->latest()->paginate(20);
         }
-
+        if (\Gate::allows('isAuthor')) {
+            return User::latest()->paginate(20);
+        }
     }
 
     public function collector()
@@ -68,16 +70,15 @@ class PenyewaController extends Controller
 
     public function destroy($id)
     {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $user = User::findOrFail($id);
+            // delete the user
 
-        $this->authorize('isAdmin');
+            $user->status = 0;
+            $user->save();
 
-        $user = User::findOrFail($id);
-        // delete the user
-
-        $user->status = 0;
-        $user->save();
-
-        return ['message' => 'User Deleted'];
+            return ['message' => 'User Deleted'];
+        }
     }
 
     public function search(){

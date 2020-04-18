@@ -66,15 +66,14 @@ class TarifController extends Controller
 
     public function destroy($id)
     {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $user = Tarif::findOrFail($id);
 
-        $this->authorize('isAdmin');
+            $user->status = 0;
+            $user->save();
 
-        $user = Tarif::findOrFail($id);
-
-        $user->status = 0;
-        $user->save();
-
-        return ['message' => 'Tarif Deleted'];
+            return ['message' => 'Tarif Deleted'];
+        }
     }
 
     public function search(){

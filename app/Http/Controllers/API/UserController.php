@@ -142,15 +142,15 @@ class UserController extends Controller
     public function destroy($id)
     {
 
-        $this->authorize('isAdmin');
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $user = User::findOrFail($id);
+            // delete the user
 
-        $user = User::findOrFail($id);
-        // delete the user
+            $user->status = 0;
+            $user->save();
 
-        $user->status = 0;
-        $user->save();
-
-        return ['message' => 'User Deleted'];
+            return ['message' => 'User Deleted'];
+        }
     }
 
     public function search(){

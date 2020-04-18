@@ -21,6 +21,9 @@ class LocationController extends Controller
         if (\Gate::allows('isAdmin')) {
             return Location::collection(Lokasi::where('status', true)->latest()->paginate(20));
         }
+        if (\Gate::allows('isAuthor')) {
+            return Location::collection(Lokasi::latest()->paginate(20));
+        }
     }
 
     public function store(Request $request)
@@ -64,15 +67,14 @@ class LocationController extends Controller
 
     public function destroy($id)
     {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $user = Lokasi::findOrFail($id);
 
-        $this->authorize('isAdmin');
+            $user->status = 0;
+            $user->save();
 
-        $user = Lokasi::findOrFail($id);
-
-        $user->status = 0;
-        $user->save();
-
-        return ['message' => 'Lokasi Deleted'];
+            return ['message' => 'Lokasi Deleted'];
+        }
     }
 
     public function search(){

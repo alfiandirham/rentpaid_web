@@ -48,11 +48,11 @@ class SetoranController extends Controller
 
     public function destroy($id)
     {
-        $this->authorize('isAdmin');
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $setoran = Setoran::findOrFail($id);
 
-        $setoran = Setoran::findOrFail($id);
-
-        return ['message' => 'disabled'];
+            return ['message' => 'disabled'];
+        }
     }
 
     public function show($id)

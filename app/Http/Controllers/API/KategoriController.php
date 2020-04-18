@@ -59,15 +59,14 @@ class KategoriController extends Controller
 
     public function destroy($id)
     {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $user = Kategori::findOrFail($id);
 
-        $this->authorize('isAdmin');
+            $user->status = 0;
+            $user->save();
 
-        $user = Kategori::findOrFail($id);
-
-        $user->status = 0;
-        $user->save();
-
-        return ['message' => 'Kategori Deleted'];
+            return ['message' => 'Kategori Deleted'];
+        }
     }
 
     public function search(){
