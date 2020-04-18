@@ -8,7 +8,7 @@
                             <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
                         </ul>
                         <ul class="nav navbar-nav bookmark-icons bg-header">
-                            <li class="nav-item"><a class="nav-link text-header" href="app-todo.html" data-toggle="tooltip" data-placement="top" title="Setoran"><i class="ficon fa fa-file-o mr-1"></i>Terima Setoran</a></li>
+                            <li class="nav-item"><router-link class="nav-link text-header antidup" to="/setor" data-toggle="tooltip" data-placement="top" title="Setoran"><i class="ficon fa fa-file-o mr-1"></i>Terima Setoran</router-link></li>
                         </ul>
                     </div>
                     <ul class="nav navbar-nav float-right">

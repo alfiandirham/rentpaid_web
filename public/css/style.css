@@ -275,3 +275,7 @@ a.router-link-exact-active.router-link-active {
     background: rgba(247, 197, 13, 0.4);
     border-radius: 4px;
 }
+
+ul>li>a.router-link-active.antidup {
+    background-color: transparent !important;
+}
