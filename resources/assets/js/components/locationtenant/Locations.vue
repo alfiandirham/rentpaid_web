@@ -268,8 +268,9 @@
                         v-model="filter.status"
                         class="form-control"
                       >
-                        <option value="1">Tersedia</option>
-                        <option value="0">Disewa</option>
+                        <option value="uvuvwu">All</option>
+                        <option value="uvuvwi">Tersedia</option>
+                        <option value="uvuvwe">Disewa</option>
                       </select>
                     </fieldset>
                   </div>
@@ -448,7 +449,7 @@ export default {
         axios
           .get("/api/findTenan/" + this.$route.params.id + "?q=" + q)
           .then(data => {
-            this.tenants = data;
+            this.tenants = data.data;
           })
           .catch(() => {});
       }

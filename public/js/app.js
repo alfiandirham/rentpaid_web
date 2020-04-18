@@ -70298,6 +70298,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71320,6 +71322,10 @@ var render = function() {
                           }
                         },
                         [
+                          _c("option", { attrs: { value: "uvuvwu" } }, [
+                            _vm._v("All")
+                          ]),
+                          _vm._v(" "),
                           _c("option", { attrs: { value: "owner" } }, [
                             _vm._v("Owner")
                           ]),
@@ -71384,11 +71390,15 @@ var render = function() {
                           }
                         },
                         [
+                          _c("option", { attrs: { value: "uvuvwu" } }, [
+                            _vm._v("All")
+                          ]),
+                          _vm._v(" "),
                           _c("option", { attrs: { value: "1" } }, [
                             _vm._v("Active")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "0" } }, [
+                          _c("option", { attrs: { value: "uvuvwe" } }, [
                             _vm._v("Deactivated")
                           ])
                         ]
@@ -71832,6 +71842,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -72737,11 +72748,15 @@ var render = function() {
                           }
                         },
                         [
+                          _c("option", { attrs: { value: "uvuvwu" } }, [
+                            _vm._v("All")
+                          ]),
+                          _vm._v(" "),
                           _c("option", { attrs: { value: "1" } }, [
                             _vm._v("Active")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "0" } }, [
+                          _c("option", { attrs: { value: "uvuvwe" } }, [
                             _vm._v("Deactivated")
                           ])
                         ]
@@ -73145,6 +73160,51 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -73471,6 +73531,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
+    var _ref;
+
     return {
       cekall: false,
       search: "",
@@ -73481,17 +73543,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         status: ""
       },
       locations: {},
-      form: new Form({
+      form: new Form((_ref = {
         id: "",
         lokasi: "",
         luas: "",
         kode: "",
         desa: "",
-        kecamatan: "",
         status: "",
-        alamat: "",
-        user_id: ""
-      })
+        kecamatan: ""
+      }, _defineProperty(_ref, "status", ""), _defineProperty(_ref, "alamat", ""), _defineProperty(_ref, "user_id", ""), _ref))
     };
   },
 
@@ -73570,12 +73630,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this5 = this;
 
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/owner").then(function (_ref) {
-          var data = _ref.data;
+        axios.get("api/owner").then(function (_ref2) {
+          var data = _ref2.data;
           return _this5.users = data;
         });
-        axios.get("api/lokasi").then(function (_ref2) {
-          var data = _ref2.data;
+        axios.get("api/lokasi").then(function (_ref3) {
+          var data = _ref3.data;
           return _this5.locations = data;
         });
       }
@@ -74042,7 +74102,123 @@ var render = function() {
                               ],
                               1
                             )
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-12" },
+                            [
+                              _c("p", [_vm._v("Status")]),
+                              _vm._v(" "),
+                              _c("ul", { staticClass: "list-unstyled mb-0" }, [
+                                _c(
+                                  "li",
+                                  { staticClass: "d-inline-block mr-2" },
+                                  [
+                                    _c("fieldset", [
+                                      _c(
+                                        "div",
+                                        { staticClass: "vs-radio-con" },
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.status,
+                                                expression: "form.status"
+                                              }
+                                            ],
+                                            attrs: {
+                                              type: "radio",
+                                              name: "status",
+                                              checked: "",
+                                              value: "true"
+                                            },
+                                            domProps: {
+                                              checked: _vm._q(
+                                                _vm.form.status,
+                                                "true"
+                                              )
+                                            },
+                                            on: {
+                                              change: function($event) {
+                                                return _vm.$set(
+                                                  _vm.form,
+                                                  "status",
+                                                  "true"
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _vm._m(1),
+                                          _vm._v(" "),
+                                          _c("span", {}, [_vm._v("Aktif")])
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  { staticClass: "d-inline-block mr-2" },
+                                  [
+                                    _c("fieldset", [
+                                      _c(
+                                        "div",
+                                        { staticClass: "vs-radio-con" },
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.status,
+                                                expression: "form.status"
+                                              }
+                                            ],
+                                            attrs: {
+                                              type: "radio",
+                                              name: "status",
+                                              value: "false"
+                                            },
+                                            domProps: {
+                                              checked: _vm._q(
+                                                _vm.form.status,
+                                                "false"
+                                              )
+                                            },
+                                            on: {
+                                              change: function($event) {
+                                                return _vm.$set(
+                                                  _vm.form,
+                                                  "status",
+                                                  "false"
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _vm._m(2),
+                                          _vm._v(" "),
+                                          _c("span", {}, [
+                                            _vm._v("Tidak Aktif")
+                                          ])
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "status" }
+                              })
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -74080,7 +74256,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card" }, [
-        _vm._m(1),
+        _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "card-content collapse show" }, [
           _c("div", { staticClass: "card-body" }, [
@@ -74130,14 +74306,20 @@ var render = function() {
                             ]
                           }
                         },
-                        _vm._l(_vm.users.data, function(user) {
-                          return _c(
-                            "option",
-                            { key: user.id, domProps: { value: user.id } },
-                            [_vm._v(_vm._s(user.name))]
-                          )
-                        }),
-                        0
+                        [
+                          _c("option", { attrs: { value: "uvuvwu" } }, [
+                            _vm._v("All")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.users.data, function(user) {
+                            return _c(
+                              "option",
+                              { key: user.id, domProps: { value: user.id } },
+                              [_vm._v(_vm._s(user.name))]
+                            )
+                          })
+                        ],
+                        2
                       )
                     ])
                   ]),
@@ -74186,11 +74368,15 @@ var render = function() {
                           }
                         },
                         [
+                          _c("option", { attrs: { value: "uvuvwu" } }, [
+                            _vm._v("All")
+                          ]),
+                          _vm._v(" "),
                           _c("option", { attrs: { value: "1" } }, [
                             _vm._v("Active")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "0" } }, [
+                          _c("option", { attrs: { value: "uvuvwe" } }, [
                             _vm._v("Deactivated")
                           ])
                         ]
@@ -74247,7 +74433,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _vm._m(2)
+                      _vm._m(4)
                     ]
                   )
                 ])
@@ -74424,6 +74610,26 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Lokasi > List Lokasi")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "vs-radio" }, [
+      _c("span", { staticClass: "vs-radio--border" }),
+      _vm._v(" "),
+      _c("span", { staticClass: "vs-radio--circle" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "vs-radio" }, [
+      _c("span", { staticClass: "vs-radio--border" }),
+      _vm._v(" "),
+      _c("span", { staticClass: "vs-radio--circle" })
     ])
   },
   function() {
@@ -75035,6 +75241,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -75080,7 +75287,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (this.$gate.isAdminOrAuthor()) {
         axios.get("/api/findTenan/" + this.$route.params.id + "?q=" + q).then(function (data) {
-          _this2.tenants = data;
+          _this2.tenants = data.data;
         }).catch(function () {});
       }
     },
@@ -75926,11 +76133,15 @@ var render = function() {
                           }
                         },
                         [
-                          _c("option", { attrs: { value: "1" } }, [
+                          _c("option", { attrs: { value: "uvuvwu" } }, [
+                            _vm._v("All")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "uvuvwi" } }, [
                             _vm._v("Tersedia")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "0" } }, [
+                          _c("option", { attrs: { value: "uvuvwe" } }, [
                             _vm._v("Disewa")
                           ])
                         ]

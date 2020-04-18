@@ -178,8 +178,9 @@
                         v-model="filter.status"
                         class="form-control"
                       >
+                        <option value="uvuvwu">All</option>
                         <option value="1">Active</option>
-                        <option value="0">Deactivated</option>
+                        <option value="uvuvwe">Deactivated</option>
                       </select>
                     </fieldset>
                   </div>

@@ -126,6 +126,47 @@
                           <has-error :form="form" field="user_id"></has-error>
                         </div>
                       </div>
+                      <div class="col-12">
+                        <p>Status</p>
+                        <ul class="list-unstyled mb-0">
+                          <li class="d-inline-block mr-2">
+                            <fieldset>
+                              <div class="vs-radio-con">
+                                <input
+                                  type="radio"
+                                  v-model="form.status"
+                                  name="status"
+                                  checked
+                                  value="true"
+                                />
+                                <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class>Aktif</span>
+                              </div>
+                            </fieldset>
+                          </li>
+                          <li class="d-inline-block mr-2">
+                            <fieldset>
+                              <div class="vs-radio-con">
+                                <input
+                                  type="radio"
+                                  name="status"
+                                  v-model="form.status"
+                                  value="false"
+                                />
+                                <span class="vs-radio">
+                                  <span class="vs-radio--border"></span>
+                                  <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class>Tidak Aktif</span>
+                              </div>
+                            </fieldset>
+                          </li>
+                        </ul>
+                        <has-error :form="form" field="status"></has-error>
+                      </div>
                     </div>
                   </div>
                 </form>
@@ -181,6 +222,7 @@
                         v-model="filter.owner"
                         class="form-control"
                       >
+                        <option value="uvuvwu">All</option>
                         <option
                           v-for="user in users.data"
                           :value="user.id"
@@ -197,8 +239,9 @@
                         v-model="filter.status"
                         class="form-control"
                       >
+                        <option value="uvuvwu">All</option>
                         <option value="1">Active</option>
-                        <option value="0">Deactivated</option>
+                        <option value="uvuvwe">Deactivated</option>
                       </select>
                     </fieldset>
                   </div>
@@ -340,6 +383,7 @@ export default {
         luas: "",
         kode: "",
         desa: "",
+        status: "",
         kecamatan: "",
         status: "",
         alamat: "",

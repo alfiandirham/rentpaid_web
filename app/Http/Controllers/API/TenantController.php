@@ -38,8 +38,8 @@ class TenantController extends Controller
     public function lokasiTenant()
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return TenantCollections::collection(Lokasi::latest()->paginate(20));
+        if (\Gate::allows('isAdmin')) {
+            return TenantCollections::collection(Lokasi::where('status', true)->latest()->paginate(20));
         }
     }
 
@@ -47,7 +47,7 @@ class TenantController extends Controller
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return TenantResource::collection(Lokasi::findOrFail($id)->tenant()->paginate(20));
+            return TenantResource::collection(Lokasi::findOrFail($id)->tenant()->latest()->paginate(20));
         }
     }
 
@@ -103,15 +103,20 @@ class TenantController extends Controller
     public function search($id){
 
         if ($search = \Request::get('q')) {
-            $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->where(function($query) use ($search){
-                $query->where('status', $search)
-                        ->orWhere('nomor', $search)
-                        ->orWhere('kategori', $search);
-            })->paginate(20));
+            if($search == "uvuvwe"){
+                $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->where('disewa', true)->latest()->paginate(20));
+            }else if($search == "uvuvwi"){
+                $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->where('disewa', false)->latest()->paginate(20));
+            }else if($search == "uvuvwu"){
+                $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->latest()->paginate(20));
+            }else{
+                $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->where(function($query) use ($search){
+                    $query->where('kode', 'LIKE',"%$search%");
+                })->paginate(20));
+            }
         }else{
             $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->latest()->paginate(20));
         }
-
         return $users;
     }
 }

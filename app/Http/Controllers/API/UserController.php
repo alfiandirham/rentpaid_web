@@ -154,17 +154,26 @@ class UserController extends Controller
     }
 
     public function search(){
+        $id = auth('api')->user()->id;
         if ($search = \Request::get('q')) {
-            $users = User::where(function($query) use ($search){
-                $query->where('name','LIKE',"%$search%")
-                        ->orWhere('email','LIKE',"%$search%")
-                        ->orWhere('status',$search)
-                        ->orWhere('type',$search);
-            })->paginate(20);
+            if($search == "uvuvwe"  && \Gate::allows('isAuthor')){
+                 $users = User::where("status", false)->where("id", '!=', $id)->latest()->paginate(20);
+            }else if($search == "uvuvwu"){
+                $users = User::where("status", true)->where("id", '!=', $id)->latest()->paginate(20);
+                if(\Gate::allows('isAuthor')){
+                    $users = User::where("id", '!=', $id)->latest()->paginate(20);
+                }
+            }else {
+                $users = User::where("status", true)->where("id", '!=', $id)->where(function($query) use ($search){
+                    $query->where('name','LIKE',"%$search%")
+                            ->orWhere('email','LIKE',"%$search%")
+                            ->orWhere('status',$search)
+                            ->orWhere('type',$search);
+                })->paginate(20);
+            }
         }else{
-            $users = User::latest()->paginate(20);
+            $users = User::where("status", true)->where("id", '!=', $id)->latest()->paginate(20);
         }
-
         return $users;
     }
 }

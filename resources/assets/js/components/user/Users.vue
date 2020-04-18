@@ -299,6 +299,7 @@
                         v-model="filter.role"
                         class="form-control"
                       >
+                        <option value="uvuvwu">All</option>
                         <option value="owner">Owner</option>
                         <option value="collector">Collector</option>
                         <option value="admin">Staff</option>
@@ -314,8 +315,9 @@
                         v-model="filter.status"
                         class="form-control"
                       >
+                        <option value="uvuvwu">All</option>
                         <option value="1">Active</option>
-                        <option value="0">Deactivated</option>
+                        <option value="uvuvwe">Deactivated</option>
                       </select>
                     </fieldset>
                   </div>

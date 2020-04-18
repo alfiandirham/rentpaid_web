@@ -16,7 +16,7 @@ class PenyewaController extends Controller
     public function index()
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin')) {
             return User::where('status', true)->latest()->paginate(20);
         }
 
@@ -26,7 +26,7 @@ class PenyewaController extends Controller
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return User::where('type', 'collector')->latest()->paginate(20);
+            return User::where('type', 'collector')->where("status", true)->latest()->paginate(20);
         }
 
     }
@@ -83,15 +83,23 @@ class PenyewaController extends Controller
     public function search(){
 
         if ($search = \Request::get('q')) {
-            $users = User::where(function($query) use ($search){
-                $query->where('nama','LIKE',"%$search%")
-                        ->orWhere('ktp','LIKE',"%$search%")
-                        ->orWhere('status',$search);
-            })->paginate(20);
+            if($search == "uvuvwe"  && \Gate::allows('isAuthor')){
+               $users = User::where('status', false)->latest()->paginate(20); 
+            }else if($search == "uvuvwu"){
+                $users = User::where('status', true)->latest()->paginate(20);
+                if(\Gate::allows('isAuthor')){
+                    $users = User::latest()->paginate(20);
+                }
+            }else{
+                $users = User::where('status', true)->where(function($query) use ($search){
+                    $query->where('nama','LIKE',"%$search%")
+                            ->orWhere('ktp','LIKE',"%$search%")
+                            ->orWhere('status',$search);
+                })->paginate(20);
+            }
         }else{
-            $users = User::latest()->paginate(20);
+            $users = User::where('status', true)->latest()->paginate(20);
         }
-
         return $users;
 
     }

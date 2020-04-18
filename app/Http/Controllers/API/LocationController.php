@@ -18,7 +18,7 @@ class LocationController extends Controller
     public function index()
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin')) {
             return Location::collection(Lokasi::where('status', true)->latest()->paginate(20));
         }
     }
@@ -48,7 +48,7 @@ class LocationController extends Controller
 
         $this->validate($request,[
             'lokasi' => 'required', 
-            'kode' => 'required|unique', 
+            'kode' => 'required|unique:lokasis,lokasi,'.$user->id, 
             'luas' => 'required', 
             'kecamatan' => 'required', 
             'desa' => 'required', 
@@ -78,32 +78,47 @@ class LocationController extends Controller
     public function search(){
 
         if ($search = \Request::get('q')) {
-            $users = Location::collection(Lokasi::where(function($query) use ($search){
+            if ($search == "uvuvwe" && \Gate::allows('isAuthor')) {
+                $users = Location::collection(Lokasi::where('status', false)->latest()->paginate(20));
+            }else if($search == "uvuvwu"){
+                $users = Location::collection(Lokasi::where('status', true)->latest()->paginate(20));
+                if(\Gate::allows('isAuthor')){
+                    $users = Location::collection(Lokasi::latest()->paginate(20));
+                }
+            }else {
+                $users = Location::collection(Lokasi::where(function($query) use ($search){
                 $query->where('lokasi','LIKE',"%$search%")
                         ->orWhere('status','LIKE',"%$search%")
                         ->orWhere('user_id','LIKE',"%$search%");
-            })->paginate(20));
+                })->paginate(20));
+            }
         }else{
-            $users = Location::collection(Lokasi::latest()->paginate(20));
+            $users = Location::collection(Lokasi::where('status', true)->latest()->paginate(20));
         }
 
         return $users;
-
     }
 
     public function search2(){
 
         if ($search = \Request::get('q')) {
-            $users = TenantCollections::collection(Lokasi::where(function($query) use ($search){
-                $query->where('lokasi','LIKE',"%$search%")
-                        ->orWhere('status','LIKE',"%$search%")
-                        ->orWhere('user_id','LIKE',"%$search%");
-            })->paginate(20));
+            if($search == "uvuvwe" && \Gate::allows('isAuthor')){
+                $users = TenantCollections::collection(Lokasi::where('status', false)->latest()->paginate(20));
+            }else if($search == "uvuvwu"){
+                $users = TenantCollections::collection(Lokasi::where('status', true)->latest()->paginate(20));
+                if(\Gate::allows('isAuthor')){
+                    $users = TenantCollections::collection(Lokasi::latest()->paginate(20));
+                }
+            }else{
+                $users = TenantCollections::collection(Lokasi::where(function($query) use ($search){
+                    $query->where('lokasi','LIKE',"%$search%")
+                            ->orWhere('status','LIKE',"%$search%")
+                            ->orWhere('user_id','LIKE',"%$search%");
+                })->paginate(20));
+            }
         }else{
-            $users = TenantCollections::collection(Lokasi::latest()->paginate(20));
+            $users = TenantCollections::collection(Lokasi::where('status', true)->latest()->paginate(20));
         }
-
         return $users;
-
     }
 }
