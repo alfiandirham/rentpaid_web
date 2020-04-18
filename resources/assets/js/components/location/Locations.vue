@@ -135,7 +135,8 @@
                   type="button"
                   @click="editmode ? updateData() : createData()"
                   class="btn btn-primary"
-                >Accept</button>
+                >Ok</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
               </div>
             </div>
           </div>

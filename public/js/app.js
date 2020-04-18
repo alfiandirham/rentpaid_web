@@ -70297,6 +70297,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71248,7 +71249,16 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Accept")]
+                      [_vm._v("Ok")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Batal")]
                     )
                   ])
                 ])
@@ -72125,6 +72135,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72655,7 +72666,16 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Accept")]
+                      [_vm._v("Ok")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Batal")]
                     )
                   ])
                 ])
@@ -73125,6 +73145,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -74039,7 +74060,16 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Accept")]
+                      [_vm._v("Ok")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Batal")]
                     )
                   ])
                 ])
@@ -74596,6 +74626,7 @@ exports.push([module.i, "\n.before[data-v-534a1de5] {\n  background-color: #ecf3
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -75824,7 +75855,16 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Accept")]
+                      [_vm._v("Ok")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Batal")]
                     )
                   ])
                 ])
@@ -76639,6 +76679,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -77229,7 +77270,16 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Accept")]
+                    [_vm._v("Ok")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-danger",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Batal")]
                   )
                 ])
               ])
@@ -77374,6 +77424,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -78196,7 +78247,16 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Accept")]
+                      [_vm._v("Ok")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Batal")]
                     )
                   ])
                 ])
@@ -78553,6 +78613,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -79327,7 +79388,16 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Accept")]
+                      [_vm._v("Ok")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Batal")]
                     )
                   ])
                 ])
