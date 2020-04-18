@@ -20,7 +20,7 @@ class Setoran extends JsonResource
             'id' => $this->id,
             'collector_id' => $this->collector_id,
             'collector' => $collector->name,
-            'lokasi' => $collector->lokasi->lokasi,
+            'lokasi' => $collector->lokasi ? $collector->lokasi->lokasi : 'kosong',
             'jumlah' => $this->jumlah,
             'tanggal' => $this->tanggal,
         ];
