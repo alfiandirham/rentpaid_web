@@ -4,10 +4,10 @@
     <!-- <section class="users-list-wrapper" v-if="$gate.isAdminOrAuthor()"> -->
     <section class="users-list-wrapper">
       <div>
-        <h2 class="head-text">Tenant > Tarif</h2>
+        <h2 class="head-text">Setoran > List Setoran</h2>
       </div>
       <div class="head-title">
-        <button type="button" @click="newModal" class="btn btn-primary">Tambah Tarif</button>
+        <button type="button" @click="newModal" class="btn btn-primary">Tambah Setoran</button>
         <!-- Modal -->
         <div
           class="modal fade"
@@ -23,7 +23,7 @@
           >
             <div class="modal-nav">
               <div class="modal-header modal-nav-header">
-                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} TARIF</h2>
+                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} Setoran</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
               <div class="modal-body modal-nav-body">
@@ -33,14 +33,14 @@
                       <div class="col-12">
                         <div class="form-group">
                           <input
-                            type="text"
-                            name="fname"
-                            v-model="form.nama"
-                            placeholder="Nama Tarif"
+                            type="date"
                             class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('nama') }"
+                            :class="{ 'is-invalid': form.errors.has('tanggal') }"
+                            v-model="form.tanggal"
+                            name="tanggal"
+                            placeholder="Tanggal"
                           />
-                          <has-error :form="form" field="nama"></has-error>
+                          <has-error :form="form" field="tanggal"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -48,30 +48,12 @@
                           <input
                             type="number"
                             class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('permeter') }"
-                            v-model="form.permeter"
-                            name="permeter"
-                            placeholder="Harga sewa per m2"
+                            :class="{ 'is-invalid': form.errors.has('collector_id') }"
+                            v-model="form.collector_id"
+                            name="collector_id"
+                            placeholder="Kolektor ID"
                           />
-                          <has-error :form="form" field="permeter"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('bop') }"
-                            v-model="form.bop"
-                            name="bop"
-                            placeholder="Jumlah Tarif BOP"
-                          />
-                          <has-error :form="form" field="bop"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="form-group">
-                          <input type="number" class="form-control" disabled placeholder="PPN 10%" />
+                          <has-error :form="form" field="collector_id"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -79,57 +61,13 @@
                           <input
                             type="number"
                             class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('air') }"
-                            v-model="form.air"
-                            name="air"
-                            placeholder="Jumlah Tarif Air"
+                            :class="{ 'is-invalid': form.errors.has('jumlah') }"
+                            v-model="form.jumlah"
+                            name="jumlah"
+                            placeholder="Jumlah Setoran"
                           />
-                          <has-error :form="form" field="air"></has-error>
+                          <has-error :form="form" field="jumlah"></has-error>
                         </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('listrik') }"
-                            v-model="form.listrik"
-                            placeholder="Jumlah Tarif Listrik"
-                          />
-                          <has-error :form="form" field="listrik"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('barang') }"
-                            v-model="form.barang"
-                            placeholder="Jumlah Tarif Barang Masuk"
-                          />
-                          <has-error :form="form" field="barang"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('sampah') }"
-                            v-model="form.sampah"
-                            placeholder="Jumlah Tarif Sampah"
-                          />
-                          <has-error :form="form" field="sampah"></has-error>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <label>Total Tarif</label>
-                        <p class="lead" style="padding-left:0.2em; padding-top:1em;">
-                          Rp. {{parseFloat(form.permeter) + parseFloat(form.bop)
-                          + parseFloat(form.bop * 0.1) + parseFloat(form.air)
-                          + parseFloat(form.listrik) + parseFloat(form.barang) + parseFloat(form.sampah)}}
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -172,32 +110,21 @@
                 <table class="table table-hover mb-0">
                   <thead>
                     <tr>
-                      <th>Nama Tarif</th>
-                      <th>BOP / (PPN 10%)</th>
-                      <th>Permeter</th>
-                      <th>Air</th>
-                      <th>Listrik</th>
-                      <th>Brg Masuk</th>
-                      <th>Sampah</th>
-                      <th>Total Sewa</th>
+                      <th>Tanggal</th>
+                      <th>Collector</th>
+                      <th>Lokasi</th>
+                      <th>Jumlah Setoran</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="tarif in tarifs.data" :key="tarif.id">
-                      <td>{{tarif.nama}}</td>
-                      <td>Rp. {{tarif.bop}} / ({{tarif.bop + (tarif.bop * 0.1)}})</td>
-                      <td>Rp. {{tarif.permeter}}</td>
-                      <td>Rp. {{tarif.air}}</td>
-                      <td>Rp. {{tarif.listrik}}</td>
-                      <td>Rp. {{tarif.barang}}</td>
-                      <td>Rp. {{tarif.sampah}}</td>
+                    <tr v-for="setor in setorans.data" :key="setor.id">
+                      <td>{{setor.tanggal}}</td>
+                      <td>{{setor.collector}}</td>
+                      <td>{{setor.lokasi}}</td>
+                      <td>Rp. {{setor.jumlah}}</td>
                       <td>
-                        Rp. {{tarif.sampah + tarif.barang + tarif.listrik + tarif.air
-                        + tarif.bop + (tarif.bop * 0.1) + tarif.permeter}}
-                      </td>
-                      <td>
-                        <a @click="editModal(tarif)">
+                        <a @click="editModal(setor)">
                           <i class="feather icon-edit-1 mr-50"></i>
                         </a>
                       </td>
@@ -205,7 +132,7 @@
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="tarifs" @pagination-change-page="getResults"></pagination>
+                  <pagination :limit="5" :data="setorans" @pagination-change-page="getResults"></pagination>
                 </div>
               </div>
             </div>
@@ -228,16 +155,12 @@ export default {
       cekall: false,
       search: "",
       editmode: false,
-      tarifs: {},
+      setorans: {},
       form: new Form({
         id: "",
-        nama: "",
-        air: "",
-        bop: "",
-        permeter: "",
-        listrik: "",
-        barang: "",
-        sampah: ""
+        collector_id: "",
+        jumlah: "",
+        tanggal: ""
       })
     };
   },
@@ -249,7 +172,7 @@ export default {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("api/tarif/" + this.form.id)
+        .put("api/setoran/" + this.form.id)
         .then(() => {
           // success
           $("#addNew").modal("hide");
@@ -274,7 +197,7 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form
-            .delete("api/tarif/" + id)
+            .delete("api/setoran/" + id)
             .then(() => {
               swal("Disabled!", "Your data has been disabled.", "success");
               Fire.$emit("AfterCreate");
@@ -297,25 +220,25 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/tarif?page=" + page).then(response => {
-        this.tarifs = response.data;
+      axios.get("api/setoran?page=" + page).then(response => {
+        this.setorans = response.data;
       });
     },
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/tarif").then(({ data }) => (this.tarifs = data));
+        axios.get("api/setoran").then(({ data }) => (this.setorans = data));
       }
     },
     createUser() {
       this.$Progress.start();
       this.form
-        .post("api/tarif")
+        .post("api/setoran")
         .then(() => {
           Fire.$emit("AfterCreate");
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "Berhasil menambah Tarif."
+            title: "Berhasil Menambah Setoran."
           });
           this.$Progress.finish();
         })
@@ -331,9 +254,9 @@ export default {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
-        .get("api/findTarif?q=" + query)
+        .get("api/findSetoran?q=" + query)
         .then(data => {
-          this.tarifs = data.data;
+          this.setorans = data.data;
         })
         .catch(() => {});
     });

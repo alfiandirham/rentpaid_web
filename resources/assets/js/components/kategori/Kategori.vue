@@ -183,39 +183,6 @@
                         placeholder="Search...."
                       />
                     </div>
-                    <div class="ag-btns d-flex flex-wrap">
-                      <div class="action-btns">
-                        <div class="btn-dropdown">
-                          <div class="btn-group dropdown actions-dropodown">
-                            <button
-                              type="button"
-                              class="btn btn-white px-2 py-75 dropdown-toggle waves-effect waves-light"
-                              data-toggle="dropdown"
-                              aria-haspopup="true"
-                              aria-expanded="false"
-                            >Actions</button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-trash-2"></i>
-                                Delete
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-clipboard"></i>
-                                Archive
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-printer"></i>
-                                Print
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-download"></i>
-                                CSV
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -223,9 +190,6 @@
                 <table class="table table-hover mb-0">
                   <thead>
                     <tr>
-                      <th>
-                        <input type="checkbox" @click="checkall" v-model="cekall" />
-                      </th>
                       <th>Nama Kategori</th>
                       <th>Kode</th>
                       <th>Tarif Sewa</th>
@@ -234,9 +198,6 @@
                   </thead>
                   <tbody>
                     <tr v-for="kategori in kategoris.data" :key="kategori.id">
-                      <th scope="row">
-                        <input type="checkbox" :checked="cekall" />
-                      </th>
                       <td>{{kategori.nama}}</td>
                       <td>{{kategori.kode}}</td>
                       <td>Rp. {{kategori.tarif}}</td>
@@ -365,7 +326,7 @@ export default {
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "User Created in successfully"
+            title: "Data Created in successfully"
           });
           this.$Progress.finish();
         })

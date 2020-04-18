@@ -35,6 +35,8 @@
                 </li>
                 <li class=" nav-item"><a href="#"><i class="fa fa-usd"></i><span class="menu-title" data-i18n="Data List">Transaksi</span></a>
                 </li>
+                <li class=" nav-item"><router-link to="/setor"><i class="fa fa-arrow-circle-o-down"></i><span class="menu-title" data-i18n="Data List">Setoran</span></router-link>
+                </li>
                 <li class=" nav-item"><a href="#"><i class="feather icon-info"></i><span class="menu-title" data-i18n="Data List">Tunggakan Pembayaran</span></a>
                 </li>
                 <li class=" navigation-header"><span>Akun</span>

@@ -73,6 +73,10 @@ let routes = [{
         component: require('./components/tenan/Tenant.vue')
     },
     {
+        path: '/setor',
+        component: require('./components/setor/Setor.vue')
+    },
+    {
         path: '/tarif',
         component: require('./components/tarif/Tarif.vue')
     },
