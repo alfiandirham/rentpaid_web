@@ -4,10 +4,9 @@
     <!-- <section class="users-list-wrapper" v-if="$gate.isAdminOrAuthor()"> -->
     <section class="users-list-wrapper">
       <div>
-        <h2 class="head-text">Setoran > List Setoran</h2>
+        <h2 class="head-text">Transaksi</h2>
       </div>
       <div class="head-title">
-        <button type="button" @click="newModal" class="btn btn-primary">Tambah Setoran</button>
         <!-- Modal -->
         <div
           class="modal fade"
@@ -23,7 +22,7 @@
           >
             <div class="modal-nav">
               <div class="modal-header modal-nav-header">
-                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} SETORAN</h2>
+                <h2>{{editmode ? 'DETAIL' : 'TAMBAH'}} TRANSAKSI</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
               <div class="modal-body modal-nav-body">
@@ -85,6 +84,68 @@
           </div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Filters</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+          <div class="heading-elements">
+            <ul class="list-inline mb-0">
+              <li>
+                <a data-action="collapse">
+                  <i class="feather icon-chevron-down"></i>
+                </a>
+              </li>
+              <li>
+                <a data-action="close">
+                  <i class="feather icon-x"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="users-list-filter">
+              <form>
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-role">Role</label>
+                    <fieldset class="form-group">
+                      <select
+                        @change="filtering(filter.role)"
+                        v-model="filter.role"
+                        class="form-control"
+                      >
+                        <option value="uvuvwu">All</option>
+                        <option value="owner">Owner</option>
+                        <option value="collector">Collector</option>
+                        <option value="admin">Staff</option>
+                        <option value="superuser">SysAdmin</option>
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-status">Status</label>
+                    <fieldset class="form-group">
+                      <select
+                        @change="filtering(filter.status)"
+                        v-model="filter.status"
+                        class="form-control"
+                      >
+                        <option value="uvuvwu">All</option>
+                        <option value="1">Active</option>
+                        <option value="uvuvwe">Deactivated</option>
+                      </select>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
         <div class="card">
@@ -110,29 +171,29 @@
                 <table class="table table-hover mb-0">
                   <thead>
                     <tr>
+                      <th>Id</th>
+                      <th>Penyewa</th>
+                      <th>Nama Lokasi</th>
                       <th>Tanggal</th>
                       <th>Collector</th>
-                      <th>Lokasi</th>
                       <th>Jumlah Setoran</th>
-                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="setor in setorans.data" :key="setor.id">
-                      <td>{{setor.tanggal}}</td>
-                      <td>{{setor.collector}}</td>
-                      <td>{{setor.lokasi}}</td>
-                      <td>Rp. {{setor.jumlah}}</td>
+                    <tr v-for="transaksi in transaksis.data" :key="transaksi.id">
                       <td>
-                        <a @click="editModal(setor)">
-                          <i class="feather icon-edit-1 mr-50"></i>
-                        </a>
+                        <a class="blue-underline" @click="editModal(transaksi)">{{transaksi.id}}</a>
                       </td>
+                      <td>{{transaksi.penyewa}}</td>
+                      <td>{{transaksi.lokasi}}</td>
+                      <td>{{transaksi.tanggal | myDate}}</td>
+                      <td>{{transaksi.collector}}</td>
+                      <td>Rp. {{transaksi.setoran}}</td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="setorans" @pagination-change-page="getResults"></pagination>
+                  <pagination :limit="5" :data="transaksis" @pagination-change-page="getResults"></pagination>
                 </div>
               </div>
             </div>
@@ -155,24 +216,37 @@ export default {
       cekall: false,
       search: "",
       editmode: false,
-      setorans: {},
+      transaksis: {},
+      filter: {
+        status: "",
+        role: ""
+      },
       form: new Form({
         id: "",
-        collector_id: "",
-        jumlah: "",
-        tanggal: ""
+        penyewa: "",
+        setoran: "",
+        tanggal: "",
+        lokasi: "",
+        collector: ""
       })
     };
   },
   methods: {
-    checkall() {
-      this.cekall ? (this.cekall = false) : (this.cekall = true);
+    filtering(q) {
+      if (this.$gate.isAdminOrAuthor()) {
+        axios
+          .get("api/findTransaksi?q=" + q)
+          .then(data => {
+            this.transaksis = data.data;
+          })
+          .catch(() => {});
+      }
     },
     updateUser() {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("api/setoran/" + this.form.id)
+        .put("api/transaksi/" + this.form.id)
         .then(() => {
           // success
           $("#addNew").modal("hide");
@@ -197,7 +271,7 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form
-            .delete("api/setoran/" + id)
+            .delete("api/transaksi/" + id)
             .then(() => {
               swal("Disabled!", "Your data has been disabled.", "success");
               Fire.$emit("AfterCreate");
@@ -220,25 +294,25 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/setoran?page=" + page).then(response => {
-        this.setorans = response.data;
+      axios.get("api/transaksi?page=" + page).then(response => {
+        this.transaksis = response.data;
       });
     },
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/setoran").then(({ data }) => (this.setorans = data));
+        axios.get("api/transaksi").then(({ data }) => (this.transaksis = data));
       }
     },
     createUser() {
       this.$Progress.start();
       this.form
-        .post("api/setoran")
+        .post("api/transaksi")
         .then(() => {
           Fire.$emit("AfterCreate");
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "Berhasil Menambah Setoran."
+            title: "Berhasil Menambah transaksi."
           });
           this.$Progress.finish();
         })
@@ -254,9 +328,9 @@ export default {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
-        .get("api/findSetoran?q=" + query)
+        .get("api/findTransaksi?q=" + query)
         .then(data => {
-          this.setorans = data.data;
+          this.transaksis = data.data;
         })
         .catch(() => {});
     });
@@ -267,3 +341,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.blue-underline {
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 17px !important;
+  text-decoration-line: underline !important;
+
+  color: #3895cc !important;
+}
+</style>

@@ -24,6 +24,8 @@ Route::apiResources(['tenan' => 'API\TenantController']);
 Route::apiResources(['tarif' => 'API\TarifController']);
 Route::apiResources(['kategori' => 'API\KategoriController']);
 Route::apiResources(['setoran' => 'API\SetoranController']);
+Route::apiResources(['transaksi' => 'API\TransaksiController']);
+Route::apiResources(['tunggakan' => 'API\TunggakanController']);
 
 Route::get('lokasitenan', 'API\TenantController@lokasiTenant');
 Route::get('lokasitenan/{id}', 'API\TenantController@lokasiTenantId');
@@ -37,5 +39,7 @@ Route::get('findPenyewa', 'API\PenyewaController@search');
 Route::get('findTarif', 'API\TarifController@search');
 Route::get('findKategori', 'API\KategoriController@search');
 Route::get('findSetoran', 'API\SetoranController@search');
+Route::get('findTransaksi', 'API\TransaksiController@search');
+Route::get('findTunggakan', 'API\TunggakanController@search');
 Route::get('findLocation', 'API\LocationController@search');
 Route::get('findLocationTenant', 'API\LocationController@search2');

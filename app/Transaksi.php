@@ -18,7 +18,7 @@ class Transaksi extends Model
         return $this->belongsTo('App\Tenant');
     }
 
-    public function collector(){
+    public function user(){
         return $this->belongsTo('App\User');
     }
 }
