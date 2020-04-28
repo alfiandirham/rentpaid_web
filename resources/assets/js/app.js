@@ -94,7 +94,7 @@ let routes = [{
     },
     {
         path: '/profile',
-        component: require('./components/Profile.vue')
+        component: require('./components/profile/Users.vue')
     },
     {
         path: '*',

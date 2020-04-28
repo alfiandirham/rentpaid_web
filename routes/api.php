@@ -31,7 +31,9 @@ Route::get('lokasitenan', 'API\TenantController@lokasiTenant');
 Route::get('lokasitenan/{id}', 'API\TenantController@lokasiTenantId');
 
 Route::get('owner', 'API\UserController@owner');
+Route::get('auth', 'API\UserController@profile');
 Route::post('photo/{id}', 'API\UserController@update');
+Route::post('profile', 'API\UserController@updateProfile');
 
 Route::get('findUser', 'API\UserController@search');
 Route::get('findTenan/{id}', 'API\TenantController@search');

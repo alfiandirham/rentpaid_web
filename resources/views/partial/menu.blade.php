@@ -41,7 +41,7 @@
                 </li>
                 <li class=" navigation-header"><span>Akun</span>
                 </li>
-                <li class=" nav-item"><a href="page-user-profile.html"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Profile">Profil Pengguna</span></a>
+                <li class=" nav-item"><router-link to="/profile"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Profile">Profil Pengguna</span></router-link>
                 </li>
                 <li class=" nav-item"><a href="page-knowledge-base.html"><i class="feather icon-info"></i><span class="menu-title" data-i18n="Knowledge Base">Info Perusahaan</span></a>
                 </li>
