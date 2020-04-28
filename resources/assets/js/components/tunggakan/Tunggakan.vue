@@ -30,55 +30,72 @@
                   <div class="form-body">
                     <div class="row">
                       <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="date"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('tanggal') }"
-                            v-model="form.tanggal"
-                            name="tanggal"
-                            placeholder="Tanggal"
-                          />
-                          <has-error :form="form" field="tanggal"></has-error>
+                        <div class="row">
+                          <div class="col-4">
+                            <label class="mb-2 labelin">ID Transaksi</label>
+                            <p class="teksin">{{form.id}}</p>
+                          </div>
+                          <div class="col-6">
+                            <label class="mb-2 labelin">Tanggal</label>
+                            <p class="teksin">{{form.tanggal | myDate}}</p>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('collector_id') }"
-                            v-model="form.collector_id"
-                            name="collector_id"
-                            placeholder="Kolektor ID"
-                          />
-                          <has-error :form="form" field="collector_id"></has-error>
+                      <div class="col-12 mt-2">
+                        <div class="row">
+                          <div class="col-4">
+                            <label class="mb-2 labelin">Nama Penyewa</label>
+                            <p class="teksin">{{form.penyewa}}</p>
+                          </div>
+                          <div class="col-6">
+                            <label class="mb-2 labelin">Detail Lokasi</label>
+                            <p class="teksin">{{form.lokasi}}</p>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('jumlah') }"
-                            v-model="form.jumlah"
-                            name="jumlah"
-                            placeholder="Jumlah Setoran"
-                          />
-                          <has-error :form="form" field="jumlah"></has-error>
+                      <div class="col-12 mt-2">
+                        <div class="row">
+                          <div class="col-4">
+                            <label class="mb-2 labelin">Detail Pembayaran</label>
+                            <p class="teksin">BOP</p>
+                            <p class="teksin">Air</p>
+                            <p class="teksin">Listrik</p>
+                            <p class="teksin">Barang Masuk</p>
+                            <p class="teksin">Sampah</p>
+                            <p class="teksin">Sewa Permeter</p>
+                          </div>
+                          <div class="col-6">
+                            <label class="mb-2 labelin">&nbsp;</label>
+                            <p class="teksin">Rp. {{form.detail.bop}}</p>
+                            <p class="teksin">Rp. {{form.detail.air}}</p>
+                            <p class="teksin">Rp. {{form.detail.listrik}}</p>
+                            <p class="teksin">Rp. {{form.detail.barang}}</p>
+                            <p class="teksin">Rp. {{form.detail.sampah}}</p>
+                            <p class="teksin">Rp. {{form.detail.permeter}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 mt-2">
+                        <div class="row">
+                          <div class="col-4">
+                            <p class="teksin-bold">Total</p>
+                          </div>
+                          <div class="col-6">
+                            <p class="teksin-bold">Rp. {{form.setoran}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 mt-2">
+                        <div class="row">
+                          <div class="col-4">
+                            <label class="mb-2 labelin">Nama Kolektor</label>
+                            <p class="teksin">{{form.collector}}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  @click="editmode ? updateUser() : createUser()"
-                  class="btn btn-primary"
-                >Ok</button>
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
               </div>
             </div>
           </div>
@@ -227,7 +244,8 @@ export default {
         setoran: "",
         tanggal: "",
         lokasi: "",
-        collector: ""
+        collector: "",
+        detail: ""
       })
     };
   },
@@ -351,5 +369,30 @@ export default {
   text-decoration-line: underline !important;
 
   color: #3895cc !important;
+}
+.labelin {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 17px;
+  color: #8f979b;
+}
+
+.teksin {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 17px;
+  color: #606060;
+  padding-left: 5px;
+}
+
+.teksin-bold {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 17px;
+  padding-left: 5px;
+  color: #ff6f6f;
 }
 </style>

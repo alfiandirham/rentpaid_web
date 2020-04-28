@@ -83232,6 +83232,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -83250,7 +83267,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setoran: "",
         tanggal: "",
         lokasi: "",
-        collector: ""
+        collector: "",
+        detail: ""
       })
     };
   },
@@ -83406,7 +83424,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.blue-underline[data-v-2b05121a] {\n  font-style: normal !important;\n  font-weight: 600 !important;\n  font-size: 16px !important;\n  line-height: 17px !important;\n  text-decoration-line: underline !important;\n\n  color: #3895cc !important;\n}\n", ""]);
+exports.push([module.i, "\n.blue-underline[data-v-2b05121a] {\n  font-style: normal !important;\n  font-weight: 600 !important;\n  font-size: 16px !important;\n  line-height: 17px !important;\n  text-decoration-line: underline !important;\n\n  color: #3895cc !important;\n}\n.labelin[data-v-2b05121a] {\n  font-style: normal;\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 17px;\n  color: #8f979b;\n}\n.teksin[data-v-2b05121a] {\n  font-style: normal;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 17px;\n  color: #606060;\n  padding-left: 5px;\n}\n.teksin-bold[data-v-2b05121a] {\n  font-style: normal;\n  font-weight: 800;\n  font-size: 16px;\n  line-height: 17px;\n  padding-left: 5px;\n  color: #174865;\n}\n", ""]);
 
 // exports
 
@@ -83465,175 +83483,127 @@ var render = function() {
                       _c("div", { staticClass: "form-body" }, [
                         _c("div", { staticClass: "row" }, [
                           _c("div", { staticClass: "col-12" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.tanggal,
-                                      expression: "form.tanggal"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has("tanggal")
-                                  },
-                                  attrs: {
-                                    type: "date",
-                                    name: "tanggal",
-                                    placeholder: "Tanggal"
-                                  },
-                                  domProps: { value: _vm.form.tanggal },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "tanggal",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("ID Transaksi")
+                                ]),
                                 _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "tanggal" }
-                                })
-                              ],
-                              1
-                            )
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.id))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Tanggal")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    _vm._s(_vm._f("myDate")(_vm.form.tanggal))
+                                  )
+                                ])
+                              ])
+                            ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.collector_id,
-                                      expression: "form.collector_id"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "collector_id"
-                                    )
-                                  },
-                                  attrs: {
-                                    type: "number",
-                                    name: "collector_id",
-                                    placeholder: "Kolektor ID"
-                                  },
-                                  domProps: { value: _vm.form.collector_id },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "collector_id",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Nama Penyewa")
+                                ]),
                                 _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: {
-                                    form: _vm.form,
-                                    field: "collector_id"
-                                  }
-                                })
-                              ],
-                              1
-                            )
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.penyewa))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Detail Lokasi")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.lokasi))
+                                ])
+                              ])
+                            ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.jumlah,
-                                      expression: "form.jumlah"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has("jumlah")
-                                  },
-                                  attrs: {
-                                    type: "number",
-                                    name: "jumlah",
-                                    placeholder: "Jumlah Setoran"
-                                  },
-                                  domProps: { value: _vm.form.jumlah },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "jumlah",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v(" ")
+                                ]),
                                 _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "jumlah" }
-                                })
-                              ],
-                              1
-                            )
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v("Rp. " + _vm._s(_vm.form.detail.bop))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v("Rp. " + _vm._s(_vm.form.detail.air))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    "Rp. " + _vm._s(_vm.form.detail.listrik)
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    "Rp. " + _vm._s(_vm.form.detail.barang)
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    "Rp. " + _vm._s(_vm.form.detail.sampah)
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    "Rp. " + _vm._s(_vm.form.detail.permeter)
+                                  )
+                                ])
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(2),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("p", { staticClass: "teksin-bold" }, [
+                                  _vm._v("Rp. " + _vm._s(_vm.form.setoran))
+                                ])
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Nama Kolektor")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.collector))
+                                ])
+                              ])
+                            ])
                           ])
                         ])
                       ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-footer" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.editmode ? _vm.updateUser() : _vm.createUser()
-                          }
-                        }
-                      },
-                      [_vm._v("Ok")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-outline-danger",
-                        attrs: { type: "button", "data-dismiss": "modal" }
-                      },
-                      [_vm._v("Batal")]
-                    )
                   ])
                 ])
               ]
@@ -83643,7 +83613,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card" }, [
-        _vm._m(1),
+        _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "card-content collapse show" }, [
           _c("div", { staticClass: "card-body" }, [
@@ -83833,7 +83803,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "table-responsive" }, [
                 _c("table", { staticClass: "table table-hover mb-0" }, [
-                  _vm._m(2),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -83897,6 +83867,36 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Transaksi")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4" }, [
+      _c("label", { staticClass: "mb-2 labelin" }, [
+        _vm._v("Detail Pembayaran")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("BOP")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Air")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Listrik")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Barang Masuk")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Sampah")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Sewa Permeter")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4" }, [
+      _c("p", { staticClass: "teksin-bold" }, [_vm._v("Total")])
     ])
   },
   function() {
@@ -84043,7 +84043,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.blue-underline[data-v-3502b3d2] {\n  font-style: normal !important;\n  font-weight: 600 !important;\n  font-size: 16px !important;\n  line-height: 17px !important;\n  text-decoration-line: underline !important;\n\n  color: #3895cc !important;\n}\n", ""]);
+exports.push([module.i, "\n.blue-underline[data-v-3502b3d2] {\n  font-style: normal !important;\n  font-weight: 600 !important;\n  font-size: 16px !important;\n  line-height: 17px !important;\n  text-decoration-line: underline !important;\n\n  color: #3895cc !important;\n}\n.labelin[data-v-3502b3d2] {\n  font-style: normal;\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 17px;\n  color: #8f979b;\n}\n.teksin[data-v-3502b3d2] {\n  font-style: normal;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 17px;\n  color: #606060;\n  padding-left: 5px;\n}\n.teksin-bold[data-v-3502b3d2] {\n  font-style: normal;\n  font-weight: 800;\n  font-size: 16px;\n  line-height: 17px;\n  padding-left: 5px;\n  color: #ff6f6f;\n}\n", ""]);
 
 // exports
 
@@ -84265,6 +84265,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -84283,7 +84300,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setoran: "",
         tanggal: "",
         lokasi: "",
-        collector: ""
+        collector: "",
+        detail: ""
       })
     };
   },
@@ -84457,175 +84475,127 @@ var render = function() {
                       _c("div", { staticClass: "form-body" }, [
                         _c("div", { staticClass: "row" }, [
                           _c("div", { staticClass: "col-12" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.tanggal,
-                                      expression: "form.tanggal"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has("tanggal")
-                                  },
-                                  attrs: {
-                                    type: "date",
-                                    name: "tanggal",
-                                    placeholder: "Tanggal"
-                                  },
-                                  domProps: { value: _vm.form.tanggal },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "tanggal",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("ID Transaksi")
+                                ]),
                                 _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "tanggal" }
-                                })
-                              ],
-                              1
-                            )
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.id))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Tanggal")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    _vm._s(_vm._f("myDate")(_vm.form.tanggal))
+                                  )
+                                ])
+                              ])
+                            ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.collector_id,
-                                      expression: "form.collector_id"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "collector_id"
-                                    )
-                                  },
-                                  attrs: {
-                                    type: "number",
-                                    name: "collector_id",
-                                    placeholder: "Kolektor ID"
-                                  },
-                                  domProps: { value: _vm.form.collector_id },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "collector_id",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Nama Penyewa")
+                                ]),
                                 _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: {
-                                    form: _vm.form,
-                                    field: "collector_id"
-                                  }
-                                })
-                              ],
-                              1
-                            )
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.penyewa))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Detail Lokasi")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.lokasi))
+                                ])
+                              ])
+                            ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.jumlah,
-                                      expression: "form.jumlah"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has("jumlah")
-                                  },
-                                  attrs: {
-                                    type: "number",
-                                    name: "jumlah",
-                                    placeholder: "Jumlah Setoran"
-                                  },
-                                  domProps: { value: _vm.form.jumlah },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "jumlah",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v(" ")
+                                ]),
                                 _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "jumlah" }
-                                })
-                              ],
-                              1
-                            )
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v("Rp. " + _vm._s(_vm.form.detail.bop))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v("Rp. " + _vm._s(_vm.form.detail.air))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    "Rp. " + _vm._s(_vm.form.detail.listrik)
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    "Rp. " + _vm._s(_vm.form.detail.barang)
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    "Rp. " + _vm._s(_vm.form.detail.sampah)
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    "Rp. " + _vm._s(_vm.form.detail.permeter)
+                                  )
+                                ])
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _vm._m(2),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("p", { staticClass: "teksin-bold" }, [
+                                  _vm._v("Rp. " + _vm._s(_vm.form.setoran))
+                                ])
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Nama Kolektor")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.collector))
+                                ])
+                              ])
+                            ])
                           ])
                         ])
                       ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-footer" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.editmode ? _vm.updateUser() : _vm.createUser()
-                          }
-                        }
-                      },
-                      [_vm._v("Ok")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-outline-danger",
-                        attrs: { type: "button", "data-dismiss": "modal" }
-                      },
-                      [_vm._v("Batal")]
-                    )
                   ])
                 ])
               ]
@@ -84635,7 +84605,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card" }, [
-        _vm._m(1),
+        _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "card-content collapse show" }, [
           _c("div", { staticClass: "card-body" }, [
@@ -84825,7 +84795,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "table-responsive" }, [
                 _c("table", { staticClass: "table table-hover mb-0" }, [
-                  _vm._m(2),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -84891,6 +84861,36 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Tunggakan Pembayaran")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4" }, [
+      _c("label", { staticClass: "mb-2 labelin" }, [
+        _vm._v("Detail Pembayaran")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("BOP")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Air")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Listrik")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Barang Masuk")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Sampah")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "teksin" }, [_vm._v("Sewa Permeter")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4" }, [
+      _c("p", { staticClass: "teksin-bold" }, [_vm._v("Total")])
     ])
   },
   function() {
