@@ -15,8 +15,6 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('penyewa_id')->unsigned();
-            $table->foreign('penyewa_id')->references('id')->on('penyewas')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('tenant_id')->unsigned();
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('user_id')->unsigned();
