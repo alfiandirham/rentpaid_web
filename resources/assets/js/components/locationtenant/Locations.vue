@@ -424,7 +424,6 @@ export default {
       tenants: {},
       form: new Form({
         id: "",
-        kode: "",
         luas: 0,
         permeter: "",
         harga: "",
