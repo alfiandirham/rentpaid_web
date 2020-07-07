@@ -83,7 +83,7 @@
                             <p class="lead">Harga per m2</p>
                           </div>
                           <div class="col-6">
-                            <h6>Rp. {{tarif.permeter}}</h6>
+                            <h6>Rp. {{tarif.permeter || 0}}</h6>
                           </div>
                         </div>
                         <div class="col-6">
@@ -94,7 +94,7 @@
                             <p class="lead">BOP</p>
                           </div>
                           <div class="col-6">
-                            <h6>Rp. {{tarif.bop}}</h6>
+                            <h6>Rp. {{tarif.bop || 0}}</h6>
                           </div>
                         </div>
                         <div class="row">
@@ -102,7 +102,7 @@
                             <p class="lead">PPN BOP</p>
                           </div>
                           <div class="col-6">
-                            <h6>Rp. {{tarif.bop * 0.1}}</h6>
+                            <h6>Rp. {{(tarif.bop || 0) * 0.1}}</h6>
                           </div>
                         </div>
                         <div class="row">
@@ -110,7 +110,7 @@
                             <p class="lead">Air</p>
                           </div>
                           <div class="col-6">
-                            <h6>Rp. {{tarif.air}}</h6>
+                            <h6>Rp. {{tarif.air || 0}}</h6>
                           </div>
                         </div>
                         <div class="row">
@@ -118,7 +118,7 @@
                             <p class="lead">Listrik</p>
                           </div>
                           <div class="col-6">
-                            <h6>Rp. {{tarif.listrik}}</h6>
+                            <h6>Rp. {{tarif.listrik || 0}}</h6>
                           </div>
                         </div>
                         <div class="row">
@@ -126,7 +126,7 @@
                             <p class="lead">Barang Masuk</p>
                           </div>
                           <div class="col-6">
-                            <h6>Rp. {{tarif.barang}}</h6>
+                            <h6>Rp. {{tarif.barang || 0}}</h6>
                           </div>
                         </div>
                         <div class="row">
@@ -134,7 +134,7 @@
                             <p class="lead">Sampah</p>
                           </div>
                           <div class="col-6">
-                            <h6>Rp. {{tarif.sampah}}</h6>
+                            <h6>Rp. {{tarif.sampah || 0}}</h6>
                           </div>
                         </div>
                         <div class="row">
@@ -143,8 +143,8 @@
                           </div>
                           <div class="col-6">
                             <h6>
-                              Rp. {{tarif.sampah + tarif.barang + tarif.listrik
-                              + tarif.air + tarif.bop + (tarif.bop * 0.1) + tarif.permeter}}
+                              Rp. {{(tarif.sampah + tarif.barang + tarif.listrik
+                              + tarif.air + tarif.bop + (tarif.bop * 0.1) + tarif.permeter) || 0}}
                             </h6>
                           </div>
                         </div>
