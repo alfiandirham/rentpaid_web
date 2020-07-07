@@ -70301,14 +70301,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71296,38 +71288,11 @@ var render = function() {
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.role,
-                              expression: "filter.role"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "role",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.role)
-                              }
-                            ]
+                            change: function(e) {
+                              return _vm.filtering(e.target.value)
+                            }
                           }
                         },
                         [
@@ -71364,38 +71329,11 @@ var render = function() {
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.status,
-                              expression: "filter.status"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "status",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.status)
-                              }
-                            ]
+                            change: function(e) {
+                              return _vm.filtering(e.target.value)
+                            }
                           }
                         },
                         [
@@ -71851,10 +71789,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
 //
 //
 //
@@ -72722,38 +72656,11 @@ var render = function() {
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.status,
-                              expression: "filter.status"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "status",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.status)
-                              }
-                            ]
+                            change: function(e) {
+                              return _vm.filtering(e.target.value)
+                            }
                           }
                         },
                         [
@@ -73529,14 +73436,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -73569,6 +73468,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       if (this.$gate.isAdminOrAuthor()) {
+        console.log(q);
         axios.get("api/findLocation?q=" + q).then(function (data) {
           _this.locations = data.data;
         }).catch(function () {});
@@ -74281,38 +74181,11 @@ var render = function() {
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.owner,
-                              expression: "filter.owner"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "owner",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.owner)
-                              }
-                            ]
+                            change: function(e) {
+                              return _vm.filtering(e.target.value)
+                            }
                           }
                         },
                         [
@@ -74342,38 +74215,11 @@ var render = function() {
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.status,
-                              expression: "filter.status"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "status",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.status)
-                              }
-                            ]
+                            change: function(e) {
+                              return _vm.filtering(e.target.value)
+                            }
                           }
                         },
                         [
@@ -74841,10 +74687,6 @@ exports.push([module.i, "\n.before[data-v-534a1de5] {\n  background-color: #ecf3
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
 //
 //
 //
@@ -76106,38 +75948,11 @@ var render = function() {
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.status,
-                              expression: "filter.status"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "status",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.status)
-                              }
-                            ]
+                            change: function(e) {
+                              return _vm.filtering(e.target.value)
+                            }
                           }
                         },
                         [

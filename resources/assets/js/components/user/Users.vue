@@ -294,11 +294,7 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="users-list-role">Role</label>
                     <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.role)"
-                        v-model="filter.role"
-                        class="form-control"
-                      >
+                      <select @change="e =>filtering(e.target.value)" class="form-control">
                         <option value="uvuvwu">All</option>
                         <option value="owner">Owner</option>
                         <option value="collector">Collector</option>
@@ -310,11 +306,7 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="users-list-status">Status</label>
                     <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.status)"
-                        v-model="filter.status"
-                        class="form-control"
-                      >
+                      <select @change="e =>filtering(e.target.value)" class="form-control">
                         <option value="uvuvwu">All</option>
                         <option value="1">Active</option>
                         <option value="uvuvwe">Deactivated</option>

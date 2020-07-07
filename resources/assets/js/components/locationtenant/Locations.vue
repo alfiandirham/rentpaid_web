@@ -263,11 +263,7 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="location-list-status">Status</label>
                     <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.status)"
-                        v-model="filter.status"
-                        class="form-control"
-                      >
+                      <select @change="e =>filtering(e.target.value)" class="form-control">
                         <option value="uvuvwu">All</option>
                         <option value="uvuvwi">Tersedia</option>
                         <option value="uvuvwe">Disewa</option>

@@ -217,11 +217,7 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="location-list-owner">Owner</label>
                     <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.owner)"
-                        v-model="filter.owner"
-                        class="form-control"
-                      >
+                      <select @change="e =>filtering(e.target.value)" class="form-control">
                         <option value="uvuvwu">All</option>
                         <option
                           v-for="user in users.data"
@@ -234,11 +230,7 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="location-list-status">Status</label>
                     <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.status)"
-                        v-model="filter.status"
-                        class="form-control"
-                      >
+                      <select @change="e =>filtering(e.target.value)" class="form-control">
                         <option value="uvuvwu">All</option>
                         <option value="1">Active</option>
                         <option value="uvuvwe">Deactivated</option>
@@ -394,6 +386,7 @@ export default {
   methods: {
     filtering(q) {
       if (this.$gate.isAdminOrAuthor()) {
+        console.log(q);
         axios
           .get("api/findLocation?q=" + q)
           .then(data => {
