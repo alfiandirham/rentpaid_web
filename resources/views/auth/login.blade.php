@@ -12,7 +12,7 @@
                         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf
                             <label class="layer-label" for="username">Email</label>
-                            <input type="email" class="form-control layer-form{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                            <input type="email" placeholder="Masukan Email" class="form-control layer-form{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('email') }}</strong>
