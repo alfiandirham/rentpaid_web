@@ -1,6 +1,6 @@
 /node_modules
 /public/hot
-/public/img/profile
+# /public/img/profile
 /public/storage
 /storage/*.key
 /storage/framework/cache/data
