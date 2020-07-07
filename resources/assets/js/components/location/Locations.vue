@@ -386,7 +386,6 @@ export default {
   methods: {
     filtering(q) {
       if (this.$gate.isAdminOrAuthor()) {
-        console.log(q);
         axios
           .get("api/findLocation?q=" + q)
           .then(data => {
