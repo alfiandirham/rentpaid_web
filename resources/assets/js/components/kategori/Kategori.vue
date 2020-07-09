@@ -32,29 +32,35 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="text"
-                            name="fname"
-                            v-model="form.nama"
-                            placeholder="Nama Kategori"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('nama') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              name="fname"
+                              v-model="form.nama"
+                              placeholder="Nama Kategori"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('nama') }"
+                            />
+                            <span class="clr-blue">Nama Kategori</span>
+                          </label>
                           <has-error :form="form" field="nama"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('kode') }"
-                            v-model="form.kode"
-                            minlength="3"
-                            maxlength="3"
-                            name="kode"
-                            placeholder="Kode Kategori"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('kode') }"
+                              v-model="form.kode"
+                              minlength="3"
+                              maxlength="3"
+                              name="kode"
+                              placeholder="Kode Kategori"
+                            />
+                            <span class="clr-blue">Kode Kategori</span>
+                          </label>
                           <has-error :form="form" field="kode"></has-error>
                         </div>
                       </div>

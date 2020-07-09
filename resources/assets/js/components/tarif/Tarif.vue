@@ -32,40 +32,49 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="text"
-                            name="fname"
-                            v-model="form.nama"
-                            placeholder="Nama Tarif"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('nama') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              name="fname"
+                              v-model="form.nama"
+                              placeholder="Nama Tarif"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('nama') }"
+                            />
+                            <span class="clr-blue">Nama Tarif</span>
+                          </label>
                           <has-error :form="form" field="nama"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('permeter') }"
-                            v-model="form.permeter"
-                            name="permeter"
-                            placeholder="Harga sewa per m2"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('permeter') }"
+                              v-model="form.permeter"
+                              name="permeter"
+                              placeholder="Harga sewa per m2"
+                            />
+                            <span class="clr-blue">Harga Sewa per m2</span>
+                          </label>
                           <has-error :form="form" field="permeter"></has-error>
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('bop') }"
-                            v-model="form.bop"
-                            name="bop"
-                            placeholder="Jumlah Tarif BOP"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('bop') }"
+                              v-model="form.bop"
+                              name="bop"
+                              placeholder="Jumlah Tarif BOP"
+                            />
+                            <span class="clr-blue">Tarif BOP</span>
+                          </label>
                           <has-error :form="form" field="bop"></has-error>
                         </div>
                       </div>
@@ -76,50 +85,62 @@
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('air') }"
-                            v-model="form.air"
-                            name="air"
-                            placeholder="Jumlah Tarif Air"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('air') }"
+                              v-model="form.air"
+                              name="air"
+                              placeholder="Jumlah Tarif Air"
+                            />
+                            <span class="clr-blue">Tarif Air</span>
+                          </label>
                           <has-error :form="form" field="air"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('listrik') }"
-                            v-model="form.listrik"
-                            placeholder="Jumlah Tarif Listrik"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('listrik') }"
+                              v-model="form.listrik"
+                              placeholder="Jumlah Tarif Listrik"
+                            />
+                            <span class="clr-blue">Tarif Listrik</span>
+                          </label>
                           <has-error :form="form" field="listrik"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('barang') }"
-                            v-model="form.barang"
-                            placeholder="Jumlah Tarif Barang Masuk"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('barang') }"
+                              v-model="form.barang"
+                              placeholder="Jumlah Tarif Barang Masuk"
+                            />
+                            <span class="clr-blue">Tarif Masuk</span>
+                          </label>
                           <has-error :form="form" field="barang"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('sampah') }"
-                            v-model="form.sampah"
-                            placeholder="Jumlah Tarif Sampah"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('sampah') }"
+                              v-model="form.sampah"
+                              placeholder="Jumlah Tarif Sampah"
+                            />
+                            <span class="clr-blue">Tarif Sampah</span>
+                          </label>
                           <has-error :form="form" field="sampah"></has-error>
                         </div>
                       </div>

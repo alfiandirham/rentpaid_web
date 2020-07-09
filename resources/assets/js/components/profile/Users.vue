@@ -32,15 +32,17 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <lable class="label mb-2">Password Baru</lable>
-                          <input
-                            type="password"
-                            v-model="form.password"
-                            :class="{ 'is-invalid': form.errors.has('password') }"
-                            class="form-control"
-                            name="contact"
-                            placeholder="Password"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="password"
+                              v-model="form.password"
+                              :class="{ 'is-invalid': form.errors.has('password') }"
+                              class="form-control"
+                              name="contact"
+                              placeholder="Password"
+                            />
+                            <span class="clr-blue">Password Baru</span>
+                          </label>
                           <has-error :form="form" field="password"></has-error>
                         </div>
                       </div>

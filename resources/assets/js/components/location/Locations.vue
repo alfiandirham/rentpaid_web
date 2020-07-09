@@ -33,77 +33,94 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <label for="fname" class="clr-blue">Nama Lokasi</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="fname"
-                            v-model="form.lokasi"
-                            placeholder="Nama Lokasi"
-                            :class="{ 'is-invalid': form.errors.has('lokasi') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              class="form-control"
+                              name="fname"
+                              v-model="form.lokasi"
+                              placeholder="Nama Lokasi"
+                              :class="{ 'is-invalid': form.errors.has('lokasi') }"
+                            />
+                            <span class="clr-blue">Nama Lokasi</span>
+                          </label>
                           <has-error :form="form" field="lokasi"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="form.kode"
-                            placeholder="Kode Lokasi"
-                            minlength="3"
-                            maxlength="3"
-                            :class="{ 'is-invalid': form.errors.has('kode') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="form.kode"
+                              placeholder="Kode Lokasi"
+                              minlength="3"
+                              maxlength="3"
+                              :class="{ 'is-invalid': form.errors.has('kode') }"
+                            />
+                            <span class="clr-blue">Kode Lokasi</span>
+                          </label>
                           <has-error :form="form" field="kode"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="form.alamat"
-                            placeholder="Alamat"
-                            :class="{ 'is-invalid': form.errors.has('alamat') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="form.alamat"
+                              placeholder="Alamat"
+                              :class="{ 'is-invalid': form.errors.has('alamat') }"
+                            />
+                            <span class="clr-blue">Alamat</span>
+                          </label>
                           <has-error :form="form" field="alamat"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            v-model="form.luas"
-                            placeholder="Luas Tanah"
-                            :class="{ 'is-invalid': form.errors.has('luas') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              v-model="form.luas"
+                              placeholder="Luas Tanah"
+                              :class="{ 'is-invalid': form.errors.has('luas') }"
+                            />
+                            <span class="clr-blue">Luas</span>
+                          </label>
                           <has-error :form="form" field="luas"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="form.kecamatan"
-                            placeholder="Kecamatan"
-                            :class="{ 'is-invalid': form.errors.has('kecamatan') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="form.kecamatan"
+                              placeholder="Kecamatan"
+                              :class="{ 'is-invalid': form.errors.has('kecamatan') }"
+                            />
+                            <span class="clr-blue">Kecamatan</span>
+                          </label>
                           <has-error :form="form" field="kecamatan"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="form.desa"
-                            placeholder="Desa/Kelurahan"
-                            :class="{ 'is-invalid': form.errors.has('desa') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="form.desa"
+                              placeholder="Desa/Kelurahan"
+                              :class="{ 'is-invalid': form.errors.has('desa') }"
+                            />
+                            <span class="clr-blue">Desa/Kelurahan</span>
+                          </label>
                           <has-error :form="form" field="desa"></has-error>
                         </div>
                       </div>
@@ -126,7 +143,7 @@
                           <has-error :form="form" field="user_id"></has-error>
                         </div>
                       </div>
-                      <div class="col-12">
+                      <div class="col-12 pl-2">
                         <p>Status</p>
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline-block mr-2">

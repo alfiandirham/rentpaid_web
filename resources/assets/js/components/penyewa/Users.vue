@@ -36,58 +36,69 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <label for="fname" class="clr-blue">Nama Lengkap</label>
-                          <input
-                            type="text"
-                            name="fname"
-                            v-model="form.nama"
-                            placeholder="Nama Lengkap"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('nama') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              name="fname"
+                              v-model="form.nama"
+                              placeholder="Nama Lengkap"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('nama') }"
+                            />
+                            <span class="clr-blue">Nama Lengkap</span>
+                          </label>
                           <has-error :form="form" field="nama"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('ktp') }"
-                            v-model="form.ktp"
-                            name="ktp"
-                            placeholder="No. KTP"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('ktp') }"
+                              v-model="form.ktp"
+                              name="ktp"
+                              placeholder="No. KTP"
+                            />
+                            <span class="clr-blue">No. KTP</span>
+                          </label>
                           <has-error :form="form" field="ktp"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('hp') }"
-                            v-model="form.hp"
-                            name="contact"
-                            placeholder="No. Telepon"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('hp') }"
+                              v-model="form.hp"
+                              name="contact"
+                              placeholder="No. Telepon"
+                            />
+                            <span class="clr-blue">No. Telepon</span>
+                          </label>
                           <has-error :form="form" field="hp"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            v-model="form.alamat"
-                            type="text"
-                            :class="{ 'is-invalid': form.errors.has('alamat') }"
-                            class="form-control"
-                            name="alamat"
-                            placeholder="Alamat"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              v-model="form.alamat"
+                              type="text"
+                              :class="{ 'is-invalid': form.errors.has('alamat') }"
+                              class="form-control"
+                              name="alamat"
+                              placeholder="Alamat"
+                            />
+                            <span class="clr-blue">Alamat</span>
+                          </label>
                           <has-error :form="form" field="alamat"></has-error>
                         </div>
                       </div>
-                      <div class="col-12">
+                      <div class="col-12 pl-2">
                         <p>Status</p>
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline-block mr-2">

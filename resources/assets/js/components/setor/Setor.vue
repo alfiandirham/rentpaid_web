@@ -32,40 +32,50 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="date"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('tanggal') }"
-                            v-model="form.tanggal"
-                            name="tanggal"
-                            placeholder="Tanggal"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              class="form-control"
+                              type="date"
+                              id="datepicker"
+                              :class="{ 'is-invalid': form.errors.has('tanggal') }"
+                              v-model="form.tanggal"
+                              name="tanggal"
+                              placeholder="Tanggal"
+                            />
+                            <span class="clr-blue">Tanggal</span>
+                          </label>
                           <has-error :form="form" field="tanggal"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('collector_id') }"
-                            v-model="form.collector_id"
-                            name="collector_id"
-                            placeholder="Kolektor ID"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('collector_id') }"
+                              v-model="form.collector_id"
+                              name="collector_id"
+                              placeholder="Kolektor ID"
+                            />
+                            <span class="clr-blue">Kolektor ID</span>
+                          </label>
                           <has-error :form="form" field="collector_id"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('jumlah') }"
-                            v-model="form.jumlah"
-                            name="jumlah"
-                            placeholder="Jumlah Setoran"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('jumlah') }"
+                              v-model="form.jumlah"
+                              name="jumlah"
+                              placeholder="Jumlah Setoran"
+                            />
+                            <span class="clr-blue">Setoran</span>
+                          </label>
                           <has-error :form="form" field="jumlah"></has-error>
                         </div>
                       </div>
@@ -149,6 +159,9 @@
 </template>
 
 <script>
+// requred("datepicker-bootstrap");
+// import datepicker from "datepicker-bootstrap";
+
 export default {
   data() {
     return {
@@ -264,6 +277,13 @@ export default {
       this.loadData();
     });
     this.loadData();
+    // $("document").ready(() => {
+    //   $("#datepicker").daterangepicker({
+    //     locale: {
+    //       format: "YYYY-MM-DD"
+    //     }
+    //   });
+    // });
   }
 };
 </script>

@@ -35,7 +35,7 @@
                   <div class="form-body">
                     <div class="row">
                       <div class="col-12">
-                        <div class="form-group">
+                        <div class="form-group lp">
                           <label for="gambar" class="clr-blue">Gambar</label>
                           <input
                             type="file"
@@ -47,71 +47,85 @@
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <label for="fname" class="clr-blue">Nama Lengkap</label>
-                          <input
-                            type="text"
-                            name="fname"
-                            v-model="form.name"
-                            placeholder="Nama Lengkap"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('name') }"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="text"
+                              name="fname"
+                              v-model="form.name"
+                              placeholder="Nama Lengkap"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('name') }"
+                            />
+                            <span class="clr-blue">Nama Lengkap</span>
+                          </label>
                           <has-error :form="form" field="name"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('ktp') }"
-                            v-model="form.ktp"
-                            name="ktp"
-                            placeholder="No. KTP"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('ktp') }"
+                              v-model="form.ktp"
+                              name="ktp"
+                              placeholder="No. KTP"
+                            />
+                            <span class="clr-blue">No. KTP</span>
+                          </label>
                           <has-error :form="form" field="ktp"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="number"
-                            class="form-control"
-                            :class="{ 'is-invalid': form.errors.has('nohp') }"
-                            v-model="form.nohp"
-                            name="contact"
-                            placeholder="No. Telepon"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="number"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('nohp') }"
+                              v-model="form.nohp"
+                              name="contact"
+                              placeholder="No. Telepon"
+                            />
+                            <span class="clr-blue">No. Telepon</span>
+                          </label>
                           <has-error :form="form" field="nohp"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            v-model="form.email"
-                            type="email"
-                            :class="{ 'is-invalid': form.errors.has('email') }"
-                            class="form-control"
-                            name="email"
-                            placeholder="Email"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              v-model="form.email"
+                              type="email"
+                              :class="{ 'is-invalid': form.errors.has('email') }"
+                              class="form-control"
+                              name="email"
+                              placeholder="Email"
+                            />
+                            <span class="clr-blue">Email</span>
+                          </label>
                           <has-error :form="form" field="email"></has-error>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            type="password"
-                            v-model="form.password"
-                            :class="{ 'is-invalid': form.errors.has('password') }"
-                            class="form-control"
-                            name="contact"
-                            placeholder="Password"
-                          />
+                          <label class="has-float-label">
+                            <input
+                              type="password"
+                              v-model="form.password"
+                              :class="{ 'is-invalid': form.errors.has('password') }"
+                              class="form-control"
+                              name="contact"
+                              placeholder="Password"
+                            />
+                            <span class="clr-blue">Password</span>
+                          </label>
                           <has-error :form="form" field="password"></has-error>
                         </div>
                       </div>
-                      <div class="col-12">
+                      <div class="col-12 pl-2">
                         <p>Tipe User</p>
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline-block mr-2">
@@ -189,7 +203,7 @@
                         </ul>
                         <has-error :form="form" field="type"></has-error>
                       </div>
-                      <div v-if="showLokasi" class="col-12">
+                      <div v-if="showLokasi" class="col-12 pl-2">
                         <div class="form-group">
                           <label for="owner">Pilih Lokasi</label>
                           <select
@@ -208,7 +222,7 @@
                           <has-error :form="form" field="lokasi_id"></has-error>
                         </div>
                       </div>
-                      <div class="col-12">
+                      <div class="col-12 pl-2">
                         <p>Status</p>
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline-block mr-2">
