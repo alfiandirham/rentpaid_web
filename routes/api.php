@@ -45,3 +45,6 @@ Route::get('findTransaksi', 'API\TransaksiController@search');
 Route::get('findTunggakan', 'API\TunggakanController@search');
 Route::get('findLocation', 'API\LocationController@search');
 Route::get('findLocationTenant', 'API\LocationController@search2');
+
+Route::get('company', 'API\PerusahaanController@index');
+Route::post('company/{id}', 'API\PerusahaanController@update');

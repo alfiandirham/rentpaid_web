@@ -169,7 +169,7 @@
           <div class="card-content">
             <div class="card-body">
               <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                   <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
                     <div class="mb-1 mb-sm-0">
                       <input
@@ -180,6 +180,15 @@
                         id="filter-text-box"
                         placeholder="Search...."
                       />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div
+                    class="float-right ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
+                  >
+                    <div class="mb-1 mb-sm-0">
+                      <a href="/xl-transaksi" class="btn btn-success">Export Excel</a>
                     </div>
                   </div>
                 </div>

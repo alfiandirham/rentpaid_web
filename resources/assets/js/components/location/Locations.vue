@@ -291,22 +291,14 @@
                               aria-expanded="false"
                             >Actions</button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">
+                              <button class="dropdown-item">
                                 <i class="feather icon-trash-2"></i>
-                                Delete
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-clipboard"></i>
-                                Archive
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-printer"></i>
-                                Print
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-download"></i>
-                                CSV
-                              </a>
+                                Non Active
+                              </button>
+                              <button class="dropdown-item">
+                                <i class="feather icon-activity"></i>
+                                Active
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -377,6 +369,7 @@
 export default {
   data() {
     return {
+      cek: [],
       cekall: false,
       search: "",
       editmode: false,

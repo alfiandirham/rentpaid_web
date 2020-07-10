@@ -85,6 +85,10 @@ let routes = [{
         component: require('./components/tunggakan/Tunggakan.vue')
     },
     {
+        path: '/perusahaan',
+        component: require('./components/perusahaan/Users.vue')
+    },
+    {
         path: '/tarif',
         component: require('./components/tarif/Tarif.vue')
     },

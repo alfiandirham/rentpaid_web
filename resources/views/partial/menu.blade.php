@@ -2,7 +2,7 @@
     <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
         <div class="navbar-header mb-3">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto"><a class="navbar-brand" href="{{asset('html/ltr/vertical-menu-template/index.html')}}">
+                <li class="nav-item mr-auto"><a class="navbar-brand" href="/dashboard">
                         <div class="brand-logo"></div>
                     </a></li>
                 <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="feather icon-x d-block d-xl-none font-medium-4 toggle-icon"></i><i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon" data-ticon="icon-disc"></i></a></li>
@@ -43,7 +43,7 @@
                 </li>
                 <li class=" nav-item"><router-link to="/profile"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Profile">Profil Pengguna</span></router-link>
                 </li>
-                <li class=" nav-item"><a href="page-knowledge-base.html"><i class="feather icon-info"></i><span class="menu-title" data-i18n="Knowledge Base">Info Perusahaan</span></a>
+                <li class=" nav-item"><router-link to="/perusahaan"><i class="feather icon-info"></i><span class="menu-title" data-i18n="Knowledge Base">Info Perusahaan</span></router-link>
                 </li>
             </ul>
         </div>
