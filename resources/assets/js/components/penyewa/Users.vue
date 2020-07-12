@@ -228,22 +228,14 @@
                               aria-expanded="false"
                             >Actions</button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">
+                              <button @click="nonAll('Disable data')" class="dropdown-item">
                                 <i class="feather icon-trash-2"></i>
-                                Delete
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-clipboard"></i>
-                                Archive
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-printer"></i>
-                                Print
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="feather icon-download"></i>
-                                CSV
-                              </a>
+                                Non Active
+                              </button>
+                              <button @click="nonAll('Active data')" class="dropdown-item">
+                                <i class="feather icon-activity"></i>
+                                Active
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -257,7 +249,7 @@
                   <thead>
                     <tr>
                       <th>
-                        <input type="checkbox" @click="checkall" v-model="cekall" />
+                        <input type="checkbox" id="select-all" />
                       </th>
                       <th>Nama</th>
                       <th>Ktp</th>
@@ -270,7 +262,7 @@
                   <tbody>
                     <tr v-for="user in users.data" :key="user.id">
                       <th scope="row">
-                        <input type="checkbox" :checked="cekall" />
+                        <input type="checkbox" :value="user.id" />
                       </th>
                       <td>{{user.nama}}</td>
                       <td>{{user.ktp}}</td>
@@ -314,7 +306,6 @@
 export default {
   data() {
     return {
-      cekall: false,
       search: "",
       editmode: false,
       users: {},
@@ -406,6 +397,39 @@ export default {
         axios.get("api/penyewa").then(({ data }) => (this.users = data));
       }
     },
+    nonAll(text) {
+      swal({
+        title: "Are you sure?",
+        text: text + " !",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then(result => {
+        this.$Progress.start();
+        // Send request to the server
+        if (result.value) {
+          // Iterate each checkbox
+          $(":checkbox").each(function() {
+            if (this.checked) {
+              if (this.value == "on") return true;
+              axios
+                .delete("api/penyewa/" + this.value)
+                .then(data => {
+                  toast({
+                    type: "success",
+                    title: text + " in successfully"
+                  });
+                })
+                .catch(() => {});
+            }
+          });
+          this.$Progress.finish();
+          Fire.$emit("AfterCreate");
+        }
+      });
+    },
     createUser() {
       this.$Progress.start();
       this.form
@@ -441,6 +465,20 @@ export default {
       this.loadData();
     });
     this.loadData();
+  },
+  mounted() {
+    $("#select-all").click(function(event) {
+      if (this.checked) {
+        // Iterate each checkbox
+        $(":checkbox").each(function() {
+          this.checked = true;
+        });
+      } else {
+        $(":checkbox").each(function() {
+          this.checked = false;
+        });
+      }
+    });
   }
 };
 </script>
