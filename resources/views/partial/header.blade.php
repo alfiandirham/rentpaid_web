@@ -13,7 +13,7 @@
                     </div>
                     <ul class="nav navbar-nav float-right">
                         <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                        <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{Auth::user()->name}}</span><span class="user-status">{{Auth::user()->type}}</span></div><span><img class="round" src="{{(Auth::user()->photo =='') ? asset('img/profile/profile.png') : asset('img/profile/'.Auth::user()->photo)}}" alt="avatar" height="40" width="40"></span>
+                        <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{Auth::user()->name}}</span><span class="user-status">{{Auth::user()->type}}</span></div><span><img class="round" src="{{(Auth::user()->photo =='' || Auth::user()->photo =='profile.png') ? asset('img/profile.png') : asset('img/profile/'.Auth::user()->photo)}}" alt="avatar" height="40" width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <router-link class="dropdown-item" to="/profile"><i class="feather icon-user"></i> Edit Profile</router-link>
