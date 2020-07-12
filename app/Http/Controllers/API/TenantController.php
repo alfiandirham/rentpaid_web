@@ -103,6 +103,19 @@ class TenantController extends Controller
         }
     }
 
+    public function destroy2($id)
+    {
+
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $user = Tenant::findOrFail($id);
+
+            $user->status = 1;
+            $user->save();
+
+            return ['message' => 'Tenant Deleted'];
+        }
+    }
+
     public function search($id){
 
         if ($search = \Request::get('q')) {

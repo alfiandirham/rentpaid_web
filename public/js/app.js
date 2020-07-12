@@ -77110,17 +77110,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       inc: 0,
       is: [0],
-      cekall: false,
       search: "",
       editmode: false,
       tenants: {},
@@ -77213,41 +77208,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this3.tenants = response.data;
       });
     },
-    loadData: function loadData() {
+    nonAll: function nonAll(text, api) {
       var _this4 = this;
+
+      swal({
+        title: "Are you sure?",
+        text: text + " !",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then(function (result) {
+        _this4.$Progress.start();
+        // Send request to the server
+        if (result.value) {
+          // Iterate each checkbox
+          $(":checkbox").each(function () {
+            if (this.checked) {
+              if (this.value == "on") return true;
+              axios.delete("/api/" + api + "/" + this.value).then(function (data) {
+                toast({
+                  type: "success",
+                  title: text + " in successfully"
+                });
+              }).catch(function () {});
+            }
+          });
+          _this4.$Progress.finish();
+          Fire.$emit("AfterCreate");
+        }
+      });
+    },
+    loadData: function loadData() {
+      var _this5 = this;
 
       if (this.$gate.isAdminOrAuthor()) {
         axios.get("api/lokasitenan").then(function (_ref2) {
           var data = _ref2.data;
-          return _this4.tenants = data;
+          return _this5.tenants = data;
         });
         axios.get("api/kategori").then(function (_ref3) {
           var data = _ref3.data;
-          return _this4.kategoris = data;
+          return _this5.kategoris = data;
         });
         axios.get("api/lokasi").then(function (_ref4) {
           var data = _ref4.data;
-          return _this4.locations = data;
+          return _this5.locations = data;
         });
       }
     },
     createData: function createData() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.is.forEach(function (i) {
-        _this5.$Progress.start();
-        _this5.form.jumlah = document.getElementById("jumlah" + i).value;
-        _this5.form.kategori_id = document.getElementById("kategori" + i).value;
-        _this5.form.post("api/tenan").then(function () {
+        _this6.$Progress.start();
+        _this6.form.jumlah = document.getElementById("jumlah" + i).value;
+        _this6.form.kategori_id = document.getElementById("kategori" + i).value;
+        _this6.form.post("api/tenan").then(function () {
           Fire.$emit("AfterCreate");
           $("#addNew").modal("hide");
           toast({
             type: "success",
             title: "Data Created in successfully"
           });
-          _this5.$Progress.finish();
+          _this6.$Progress.finish();
         }).catch(function () {
-          _this5.$Progress.fail();
+          _this6.$Progress.fail();
         });
       });
     },
@@ -77257,18 +77284,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }, 1000)
   },
   created: function created() {
-    var _this6 = this;
+    var _this7 = this;
 
     Fire.$on("searching", function () {
-      var query = _this6.search;
+      var query = _this7.search;
       axios.get("api/findLocationTenant?q=" + query).then(function (data) {
-        _this6.tenants = data.data;
+        _this7.tenants = data.data;
       }).catch(function () {});
     });
     Fire.$on("AfterCreate", function () {
-      _this6.loadData();
+      _this7.loadData();
     });
     this.loadData();
+  },
+  mounted: function mounted() {
+    $("#select-all").click(function (event) {
+      if (this.checked) {
+        // Iterate each checkbox
+        $(":checkbox").each(function () {
+          this.checked = true;
+        });
+      } else {
+        $(":checkbox").each(function () {
+          this.checked = false;
+        });
+      }
+    });
   }
 });
 
@@ -77285,7 +77326,68 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _vm._m(1),
+        _c("div", { staticClass: "col-1" }, [
+          _c("div", { staticClass: "action-btns" }, [
+            _c("div", { staticClass: "btn-dropdown mr-1 mb-1" }, [
+              _c(
+                "div",
+                { staticClass: "btn-group dropdown actions-dropodown" },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "dropdown",
+                        "aria-haspopup": "true",
+                        "aria-expanded": "false"
+                      }
+                    },
+                    [_vm._v("Actions")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "dropdown-menu" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "dropdown-item",
+                        on: {
+                          click: function($event) {
+                            return _vm.nonAll("Disable data", "lokasi")
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "feather icon-trash-2" }),
+                        _vm._v(
+                          "\n                  Non Active\n                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "dropdown-item",
+                        on: {
+                          click: function($event) {
+                            return _vm.nonAll("Active data", "lokasi2")
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "feather icon-activity" }),
+                        _vm._v("\n                  Active\n                ")
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-9" }, [
           _c(
@@ -77334,60 +77436,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "table-responsive" }, [
         _c("table", { staticClass: "table data-list-view dataTable" }, [
-          _c("thead", [
-            _c("tr", [
-              _c("th", { staticClass: "pl-1" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.cekall,
-                      expression: "cekall"
-                    }
-                  ],
-                  attrs: { type: "checkbox" },
-                  domProps: {
-                    checked: Array.isArray(_vm.cekall)
-                      ? _vm._i(_vm.cekall, null) > -1
-                      : _vm.cekall
-                  },
-                  on: {
-                    click: _vm.checkall,
-                    change: function($event) {
-                      var $$a = _vm.cekall,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 && (_vm.cekall = $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            (_vm.cekall = $$a
-                              .slice(0, $$i)
-                              .concat($$a.slice($$i + 1)))
-                        }
-                      } else {
-                        _vm.cekall = $$c
-                      }
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Nama Lokasi")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Jumlah Tenant")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Sudah Disewakan")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Jumlah Tersedia")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Owner")])
-            ])
-          ]),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "tbody",
@@ -77396,7 +77445,7 @@ var render = function() {
                 _c("th", { attrs: { scope: "row" } }, [
                   _c("input", {
                     attrs: { type: "checkbox" },
-                    domProps: { checked: _vm.cekall }
+                    domProps: { value: tenant.id }
                   })
                 ]),
                 _vm._v(" "),
@@ -77737,48 +77786,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-1" }, [
-      _c("div", { staticClass: "action-btns" }, [
-        _c("div", { staticClass: "btn-dropdown mr-1 mb-1" }, [
-          _c("div", { staticClass: "btn-group dropdown actions-dropodown" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "dropdown",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [_vm._v("Actions")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-menu" }, [
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "feather icon-trash" }),
-                _vm._v("Delete\n                ")
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "feather icon-archive" }),
-                _vm._v("Archive\n                ")
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "feather icon-file" }),
-                _vm._v("Print\n                ")
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "feather icon-save" }),
-                _vm._v("Another Action\n                ")
-              ])
-            ])
-          ])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "pl-1" }, [
+          _c("input", { attrs: { type: "checkbox", id: "select-all" } })
+        ]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Nama Lokasi")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Jumlah Tenant")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Sudah Disewakan")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Jumlah Tersedia")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Owner")])
       ])
     ])
   },

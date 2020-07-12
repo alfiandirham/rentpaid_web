@@ -17,18 +17,14 @@
                   aria-expanded="false"
                 >Actions</button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">
-                    <i class="feather icon-trash"></i>Delete
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="feather icon-archive"></i>Archive
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="feather icon-file"></i>Print
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="feather icon-save"></i>Another Action
-                  </a>
+                  <button @click="nonAll('Disable data','lokasi')" class="dropdown-item">
+                    <i class="feather icon-trash-2"></i>
+                    Non Active
+                  </button>
+                  <button @click="nonAll('Active data', 'lokasi2')" class="dropdown-item">
+                    <i class="feather icon-activity"></i>
+                    Active
+                  </button>
                 </div>
               </div>
             </div>
@@ -59,7 +55,7 @@
           <thead>
             <tr>
               <th class="pl-1">
-                <input type="checkbox" @click="checkall" v-model="cekall" />
+                <input type="checkbox" id="select-all" />
               </th>
               <th>Nama Lokasi</th>
               <th>Jumlah Tenant</th>
@@ -72,7 +68,7 @@
           <tbody>
             <tr v-for="tenant in tenants.data" :key="tenant.id">
               <th scope="row">
-                <input type="checkbox" :checked="cekall" />
+                <input type="checkbox" :value="tenant.id" />
               </th>
               <td>
                 <router-link v-if="tenant.jumlah != 0" :to="`tenant/${tenant.id}`">{{tenant.lokasi}}</router-link>
@@ -217,7 +213,6 @@ export default {
     return {
       inc: 0,
       is: [0],
-      cekall: false,
       search: "",
       editmode: false,
       tenants: {},
@@ -306,6 +301,39 @@ export default {
         this.tenants = response.data;
       });
     },
+    nonAll(text, api) {
+      swal({
+        title: "Are you sure?",
+        text: text + " !",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then(result => {
+        this.$Progress.start();
+        // Send request to the server
+        if (result.value) {
+          // Iterate each checkbox
+          $(":checkbox").each(function() {
+            if (this.checked) {
+              if (this.value == "on") return true;
+              axios
+                .delete("/api/" + api + "/" + this.value)
+                .then(data => {
+                  toast({
+                    type: "success",
+                    title: text + " in successfully"
+                  });
+                })
+                .catch(() => {});
+            }
+          });
+          this.$Progress.finish();
+          Fire.$emit("AfterCreate");
+        }
+      });
+    },
     loadData() {
       if (this.$gate.isAdminOrAuthor()) {
         axios.get("api/lokasitenan").then(({ data }) => (this.tenants = data));
@@ -352,6 +380,20 @@ export default {
       this.loadData();
     });
     this.loadData();
+  },
+  mounted() {
+    $("#select-all").click(function(event) {
+      if (this.checked) {
+        // Iterate each checkbox
+        $(":checkbox").each(function() {
+          this.checked = true;
+        });
+      } else {
+        $(":checkbox").each(function() {
+          this.checked = false;
+        });
+      }
+    });
   }
 };
 </script>
