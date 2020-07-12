@@ -70310,21 +70310,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
 
     return {
-      cekall: false,
       search: "",
       showLokasi: false,
       editmode: false,
@@ -70405,6 +70396,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
+    nonAll: function nonAll(text) {
+      var _this4 = this;
+
+      swal({
+        title: "Are you sure?",
+        text: text + " !",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then(function (result) {
+        _this4.$Progress.start();
+        // Send request to the server
+        if (result.value) {
+          // Iterate each checkbox
+          $(":checkbox").each(function () {
+            if (this.checked) {
+              if (this.value == "on") return true;
+              axios.delete("api/user/" + this.value).then(function (data) {
+                toast({
+                  type: "success",
+                  title: text + " in successfully"
+                });
+              }).catch(function () {});
+            }
+          });
+          _this4.$Progress.finish();
+          Fire.$emit("AfterCreate");
+        }
+      });
+    },
     editModal: function editModal(user) {
       this.editmode = true;
       this.form.reset();
@@ -70417,30 +70440,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $("#addNew").modal("show");
     },
     getResults: function getResults() {
-      var _this4 = this;
+      var _this5 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
       axios.get("api/user?page=" + page).then(function (response) {
-        _this4.users = response.data;
+        _this5.users = response.data;
       });
     },
     loadData: function loadData() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.$gate.isAdminOrAuthor()) {
         axios.get("api/user").then(function (_ref2) {
           var data = _ref2.data;
-          return _this5.users = data;
+          return _this6.users = data;
         });
         axios.get("api/lokasi").then(function (_ref3) {
           var data = _ref3.data;
-          return _this5.locations = data;
+          return _this6.locations = data;
         });
       }
     },
     updateGambar: function updateGambar(e) {
-      var _this6 = this;
+      var _this7 = this;
 
       var file = e.target.files[0];
       var reader = new FileReader();
@@ -70456,12 +70479,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       reader.onloadend = function (file) {
-        _this6.form.photo = reader.result;
+        _this7.form.photo = reader.result;
       };
       reader.readAsDataURL(file);
     },
     createUser: function createUser() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.$Progress.start();
       this.form.post("api/user").then(function () {
@@ -70471,9 +70494,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           type: "success",
           title: "User Created in successfully"
         });
-        _this7.$Progress.finish();
+        _this8.$Progress.finish();
       }).catch(function () {
-        _this7.$Progress.fail();
+        _this8.$Progress.fail();
       });
     },
 
@@ -70482,18 +70505,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, 1000)
   },
   created: function created() {
-    var _this8 = this;
+    var _this9 = this;
 
     Fire.$on("searching", function () {
-      var query = _this8.search;
+      var query = _this9.search;
       axios.get("api/findUser?q=" + query).then(function (data) {
-        _this8.users = data.data;
+        _this9.users = data.data;
       }).catch(function () {});
     });
     Fire.$on("AfterCreate", function () {
-      _this8.loadData();
+      _this9.loadData();
     });
     this.loadData();
+  },
+  mounted: function mounted() {
+    $("#select-all").click(function (event) {
+      if (this.checked) {
+        // Iterate each checkbox
+        $(":checkbox").each(function () {
+          this.checked = true;
+        });
+      } else {
+        $(":checkbox").each(function () {
+          this.checked = false;
+        });
+      }
+    });
   }
 });
 
@@ -71466,7 +71503,77 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _vm._m(8)
+                      _c("div", { staticClass: "ag-btns d-flex flex-wrap" }, [
+                        _c("div", { staticClass: "action-btns" }, [
+                          _c("div", { staticClass: "btn-dropdown" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "btn-group dropdown actions-dropodown"
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-white px-2 py-75 dropdown-toggle waves-effect waves-light",
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "dropdown",
+                                      "aria-haspopup": "true",
+                                      "aria-expanded": "false"
+                                    }
+                                  },
+                                  [_vm._v("Actions")]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "dropdown-menu" }, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "dropdown-item",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.nonAll("Disable data")
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "feather icon-trash-2"
+                                      }),
+                                      _vm._v(
+                                        "\n                              Non Active\n                            "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "dropdown-item",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.nonAll("Active data")
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "feather icon-activity"
+                                      }),
+                                      _vm._v(
+                                        "\n                              Active\n                            "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
                     ]
                   )
                 ])
@@ -71474,62 +71581,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "table-responsive" }, [
                 _c("table", { staticClass: "table table-hover mb-0" }, [
-                  _c("thead", [
-                    _c("tr", [
-                      _c("th", [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.cekall,
-                              expression: "cekall"
-                            }
-                          ],
-                          attrs: { type: "checkbox" },
-                          domProps: {
-                            checked: Array.isArray(_vm.cekall)
-                              ? _vm._i(_vm.cekall, null) > -1
-                              : _vm.cekall
-                          },
-                          on: {
-                            click: _vm.checkall,
-                            change: function($event) {
-                              var $$a = _vm.cekall,
-                                $$el = $event.target,
-                                $$c = $$el.checked ? true : false
-                              if (Array.isArray($$a)) {
-                                var $$v = null,
-                                  $$i = _vm._i($$a, $$v)
-                                if ($$el.checked) {
-                                  $$i < 0 && (_vm.cekall = $$a.concat([$$v]))
-                                } else {
-                                  $$i > -1 &&
-                                    (_vm.cekall = $$a
-                                      .slice(0, $$i)
-                                      .concat($$a.slice($$i + 1)))
-                                }
-                              } else {
-                                _vm.cekall = $$c
-                              }
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Name")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Email")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("No Hp")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Tipe User")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Status")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Aksi")])
-                    ])
-                  ]),
+                  _vm._m(8),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -71538,7 +71590,7 @@ var render = function() {
                         _c("th", { attrs: { scope: "row" } }, [
                           _c("input", {
                             attrs: { type: "checkbox" },
-                            domProps: { checked: _vm.cekall }
+                            domProps: { value: user.id }
                           })
                         ]),
                         _vm._v(" "),
@@ -71737,56 +71789,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ag-btns d-flex flex-wrap" }, [
-      _c("div", { staticClass: "action-btns" }, [
-        _c("div", { staticClass: "btn-dropdown" }, [
-          _c("div", { staticClass: "btn-group dropdown actions-dropodown" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-white px-2 py-75 dropdown-toggle waves-effect waves-light",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "dropdown",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [_vm._v("Actions")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-menu" }, [
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "feather icon-trash-2" }),
-                _vm._v(
-                  "\n                              Delete\n                            "
-                )
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "feather icon-clipboard" }),
-                _vm._v(
-                  "\n                              Archive\n                            "
-                )
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "feather icon-printer" }),
-                _vm._v(
-                  "\n                              Print\n                            "
-                )
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "feather icon-download" }),
-                _vm._v(
-                  "\n                              CSV\n                            "
-                )
-              ])
-            ])
-          ])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _c("input", { attrs: { type: "checkbox", id: "select-all" } })
+        ]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("No Hp")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tipe User")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Aksi")])
       ])
     ])
   }
