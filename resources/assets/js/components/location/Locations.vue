@@ -291,11 +291,17 @@
                               aria-expanded="false"
                             >Actions</button>
                             <div class="dropdown-menu">
-                              <button @click="nonAll('Disable data')" class="dropdown-item">
+                              <button
+                                @click="nonAll('Disable data','lokasi')"
+                                class="dropdown-item"
+                              >
                                 <i class="feather icon-trash-2"></i>
                                 Non Active
                               </button>
-                              <button @click="nonAll('Active data')" class="dropdown-item">
+                              <button
+                                @click="nonAll('Active data','lokasi2')"
+                                class="dropdown-item"
+                              >
                                 <i class="feather icon-activity"></i>
                                 Active
                               </button>
@@ -445,7 +451,7 @@ export default {
         }
       });
     },
-    nonAll(text) {
+    nonAll(text, api) {
       swal({
         title: "Are you sure?",
         text: text + " !",
@@ -463,7 +469,7 @@ export default {
             if (this.checked) {
               if (this.value == "on") return true;
               axios
-                .delete("api/lokasi/" + this.value)
+                .delete("api/" + api + "/" + this.value)
                 .then(data => {
                   toast({
                     type: "success",

@@ -70396,7 +70396,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    nonAll: function nonAll(text) {
+    nonAll: function nonAll(text, api) {
       var _this4 = this;
 
       swal({
@@ -70415,7 +70415,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           $(":checkbox").each(function () {
             if (this.checked) {
               if (this.value == "on") return true;
-              axios.delete("api/user/" + this.value).then(function (data) {
+              axios.delete("api/" + api + "/" + this.value).then(function (data) {
                 toast({
                   type: "success",
                   title: text + " in successfully"
@@ -71535,7 +71535,10 @@ var render = function() {
                                       staticClass: "dropdown-item",
                                       on: {
                                         click: function($event) {
-                                          return _vm.nonAll("Disable data")
+                                          return _vm.nonAll(
+                                            "Disable data",
+                                            "user"
+                                          )
                                         }
                                       }
                                     },
@@ -71555,7 +71558,10 @@ var render = function() {
                                       staticClass: "dropdown-item",
                                       on: {
                                         click: function($event) {
-                                          return _vm.nonAll("Active data")
+                                          return _vm.nonAll(
+                                            "Active data",
+                                            "user2"
+                                          )
                                         }
                                       }
                                     },
@@ -72176,6 +72182,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72278,7 +72290,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    nonAll: function nonAll(text) {
+    nonAll: function nonAll(text, api) {
       var _this6 = this;
 
       swal({
@@ -72297,7 +72309,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           $(":checkbox").each(function () {
             if (this.checked) {
               if (this.value == "on") return true;
-              axios.delete("api/penyewa/" + this.value).then(function (data) {
+              axios.delete("api/" + api + "/" + this.value).then(function (data) {
                 toast({
                   type: "success",
                   title: text + " in successfully"
@@ -72927,7 +72939,10 @@ var render = function() {
                                       staticClass: "dropdown-item",
                                       on: {
                                         click: function($event) {
-                                          return _vm.nonAll("Disable data")
+                                          return _vm.nonAll(
+                                            "Disable data",
+                                            "penyewa"
+                                          )
                                         }
                                       }
                                     },
@@ -72947,7 +72962,10 @@ var render = function() {
                                       staticClass: "dropdown-item",
                                       on: {
                                         click: function($event) {
-                                          return _vm.nonAll("Active data")
+                                          return _vm.nonAll(
+                                            "Active data",
+                                            "penyewa2"
+                                          )
                                         }
                                       }
                                     },
@@ -73593,6 +73611,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -73670,7 +73694,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    nonAll: function nonAll(text) {
+    nonAll: function nonAll(text, api) {
       var _this4 = this;
 
       swal({
@@ -73689,7 +73713,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           $(":checkbox").each(function () {
             if (this.checked) {
               if (this.value == "on") return true;
-              axios.delete("api/lokasi/" + this.value).then(function (data) {
+              axios.delete("api/" + api + "/" + this.value).then(function (data) {
                 toast({
                   type: "success",
                   title: text + " in successfully"
@@ -74582,7 +74606,10 @@ var render = function() {
                                       staticClass: "dropdown-item",
                                       on: {
                                         click: function($event) {
-                                          return _vm.nonAll("Disable data")
+                                          return _vm.nonAll(
+                                            "Disable data",
+                                            "lokasi"
+                                          )
                                         }
                                       }
                                     },
@@ -74602,7 +74629,10 @@ var render = function() {
                                       staticClass: "dropdown-item",
                                       on: {
                                         click: function($event) {
-                                          return _vm.nonAll("Active data")
+                                          return _vm.nonAll(
+                                            "Active data",
+                                            "lokasi2"
+                                          )
                                         }
                                       }
                                     },

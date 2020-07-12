@@ -151,7 +151,21 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             // delete the user
 
-            $user->status = !$user->status;
+            $user->status = 0;
+            $user->save();
+
+            return ['message' => 'User Deleted'];
+        }
+    }
+
+    public function destroy2($id)
+    {
+
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $user = User::findOrFail($id);
+            // delete the user
+
+            $user->status = 1;
             $user->save();
 
             return ['message' => 'User Deleted'];

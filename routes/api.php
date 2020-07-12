@@ -49,3 +49,6 @@ Route::get('findLocationTenant', 'API\LocationController@search2');
 Route::get('company', 'API\PerusahaanController@index');
 Route::get('collector/{id}', 'API\UserController@kolektor');
 Route::post('company/{id}', 'API\PerusahaanController@update');
+Route::delete('lokasi2/{id}', 'API\LocationController@destroy2');
+Route::delete('user2/{id}', 'API\UserController@destroy2');
+Route::delete('penyewa2/{id}', 'API\PenyewaController@destroy2');

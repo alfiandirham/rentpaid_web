@@ -70,7 +70,19 @@ class LocationController extends Controller
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
             $user = Lokasi::findOrFail($id);
 
-            $user->status = !$user->status;
+            $user->status = 0;
+            $user->save();
+
+            return ['message' => 'Lokasi Deleted'];
+        }
+    }
+
+    public function destroy2($id)
+    {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            $user = Lokasi::findOrFail($id);
+
+            $user->status = 1;
             $user->save();
 
             return ['message' => 'Lokasi Deleted'];
