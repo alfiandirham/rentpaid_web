@@ -47,4 +47,5 @@ Route::get('findLocation', 'API\LocationController@search');
 Route::get('findLocationTenant', 'API\LocationController@search2');
 
 Route::get('company', 'API\PerusahaanController@index');
+Route::get('collector/{id}', 'API\UserController@kolektor');
 Route::post('company/{id}', 'API\PerusahaanController@update');

@@ -28,6 +28,11 @@ class UserController extends Controller
         }
     }
 
+    public function kolektor($id)
+    {
+        return User::where("id", $id)->where("status", true)->where("type", "collector")->first();
+    }
+
     public function owner()
     {
         // $this->authorize('isAdmin');
