@@ -291,11 +291,11 @@
                               aria-expanded="false"
                             >Actions</button>
                             <div class="dropdown-menu">
-                              <button class="dropdown-item">
+                              <button @click="nonAll('Disable data')" class="dropdown-item">
                                 <i class="feather icon-trash-2"></i>
                                 Non Active
                               </button>
-                              <button class="dropdown-item">
+                              <button @click="nonAll('Active data')" class="dropdown-item">
                                 <i class="feather icon-activity"></i>
                                 Active
                               </button>
@@ -312,7 +312,7 @@
                   <thead>
                     <tr>
                       <th>
-                        <input type="checkbox" @click="checkall" v-model="cekall" />
+                        <input type="checkbox" id="select-all" />
                       </th>
                       <th>Nama Lokasi</th>
                       <th>Kode Lokasi</th>
@@ -325,7 +325,7 @@
                   <tbody>
                     <tr v-for="location in locations.data" :key="location.id">
                       <th scope="row">
-                        <input type="checkbox" :checked="cekall" />
+                        <input type="checkbox" :value="location.id" />
                       </th>
                       <td>{{location.lokasi}}</td>
                       <td>{{location.kode}}</td>
@@ -369,8 +369,6 @@
 export default {
   data() {
     return {
-      cek: [],
-      cekall: false,
       search: "",
       editmode: false,
       users: {},
@@ -447,6 +445,39 @@ export default {
         }
       });
     },
+    nonAll(text) {
+      swal({
+        title: "Are you sure?",
+        text: text + " !",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then(result => {
+        this.$Progress.start();
+        // Send request to the server
+        if (result.value) {
+          // Iterate each checkbox
+          $(":checkbox").each(function() {
+            if (this.checked) {
+              if (this.value == "on") return true;
+              axios
+                .delete("api/lokasi/" + this.value)
+                .then(data => {
+                  toast({
+                    type: "success",
+                    title: text + " in successfully"
+                  });
+                })
+                .catch(() => {});
+            }
+          });
+          this.$Progress.finish();
+          Fire.$emit("AfterCreate");
+        }
+      });
+    },
     editModal(user) {
       this.editmode = true;
       this.form.reset();
@@ -504,6 +535,20 @@ export default {
       this.loadData();
     });
     this.loadData();
+  },
+  mounted() {
+    $("#select-all").click(function(event) {
+      if (this.checked) {
+        // Iterate each checkbox
+        $(":checkbox").each(function() {
+          this.checked = true;
+        });
+      } else {
+        $(":checkbox").each(function() {
+          this.checked = false;
+        });
+      }
+    });
   }
 };
 </script>
