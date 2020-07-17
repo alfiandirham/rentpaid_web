@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Transaksi;
+use App\Http\Resources\TrExp as Tr;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class TunggakanExport implements FromCollection
@@ -12,6 +13,6 @@ class TunggakanExport implements FromCollection
     */
     public function collection()
     {
-        return Transaksi::all();
+        return Tr::collection(Transaksi::where('status', 'menunggak')->get());
     }
 }

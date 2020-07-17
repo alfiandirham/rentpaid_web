@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Transaksi extends JsonResource
+class TrExp extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +18,6 @@ class Transaksi extends JsonResource
             'id' => $this->id,
             'penyewa' => $this->tenant->penyewa->nama,
             'lokasi' => 'Tenant '.$this->tenant->kode.', '.$this->tenant->lokasi->lokasi,
-            'detail' => $this->tenant->kategori->tarif,
             'tanggal' =>$this->tanggal,
             'collector' => $this->user->name,
             'setoran' => $this->dibayar
