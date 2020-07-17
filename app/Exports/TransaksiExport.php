@@ -13,6 +13,6 @@ class TransaksiExport implements FromCollection
     */
     public function collection()
     {
-        return Tr::collection(Transaksi::where('status', '<>', 'menunggak')->get());
+        return Tr::collection(Transaksi::where('status', '<>', 'menunggak')->latest()->get());
     }
 }
