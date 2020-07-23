@@ -70315,6 +70315,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70914,59 +70921,63 @@ var render = function() {
                               _c("p", [_vm._v("Tipe User")]),
                               _vm._v(" "),
                               _c("ul", { staticClass: "list-unstyled mb-0" }, [
-                                _c(
-                                  "li",
-                                  { staticClass: "d-inline-block mr-2" },
-                                  [
-                                    _c("fieldset", [
-                                      _c(
-                                        "div",
-                                        { staticClass: "vs-radio-con" },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.form.type,
-                                                expression: "form.type"
-                                              }
-                                            ],
-                                            attrs: {
-                                              type: "radio",
-                                              name: "type",
-                                              value: "superuser"
-                                            },
-                                            domProps: {
-                                              checked: _vm._q(
-                                                _vm.form.type,
-                                                "superuser"
-                                              )
-                                            },
-                                            on: {
-                                              change: [
-                                                function($event) {
-                                                  return _vm.$set(
-                                                    _vm.form,
-                                                    "type",
+                                this.$gate.isAuthor()
+                                  ? _c(
+                                      "li",
+                                      { staticClass: "d-inline-block mr-2" },
+                                      [
+                                        _c("fieldset", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "vs-radio-con" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.form.type,
+                                                    expression: "form.type"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "radio",
+                                                  name: "type",
+                                                  value: "superuser"
+                                                },
+                                                domProps: {
+                                                  checked: _vm._q(
+                                                    _vm.form.type,
                                                     "superuser"
                                                   )
                                                 },
-                                                function($event) {
-                                                  return _vm.showLocat()
+                                                on: {
+                                                  change: [
+                                                    function($event) {
+                                                      return _vm.$set(
+                                                        _vm.form,
+                                                        "type",
+                                                        "superuser"
+                                                      )
+                                                    },
+                                                    function($event) {
+                                                      return _vm.showLocat()
+                                                    }
+                                                  ]
                                                 }
-                                              ]
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _vm._m(1),
-                                          _vm._v(" "),
-                                          _c("span", {}, [_vm._v("Sys Admin")])
-                                        ]
-                                      )
-                                    ])
-                                  ]
-                                ),
+                                              }),
+                                              _vm._v(" "),
+                                              _vm._m(1),
+                                              _vm._v(" "),
+                                              _c("span", {}, [
+                                                _vm._v("Sys Admin")
+                                              ])
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c(
                                   "li",
@@ -71024,113 +71035,119 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "li",
-                                  { staticClass: "d-inline-block mr-2" },
-                                  [
-                                    _c("fieldset", [
-                                      _c(
-                                        "div",
-                                        { staticClass: "vs-radio-con" },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.form.type,
-                                                expression: "form.type"
-                                              }
-                                            ],
-                                            attrs: {
-                                              type: "radio",
-                                              name: "type",
-                                              value: "collector"
-                                            },
-                                            domProps: {
-                                              checked: _vm._q(
-                                                _vm.form.type,
-                                                "collector"
-                                              )
-                                            },
-                                            on: {
-                                              change: [
-                                                function($event) {
-                                                  return _vm.$set(
-                                                    _vm.form,
-                                                    "type",
+                                this.$gate.isAuthor() || this.$gate.isAdmin()
+                                  ? _c(
+                                      "li",
+                                      { staticClass: "d-inline-block mr-2" },
+                                      [
+                                        _c("fieldset", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "vs-radio-con" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.form.type,
+                                                    expression: "form.type"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "radio",
+                                                  name: "type",
+                                                  value: "collector"
+                                                },
+                                                domProps: {
+                                                  checked: _vm._q(
+                                                    _vm.form.type,
                                                     "collector"
                                                   )
                                                 },
-                                                function($event) {
-                                                  return _vm.showLocation()
+                                                on: {
+                                                  change: [
+                                                    function($event) {
+                                                      return _vm.$set(
+                                                        _vm.form,
+                                                        "type",
+                                                        "collector"
+                                                      )
+                                                    },
+                                                    function($event) {
+                                                      return _vm.showLocation()
+                                                    }
+                                                  ]
                                                 }
-                                              ]
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _vm._m(3),
-                                          _vm._v(" "),
-                                          _c("span", {}, [_vm._v("Collector")])
-                                        ]
-                                      )
-                                    ])
-                                  ]
-                                ),
+                                              }),
+                                              _vm._v(" "),
+                                              _vm._m(3),
+                                              _vm._v(" "),
+                                              _c("span", {}, [
+                                                _vm._v("Collector")
+                                              ])
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  : _vm._e(),
                                 _vm._v(" "),
-                                _c(
-                                  "li",
-                                  { staticClass: "d-inline-block mr-2" },
-                                  [
-                                    _c("fieldset", [
-                                      _c(
-                                        "div",
-                                        { staticClass: "vs-radio-con" },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.form.type,
-                                                expression: "form.type"
-                                              }
-                                            ],
-                                            attrs: {
-                                              type: "radio",
-                                              name: "type",
-                                              value: "owner"
-                                            },
-                                            domProps: {
-                                              checked: _vm._q(
-                                                _vm.form.type,
-                                                "owner"
-                                              )
-                                            },
-                                            on: {
-                                              change: [
-                                                function($event) {
-                                                  return _vm.$set(
-                                                    _vm.form,
-                                                    "type",
+                                this.$gate.isAuthor()
+                                  ? _c(
+                                      "li",
+                                      { staticClass: "d-inline-block mr-2" },
+                                      [
+                                        _c("fieldset", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "vs-radio-con" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.form.type,
+                                                    expression: "form.type"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "radio",
+                                                  name: "type",
+                                                  value: "owner"
+                                                },
+                                                domProps: {
+                                                  checked: _vm._q(
+                                                    _vm.form.type,
                                                     "owner"
                                                   )
                                                 },
-                                                function($event) {
-                                                  return _vm.showLocat()
+                                                on: {
+                                                  change: [
+                                                    function($event) {
+                                                      return _vm.$set(
+                                                        _vm.form,
+                                                        "type",
+                                                        "owner"
+                                                      )
+                                                    },
+                                                    function($event) {
+                                                      return _vm.showLocat()
+                                                    }
+                                                  ]
                                                 }
-                                              ]
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _vm._m(4),
-                                          _vm._v(" "),
-                                          _c("span", {}, [_vm._v("Owner")])
-                                        ]
-                                      )
-                                    ])
-                                  ]
-                                )
+                                              }),
+                                              _vm._v(" "),
+                                              _vm._m(4),
+                                              _vm._v(" "),
+                                              _c("span", {}, [_vm._v("Owner")])
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  : _vm._e()
                               ]),
                               _vm._v(" "),
                               _c("has-error", {
@@ -71555,28 +71572,30 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "dropdown-item",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.nonAll(
-                                            "Active data",
-                                            "user2"
+                                  this.$gate.isAuthor()
+                                    ? _c(
+                                        "button",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.nonAll(
+                                                "Active data",
+                                                "user2"
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "feather icon-activity"
+                                          }),
+                                          _vm._v(
+                                            "\n                              Active\n                            "
                                           )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "feather icon-activity"
-                                      }),
-                                      _vm._v(
-                                        "\n                              Active\n                            "
+                                        ]
                                       )
-                                    ]
-                                  )
+                                    : _vm._e()
                                 ])
                               ]
                             )

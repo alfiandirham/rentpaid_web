@@ -128,7 +128,7 @@
                       <div class="col-12 pl-2">
                         <p>Tipe User</p>
                         <ul class="list-unstyled mb-0">
-                          <li class="d-inline-block mr-2">
+                          <li v-if="this.$gate.isAuthor()" class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
                                 <input
@@ -164,7 +164,10 @@
                               </div>
                             </fieldset>
                           </li>
-                          <li class="d-inline-block mr-2">
+                          <li
+                            v-if="this.$gate.isAuthor() || this.$gate.isAdmin()"
+                            class="d-inline-block mr-2"
+                          >
                             <fieldset>
                               <div class="vs-radio-con">
                                 <input
@@ -182,7 +185,7 @@
                               </div>
                             </fieldset>
                           </li>
-                          <li class="d-inline-block mr-2">
+                          <li v-if="this.$gate.isAuthor()" class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
                                 <input
@@ -368,7 +371,11 @@
                                 <i class="feather icon-trash-2"></i>
                                 Non Active
                               </button>
-                              <button @click="nonAll('Active data', 'user2')" class="dropdown-item">
+                              <button
+                                v-if="this.$gate.isAuthor()"
+                                @click="nonAll('Active data', 'user2')"
+                                class="dropdown-item"
+                              >
                                 <i class="feather icon-activity"></i>
                                 Active
                               </button>
