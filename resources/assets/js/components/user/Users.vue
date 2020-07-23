@@ -576,10 +576,8 @@ export default {
       });
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/user").then(({ data }) => (this.users = data));
-        axios.get("api/lokasi").then(({ data }) => (this.locations = data));
-      }
+      axios.get("api/user").then(({ data }) => (this.users = data));
+      axios.get("api/lokasi").then(({ data }) => (this.locations = data));
     },
     updateGambar(e) {
       let file = e.target.files[0];

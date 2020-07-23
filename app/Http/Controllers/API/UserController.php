@@ -22,6 +22,10 @@ class UserController extends Controller
             $user = auth('api')->user();
             return User::where("status", true)->where("id", '!=', $user->id)->latest()->paginate(20);
         }
+        if (\Gate::allows('isOwner')) {
+            $user = auth('api')->user();
+            return User::where("type", 'admin')->where("status", true)->latest()->paginate(20);
+        }
         if (\Gate::allows('isAuthor')) {
             $user = auth('api')->user();
             return User::where("id", '!=', $user->id)->latest()->paginate(20);
@@ -147,7 +151,6 @@ class UserController extends Controller
     public function destroy($id)
     {
 
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
             $user = User::findOrFail($id);
             // delete the user
 
@@ -155,13 +158,11 @@ class UserController extends Controller
             $user->save();
 
             return ['message' => 'User Deleted'];
-        }
     }
 
     public function destroy2($id)
     {
 
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
             $user = User::findOrFail($id);
             // delete the user
 
@@ -169,7 +170,6 @@ class UserController extends Controller
             $user->save();
 
             return ['message' => 'User Deleted'];
-        }
     }
 
     public function search(){

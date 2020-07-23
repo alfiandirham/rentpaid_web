@@ -11,6 +11,10 @@ export default class Gate {
         return this.user.type === 'superuser';
     }
 
+    isOwner() {
+        return this.user.type === 'owner';
+    }
+
     isUser() {
         return this.user.type === 'user';
     }
