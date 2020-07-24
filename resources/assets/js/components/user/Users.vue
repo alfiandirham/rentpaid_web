@@ -282,7 +282,7 @@
           </div>
         </div>
       </div>
-      <div class="card">
+      <div v-if="this.$gate.isAuthor()" class="card">
         <div class="card-header">
           <h4 class="card-title">Filters</h4>
           <a class="heading-elements-toggle">

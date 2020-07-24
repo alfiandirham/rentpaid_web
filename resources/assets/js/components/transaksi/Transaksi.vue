@@ -57,21 +57,15 @@
                         <div class="row">
                           <div class="col-4">
                             <label class="mb-2 labelin">Detail Pembayaran</label>
-                            <p class="teksin">BOP</p>
-                            <p class="teksin">Air</p>
-                            <p class="teksin">Listrik</p>
-                            <p class="teksin">Barang Masuk</p>
-                            <p class="teksin">Sampah</p>
-                            <p class="teksin">Sewa Permeter</p>
+                            <p
+                              v-for="v in Object.keys(form.detail)"
+                              :key="v"
+                              class="teksin text-capitalize"
+                            >{{v}}</p>
                           </div>
                           <div class="col-6">
                             <label class="mb-2 labelin">&nbsp;</label>
-                            <p class="teksin">Rp. {{form.detail.bop}}</p>
-                            <p class="teksin">Rp. {{form.detail.air}}</p>
-                            <p class="teksin">Rp. {{form.detail.listrik}}</p>
-                            <p class="teksin">Rp. {{form.detail.barang}}</p>
-                            <p class="teksin">Rp. {{form.detail.sampah}}</p>
-                            <p class="teksin">Rp. {{form.detail.permeter}}</p>
+                            <p v-for="v in form.detail" :key="v" class="teksin">Rp. {{v}}</p>
                           </div>
                         </div>
                       </div>
@@ -245,7 +239,7 @@ export default {
       transaksis: {},
       filter: {
         status: "",
-        role: ""
+        role: "",
       },
       form: new Form({
         id: "",
@@ -254,8 +248,8 @@ export default {
         tanggal: "",
         lokasi: "",
         collector: "",
-        detail: ""
-      })
+        detail: "",
+      }),
     };
   },
   methods: {
@@ -263,7 +257,7 @@ export default {
       if (this.$gate.isAdminOrAuthor()) {
         axios
           .get("api/findTransaksi?q=" + q)
-          .then(data => {
+          .then((data) => {
             this.transaksis = data.data;
           })
           .catch(() => {});
@@ -293,8 +287,8 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then(result => {
+        confirmButtonText: "Yes",
+      }).then((result) => {
         // Send request to the server
         if (result.value) {
           this.form
@@ -321,7 +315,7 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/transaksi?page=" + page).then(response => {
+      axios.get("api/transaksi?page=" + page).then((response) => {
         this.transaksis = response.data;
       });
     },
@@ -339,7 +333,7 @@ export default {
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "Berhasil Menambah transaksi."
+            title: "Berhasil Menambah transaksi.",
           });
           this.$Progress.finish();
         })
@@ -349,14 +343,14 @@ export default {
     },
     searchit: _.debounce(() => {
       Fire.$emit("searching");
-    }, 1000)
+    }, 1000),
   },
   created() {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
         .get("api/findTransaksi?q=" + query)
-        .then(data => {
+        .then((data) => {
           this.transaksis = data.data;
         })
         .catch(() => {});
@@ -365,7 +359,7 @@ export default {
       this.loadData();
     });
     this.loadData();
-  }
+  },
 };
 </script>
 
