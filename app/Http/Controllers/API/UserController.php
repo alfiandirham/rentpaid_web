@@ -20,7 +20,7 @@ class UserController extends Controller
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin')) {
             $user = auth('api')->user();
-            return User::where("status", true)->where("id", '!=', $user->id)->latest()->paginate(20);
+            return User::where("type", 'collector')->where("status", true)->where("id", '!=', $user->id)->latest()->paginate(20);
         }
         if (\Gate::allows('isOwner')) {
             $user = auth('api')->user();

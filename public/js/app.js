@@ -70979,61 +70979,63 @@ var render = function() {
                                     )
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _c(
-                                  "li",
-                                  { staticClass: "d-inline-block mr-2" },
-                                  [
-                                    _c("fieldset", [
-                                      _c(
-                                        "div",
-                                        { staticClass: "vs-radio-con" },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.form.type,
-                                                expression: "form.type"
-                                              }
-                                            ],
-                                            attrs: {
-                                              type: "radio",
-                                              name: "type",
-                                              value: "admin"
-                                            },
-                                            domProps: {
-                                              checked: _vm._q(
-                                                _vm.form.type,
-                                                "admin"
-                                              )
-                                            },
-                                            on: {
-                                              change: [
-                                                function($event) {
-                                                  return _vm.$set(
-                                                    _vm.form,
-                                                    "type",
+                                !this.$gate.isAdmin()
+                                  ? _c(
+                                      "li",
+                                      { staticClass: "d-inline-block mr-2" },
+                                      [
+                                        _c("fieldset", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "vs-radio-con" },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.form.type,
+                                                    expression: "form.type"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "radio",
+                                                  name: "type",
+                                                  value: "admin"
+                                                },
+                                                domProps: {
+                                                  checked: _vm._q(
+                                                    _vm.form.type,
                                                     "admin"
                                                   )
                                                 },
-                                                function($event) {
-                                                  return _vm.showLocat()
+                                                on: {
+                                                  change: [
+                                                    function($event) {
+                                                      return _vm.$set(
+                                                        _vm.form,
+                                                        "type",
+                                                        "admin"
+                                                      )
+                                                    },
+                                                    function($event) {
+                                                      return _vm.showLocat()
+                                                    }
+                                                  ]
                                                 }
-                                              ]
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _vm._m(2),
-                                          _vm._v(" "),
-                                          _c("span", {}, [
-                                            _vm._v("Company Staff")
-                                          ])
-                                        ]
-                                      )
-                                    ])
-                                  ]
-                                ),
+                                              }),
+                                              _vm._v(" "),
+                                              _vm._m(2),
+                                              _vm._v(" "),
+                                              _c("span", {}, [
+                                                _vm._v("Company Staff")
+                                              ])
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 this.$gate.isAuthor() || this.$gate.isAdmin()
                                   ? _c(

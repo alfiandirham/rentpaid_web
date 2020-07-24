@@ -146,7 +146,7 @@
                               </div>
                             </fieldset>
                           </li>
-                          <li class="d-inline-block mr-2">
+                          <li v-if="!this.$gate.isAdmin()" class="d-inline-block mr-2">
                             <fieldset>
                               <div class="vs-radio-con">
                                 <input
@@ -456,7 +456,7 @@ export default {
       locations: {},
       filter: {
         status: "",
-        role: ""
+        role: "",
       },
       form: new Form({
         id: "",
@@ -469,8 +469,8 @@ export default {
         status: "",
         ktp: "",
         photo: "",
-        lokasi_id: ""
-      })
+        lokasi_id: "",
+      }),
     };
   },
   methods: {
@@ -484,7 +484,7 @@ export default {
       if (this.$gate.isAdminOrAuthor()) {
         axios
           .get("api/findUser?q=" + q)
-          .then(data => {
+          .then((data) => {
             this.users = data.data;
           })
           .catch(() => {});
@@ -517,8 +517,8 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then(result => {
+        confirmButtonText: "Yes",
+      }).then((result) => {
         // Send request to the server
         if (result.value) {
           this.form
@@ -541,21 +541,21 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then(result => {
+        confirmButtonText: "Yes",
+      }).then((result) => {
         this.$Progress.start();
         // Send request to the server
         if (result.value) {
           // Iterate each checkbox
-          $(":checkbox").each(function() {
+          $(":checkbox").each(function () {
             if (this.checked) {
               if (this.value == "on") return true;
               axios
                 .delete("api/" + api + "/" + this.value)
-                .then(data => {
+                .then((data) => {
                   toast({
                     type: "success",
-                    title: text + " in successfully"
+                    title: text + " in successfully",
                   });
                 })
                 .catch(() => {});
@@ -578,7 +578,7 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/user?page=" + page).then(response => {
+      axios.get("api/user?page=" + page).then((response) => {
         this.users = response.data;
       });
     },
@@ -595,12 +595,12 @@ export default {
         swal({
           type: "error",
           title: "Oops...",
-          text: "You are uploading a large file"
+          text: "You are uploading a large file",
         });
         return false;
       }
 
-      reader.onloadend = file => {
+      reader.onloadend = (file) => {
         this.form.photo = reader.result;
       };
       reader.readAsDataURL(file);
@@ -614,7 +614,7 @@ export default {
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "User Created in successfully"
+            title: "User Created in successfully",
           });
           this.$Progress.finish();
         })
@@ -624,14 +624,14 @@ export default {
     },
     searchit: _.debounce(() => {
       Fire.$emit("searching");
-    }, 1000)
+    }, 1000),
   },
   created() {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
         .get("api/findUser?q=" + query)
-        .then(data => {
+        .then((data) => {
           this.users = data.data;
         })
         .catch(() => {});
@@ -642,19 +642,19 @@ export default {
     this.loadData();
   },
   mounted() {
-    $("#select-all").click(function(event) {
+    $("#select-all").click(function (event) {
       if (this.checked) {
         // Iterate each checkbox
-        $(":checkbox").each(function() {
+        $(":checkbox").each(function () {
           this.checked = true;
         });
       } else {
-        $(":checkbox").each(function() {
+        $(":checkbox").each(function () {
           this.checked = false;
         });
       }
     });
-  }
+  },
 };
 </script>
 
