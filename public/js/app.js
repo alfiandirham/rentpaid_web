@@ -75355,25 +75355,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -75406,21 +75387,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     setTarif: function setTarif() {
       var _this = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("/api/kategori/" + this.form.kategori_id).then(function (_ref) {
-          var data = _ref.data;
-          return _this.form.harga = data.data.tarif;
-        });
-      }
+      axios.get("/api/kategori/" + this.form.kategori_id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form.harga = data.data.tarif;
+      });
     },
     filtering: function filtering(q) {
       var _this2 = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("/api/findTenan/" + this.$route.params.id + "?q=" + q).then(function (data) {
-          _this2.tenants = data.data;
-        }).catch(function () {});
-      }
+      axios.get("/api/findTenan/" + this.$route.params.id + "?q=" + q).then(function (data) {
+        _this2.tenants = data.data;
+      }).catch(function () {});
     },
     checkall: function checkall() {
       this.cekall ? this.cekall = false : this.cekall = true;
@@ -75525,22 +75502,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     loadData: function loadData() {
       var _this7 = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("/api/penyewa").then(function (_ref2) {
-          var data = _ref2.data;
-          return _this7.users = data;
-        });
-        axios.get("/api/kategori").then(function (_ref3) {
-          var data = _ref3.data;
-          return _this7.kategoris = data;
-        });
-        axios.get("/api/lokasitenan/" + this.$route.params.id).then(function (_ref4) {
-          var data = _ref4.data;
+      axios.get("/api/penyewa").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this7.users = data;
+      });
+      axios.get("/api/kategori").then(function (_ref3) {
+        var data = _ref3.data;
+        return _this7.kategoris = data;
+      });
+      axios.get("/api/lokasitenan/" + this.$route.params.id).then(function (_ref4) {
+        var data = _ref4.data;
 
-          _this7.tenants = data;
-          _this7.tena = data.data[0];
-        });
-      }
+        _this7.tenants = data;
+        _this7.tena = data.data[0];
+      });
     },
     createData: function createData() {
       var _this8 = this;
@@ -76704,30 +76679,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { staticClass: "heading-elements-toggle" }, [
         _c("i", { staticClass: "fa fa-ellipsis-v font-medium-3" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "heading-elements" }, [
-        _c("ul", { staticClass: "list-inline mb-0" }, [
-          _c("li", [
-            _c("a", { attrs: { "data-action": "collapse" } }, [
-              _c("i", { staticClass: "feather icon-chevron-down" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { "data-action": "" } }, [
-              _c("i", {
-                staticClass: "feather icon-rotate-cw users-data-filter"
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { "data-action": "close" } }, [
-              _c("i", { staticClass: "feather icon-x" })
-            ])
-          ])
-        ])
       ])
     ])
   },

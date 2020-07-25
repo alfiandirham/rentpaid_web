@@ -270,25 +270,6 @@
           <a class="heading-elements-toggle">
             <i class="fa fa-ellipsis-v font-medium-3"></i>
           </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="feather icon-chevron-down"></i>
-                </a>
-              </li>
-              <li>
-                <a data-action>
-                  <i class="feather icon-rotate-cw users-data-filter"></i>
-                </a>
-              </li>
-              <li>
-                <a data-action="close">
-                  <i class="feather icon-x"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
         <div class="card-content collapse show">
           <div class="card-body">
@@ -470,7 +451,7 @@ export default {
       editmode: false,
       users: {},
       filter: {
-        status: ""
+        status: "",
       },
       tenants: {},
       tena: {},
@@ -483,27 +464,23 @@ export default {
         timur: "",
         selatan: "",
         barat: "",
-        status: ""
-      })
+        status: "",
+      }),
     };
   },
   methods: {
     setTarif() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios
-          .get("/api/kategori/" + this.form.kategori_id)
-          .then(({ data }) => (this.form.harga = data.data.tarif));
-      }
+      axios
+        .get("/api/kategori/" + this.form.kategori_id)
+        .then(({ data }) => (this.form.harga = data.data.tarif));
     },
     filtering(q) {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios
-          .get("/api/findTenan/" + this.$route.params.id + "?q=" + q)
-          .then(data => {
-            this.tenants = data.data;
-          })
-          .catch(() => {});
-      }
+      axios
+        .get("/api/findTenan/" + this.$route.params.id + "?q=" + q)
+        .then((data) => {
+          this.tenants = data.data;
+        })
+        .catch(() => {});
     },
     checkall() {
       this.cekall ? (this.cekall = false) : (this.cekall = true);
@@ -532,8 +509,8 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then(result => {
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
         // Send request to the server
         if (result.value) {
           this.form
@@ -557,8 +534,8 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Okay!"
-      }).then(result => {
+        confirmButtonText: "Okay!",
+      }).then((result) => {
         // Send request to the server
         if (result.value) {
           this.form.disewa = 1;
@@ -578,7 +555,7 @@ export default {
     },
     nonAll() {
       let data = [];
-      $(":checkbox").each(function() {
+      $(":checkbox").each(function () {
         if (this.checked) {
           if (this.value == "on") return true;
           data.push(this.value.substring(2));
@@ -605,21 +582,19 @@ export default {
     getResults(page = 1) {
       axios
         .get("/api/lokasitenan/" + this.$route.params.id + "?page=" + page)
-        .then(response => {
+        .then((response) => {
           this.tenants = response.data;
         });
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("/api/penyewa").then(({ data }) => (this.users = data));
-        axios.get("/api/kategori").then(({ data }) => (this.kategoris = data));
-        axios
-          .get("/api/lokasitenan/" + this.$route.params.id)
-          .then(({ data }) => {
-            this.tenants = data;
-            this.tena = data.data[0];
-          });
-      }
+      axios.get("/api/penyewa").then(({ data }) => (this.users = data));
+      axios.get("/api/kategori").then(({ data }) => (this.kategoris = data));
+      axios
+        .get("/api/lokasitenan/" + this.$route.params.id)
+        .then(({ data }) => {
+          this.tenants = data;
+          this.tena = data.data[0];
+        });
     },
     createData() {
       this.$Progress.start();
@@ -630,7 +605,7 @@ export default {
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "Data Created in successfully"
+            title: "Data Created in successfully",
           });
           this.$Progress.finish();
         })
@@ -643,14 +618,14 @@ export default {
     }, 1000),
     upluas: _.debounce(() => {
       Fire.$emit("upluas");
-    }, 1000)
+    }, 1000),
   },
   created() {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
         .get("/api/findTenan/" + this.$route.params.id + "?q=" + query)
-        .then(data => {
+        .then((data) => {
           this.tenants = data.data;
         })
         .catch(() => {});
@@ -668,21 +643,21 @@ export default {
     this.loadData();
   },
   mounted() {
-    $("#bb").click(function(event) {
+    $("#bb").click(function (event) {
       console.log("fg");
       if (this.checked) {
         // Iterate each checkbox
-        $(":checkbox").each(function() {
+        $(":checkbox").each(function () {
           let data = this.value;
           if (data[0] == 1) this.checked = true;
         });
       } else {
-        $(":checkbox").each(function() {
+        $(":checkbox").each(function () {
           this.checked = false;
         });
       }
     });
-  }
+  },
 };
 </script>
 

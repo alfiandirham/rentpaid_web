@@ -22,7 +22,7 @@ class TenantController extends Controller
     public function index()
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             return TenantResource::collection(Tenant::latest()->paginate(20));
         }
     }
@@ -30,7 +30,7 @@ class TenantController extends Controller
     public function show($id)
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             return new TenantResource(Tenant::findOrfail($id));
         }
     }
@@ -52,7 +52,7 @@ class TenantController extends Controller
     public function lokasiTenantId($id)
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner') ) {
             return TenantResource::collection(Lokasi::findOrFail($id)->tenant()->latest()->paginate(20));
         }
     }
@@ -96,7 +96,7 @@ class TenantController extends Controller
     public function destroy($id)
     {
 
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             $user = Tenant::findOrFail($id);
 
             $user->status = 0;
@@ -109,7 +109,7 @@ class TenantController extends Controller
     public function destroy2($id)
     {
 
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             $user = Tenant::findOrFail($id);
 
             $user->status = 1;
