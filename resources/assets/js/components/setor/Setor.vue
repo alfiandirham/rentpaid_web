@@ -3,11 +3,11 @@
     <!-- users list start -->
     <!-- <section class="users-list-wrapper" v-if="$gate.isAdminOrAuthor()"> -->
     <section class="users-list-wrapper">
-      <div>
+      <div class="fixed">
         <h2 class="head-text">Setoran > List Setoran</h2>
       </div>
       <div class="head-title">
-        <button type="button" @click="newModal" class="btn btn-primary">Tambah Setoran</button>
+        <button type="button" @click="newModal" class="btn fixed-2 btn-primary">Tambah Setoran</button>
         <!-- Modal -->
         <div
           class="modal fade"
@@ -98,7 +98,7 @@
       </div>
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
-        <div class="card">
+        <div class="card mt-7">
           <div class="card-content">
             <div class="card-body">
               <div class="row">
@@ -184,8 +184,8 @@ export default {
         id: "",
         collector_id: "",
         jumlah: "",
-        tanggal: ""
-      })
+        tanggal: "",
+      }),
     };
   },
   methods: {
@@ -194,7 +194,7 @@ export default {
   the text field element and an array of possible autocompleted values:*/
       var currentFocus;
       /*execute a function when someone writes in the text field:*/
-      inp.addEventListener("input", function(e) {
+      inp.addEventListener("input", function (e) {
         var a,
           b,
           i,
@@ -224,7 +224,7 @@ export default {
             /*insert a input field that will hold the current array item's value:*/
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
             /*execute a function when someone clicks on the item value (DIV element):*/
-            b.addEventListener("click", function(e) {
+            b.addEventListener("click", function (e) {
               /*insert the value for the autocomplete text field:*/
               inp.value = this.getElementsByTagName("input")[0].value;
               /*close the list of autocompleted values,
@@ -236,7 +236,7 @@ export default {
         }
       });
       /*execute a function presses a key on the keyboard:*/
-      inp.addEventListener("keydown", function(e) {
+      inp.addEventListener("keydown", function (e) {
         var x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
         if (e.keyCode == 40) {
@@ -288,7 +288,7 @@ export default {
         }
       }
       /*execute a function when someone clicks in the document:*/
-      document.addEventListener("click", function(e) {
+      document.addEventListener("click", function (e) {
         closeAllLists(e.target);
       });
     },
@@ -319,8 +319,8 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then(result => {
+        confirmButtonText: "Yes",
+      }).then((result) => {
         // Send request to the server
         if (result.value) {
           this.form
@@ -347,7 +347,7 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/setoran?page=" + page).then(response => {
+      axios.get("api/setoran?page=" + page).then((response) => {
         this.setorans = response.data;
       });
     },
@@ -365,7 +365,7 @@ export default {
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "Berhasil Menambah Setoran."
+            title: "Berhasil Menambah Setoran.",
           });
           this.$Progress.finish();
         })
@@ -378,20 +378,20 @@ export default {
     }, 1000),
     searchid() {
       Fire.$emit("searchid");
-    }
+    },
   },
   created() {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
         .get("api/findSetoran?q=" + query)
-        .then(data => {
+        .then((data) => {
           this.setorans = data.data;
         })
         .catch(() => {});
     });
     Fire.$on("searchid", () => {
-      axios.get("api/collector/" + this.id.charAt(0)).then(data => {
+      axios.get("api/collector/" + this.id.charAt(0)).then((data) => {
         let arr = [];
         arr.push(data.data.id + "/" + data.data.name);
         this.autocomplete(arr);
@@ -409,6 +409,6 @@ export default {
     //     }
     //   });
     // });
-  }
+  },
 };
 </script>

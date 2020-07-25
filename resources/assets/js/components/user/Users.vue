@@ -4,11 +4,11 @@
     <!-- <section class="users-list-wrapper" v-if="$gate.isAdminOrAuthor()"> -->
     <section class="users-list-wrapper">
       <!-- users filter start -->
-      <div>
+      <div class="fixed">
         <h2 class="head-text">Users > List User</h2>
       </div>
       <div class="head-title">
-        <button type="button" @click="newModal" class="btn btn-primary">
+        <button type="button" @click="newModal" class="btn fixed-2 btn-primary">
           <i class="fa fa-user-plus fa-lg pr-1"></i>
           Tambah User
         </button>
@@ -282,26 +282,12 @@
           </div>
         </div>
       </div>
-      <div v-if="this.$gate.isAuthor()" class="card">
+      <div v-if="this.$gate.isAuthor()" class="card mt-7">
         <div class="card-header">
           <h4 class="card-title">Filters</h4>
           <a class="heading-elements-toggle">
             <i class="fa fa-ellipsis-v font-medium-3"></i>
           </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="feather icon-chevron-down"></i>
-                </a>
-              </li>
-              <li>
-                <a data-action="close">
-                  <i class="feather icon-x"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
         <div class="card-content collapse show">
           <div class="card-body">

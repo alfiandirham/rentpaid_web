@@ -70308,20 +70308,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70560,7 +70546,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn fixed-2 btn-primary",
             attrs: { type: "button" },
             on: { click: _vm.newModal }
           },
@@ -71395,7 +71381,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       this.$gate.isAuthor()
-        ? _c("div", { staticClass: "card" }, [
+        ? _c("div", { staticClass: "card mt-7" }, [
             _vm._m(7),
             _vm._v(" "),
             _c("div", { staticClass: "card-content collapse show" }, [
@@ -71725,7 +71711,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "fixed" }, [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Users > List User")])
     ])
   },
@@ -71798,22 +71784,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { staticClass: "heading-elements-toggle" }, [
         _c("i", { staticClass: "fa fa-ellipsis-v font-medium-3" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "heading-elements" }, [
-        _c("ul", { staticClass: "list-inline mb-0" }, [
-          _c("li", [
-            _c("a", { attrs: { "data-action": "collapse" } }, [
-              _c("i", { staticClass: "feather icon-chevron-down" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { "data-action": "close" } }, [
-              _c("i", { staticClass: "feather icon-x" })
-            ])
-          ])
-        ])
       ])
     ])
   },
@@ -71904,20 +71874,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -72415,7 +72371,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn fixed-2 btn-primary",
             attrs: { type: "button" },
             on: { click: _vm.newModal }
           },
@@ -72843,7 +72799,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card mt-7" }, [
         _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "card-content collapse show" }, [
@@ -73129,7 +73085,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "fixed" }, [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Penyewa > List Penyewa")])
     ])
   },
@@ -73162,22 +73118,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { staticClass: "heading-elements-toggle" }, [
         _c("i", { staticClass: "fa fa-ellipsis-v font-medium-3" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "heading-elements" }, [
-        _c("ul", { staticClass: "list-inline mb-0" }, [
-          _c("li", [
-            _c("a", { attrs: { "data-action": "collapse" } }, [
-              _c("i", { staticClass: "feather icon-chevron-down" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { "data-action": "close" } }, [
-              _c("i", { staticClass: "feather icon-x" })
-            ])
-          ])
-        ])
       ])
     ])
   },
@@ -73270,25 +73210,6 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -73853,7 +73774,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn btn-primary fixed-2",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -74476,7 +74397,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card mt-7" }, [
         _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "card-content collapse show" }, [
@@ -74796,7 +74717,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "fixed" }, [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Lokasi > List Lokasi")])
     ])
   },
@@ -74829,30 +74750,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { staticClass: "heading-elements-toggle" }, [
         _c("i", { staticClass: "fa fa-ellipsis-v font-medium-3" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "heading-elements" }, [
-        _c("ul", { staticClass: "list-inline mb-0" }, [
-          _c("li", [
-            _c("a", { attrs: { "data-action": "collapse" } }, [
-              _c("i", { staticClass: "feather icon-chevron-down" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { "data-action": "" } }, [
-              _c("i", {
-                staticClass: "feather icon-rotate-cw users-data-filter"
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { "data-action": "close" } }, [
-              _c("i", { staticClass: "feather icon-x" })
-            ])
-          ])
-        ])
       ])
     ])
   },
@@ -78354,7 +78251,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn fixed-2 btn-primary",
             attrs: { type: "button" },
             on: { click: _vm.newModal }
           },
@@ -78611,7 +78508,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "basic-examples" } }, [
-        _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card mt-7" }, [
           _c("div", { staticClass: "card-content" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
@@ -78722,7 +78619,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "fixed" }, [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Setoran > List Setoran")])
     ])
   },
@@ -78877,20 +78774,6 @@ exports.push([module.i, "\n.blue-underline[data-v-2b05121a] {\n  font-style: nor
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -79709,22 +79592,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { staticClass: "heading-elements-toggle" }, [
         _c("i", { staticClass: "fa fa-ellipsis-v font-medium-3" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "heading-elements" }, [
-        _c("ul", { staticClass: "list-inline mb-0" }, [
-          _c("li", [
-            _c("a", { attrs: { "data-action": "collapse" } }, [
-              _c("i", { staticClass: "feather icon-chevron-down" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { "data-action": "close" } }, [
-              _c("i", { staticClass: "feather icon-x" })
-            ])
-          ])
-        ])
       ])
     ])
   },
@@ -79881,20 +79748,6 @@ exports.push([module.i, "\n.blue-underline[data-v-3502b3d2] {\n  font-style: nor
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -80740,22 +80593,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { staticClass: "heading-elements-toggle" }, [
         _c("i", { staticClass: "fa fa-ellipsis-v font-medium-3" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "heading-elements" }, [
-        _c("ul", { staticClass: "list-inline mb-0" }, [
-          _c("li", [
-            _c("a", { attrs: { "data-action": "collapse" } }, [
-              _c("i", { staticClass: "feather icon-chevron-down" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { "data-action": "close" } }, [
-              _c("i", { staticClass: "feather icon-x" })
-            ])
-          ])
-        ])
       ])
     ])
   },
@@ -81685,7 +81522,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn btn-primary fixed-2",
             attrs: { type: "button" },
             on: { click: _vm.newModal }
           },
@@ -82198,7 +82035,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "basic-examples" } }, [
-        _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card mt-7" }, [
           _c("div", { staticClass: "card-content" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
@@ -82337,7 +82174,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "fixed" }, [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Tenant > Tarif")])
     ])
   },
@@ -82835,7 +82672,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn btn-primary fixed-2",
             attrs: { type: "button" },
             on: { click: _vm.newModal }
           },
@@ -83235,7 +83072,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "basic-examples" } }, [
-        _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card mt-7" }, [
           _c("div", { staticClass: "card-content" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
@@ -83342,7 +83179,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "fixed" }, [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Tenant > Kategori")])
     ])
   },

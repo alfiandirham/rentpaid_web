@@ -4,11 +4,11 @@
     <!-- <section class="users-list-wrapper" v-if="$gate.isAdminOrAuthor()"> -->
     <section class="users-list-wrapper">
       <!-- users filter start -->
-      <div>
+      <div class="fixed">
         <h2 class="head-text">Penyewa > List Penyewa</h2>
       </div>
       <div class="head-title">
-        <button type="button" @click="newModal" class="btn btn-primary">
+        <button type="button" @click="newModal" class="btn fixed-2 btn-primary">
           <i class="fa fa-user-plus fa-lg pr-1"></i>
           Tambah Penyewa
         </button>
@@ -155,26 +155,12 @@
           </div>
         </div>
       </div>
-      <div class="card">
+      <div class="card mt-7">
         <div class="card-header">
           <h4 class="card-title">Filters</h4>
           <a class="heading-elements-toggle">
             <i class="fa fa-ellipsis-v font-medium-3"></i>
           </a>
-          <div class="heading-elements">
-            <ul class="list-inline mb-0">
-              <li>
-                <a data-action="collapse">
-                  <i class="feather icon-chevron-down"></i>
-                </a>
-              </li>
-              <li>
-                <a data-action="close">
-                  <i class="feather icon-x"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
         <div class="card-content collapse show">
           <div class="card-body">
@@ -316,7 +302,7 @@ export default {
       editmode: false,
       users: {},
       filter: {
-        status: ""
+        status: "",
       },
       form: new Form({
         id: "",
@@ -324,8 +310,8 @@ export default {
         alamat: "",
         hp: "",
         status: "",
-        ktp: ""
-      })
+        ktp: "",
+      }),
     };
   },
   methods: {
@@ -333,7 +319,7 @@ export default {
       if (this.$gate.isAdminOrAuthor()) {
         axios
           .get("api/findPenyewa?q=" + q)
-          .then(data => {
+          .then((data) => {
             this.users = data.data;
           })
           .catch(() => {});
@@ -366,8 +352,8 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then(result => {
+        confirmButtonText: "Yes",
+      }).then((result) => {
         // Send request to the server
         if (result.value) {
           this.form
@@ -394,7 +380,7 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/penyewa?page=" + page).then(response => {
+      axios.get("api/penyewa?page=" + page).then((response) => {
         this.users = response.data;
       });
     },
@@ -411,21 +397,21 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then(result => {
+        confirmButtonText: "Yes",
+      }).then((result) => {
         this.$Progress.start();
         // Send request to the server
         if (result.value) {
           // Iterate each checkbox
-          $(":checkbox").each(function() {
+          $(":checkbox").each(function () {
             if (this.checked) {
               if (this.value == "on") return true;
               axios
                 .delete("api/" + api + "/" + this.value)
-                .then(data => {
+                .then((data) => {
                   toast({
                     type: "success",
-                    title: text + " in successfully"
+                    title: text + " in successfully",
                   });
                 })
                 .catch(() => {});
@@ -445,7 +431,7 @@ export default {
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "User Created in successfully"
+            title: "User Created in successfully",
           });
           this.$Progress.finish();
         })
@@ -455,14 +441,14 @@ export default {
     },
     searchit: _.debounce(() => {
       Fire.$emit("searching");
-    }, 1000)
+    }, 1000),
   },
   created() {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
         .get("api/findPenyewa?q=" + query)
-        .then(data => {
+        .then((data) => {
           this.users = data.data;
         })
         .catch(() => {});
@@ -473,18 +459,18 @@ export default {
     this.loadData();
   },
   mounted() {
-    $("#select-all").click(function(event) {
+    $("#select-all").click(function (event) {
       if (this.checked) {
         // Iterate each checkbox
-        $(":checkbox").each(function() {
+        $(":checkbox").each(function () {
           this.checked = true;
         });
       } else {
-        $(":checkbox").each(function() {
+        $(":checkbox").each(function () {
           this.checked = false;
         });
       }
     });
-  }
+  },
 };
 </script>

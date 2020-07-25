@@ -3,11 +3,11 @@
     <!-- users list start -->
     <!-- <section class="users-list-wrapper" v-if="$gate.isAdminOrAuthor()"> -->
     <section class="users-list-wrapper">
-      <div>
+      <div class="fixed">
         <h2 class="head-text">Tenant > Tarif</h2>
       </div>
       <div class="head-title">
-        <button type="button" @click="newModal" class="btn btn-primary">Tambah Tarif</button>
+        <button type="button" @click="newModal" class="btn btn-primary fixed-2">Tambah Tarif</button>
         <!-- Modal -->
         <div
           class="modal fade"
@@ -170,7 +170,7 @@
       </div>
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
-        <div class="card">
+        <div class="card mt-7">
           <div class="card-content">
             <div class="card-body">
               <div class="row">
@@ -258,8 +258,8 @@ export default {
         permeter: "",
         listrik: "",
         barang: "",
-        sampah: ""
-      })
+        sampah: "",
+      }),
     };
   },
   methods: {
@@ -290,8 +290,8 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then(result => {
+        confirmButtonText: "Yes",
+      }).then((result) => {
         // Send request to the server
         if (result.value) {
           this.form
@@ -318,7 +318,7 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/tarif?page=" + page).then(response => {
+      axios.get("api/tarif?page=" + page).then((response) => {
         this.tarifs = response.data;
       });
     },
@@ -336,7 +336,7 @@ export default {
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "Berhasil menambah Tarif."
+            title: "Berhasil menambah Tarif.",
           });
           this.$Progress.finish();
         })
@@ -346,14 +346,14 @@ export default {
     },
     searchit: _.debounce(() => {
       Fire.$emit("searching");
-    }, 1000)
+    }, 1000),
   },
   created() {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
         .get("api/findTarif?q=" + query)
-        .then(data => {
+        .then((data) => {
           this.tarifs = data.data;
         })
         .catch(() => {});
@@ -362,6 +362,6 @@ export default {
       this.loadData();
     });
     this.loadData();
-  }
+  },
 };
 </script>

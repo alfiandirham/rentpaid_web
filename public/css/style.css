@@ -463,3 +463,19 @@ ul>li>a.router-link-active.antidup {
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
+
+.fixed {
+    position: fixed;
+    z-index: 22;
+    top: 105px;
+}
+
+.fixed-2 {
+    position: fixed;
+    z-index: 22;
+    top: 154px;
+}
+
+.mt-7 {
+    margin-top: 8rem;
+}
