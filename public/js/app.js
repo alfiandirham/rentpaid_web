@@ -79299,74 +79299,6 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
                     _c("label", { attrs: { for: "users-list-role" } }, [
-                      _vm._v("Lokasi")
-                    ]),
-                    _vm._v(" "),
-                    _c("fieldset", { staticClass: "form-group" }, [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control",
-                          on: {
-                            change: function($event) {
-                              return _vm.filtering()
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "uvuvwu" } }, [
-                            _vm._v("All")
-                          ]),
-                          _vm._v(" "),
-                          _vm._l(_vm.lokasi.data, function(p) {
-                            return _c(
-                              "option",
-                              { key: p.id, domProps: { value: p.id } },
-                              [_vm._v(_vm._s(p.lokasi))]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "users-list-role" } }, [
-                      _vm._v("Penyewa")
-                    ]),
-                    _vm._v(" "),
-                    _c("fieldset", { staticClass: "form-group" }, [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control",
-                          on: {
-                            change: function($event) {
-                              return _vm.filtering()
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "uvuvwu" } }, [
-                            _vm._v("All")
-                          ]),
-                          _vm._v(" "),
-                          _vm._l(_vm.penyewa.data, function(p) {
-                            return _c(
-                              "option",
-                              { key: p.id, domProps: { value: p.id } },
-                              [_vm._v(_vm._s(p.nama))]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "users-list-role" } }, [
                       _vm._v("Collector")
                     ]),
                     _vm._v(" "),
@@ -79376,8 +79308,8 @@ var render = function() {
                         {
                           staticClass: "form-control",
                           on: {
-                            change: function($event) {
-                              return _vm.filtering()
+                            change: function(e) {
+                              return _vm.filtering(e.target.value)
                             }
                           }
                         },
@@ -80251,74 +80183,6 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
                     _c("label", { attrs: { for: "users-list-role" } }, [
-                      _vm._v("Lokasi")
-                    ]),
-                    _vm._v(" "),
-                    _c("fieldset", { staticClass: "form-group" }, [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control",
-                          on: {
-                            change: function($event) {
-                              return _vm.filtering()
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "uvuvwu" } }, [
-                            _vm._v("All")
-                          ]),
-                          _vm._v(" "),
-                          _vm._l(_vm.lokasi.data, function(p) {
-                            return _c(
-                              "option",
-                              { key: p.id, domProps: { value: p.id } },
-                              [_vm._v(_vm._s(p.lokasi))]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "users-list-role" } }, [
-                      _vm._v("Penyewa")
-                    ]),
-                    _vm._v(" "),
-                    _c("fieldset", { staticClass: "form-group" }, [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control",
-                          on: {
-                            change: function($event) {
-                              return _vm.filtering()
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "uvuvwu" } }, [
-                            _vm._v("All")
-                          ]),
-                          _vm._v(" "),
-                          _vm._l(_vm.penyewa.data, function(p) {
-                            return _c(
-                              "option",
-                              { key: p.id, domProps: { value: p.id } },
-                              [_vm._v(_vm._s(p.nama))]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "users-list-role" } }, [
                       _vm._v("Collector")
                     ]),
                     _vm._v(" "),
@@ -80328,8 +80192,8 @@ var render = function() {
                         {
                           staticClass: "form-control",
                           on: {
-                            change: function($event) {
-                              return _vm.filtering()
+                            change: function(e) {
+                              return _vm.filtering(e.target.value)
                             }
                           }
                         },

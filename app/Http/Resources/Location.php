@@ -24,6 +24,7 @@ class Location extends JsonResource
             'alamat' => $this->alamat, 
             'user_id' => $this->user_id, 
             'owner' => $this->user->name, 
+            'tenan' => $this->tenant, 
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

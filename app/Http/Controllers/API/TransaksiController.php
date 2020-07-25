@@ -63,8 +63,13 @@ class TransaksiController extends Controller
     public function search(){
         if ($search = \Request::get('q')) {
             $transaksi = TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->where(function($query) use ($search){
-                $query->where('tanggal','LIKE', "%$search%");
+                $query->where('tanggal','LIKE', "%$search%")
+                ->orWhere('user_id', 'like', "%$search%")
+                ->orWhere('tenant_id', 'like', "%$search%");
             })->paginate(20));
+            if($search == "uvuvwu"){
+                $transaksi = TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->latest()->paginate(20));
+            }
         }else{
             $transaksi = TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->latest()->paginate(20));
         }

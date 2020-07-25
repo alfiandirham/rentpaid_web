@@ -40,6 +40,9 @@ class UserController extends Controller
     public function kolek()
     {
         $id = auth('api')->user()->id;
+        if (\Gate::allows('isAuthor') ){
+            return User::where("id", '!=' , $id)->where("type", "collector")->latest()->paginate(20);
+        }
         return User::where("id", '!=' , $id)->where("status", true)->where("type", "collector")->latest()->paginate(20);
     }
 

@@ -107,7 +107,7 @@
             <div class="users-list-filter">
               <form>
                 <div class="row">
-                  <div class="col-12 col-sm-6 col-lg-3">
+                  <!-- <div class="col-12 col-sm-6 col-lg-3">
                     <label for="users-list-role">Lokasi</label>
                     <fieldset class="form-group">
                       <select @change="filtering()" class="form-control">
@@ -124,11 +124,11 @@
                         <option v-for="p in penyewa.data" :key="p.id" :value="p.id">{{p.nama}}</option>
                       </select>
                     </fieldset>
-                  </div>
+                  </div>-->
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="users-list-role">Collector</label>
                     <fieldset class="form-group">
-                      <select @change="filtering()" class="form-control">
+                      <select @change="e =>filtering(e.target.value)" class="form-control">
                         <option value="uvuvwu">All</option>
                         <option v-for="p in collector.data" :key="p.id" :value="p.id">{{p.name}}</option>
                       </select>
