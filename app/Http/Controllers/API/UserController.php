@@ -37,6 +37,12 @@ class UserController extends Controller
         return User::where("id", $id)->where("status", true)->where("type", "collector")->first();
     }
 
+    public function kolek()
+    {
+        $id = auth('api')->user()->id;
+        return User::where("id", '!=' , $id)->where("status", true)->where("type", "collector")->latest()->paginate(20);
+    }
+
     public function owner()
     {
         // $this->authorize('isAdmin');

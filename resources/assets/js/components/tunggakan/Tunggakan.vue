@@ -108,32 +108,29 @@
               <form>
                 <div class="row">
                   <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="users-list-role">Role</label>
+                    <label for="users-list-role">Lokasi</label>
                     <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.role)"
-                        v-model="filter.role"
-                        class="form-control"
-                      >
+                      <select @change="filtering()" class="form-control">
                         <option value="uvuvwu">All</option>
-                        <option value="owner">Owner</option>
-                        <option value="collector">Collector</option>
-                        <option value="admin">Staff</option>
-                        <option value="superuser">SysAdmin</option>
+                        <option v-for="p in lokasi.data" :key="p.id" :value="p.id">{{p.lokasi}}</option>
                       </select>
                     </fieldset>
                   </div>
                   <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="users-list-status">Status</label>
+                    <label for="users-list-role">Penyewa</label>
                     <fieldset class="form-group">
-                      <select
-                        @change="filtering(filter.status)"
-                        v-model="filter.status"
-                        class="form-control"
-                      >
+                      <select @change="filtering()" class="form-control">
                         <option value="uvuvwu">All</option>
-                        <option value="1">Active</option>
-                        <option value="uvuvwe">Deactivated</option>
+                        <option v-for="p in penyewa.data" :key="p.id" :value="p.id">{{p.nama}}</option>
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-role">Collector</label>
+                    <fieldset class="form-group">
+                      <select @change="filtering()" class="form-control">
+                        <option value="uvuvwu">All</option>
+                        <option v-for="p in collector.data" :key="p.id" :value="p.id">{{p.name}}</option>
                       </select>
                     </fieldset>
                   </div>
@@ -223,10 +220,9 @@ export default {
       search: "",
       editmode: false,
       transaksis: {},
-      filter: {
-        status: "",
-        role: "",
-      },
+      lokasi: {},
+      penyewa: {},
+      collector: {},
       form: new Form({
         id: "",
         penyewa: "",
@@ -305,6 +301,9 @@ export default {
     },
     loadData() {
       axios.get("api/tunggakan").then(({ data }) => (this.transaksis = data));
+      axios.get("api/lokasi").then(({ data }) => (this.lokasi = data));
+      axios.get("/api/penyewa").then(({ data }) => (this.penyewa = data));
+      axios.get("/api/kolektor").then(({ data }) => (this.collector = data));
     },
     createUser() {
       this.$Progress.start();

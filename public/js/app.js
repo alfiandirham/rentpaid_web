@@ -78957,9 +78957,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -78968,10 +78965,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       search: "",
       editmode: false,
       transaksis: {},
-      filter: {
-        status: "",
-        role: ""
-      },
+      lokasi: {},
+      penyewa: {},
+      collector: {},
       form: new Form({
         id: "",
         penyewa: "",
@@ -79056,6 +79052,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get("api/transaksi").then(function (_ref) {
         var data = _ref.data;
         return _this5.transaksis = data;
+      });
+      axios.get("api/lokasi").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.lokasi = data;
+      });
+      axios.get("/api/penyewa").then(function (_ref3) {
+        var data = _ref3.data;
+        return _this5.penyewa = data;
+      });
+      axios.get("/api/kolektor").then(function (_ref4) {
+        var data = _ref4.data;
+        return _this5.collector = data;
       });
     },
     createUser: function createUser() {
@@ -79291,45 +79299,18 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
                     _c("label", { attrs: { for: "users-list-role" } }, [
-                      _vm._v("Role")
+                      _vm._v("Lokasi")
                     ]),
                     _vm._v(" "),
                     _c("fieldset", { staticClass: "form-group" }, [
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.role,
-                              expression: "filter.role"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "role",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.role)
-                              }
-                            ]
+                            change: function($event) {
+                              return _vm.filtering()
+                            }
                           }
                         },
                         [
@@ -79337,67 +79318,33 @@ var render = function() {
                             _vm._v("All")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "owner" } }, [
-                            _vm._v("Owner")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "collector" } }, [
-                            _vm._v("Collector")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "admin" } }, [
-                            _vm._v("Staff")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "superuser" } }, [
-                            _vm._v("SysAdmin")
-                          ])
-                        ]
+                          _vm._l(_vm.lokasi.data, function(p) {
+                            return _c(
+                              "option",
+                              { key: p.id, domProps: { value: p.id } },
+                              [_vm._v(_vm._s(p.lokasi))]
+                            )
+                          })
+                        ],
+                        2
                       )
                     ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "users-list-status" } }, [
-                      _vm._v("Status")
+                    _c("label", { attrs: { for: "users-list-role" } }, [
+                      _vm._v("Penyewa")
                     ]),
                     _vm._v(" "),
                     _c("fieldset", { staticClass: "form-group" }, [
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.status,
-                              expression: "filter.status"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "status",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.status)
-                              }
-                            ]
+                            change: function($event) {
+                              return _vm.filtering()
+                            }
                           }
                         },
                         [
@@ -79405,14 +79352,49 @@ var render = function() {
                             _vm._v("All")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Active")
+                          _vm._l(_vm.penyewa.data, function(p) {
+                            return _c(
+                              "option",
+                              { key: p.id, domProps: { value: p.id } },
+                              [_vm._v(_vm._s(p.nama))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
+                    _c("label", { attrs: { for: "users-list-role" } }, [
+                      _vm._v("Collector")
+                    ]),
+                    _vm._v(" "),
+                    _c("fieldset", { staticClass: "form-group" }, [
+                      _c(
+                        "select",
+                        {
+                          staticClass: "form-control",
+                          on: {
+                            change: function($event) {
+                              return _vm.filtering()
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "uvuvwu" } }, [
+                            _vm._v("All")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "uvuvwe" } }, [
-                            _vm._v("Deactivated")
-                          ])
-                        ]
+                          _vm._l(_vm.collector.data, function(p) {
+                            return _c(
+                              "option",
+                              { key: p.id, domProps: { value: p.id } },
+                              [_vm._v(_vm._s(p.name))]
+                            )
+                          })
+                        ],
+                        2
                       )
                     ])
                   ])
@@ -79927,9 +79909,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -79938,10 +79917,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       search: "",
       editmode: false,
       transaksis: {},
-      filter: {
-        status: "",
-        role: ""
-      },
+      lokasi: {},
+      penyewa: {},
+      collector: {},
       form: new Form({
         id: "",
         penyewa: "",
@@ -80026,6 +80004,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get("api/tunggakan").then(function (_ref) {
         var data = _ref.data;
         return _this5.transaksis = data;
+      });
+      axios.get("api/lokasi").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.lokasi = data;
+      });
+      axios.get("/api/penyewa").then(function (_ref3) {
+        var data = _ref3.data;
+        return _this5.penyewa = data;
+      });
+      axios.get("/api/kolektor").then(function (_ref4) {
+        var data = _ref4.data;
+        return _this5.collector = data;
       });
     },
     createUser: function createUser() {
@@ -80261,45 +80251,18 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
                     _c("label", { attrs: { for: "users-list-role" } }, [
-                      _vm._v("Role")
+                      _vm._v("Lokasi")
                     ]),
                     _vm._v(" "),
                     _c("fieldset", { staticClass: "form-group" }, [
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.role,
-                              expression: "filter.role"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "role",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.role)
-                              }
-                            ]
+                            change: function($event) {
+                              return _vm.filtering()
+                            }
                           }
                         },
                         [
@@ -80307,67 +80270,33 @@ var render = function() {
                             _vm._v("All")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "owner" } }, [
-                            _vm._v("Owner")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "collector" } }, [
-                            _vm._v("Collector")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "admin" } }, [
-                            _vm._v("Staff")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "superuser" } }, [
-                            _vm._v("SysAdmin")
-                          ])
-                        ]
+                          _vm._l(_vm.lokasi.data, function(p) {
+                            return _c(
+                              "option",
+                              { key: p.id, domProps: { value: p.id } },
+                              [_vm._v(_vm._s(p.lokasi))]
+                            )
+                          })
+                        ],
+                        2
                       )
                     ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "users-list-status" } }, [
-                      _vm._v("Status")
+                    _c("label", { attrs: { for: "users-list-role" } }, [
+                      _vm._v("Penyewa")
                     ]),
                     _vm._v(" "),
                     _c("fieldset", { staticClass: "form-group" }, [
                       _c(
                         "select",
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filter.status,
-                              expression: "filter.status"
-                            }
-                          ],
                           staticClass: "form-control",
                           on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.filter,
-                                  "status",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                return _vm.filtering(_vm.filter.status)
-                              }
-                            ]
+                            change: function($event) {
+                              return _vm.filtering()
+                            }
                           }
                         },
                         [
@@ -80375,14 +80304,49 @@ var render = function() {
                             _vm._v("All")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Active")
+                          _vm._l(_vm.penyewa.data, function(p) {
+                            return _c(
+                              "option",
+                              { key: p.id, domProps: { value: p.id } },
+                              [_vm._v(_vm._s(p.nama))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
+                    _c("label", { attrs: { for: "users-list-role" } }, [
+                      _vm._v("Collector")
+                    ]),
+                    _vm._v(" "),
+                    _c("fieldset", { staticClass: "form-group" }, [
+                      _c(
+                        "select",
+                        {
+                          staticClass: "form-control",
+                          on: {
+                            change: function($event) {
+                              return _vm.filtering()
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "uvuvwu" } }, [
+                            _vm._v("All")
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "uvuvwe" } }, [
-                            _vm._v("Deactivated")
-                          ])
-                        ]
+                          _vm._l(_vm.collector.data, function(p) {
+                            return _c(
+                              "option",
+                              { key: p.id, domProps: { value: p.id } },
+                              [_vm._v(_vm._s(p.name))]
+                            )
+                          })
+                        ],
+                        2
                       )
                     ])
                   ])
