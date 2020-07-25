@@ -81488,12 +81488,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     loadData: function loadData() {
       var _this4 = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/tarif").then(function (_ref) {
-          var data = _ref.data;
-          return _this4.tarifs = data;
-        });
-      }
+      axios.get("api/tarif").then(function (_ref) {
+        var data = _ref.data;
+        return _this4.tarifs = data;
+      });
     },
     createUser: function createUser() {
       var _this5 = this;

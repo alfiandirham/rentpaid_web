@@ -25,7 +25,7 @@ class KategoriController extends Controller
     public function show($id)
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             return new KategoriCollection(Kategori::findOrfail($id));
         }
     }
