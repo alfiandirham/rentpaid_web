@@ -59,7 +59,7 @@ class KategoriController extends Controller
 
     public function destroy($id)
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             $user = Kategori::findOrFail($id);
 
             $user->status = 0;

@@ -82632,16 +82632,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     loadData: function loadData() {
       var _this5 = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/kategori").then(function (_ref2) {
-          var data = _ref2.data;
-          return _this5.kategoris = data;
-        });
-        axios.get("api/tarif").then(function (_ref3) {
-          var data = _ref3.data;
-          return _this5.tarifs = data;
-        });
-      }
+      axios.get("api/kategori").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.kategoris = data;
+      });
+      axios.get("api/tarif").then(function (_ref3) {
+        var data = _ref3.data;
+        return _this5.tarifs = data;
+      });
     },
     createUser: function createUser() {
       var _this6 = this;

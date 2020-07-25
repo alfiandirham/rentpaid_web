@@ -318,10 +318,8 @@ export default {
       });
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/kategori").then(({ data }) => (this.kategoris = data));
-        axios.get("api/tarif").then(({ data }) => (this.tarifs = data));
-      }
+      axios.get("api/kategori").then(({ data }) => (this.kategoris = data));
+      axios.get("api/tarif").then(({ data }) => (this.tarifs = data));
     },
     createUser() {
       this.$Progress.start();
