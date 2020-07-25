@@ -231,14 +231,11 @@ export default {
       this.is = this.is.filter((item) => item !== i);
     },
     jumlahData(i) {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios
-          .get("api/kategori/" + document.getElementById("kategori" + i).value)
-          .then(({ data }) => {
-            document.getElementById("harga" + i).value =
-              "Rp. " + data.data.tarif;
-          });
-      }
+      axios
+        .get("api/kategori/" + document.getElementById("kategori" + i).value)
+        .then(({ data }) => {
+          document.getElementById("harga" + i).value = "Rp. " + data.data.tarif;
+        });
       this.inc += 1;
       this.is.push(this.inc);
     },

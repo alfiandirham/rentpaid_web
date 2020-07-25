@@ -252,11 +252,9 @@ export default {
   },
   methods: {
     setTarif() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios
-          .get("api/tarif/" + this.form.tarif_id)
-          .then(({ data }) => (this.tarif = data));
-      }
+      axios
+        .get("api/tarif/" + this.form.tarif_id)
+        .then(({ data }) => (this.tarif = data));
     },
     checkall() {
       this.cekall ? (this.cekall = false) : (this.cekall = true);

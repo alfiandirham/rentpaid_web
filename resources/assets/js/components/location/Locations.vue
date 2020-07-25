@@ -380,14 +380,12 @@ export default {
   },
   methods: {
     filtering(q) {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios
-          .get("api/findLocation?q=" + q)
-          .then((data) => {
-            this.locations = data.data;
-          })
-          .catch(() => {});
-      }
+      axios
+        .get("api/findLocation?q=" + q)
+        .then((data) => {
+          this.locations = data.data;
+        })
+        .catch(() => {});
     },
     checkall() {
       this.cekall ? (this.cekall = false) : (this.cekall = true);

@@ -352,9 +352,7 @@ export default {
       });
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/setoran").then(({ data }) => (this.setorans = data));
-      }
+      axios.get("api/setoran").then(({ data }) => (this.setorans = data));
     },
     createUser() {
       this.$Progress.start();

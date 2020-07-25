@@ -72200,11 +72200,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     filtering: function filtering(q) {
       var _this = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/findPenyewa?q=" + q).then(function (data) {
-          _this.users = data.data;
-        }).catch(function () {});
-      }
+      axios.get("api/findPenyewa?q=" + q).then(function (data) {
+        _this.users = data.data;
+      }).catch(function () {});
     },
     checkall: function checkall() {
       this.cekall ? this.cekall = false : this.cekall = true;
@@ -73603,11 +73601,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filtering: function filtering(q) {
       var _this = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/findLocation?q=" + q).then(function (data) {
-          _this.locations = data.data;
-        }).catch(function () {});
-      }
+      axios.get("api/findLocation?q=" + q).then(function (data) {
+        _this.locations = data.data;
+      }).catch(function () {});
     },
     checkall: function checkall() {
       this.cekall ? this.cekall = false : this.cekall = true;
@@ -77049,13 +77045,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     jumlahData: function jumlahData(i) {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/kategori/" + document.getElementById("kategori" + i).value).then(function (_ref) {
-          var data = _ref.data;
+      axios.get("api/kategori/" + document.getElementById("kategori" + i).value).then(function (_ref) {
+        var data = _ref.data;
 
-          document.getElementById("harga" + i).value = "Rp. " + data.data.tarif;
-        });
-      }
+        document.getElementById("harga" + i).value = "Rp. " + data.data.tarif;
+      });
       this.inc += 1;
       this.is.push(this.inc);
     },
@@ -78150,12 +78144,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     loadData: function loadData() {
       var _this4 = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/setoran").then(function (_ref) {
-          var data = _ref.data;
-          return _this4.setorans = data;
-        });
-      }
+      axios.get("api/setoran").then(function (_ref) {
+        var data = _ref.data;
+        return _this4.setorans = data;
+      });
     },
     createUser: function createUser() {
       var _this5 = this;
@@ -78996,11 +78988,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     filtering: function filtering(q) {
       var _this = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/findTransaksi?q=" + q).then(function (data) {
-          _this.transaksis = data.data;
-        }).catch(function () {});
-      }
+      axios.get("api/findTransaksi?q=" + q).then(function (data) {
+        _this.transaksis = data.data;
+      }).catch(function () {});
     },
     updateUser: function updateUser() {
       var _this2 = this;
@@ -82485,12 +82475,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     setTarif: function setTarif() {
       var _this = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/tarif/" + this.form.tarif_id).then(function (_ref) {
-          var data = _ref.data;
-          return _this.tarif = data;
-        });
-      }
+      axios.get("api/tarif/" + this.form.tarif_id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.tarif = data;
+      });
     },
     checkall: function checkall() {
       this.cekall ? this.cekall = false : this.cekall = true;
