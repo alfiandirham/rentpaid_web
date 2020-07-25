@@ -79942,12 +79942,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -80192,51 +80186,54 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12 mt-2" }, [
                             _c("div", { staticClass: "row" }, [
-                              _vm._m(1),
+                              _c(
+                                "div",
+                                { staticClass: "col-4" },
+                                [
+                                  _c("label", { staticClass: "mb-2 labelin" }, [
+                                    _vm._v("Detail Pembayaran")
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(Object.keys(_vm.form.detail), function(
+                                    v
+                                  ) {
+                                    return _c(
+                                      "p",
+                                      {
+                                        key: v,
+                                        staticClass: "teksin text-capitalize"
+                                      },
+                                      [_vm._v(_vm._s(v))]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
                               _vm._v(" "),
-                              _c("div", { staticClass: "col-6" }, [
-                                _c("label", { staticClass: "mb-2 labelin" }, [
-                                  _vm._v(" ")
-                                ]),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "teksin" }, [
-                                  _vm._v("Rp. " + _vm._s(_vm.form.detail.bop))
-                                ]),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "teksin" }, [
-                                  _vm._v("Rp. " + _vm._s(_vm.form.detail.air))
-                                ]),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "teksin" }, [
-                                  _vm._v(
-                                    "Rp. " + _vm._s(_vm.form.detail.listrik)
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "teksin" }, [
-                                  _vm._v(
-                                    "Rp. " + _vm._s(_vm.form.detail.barang)
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "teksin" }, [
-                                  _vm._v(
-                                    "Rp. " + _vm._s(_vm.form.detail.sampah)
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "teksin" }, [
-                                  _vm._v(
-                                    "Rp. " + _vm._s(_vm.form.detail.permeter)
-                                  )
-                                ])
-                              ])
+                              _c(
+                                "div",
+                                { staticClass: "col-6" },
+                                [
+                                  _c("label", { staticClass: "mb-2 labelin" }, [
+                                    _vm._v(" ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.form.detail, function(v) {
+                                    return _c(
+                                      "p",
+                                      { key: v, staticClass: "teksin" },
+                                      [_vm._v("Rp. " + _vm._s(v))]
+                                    )
+                                  })
+                                ],
+                                2
+                              )
                             ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12 mt-2" }, [
                             _c("div", { staticClass: "row" }, [
-                              _vm._m(2),
+                              _vm._m(1),
                               _vm._v(" "),
                               _c("div", { staticClass: "col-6" }, [
                                 _c("p", { staticClass: "teksin-bold" }, [
@@ -80271,7 +80268,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card" }, [
-        _vm._m(3),
+        _vm._m(2),
         _vm._v(" "),
         _c("div", { staticClass: "card-content collapse show" }, [
           _c("div", { staticClass: "card-body" }, [
@@ -80458,12 +80455,12 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "table-responsive" }, [
                 _c("table", { staticClass: "table table-hover mb-0" }, [
-                  _vm._m(5),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -80529,28 +80526,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", [
       _c("h2", { staticClass: "head-text" }, [_vm._v("Tunggakan Pembayaran")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4" }, [
-      _c("label", { staticClass: "mb-2 labelin" }, [
-        _vm._v("Detail Pembayaran")
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "teksin" }, [_vm._v("BOP")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "teksin" }, [_vm._v("Air")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "teksin" }, [_vm._v("Listrik")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "teksin" }, [_vm._v("Barang Masuk")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "teksin" }, [_vm._v("Sampah")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "teksin" }, [_vm._v("Sewa Permeter")])
     ])
   },
   function() {

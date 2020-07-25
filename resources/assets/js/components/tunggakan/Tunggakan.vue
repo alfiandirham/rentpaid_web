@@ -57,21 +57,15 @@
                         <div class="row">
                           <div class="col-4">
                             <label class="mb-2 labelin">Detail Pembayaran</label>
-                            <p class="teksin">BOP</p>
-                            <p class="teksin">Air</p>
-                            <p class="teksin">Listrik</p>
-                            <p class="teksin">Barang Masuk</p>
-                            <p class="teksin">Sampah</p>
-                            <p class="teksin">Sewa Permeter</p>
+                            <p
+                              v-for="v in Object.keys(form.detail)"
+                              :key="v"
+                              class="teksin text-capitalize"
+                            >{{v}}</p>
                           </div>
                           <div class="col-6">
                             <label class="mb-2 labelin">&nbsp;</label>
-                            <p class="teksin">Rp. {{form.detail.bop}}</p>
-                            <p class="teksin">Rp. {{form.detail.air}}</p>
-                            <p class="teksin">Rp. {{form.detail.listrik}}</p>
-                            <p class="teksin">Rp. {{form.detail.barang}}</p>
-                            <p class="teksin">Rp. {{form.detail.sampah}}</p>
-                            <p class="teksin">Rp. {{form.detail.permeter}}</p>
+                            <p v-for="v in form.detail" :key="v" class="teksin">Rp. {{v}}</p>
                           </div>
                         </div>
                       </div>
