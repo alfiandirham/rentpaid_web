@@ -79053,12 +79053,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     loadData: function loadData() {
       var _this5 = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/transaksi").then(function (_ref) {
-          var data = _ref.data;
-          return _this5.transaksis = data;
-        });
-      }
+      axios.get("api/transaksi").then(function (_ref) {
+        var data = _ref.data;
+        return _this5.transaksis = data;
+      });
     },
     createUser: function createUser() {
       var _this6 = this;
@@ -79960,11 +79958,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     filtering: function filtering(q) {
       var _this = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/findTunggakan?q=" + q).then(function (data) {
-          _this.transaksis = data.data;
-        }).catch(function () {});
-      }
+      axios.get("api/findTunggakan?q=" + q).then(function (data) {
+        _this.transaksis = data.data;
+      }).catch(function () {});
     },
     updateUser: function updateUser() {
       var _this2 = this;
@@ -80027,12 +80023,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     loadData: function loadData() {
       var _this5 = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/tunggakan").then(function (_ref) {
-          var data = _ref.data;
-          return _this5.transaksis = data;
-        });
-      }
+      axios.get("api/tunggakan").then(function (_ref) {
+        var data = _ref.data;
+        return _this5.transaksis = data;
+      });
     },
     createUser: function createUser() {
       var _this6 = this;

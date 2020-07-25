@@ -304,9 +304,7 @@ export default {
       });
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/transaksi").then(({ data }) => (this.transaksis = data));
-      }
+      axios.get("api/transaksi").then(({ data }) => (this.transaksis = data));
     },
     createUser() {
       this.$Progress.start();

@@ -240,14 +240,12 @@ export default {
   },
   methods: {
     filtering(q) {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios
-          .get("api/findTunggakan?q=" + q)
-          .then((data) => {
-            this.transaksis = data.data;
-          })
-          .catch(() => {});
-      }
+      axios
+        .get("api/findTunggakan?q=" + q)
+        .then((data) => {
+          this.transaksis = data.data;
+        })
+        .catch(() => {});
     },
     updateUser() {
       this.$Progress.start();
@@ -306,9 +304,7 @@ export default {
       });
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/tunggakan").then(({ data }) => (this.transaksis = data));
-      }
+      axios.get("api/tunggakan").then(({ data }) => (this.transaksis = data));
     },
     createUser() {
       this.$Progress.start();
