@@ -200,7 +200,7 @@
           </div>
         </div>
       </div>
-      <div class="card mt-7">
+      <div v-if="!this.$gate.isOwner()" class="card mt-7">
         <div class="card-header">
           <h4 class="card-title">Filters</h4>
           <a class="heading-elements-toggle">
@@ -225,7 +225,7 @@
                       </select>
                     </fieldset>
                   </div>
-                  <div class="col-12 col-sm-6 col-lg-3">
+                  <div v-if="this.$gate.isAuthor()" class="col-12 col-sm-6 col-lg-3">
                     <label for="location-list-status">Status</label>
                     <fieldset class="form-group">
                       <select @change="e =>filtering(e.target.value)" class="form-control">
@@ -244,7 +244,7 @@
       <!-- users filter end -->
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
-        <div class="card">
+        <div class="card" :class="this.$gate.isOwner() ? 'mt-7' :''">
           <div class="card-content">
             <div class="card-body">
               <div class="row">
@@ -482,10 +482,8 @@ export default {
       });
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/owner").then(({ data }) => (this.users = data));
-        axios.get("api/lokasi").then(({ data }) => (this.locations = data));
-      }
+      axios.get("api/owner").then(({ data }) => (this.users = data));
+      axios.get("api/lokasi").then(({ data }) => (this.locations = data));
     },
     createData() {
       this.$Progress.start();

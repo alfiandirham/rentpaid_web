@@ -73705,16 +73705,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     loadData: function loadData() {
       var _this6 = this;
 
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/owner").then(function (_ref2) {
-          var data = _ref2.data;
-          return _this6.users = data;
-        });
-        axios.get("api/lokasi").then(function (_ref3) {
-          var data = _ref3.data;
-          return _this6.locations = data;
-        });
-      }
+      axios.get("api/owner").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this6.users = data;
+      });
+      axios.get("api/lokasi").then(function (_ref3) {
+        var data = _ref3.data;
+        return _this6.locations = data;
+      });
     },
     createData: function createData() {
       var _this7 = this;
@@ -74406,317 +74404,338 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card mt-7" }, [
-        _vm._m(3),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-content collapse show" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "users-list-filter" }, [
-              _c("form", [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "location-list-owner" } }, [
-                      _vm._v("Owner")
-                    ]),
-                    _vm._v(" "),
-                    _c("fieldset", { staticClass: "form-group" }, [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control",
-                          on: {
-                            change: function(e) {
-                              return _vm.filtering(e.target.value)
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "uvuvwu" } }, [
-                            _vm._v("All")
-                          ]),
-                          _vm._v(" "),
-                          _vm._l(_vm.users.data, function(user) {
-                            return _c(
-                              "option",
-                              { key: user.id, domProps: { value: user.id } },
-                              [_vm._v(_vm._s(user.name))]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "location-list-status" } }, [
-                      _vm._v("Status")
-                    ]),
-                    _vm._v(" "),
-                    _c("fieldset", { staticClass: "form-group" }, [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control",
-                          on: {
-                            change: function(e) {
-                              return _vm.filtering(e.target.value)
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "uvuvwu" } }, [
-                            _vm._v("All")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Active")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "uvuvwe" } }, [
-                            _vm._v("Deactivated")
-                          ])
-                        ]
-                      )
+      !this.$gate.isOwner()
+        ? _c("div", { staticClass: "card mt-7" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-content collapse show" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "users-list-filter" }, [
+                  _c("form", [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
+                        _c("label", { attrs: { for: "location-list-owner" } }, [
+                          _vm._v("Owner")
+                        ]),
+                        _vm._v(" "),
+                        _c("fieldset", { staticClass: "form-group" }, [
+                          _c(
+                            "select",
+                            {
+                              staticClass: "form-control",
+                              on: {
+                                change: function(e) {
+                                  return _vm.filtering(e.target.value)
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "uvuvwu" } }, [
+                                _vm._v("All")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.users.data, function(user) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: user.id,
+                                    domProps: { value: user.id }
+                                  },
+                                  [_vm._v(_vm._s(user.name))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      this.$gate.isAuthor()
+                        ? _c(
+                            "div",
+                            { staticClass: "col-12 col-sm-6 col-lg-3" },
+                            [
+                              _c(
+                                "label",
+                                { attrs: { for: "location-list-status" } },
+                                [_vm._v("Status")]
+                              ),
+                              _vm._v(" "),
+                              _c("fieldset", { staticClass: "form-group" }, [
+                                _c(
+                                  "select",
+                                  {
+                                    staticClass: "form-control",
+                                    on: {
+                                      change: function(e) {
+                                        return _vm.filtering(e.target.value)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "uvuvwu" } },
+                                      [_vm._v("All")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "1" } }, [
+                                      _vm._v("Active")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "uvuvwe" } },
+                                      [_vm._v("Deactivated")]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
                     ])
                   ])
                 ])
               ])
             ])
           ])
-        ])
-      ]),
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { attrs: { id: "basic-examples" } }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-content" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
-                    },
-                    [
-                      _c("div", { staticClass: "mb-1 mb-sm-0" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.search,
-                              expression: "search"
-                            }
-                          ],
-                          staticClass:
-                            "ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0",
-                          attrs: {
-                            type: "search",
-                            id: "filter-text-box",
-                            placeholder: "Search...."
-                          },
-                          domProps: { value: _vm.search },
-                          on: {
-                            keyup: _vm.searchit,
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.search = $event.target.value
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ag-btns d-flex flex-wrap" }, [
-                        _c("div", { staticClass: "action-btns" }, [
-                          _c("div", { staticClass: "btn-dropdown" }, [
-                            _c(
-                              "div",
+        _c(
+          "div",
+          { staticClass: "card", class: this.$gate.isOwner() ? "mt-7" : "" },
+          [
+            _c("div", { staticClass: "card-content" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
+                      },
+                      [
+                        _c("div", { staticClass: "mb-1 mb-sm-0" }, [
+                          _c("input", {
+                            directives: [
                               {
-                                staticClass:
-                                  "btn-group dropdown actions-dropodown"
-                              },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-white px-2 py-75 dropdown-toggle waves-effect waves-light",
-                                    attrs: {
-                                      type: "button",
-                                      "data-toggle": "dropdown",
-                                      "aria-haspopup": "true",
-                                      "aria-expanded": "false"
-                                    }
-                                  },
-                                  [_vm._v("Actions")]
-                                ),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "dropdown-menu" }, [
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.search,
+                                expression: "search"
+                              }
+                            ],
+                            staticClass:
+                              "ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0",
+                            attrs: {
+                              type: "search",
+                              id: "filter-text-box",
+                              placeholder: "Search...."
+                            },
+                            domProps: { value: _vm.search },
+                            on: {
+                              keyup: _vm.searchit,
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.search = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "ag-btns d-flex flex-wrap" }, [
+                          _c("div", { staticClass: "action-btns" }, [
+                            _c("div", { staticClass: "btn-dropdown" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn-group dropdown actions-dropodown"
+                                },
+                                [
                                   _c(
                                     "button",
                                     {
-                                      staticClass: "dropdown-item",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.nonAll(
-                                            "Disable data",
-                                            "lokasi"
-                                          )
-                                        }
+                                      staticClass:
+                                        "btn btn-white px-2 py-75 dropdown-toggle waves-effect waves-light",
+                                      attrs: {
+                                        type: "button",
+                                        "data-toggle": "dropdown",
+                                        "aria-haspopup": "true",
+                                        "aria-expanded": "false"
                                       }
                                     },
-                                    [
-                                      _c("i", {
-                                        staticClass: "feather icon-trash-2"
-                                      }),
-                                      _vm._v(
-                                        "\n                              Non Active\n                            "
-                                      )
-                                    ]
+                                    [_vm._v("Actions")]
                                   ),
                                   _vm._v(" "),
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "dropdown-item",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.nonAll(
-                                            "Active data",
-                                            "lokasi2"
-                                          )
+                                  _c("div", { staticClass: "dropdown-menu" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "dropdown-item",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.nonAll(
+                                              "Disable data",
+                                              "lokasi"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "feather icon-activity"
-                                      }),
-                                      _vm._v(
-                                        "\n                              Active\n                            "
-                                      )
-                                    ]
-                                  )
-                                ])
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "feather icon-trash-2"
+                                        }),
+                                        _vm._v(
+                                          "\n                              Non Active\n                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "dropdown-item",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.nonAll(
+                                              "Active data",
+                                              "lokasi2"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "feather icon-activity"
+                                        }),
+                                        _vm._v(
+                                          "\n                              Active\n                            "
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c("table", { staticClass: "table table-hover mb-0" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.locations.data, function(location) {
+                        return _c("tr", { key: location.id }, [
+                          _c("th", { attrs: { scope: "row" } }, [
+                            _c("input", {
+                              attrs: { type: "checkbox" },
+                              domProps: { value: location.id }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(location.lokasi))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(location.kode))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(location.alamat))]),
+                          _vm._v(" "),
+                          location.status === 1
+                            ? _c("td", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "badge badge-pill badge-light-success"
+                                  },
+                                  [_vm._v("Active")]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          location.status === 0
+                            ? _c("td", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "badge badge-pill badge-light-warning"
+                                  },
+                                  [_vm._v("Non Active")]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(location.owner))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "a",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editModal(location)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass:
+                                    "users-edit-icon feather icon-edit-1 mr-50"
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteData(location.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass:
+                                    "users-delete-icon feather icon-trash-2"
+                                })
                               ]
                             )
                           ])
                         ])
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "table-responsive" }, [
-                _c("table", { staticClass: "table table-hover mb-0" }, [
-                  _vm._m(4),
+                      }),
+                      0
+                    )
+                  ]),
                   _vm._v(" "),
                   _c(
-                    "tbody",
-                    _vm._l(_vm.locations.data, function(location) {
-                      return _c("tr", { key: location.id }, [
-                        _c("th", { attrs: { scope: "row" } }, [
-                          _c("input", {
-                            attrs: { type: "checkbox" },
-                            domProps: { value: location.id }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(location.lokasi))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(location.kode))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(location.alamat))]),
-                        _vm._v(" "),
-                        location.status === 1
-                          ? _c("td", [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "badge badge-pill badge-light-success"
-                                },
-                                [_vm._v("Active")]
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        location.status === 0
-                          ? _c("td", [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "badge badge-pill badge-light-warning"
-                                },
-                                [_vm._v("Non Active")]
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(location.owner))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "a",
-                            {
-                              on: {
-                                click: function($event) {
-                                  return _vm.editModal(location)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass:
-                                  "users-edit-icon feather icon-edit-1 mr-50"
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              on: {
-                                click: function($event) {
-                                  return _vm.deleteData(location.id)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass:
-                                  "users-delete-icon feather icon-trash-2"
-                              })
-                            ]
-                          )
-                        ])
-                      ])
-                    }),
-                    0
+                    "div",
+                    { staticClass: "mt-2 pl-1" },
+                    [
+                      _c("pagination", {
+                        attrs: { limit: 5, data: _vm.locations },
+                        on: { "pagination-change-page": _vm.getResults }
+                      })
+                    ],
+                    1
                   )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "mt-2 pl-1" },
-                  [
-                    _c("pagination", {
-                      attrs: { limit: 5, data: _vm.locations },
-                      on: { "pagination-change-page": _vm.getResults }
-                    })
-                  ],
-                  1
-                )
+                ])
               ])
             ])
-          ])
-        ])
+          ]
+        )
       ])
     ])
   ])
