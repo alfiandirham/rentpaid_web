@@ -43,6 +43,9 @@ class UserController extends Controller
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
             return User::where("status", true)->where('type', 'owner')->latest()->paginate(20);
         }
+        if (\Gate::allows('isOwner') ){
+            return User::where("status", true)->where('type', 'owner')->where('id', \Auth::user()->id)->latest()->paginate(20);
+        }
     }
 
     public function store(Request $request)

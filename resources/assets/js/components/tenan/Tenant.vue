@@ -222,13 +222,13 @@ export default {
         id: "",
         kategori_id: "",
         jumlah: "",
-        lokasi_id: ""
-      })
+        lokasi_id: "",
+      }),
     };
   },
   methods: {
     popData(i) {
-      this.is = this.is.filter(item => item !== i);
+      this.is = this.is.filter((item) => item !== i);
     },
     jumlahData(i) {
       if (this.$gate.isAdminOrAuthor()) {
@@ -269,8 +269,8 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then(result => {
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
         // Send request to the server
         if (result.value) {
           this.form
@@ -297,7 +297,7 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/lokasitenan?page=" + page).then(response => {
+      axios.get("api/lokasitenan?page=" + page).then((response) => {
         this.tenants = response.data;
       });
     },
@@ -309,21 +309,21 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then(result => {
+        confirmButtonText: "Yes",
+      }).then((result) => {
         this.$Progress.start();
         // Send request to the server
         if (result.value) {
           // Iterate each checkbox
-          $(":checkbox").each(function() {
+          $(":checkbox").each(function () {
             if (this.checked) {
               if (this.value == "on") return true;
               axios
                 .delete("/api/" + api + "/" + this.value)
-                .then(data => {
+                .then((data) => {
                   toast({
                     type: "success",
-                    title: text + " in successfully"
+                    title: text + " in successfully",
                   });
                 })
                 .catch(() => {});
@@ -335,14 +335,12 @@ export default {
       });
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/lokasitenan").then(({ data }) => (this.tenants = data));
-        axios.get("api/kategori").then(({ data }) => (this.kategoris = data));
-        axios.get("api/lokasi").then(({ data }) => (this.locations = data));
-      }
+      axios.get("api/lokasitenan").then(({ data }) => (this.tenants = data));
+      axios.get("api/kategori").then(({ data }) => (this.kategoris = data));
+      axios.get("api/lokasi").then(({ data }) => (this.locations = data));
     },
     createData() {
-      this.is.forEach(i => {
+      this.is.forEach((i) => {
         this.$Progress.start();
         this.form.jumlah = document.getElementById("jumlah" + i).value;
         this.form.kategori_id = document.getElementById("kategori" + i).value;
@@ -353,7 +351,7 @@ export default {
             $("#addNew").modal("hide");
             toast({
               type: "success",
-              title: "Data Created in successfully"
+              title: "Data Created in successfully",
             });
             this.$Progress.finish();
           })
@@ -364,14 +362,14 @@ export default {
     },
     searchit: _.debounce(() => {
       Fire.$emit("searching");
-    }, 1000)
+    }, 1000),
   },
   created() {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
         .get("api/findLocationTenant?q=" + query)
-        .then(data => {
+        .then((data) => {
           this.tenants = data.data;
         })
         .catch(() => {});
@@ -382,19 +380,19 @@ export default {
     this.loadData();
   },
   mounted() {
-    $("#select-all").click(function(event) {
+    $("#select-all").click(function (event) {
       if (this.checked) {
         // Iterate each checkbox
-        $(":checkbox").each(function() {
+        $(":checkbox").each(function () {
           this.checked = true;
         });
       } else {
-        $(":checkbox").each(function() {
+        $(":checkbox").each(function () {
           this.checked = false;
         });
       }
     });
-  }
+  },
 };
 </script>
 

@@ -70,7 +70,7 @@ class LocationController extends Controller
 
     public function destroy($id)
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             $user = Lokasi::findOrFail($id);
 
             $user->status = 0;
@@ -82,7 +82,7 @@ class LocationController extends Controller
 
     public function destroy2($id)
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             $user = Lokasi::findOrFail($id);
 
             $user->status = 1;
@@ -143,14 +143,31 @@ class LocationController extends Controller
                     $users = TenantCollections::collection(Lokasi::latest()->paginate(20));
                 }
             }else{
-                $users = TenantCollections::collection(Lokasi::where(function($query) use ($search){
+                $users = TenantCollections::collection(Lokasi::where('status', true)->where(function($query) use ($search){
                     $query->where('lokasi','LIKE',"%$search%")
                             ->orWhere('status','LIKE',"%$search%")
                             ->orWhere('user_id','LIKE',"%$search%");
                 })->paginate(20));
+                if(\Gate::allows('isAuthor')){
+                    $users = TenantCollections::collection(Lokasi::where(function($query) use ($search){
+                        $query->where('lokasi','LIKE',"%$search%")
+                                ->orWhere('status','LIKE',"%$search%")
+                                ->orWhere('user_id','LIKE',"%$search%");
+                    })->paginate(20));
+                }
+                if(\Gate::allows('isOwner')){
+                    $users = TenantCollections::collection(Lokasi::where('status', true)->where('user_id', \Auth::user()->id)->where(function($query) use ($search){
+                        $query->where('lokasi','LIKE',"%$search%")
+                                ->orWhere('status','LIKE',"%$search%")
+                                ->orWhere('user_id','LIKE',"%$search%");
+                    })->paginate(20));
+                }
             }
         }else{
             $users = TenantCollections::collection(Lokasi::where('status', true)->latest()->paginate(20));
+            if(\Gate::allows('isOwner')){
+                $users = TenantCollections::collection(Lokasi::where('status', true)->where('user_id', \Auth::user()->id)->latest()->paginate(20));
+            }
         }
         return $users;
     }

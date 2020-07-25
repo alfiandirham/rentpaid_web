@@ -41,6 +41,9 @@ class TenantController extends Controller
         if (\Gate::allows('isAdmin')) {
             return TenantCollections::collection(Lokasi::where('status', true)->latest()->paginate(20));
         }
+        if (\Gate::allows('isOwner')) {
+            return TenantCollections::collection(\Auth::user()->location()->where('status', true)->latest()->paginate(20));
+        }
         if (\Gate::allows('isAuthor')) {
             return TenantCollections::collection(Lokasi::latest()->paginate(20));
         }
