@@ -85,18 +85,16 @@ export default {
         id: "",
         alamat: "",
         name: "",
-        photo: ""
-      })
+        photo: "",
+      }),
     };
   },
   methods: {
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("/api/company").then(({ data }) => {
-          this.form.fill(data);
-          this.user = data;
-        });
-      }
+      axios.get("/api/company").then(({ data }) => {
+        this.form.fill(data);
+        this.user = data;
+      });
     },
     updateUser() {
       this.$Progress.start();
@@ -129,23 +127,23 @@ export default {
         swal({
           type: "error",
           title: "Oops...",
-          text: "You are uploading a large file"
+          text: "You are uploading a large file",
         });
         return false;
       }
 
-      reader.onloadend = file => {
+      reader.onloadend = (file) => {
         this.form.photo = reader.result;
       };
       reader.readAsDataURL(file);
-    }
+    },
   },
   created() {
     Fire.$on("AfterCreate", () => {
       this.loadData();
     });
     this.loadData();
-  }
+  },
 };
 </script>
 

@@ -139,7 +139,7 @@
                   <div class="form-group">
                     <p>Tipe User</p>
                     <ul class="list-unstyled mb-0">
-                      <li class="d-inline-block mr-2">
+                      <li v-if="this.$gate.isAuthor()" class="d-inline-block mr-2">
                         <fieldset>
                           <div class="vs-radio-con">
                             <input
@@ -157,7 +157,10 @@
                           </div>
                         </fieldset>
                       </li>
-                      <li class="d-inline-block mr-2">
+                      <li
+                        v-if="this.$gate.isAdmin() || this.$gate.isAuthor() "
+                        class="d-inline-block mr-2"
+                      >
                         <fieldset>
                           <div class="vs-radio-con">
                             <input
@@ -175,7 +178,10 @@
                           </div>
                         </fieldset>
                       </li>
-                      <li class="d-inline-block mr-2">
+                      <li
+                        class="d-inline-block mr-2"
+                        v-if="this.$gate.isAdmin() || this.$gate.isAuthor() || this.$gate.isOwner()"
+                      >
                         <fieldset>
                           <div class="vs-radio-con">
                             <input
@@ -193,7 +199,10 @@
                           </div>
                         </fieldset>
                       </li>
-                      <li class="d-inline-block mr-2">
+                      <li
+                        v-if="this.$gate.isOwner() || this.$gate.isAuthor()"
+                        class="d-inline-block mr-2"
+                      >
                         <fieldset>
                           <div class="vs-radio-con">
                             <input
@@ -252,8 +261,8 @@ export default {
         status: "",
         ktp: "",
         photo: "",
-        lokasi_id: ""
-      })
+        lokasi_id: "",
+      }),
     };
   },
   methods: {
@@ -264,12 +273,10 @@ export default {
       this.form.fill(user);
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/auth").then(({ data }) => {
-          this.form.fill(data);
-          this.user = data;
-        });
-      }
+      axios.get("api/auth").then(({ data }) => {
+        this.form.fill(data);
+        this.user = data;
+      });
     },
     updateUser() {
       this.$Progress.start();
@@ -321,12 +328,12 @@ export default {
         swal({
           type: "error",
           title: "Oops...",
-          text: "You are uploading a large file"
+          text: "You are uploading a large file",
         });
         return false;
       }
 
-      reader.onloadend = file => {
+      reader.onloadend = (file) => {
         this.form.photo = reader.result;
       };
       reader.readAsDataURL(file);
@@ -340,21 +347,21 @@ export default {
           $("#addNew").modal("hide");
           toast({
             type: "success",
-            title: "User Created in successfully"
+            title: "User Created in successfully",
           });
           this.$Progress.finish();
         })
         .catch(() => {
           this.$Progress.fail();
         });
-    }
+    },
   },
   created() {
     Fire.$on("AfterCreate", () => {
       this.loadData();
     });
     this.loadData();
-  }
+  },
 };
 </script>
 
