@@ -155,7 +155,7 @@
           </div>
         </div>
       </div>
-      <div class="card mt-7">
+      <div v-if="this.$gate.isAuthor()" class="card mt-7">
         <div class="card-header">
           <h4 class="card-title">Filters</h4>
           <a class="heading-elements-toggle">
@@ -186,7 +186,7 @@
       <!-- users filter end -->
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
-        <div class="card">
+        <div class="card" :class="this.$gate.isAuthor() ? '': 'mt-7'">
           <div class="card-content">
             <div class="card-body">
               <div class="row">
@@ -385,9 +385,7 @@ export default {
       });
     },
     loadData() {
-      if (this.$gate.isAdminOrAuthor()) {
-        axios.get("api/penyewa").then(({ data }) => (this.users = data));
-      }
+      axios.get("api/penyewa").then(({ data }) => (this.users = data));
     },
     nonAll(text, api) {
       swal({

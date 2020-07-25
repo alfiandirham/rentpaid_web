@@ -325,7 +325,7 @@
       <!-- users filter end -->
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
-        <div class="card">
+        <div class="card" :class="!this.$gate.isAuthor() ? 'mt-7':''">
           <div class="card-content">
             <div class="card-body">
               <div class="row">

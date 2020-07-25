@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Penyewa as User;
+use App\Lokasi;
 
 class PenyewaController extends Controller
 {
@@ -16,12 +17,12 @@ class PenyewaController extends Controller
     public function index()
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin')) {
-            return User::where('status', true)->latest()->paginate(20);
-        }
+        // if (\Gate::allows('isAdmin')) {
+        // }
         if (\Gate::allows('isAuthor')) {
             return User::latest()->paginate(20);
         }
+        return \Auth::user()->penyewa()->where('status', true)->latest()->paginate(20);
     }
 
     public function collector()
