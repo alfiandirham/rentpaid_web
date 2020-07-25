@@ -32,6 +32,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Lokasi');
     }
 
+    public function penyewa() {
+        return $this->hasMany('App\Penyewa');
+    }
+
     public function transaksi() {
         return $this->hasMany('App\Transaksi');
     }

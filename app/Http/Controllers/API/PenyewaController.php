@@ -45,6 +45,7 @@ class PenyewaController extends Controller
         ]);
 
         ($request['status'] == 'false') ? $request->merge(['status' => 0]) : $request->merge(['status' => 1]);
+        $request->merge(['user_id' => \Auth::user()->id]);
 
         return User::create($request->all());
     }
@@ -115,7 +116,6 @@ class PenyewaController extends Controller
             $users = User::where('status', true)->latest()->paginate(20);
         }
         return $users;
-
     }
 }
 
