@@ -22,9 +22,9 @@ class TarifController extends Controller
         }
 
         if (\Gate::allows('isAdmin')) {
-            $id = \Auth::user()->user_id;
-            $user = User::findOrFail($id);
-            return $user->tarif()->latest()->paginate(20);
+            $id = \Auth::user();
+            $user = User::findOrFail($id->user_id);
+            return $user->tarif()->where('lokasi_id',$id->lokasi_id)->latest()->paginate(20);
         }
 
         if (\Gate::allows('isOwner')) {
@@ -54,9 +54,9 @@ class TarifController extends Controller
         ]);
 
         if (\Gate::allows('isAdmin')) {
-            $id = \Auth::user()->user_id;
-            $user = User::findOrFail($id);
-            $request->merge(['user_id' => $user->id]);
+            $id = \Auth::user();
+            $user = User::findOrFail($id->user_id);
+            $request->merge(['user_id' => $user->id, 'lokasi_id' => $id->lokasi_id]);
         }
 
         if (\Gate::allows('isOwner')) {

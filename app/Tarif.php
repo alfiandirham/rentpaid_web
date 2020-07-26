@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tarif extends Model
 {
     protected $fillable = [
-        'nama', 'bop', 'barang', 'listrik', 'sampah', 'air', 'permeter', 'user_id'
+        'nama', 'bop', 'barang', 'listrik', 'sampah', 'air', 'permeter', 'user_id', 'lokasi_id'
     ];
 
     public function kategori(){
