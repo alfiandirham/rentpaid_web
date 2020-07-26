@@ -152,7 +152,7 @@
                                 <input
                                   type="radio"
                                   v-model="form.type"
-                                  @change="showLocat()"
+                                  @change="showLocation()"
                                   name="type"
                                   value="admin"
                                 />

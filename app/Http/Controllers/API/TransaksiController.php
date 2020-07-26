@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Transaksi as TransaksiCollection;
 use App\Transaksi;
+use App\User;
 
 class TransaksiController extends Controller
 {
@@ -15,6 +16,13 @@ class TransaksiController extends Controller
     }
 
     public function index(){
+        if(\Gate::allows('isAdmin')){
+            $user = User::where([
+                "status" => true,
+                "user_id" => \Auth::user()->id
+            ]);
+            return TransaksiCollection::collection($user->transaksi()->where('status', '<>', 'menunggak')->latest()->paginate(20));
+        }
         return TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->latest()->paginate(20));
     }
 

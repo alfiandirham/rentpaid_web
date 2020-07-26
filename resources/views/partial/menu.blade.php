@@ -14,8 +14,10 @@
                 </li>
                 <li class=" navigation-header"><span>MASTER</span>
                 </li>
+                @cannot('isAdmin')
                 <li class=" nav-item"><router-link to="/locations"><i class="fa fa-map-marker"></i><span class="menu-title" data-i18n="Email">Lokasi</span></router-link>
                 </li>
+                @endcan
                 <li class=" nav-item"><a><i class="feather icon-box"></i><span class="menu-title">Tenant</span></a>
                     <ul class="menu-content">
                         <li><router-link to="/tenants"><i class="feather icon-circle"></i><span class="menu-item">Daftar Tenant</span></router-link>
