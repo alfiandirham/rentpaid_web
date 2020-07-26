@@ -19,11 +19,9 @@ class UserController extends Controller
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin')) {
-            $user = auth('api')->user();
             return User::where("type", 'collector')->where("status", true)->where('user_id', \Auth::user()->id)->latest()->paginate(20);
         }
         if (\Gate::allows('isOwner')) {
-            $user = auth('api')->user();
             return User::where('user_id', \Auth::user()->id)->where("type", 'admin')->where("status", true)->latest()->paginate(20);
         }
         if (\Gate::allows('isAuthor')) {
@@ -43,7 +41,9 @@ class UserController extends Controller
         if (\Gate::allows('isAuthor') ){
             return User::where("id", '!=' , $id)->where("type", "collector")->latest()->paginate(20);
         }
-        return User::where("id", '!=' , $id)->where("status", true)->where("type", "collector")->latest()->paginate(20);
+        if (\Gate::allows('isAdmin') ){
+            return User::where("type", 'collector')->where("status", true)->where('user_id', \Auth::user()->id)->latest()->paginate(20);
+        }
     }
 
     public function owner()

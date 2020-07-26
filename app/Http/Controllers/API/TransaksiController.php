@@ -73,7 +73,6 @@ class TransaksiController extends Controller
         }else{
             $transaksi = TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->latest()->paginate(20));
         }
-
         return $transaksi;
     }
 }
