@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kategori extends Model
 {
     protected $fillable = [
-        'nama', 'kode', 'tarif_id', 'user_id'
+        'nama', 'kode', 'tarif_id', 'user_id', 'lokasi_id'
     ];
 
     public function tarif(){
