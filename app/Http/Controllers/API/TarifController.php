@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Tarif;
+use App\User;
 
 class TarifController extends Controller
 {
@@ -16,8 +17,18 @@ class TarifController extends Controller
     public function index()
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
+        if (\Gate::allows('isAuthor')) {
             return Tarif::latest()->paginate(20);
+        }
+
+        if (\Gate::allows('isAdmin')) {
+            $id = \Auth::user()->user_id;
+            $user = User::findOrFail($id);
+            return $user->tarif()->latest()->paginate(20);
+        }
+
+        if (\Gate::allows('isOwner')) {
+            return \Auth::user()->tarif()->latest()->paginate(20);
         }
     }
 
@@ -41,6 +52,16 @@ class TarifController extends Controller
             'listrik' => 'required', 
             'sampah' => 'required'
         ]);
+
+        if (\Gate::allows('isAdmin')) {
+            $id = \Auth::user()->user_id;
+            $user = User::findOrFail($id);
+            $request->merge(['user_id' => $user->id]);
+        }
+
+        if (\Gate::allows('isOwner')) {
+            $request->merge(['user_id' => \Auth::user()->id]);
+        }
 
         return Tarif::create($request->all());
     }

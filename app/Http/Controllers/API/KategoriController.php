@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Kategori as KategoriCollection;
 use App\Kategori;
+use App\User;
 
 class KategoriController extends Controller
 {
@@ -17,8 +18,18 @@ class KategoriController extends Controller
     public function index()
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
+        if (\Gate::allows('isAuthor')) {
             return KategoriCollection::collection(Kategori::latest()->paginate(20));
+        }
+
+        if (\Gate::allows('isAdmin')) {
+            $id = \Auth::user()->user_id;
+            $user = User::findOrFail($id);
+            return KategoriCollection::collection($user->kategori()->latest()->paginate(20));
+        }
+
+        if (\Gate::allows('isOwner')) {
+            return KategoriCollection::collection(\Auth::user()->kategori()->latest()->paginate(20));
         }
     }
 
@@ -38,6 +49,16 @@ class KategoriController extends Controller
             'kode' => 'required', 
             'tarif_id' => 'required'
         ]);
+
+        if (\Gate::allows('isAdmin')) {
+            $id = \Auth::user()->user_id;
+            $user = User::findOrFail($id);
+            $request->merge(['user_id' => $user->id]);
+        }
+
+        if (\Gate::allows('isOwner')) {
+            $request->merge(['user_id' => \Auth::user()->id]);
+        }
 
         return new KategoriCollection(Kategori::create($request->all()));
     }
