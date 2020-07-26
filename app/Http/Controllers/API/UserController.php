@@ -20,11 +20,11 @@ class UserController extends Controller
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin')) {
             $user = auth('api')->user();
-            return User::where("type", 'collector')->where("status", true)->where("id", '!=', $user->id)->latest()->paginate(20);
+            return User::where("type", 'collector')->where("status", true)->where('user_id', \Auth::user()->id)->latest()->paginate(20);
         }
         if (\Gate::allows('isOwner')) {
             $user = auth('api')->user();
-            return User::where("type", 'admin')->where("status", true)->latest()->paginate(20);
+            return User::where('user_id', \Auth::user()->id)->where("type", 'admin')->where("status", true)->latest()->paginate(20);
         }
         if (\Gate::allows('isAuthor')) {
             $user = auth('api')->user();
@@ -49,11 +49,14 @@ class UserController extends Controller
     public function owner()
     {
         // $this->authorize('isAdmin');
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAuthor')) {
             return User::where("status", true)->where('type', 'owner')->latest()->paginate(20);
         }
         if (\Gate::allows('isOwner') ){
             return User::where("status", true)->where('type', 'owner')->where('id', \Auth::user()->id)->latest()->paginate(20);
+        }
+        if (\Gate::allows('isAdmin') ){
+            return User::where("status", true)->where('type', 'owner')->where('id', \Auth::user()->user_id)->latest()->paginate(20);
         }
     }
 
@@ -81,6 +84,7 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'type' => $request['type'],
+            'user_id' => \Auth::user()->id,
             'nohp' => $request['nohp'],
             'status' => $request['status'],
             'ktp' => $request['ktp'],

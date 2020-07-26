@@ -102,10 +102,9 @@ export default {
   computed: {
     myStyles() {
       return {
-        display: "row",
-        width: "1132px",
-        maxHeight: "450px",
-        padding: `10px`,
+        position: "relative",
+        height: "50vh",
+        width: "80vw",
       };
     },
   },

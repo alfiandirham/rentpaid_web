@@ -37,9 +37,10 @@ class TenantController extends Controller
 
     public function lokasiTenant()
     {
+        $id = \Auth::user()->user_id;
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin')) {
-            return TenantCollections::collection(Lokasi::where('status', true)->latest()->paginate(20));
+            return TenantCollections::collection(User::where('id',$id)->first()->location()->where('status', true)->latest()->paginate(20));
         }
         if (\Gate::allows('isOwner')) {
             return TenantCollections::collection(\Auth::user()->location()->where('status', true)->latest()->paginate(20));
