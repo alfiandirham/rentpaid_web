@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Setoran as SetoranCollection;
 use App\Setoran;
+use App\User;
 
 class SetoranController extends Controller
 {
@@ -15,6 +16,13 @@ class SetoranController extends Controller
     }
 
     public function index(){
+        if (\Gate::allows('isAdmin')) {
+            return SetoranCollection::collection(Setoran::where('staff_id', \Auth::user()->id)->latest()->paginate(20));
+        }
+
+        if (\Gate::allows('isOwner')) {
+            return SetoranCollection::collection(Setoran::where('user_id', \Auth::user()->id)->latest()->paginate(20));
+        }
         return SetoranCollection::collection(Setoran::latest()->paginate(20));
     }
 
@@ -26,6 +34,16 @@ class SetoranController extends Controller
             'tanggal' => 'required|date',
             'jumlah' => 'required',
         ]);
+
+        if (\Gate::allows('isAdmin')) {
+            $id = \Auth::user();
+            $user = User::findOrFail($id->user_id);
+            $req->merge(['user_id' => $user->id, 'lokasi_id' => $id->lokasi_id]);
+        }
+
+        if (\Gate::allows('isOwner')) {
+            $req->merge(['user_id' => \Auth::user()->id]);
+        }
 
         $req->merge(['staff_id' => $staff->id]);
 
