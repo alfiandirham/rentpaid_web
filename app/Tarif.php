@@ -13,4 +13,8 @@ class Tarif extends Model
     public function kategori(){
         return $this->hasMany('App\Kategori');
     }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

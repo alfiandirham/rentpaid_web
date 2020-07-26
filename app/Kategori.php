@@ -17,4 +17,8 @@ class Kategori extends Model
     public function tenant(){
         return $this->hasMany('App\Tenant');
     }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

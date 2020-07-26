@@ -43,4 +43,12 @@ class User extends Authenticatable
     public function lokasi() {
         return $this->belongsTo('App\Lokasi');
     }
+
+    public function tarif(){
+        return $this->hasMany('App\Tarif');
+    }
+
+    public function kategori(){
+        return $this->hasMany('App\Kategori');
+    }
 }
