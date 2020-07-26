@@ -24,9 +24,9 @@ class PenyewaController extends Controller
             return User::latest()->paginate(20);
         }
         if (\Gate::allows('isAdmin')) {
-            $id = \Auth::user()->user_id;
-            $user = User2::findOrFail($id);
-            return $user->penyewa()->where('status', true)->latest()->paginate(20);
+            $id = \Auth::user();
+            $user = User2::findOrFail($id->user_id);
+            return $user->penyewa()->where(['status' => true, 'lokasi_id' => $id->lokasi->id])->latest()->paginate(20);
         }
         return \Auth::user()->penyewa()->where('status', true)->latest()->paginate(20);
     }
@@ -53,9 +53,9 @@ class PenyewaController extends Controller
 
         ($request['status'] == 'false') ? $request->merge(['status' => 0]) : $request->merge(['status' => 1]);
         if (\Gate::allows('isAdmin')) {
-            $id = \Auth::user()->user_id;
-            $user = User2::findOrFail($id);
-            $request->merge(['user_id' => $user->id]);
+            $id = \Auth::user();
+            $user = User2::findOrFail($id->user_id);
+            $request->merge(['user_id' => $user->id, 'lokasi_id' => $id->lokasi_id]);
         }
 
         if (\Gate::allows('isOwner')) {

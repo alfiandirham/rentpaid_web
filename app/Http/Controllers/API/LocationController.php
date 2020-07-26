@@ -18,10 +18,10 @@ class LocationController extends Controller
 
     public function index()
     {
-        $id = \Auth::user()->user_id;
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin')) {
-            return Location::collection(User::where('id',$id)->first()->location()->where('status', true)->latest()->paginate(20));
+            $id = \Auth::user()->lokasi_id;
+            return Location::collection(Lokasi::where(['status' => true, 'id' => $id])->latest()->paginate(20));
         }
         if(\Gate::allows('isOwner')){
             return Location::collection(\Auth::user()->location()->where('status', true)->latest()->paginate(20));
