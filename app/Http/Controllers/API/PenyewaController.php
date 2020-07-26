@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Penyewa as User;
 use App\Lokasi;
+use App\User as User2;
 
 class PenyewaController extends Controller
 {
@@ -21,6 +22,11 @@ class PenyewaController extends Controller
         // }
         if (\Gate::allows('isAuthor')) {
             return User::latest()->paginate(20);
+        }
+        if (\Gate::allows('isAdmin')) {
+            $id = \Auth::user()->user_id;
+            $user = User2::findOrFail($id);
+            return $user->penyewa()->where('status', true)->latest()->paginate(20);
         }
         return \Auth::user()->penyewa()->where('status', true)->latest()->paginate(20);
     }
@@ -46,7 +52,15 @@ class PenyewaController extends Controller
         ]);
 
         ($request['status'] == 'false') ? $request->merge(['status' => 0]) : $request->merge(['status' => 1]);
-        $request->merge(['user_id' => \Auth::user()->id]);
+        if (\Gate::allows('isAdmin')) {
+            $id = \Auth::user()->user_id;
+            $user = User2::findOrFail($id);
+            $request->merge(['user_id' => $user->id]);
+        }
+
+        if (\Gate::allows('isOwner')) {
+            $request->merge(['user_id' => \Auth::user()->id]);
+        }
 
         return User::create($request->all());
     }
