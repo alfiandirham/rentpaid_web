@@ -15,6 +15,12 @@ class TunggakanController extends Controller
     }
 
     public function index(){
+        if(\Gate::allows('isAdmin')){
+            return TransaksiCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('status', 'menunggak')->latest()->paginate(20));
+        }
+        if(\Gate::allows('isOwner')){
+            return TransaksiCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('status', 'menunggak')->latest()->paginate(20));
+        }
         return TransaksiCollection::collection(Transaksi::where('status', '=', 'menunggak')->latest()->paginate(20));
     }
 
