@@ -11,7 +11,7 @@
                 </div>
               </div>
               <h2 class="text-bold-700 text-success mt-1 mb-25">92.6k</h2>
-              <p class="mb-2">Pendapatan hari ini</p>
+              <p class="mb-2 clr-cl">Pendapatan hari ini</p>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@
                 </div>
               </div>
               <h2 class="text-bold-700 text-danger mt-1 mb-25">92.6k</h2>
-              <p class="mb-2">Pembayaran menunggak hari ini</p>
+              <p class="mb-2 clr-cl">Pembayaran menunggak hari ini</p>
             </div>
           </div>
         </div>
@@ -36,8 +36,8 @@
                   <i class="fa fa-codepen black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 mt-1 mb-25">97.5K</h2>
-              <p class="mb-2">Tenant disewa</p>
+              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">97.5K</h2>
+              <p class="mb-2 clr-cl">Tenant disewa</p>
             </div>
           </div>
         </div>
@@ -49,14 +49,37 @@
                   <i class="feather icon-users black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 mt-1 mb-25">97.5K</h2>
-              <p class="mb-2">Kolektor Aktif</p>
+              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">97.5K</h2>
+              <p class="mb-2 clr-cl">Kolektor Aktif</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="row min-vw-100">
-        <line-chart :styles="myStyles" :chart-data="datacollection"></line-chart>
+      <div class="row">
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <line-chart :styles="myStyles" :chart-data="datacollection"></line-chart>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="h4 mb-2 clr-bl">Pendapatan</h4>
+              <div class="row">
+                <div class="col">
+                  <span class="clr-cl">Bulan Ini</span>
+                  <h6 class="text-success mt-8">Rp 10k</h6>
+                </div>
+                <div class="col">
+                  <span class="clr-cl">Bulan Lalu</span>
+                  <h6 class="clr-bl mt-8">Rp 8k</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -77,17 +100,35 @@ export default {
   methods: {
     fillData() {
       this.datacollection = {
-        labels: [10, 20, 30],
+        labels: ["01", "05", "09", "13", "17", "21", "26", "31"],
         datasets: [
           {
             label: "Bulan Ini",
             backgroundColor: "#f87979",
-            data: [11, 21, 40],
+            data: [
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+            ],
           },
           {
             label: "Bulan Lalu",
             backgroundColor: "#f5f655",
-            data: [this.getRandomInt(), this.getRandomInt()],
+            data: [
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+            ],
           },
         ],
       };
@@ -103,8 +144,7 @@ export default {
     myStyles() {
       return {
         position: "relative",
-        height: "50vh",
-        width: "80vw",
+        width: "100%",
       };
     },
   },

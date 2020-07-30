@@ -479,3 +479,15 @@ ul>li>a.router-link-active.antidup {
 .mt-7 {
     margin-top: 8rem;
 }
+
+.clr-bl {
+    color: #174865;
+}
+
+.mt-8 {
+    margin-top: 8px;
+}
+
+.clr-cl {
+    color: #979797;
+}
