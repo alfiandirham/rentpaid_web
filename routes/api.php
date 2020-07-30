@@ -54,3 +54,4 @@ Route::delete('lokasi2/{id}', 'API\LocationController@destroy2');
 Route::delete('user2/{id}', 'API\UserController@destroy2');
 Route::delete('penyewa2/{id}', 'API\PenyewaController@destroy2');
 Route::delete('tenan2/{id}', 'API\TenantController@destroy2');
+Route::get('dashboard', 'API\DashboardController@index');

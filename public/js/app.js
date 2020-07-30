@@ -69652,7 +69652,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      datacollection: null
+      datacollection: null,
+      data: null
     };
   },
 
@@ -69673,6 +69674,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     getRandomInt: function getRandomInt() {
       return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
+    },
+    loadData: function loadData() {
+      var _this = this;
+
+      axios.get("api/dashboard").then(function (data) {
+        return _this.data = data.data;
+      });
     }
   },
   mounted: function mounted() {
@@ -69686,6 +69694,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         width: "100%"
       };
     }
+  },
+  created: function created() {
+    this.loadData();
   }
 });
 
@@ -86132,7 +86143,103 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "dashboard" }, [
     _c("section", { attrs: { id: "dashboard-analytics" } }, [
-      _vm._m(0),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-3 col-md-3 col-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card-header d-flex flex-column align-items-start pb-0"
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "h2",
+                  { staticClass: "text-bold-700 text-success mt-1 mb-25" },
+                  [_vm._v("Rp " + _vm._s(_vm.data.phari))]
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "mb-2 clr-cl" }, [
+                  _vm._v("Pendapatan hari ini")
+                ])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-3 col-md-3 col-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card-header d-flex flex-column align-items-start pb-0"
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "h2",
+                  { staticClass: "text-bold-700 text-danger mt-1 mb-25" },
+                  [_vm._v("Rp " + _vm._s(_vm.data.thari))]
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "mb-2 clr-cl" }, [
+                  _vm._v("Pembayaran menunggak hari ini")
+                ])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-3 col-md-3 col-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card-header d-flex flex-column align-items-start pb-0"
+              },
+              [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("h2", { staticClass: "text-bold-700 mt-1 mb-25 clr-bl" }, [
+                  _vm._v(_vm._s(_vm.data.tenant))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "mb-2 clr-cl" }, [
+                  _vm._v("Tenant disewa")
+                ])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-3 col-md-3 col-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card-header d-flex flex-column align-items-start pb-0"
+              },
+              [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("h2", { staticClass: "text-bold-700 mt-1 mb-25 clr-bl" }, [
+                  _vm._v(_vm._s(_vm.data.kolektor))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "mb-2 clr-cl" }, [
+                  _vm._v("Kolektor Aktif")
+                ])
+              ]
+            )
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-5" }, [
@@ -86153,7 +86260,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(4)
       ])
     ])
   ])
@@ -86163,117 +86270,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-3 col-md-3 col-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "card-header d-flex flex-column align-items-start pb-0"
-            },
-            [
-              _c("div", { staticClass: "avatar bg-rgba-success p-50 m-0" }, [
-                _c("div", { staticClass: "avatar-content" }, [
-                  _c("i", { staticClass: "fa fa-usd black font-medium-5" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "h2",
-                { staticClass: "text-bold-700 text-success mt-1 mb-25" },
-                [_vm._v("92.6k")]
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "mb-2 clr-cl" }, [
-                _vm._v("Pendapatan hari ini")
-              ])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3 col-md-3 col-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "card-header d-flex flex-column align-items-start pb-0"
-            },
-            [
-              _c("div", { staticClass: "avatar bg-rgba-danger p-50 m-0" }, [
-                _c("div", { staticClass: "avatar-content" }, [
-                  _c("i", { staticClass: "fa fa-usd black font-medium-5" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "h2",
-                { staticClass: "text-bold-700 text-danger mt-1 mb-25" },
-                [_vm._v("92.6k")]
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "mb-2 clr-cl" }, [
-                _vm._v("Pembayaran menunggak hari ini")
-              ])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3 col-md-3 col-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "card-header d-flex flex-column align-items-start pb-0"
-            },
-            [
-              _c("div", { staticClass: "avatar bg-rgba-success p-50 m-0" }, [
-                _c("div", { staticClass: "avatar-content" }, [
-                  _c("i", { staticClass: "fa fa-codepen black font-medium-5" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("h2", { staticClass: "text-bold-700 mt-1 mb-25 clr-bl" }, [
-                _vm._v("97.5K")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "mb-2 clr-cl" }, [_vm._v("Tenant disewa")])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3 col-md-3 col-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "card-header d-flex flex-column align-items-start pb-0"
-            },
-            [
-              _c("div", { staticClass: "avatar bg-rgba-success p-50 m-0" }, [
-                _c("div", { staticClass: "avatar-content" }, [
-                  _c("i", {
-                    staticClass: "feather icon-users black font-medium-5"
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("h2", { staticClass: "text-bold-700 mt-1 mb-25 clr-bl" }, [
-                _vm._v("97.5K")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "mb-2 clr-cl" }, [
-                _vm._v("Kolektor Aktif")
-              ])
-            ]
-          )
-        ])
+    return _c("div", { staticClass: "avatar bg-rgba-success p-50 m-0" }, [
+      _c("div", { staticClass: "avatar-content" }, [
+        _c("i", { staticClass: "fa fa-usd black font-medium-5" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "avatar bg-rgba-danger p-50 m-0" }, [
+      _c("div", { staticClass: "avatar-content" }, [
+        _c("i", { staticClass: "fa fa-usd black font-medium-5" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "avatar bg-rgba-success p-50 m-0" }, [
+      _c("div", { staticClass: "avatar-content" }, [
+        _c("i", { staticClass: "fa fa-codepen black font-medium-5" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "avatar bg-rgba-success p-50 m-0" }, [
+      _c("div", { staticClass: "avatar-content" }, [
+        _c("i", { staticClass: "feather icon-users black font-medium-5" })
       ])
     ])
   },

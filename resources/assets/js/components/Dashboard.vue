@@ -10,7 +10,7 @@
                   <i class="fa fa-usd black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 text-success mt-1 mb-25">92.6k</h2>
+              <h2 class="text-bold-700 text-success mt-1 mb-25">Rp {{data.phari}}</h2>
               <p class="mb-2 clr-cl">Pendapatan hari ini</p>
             </div>
           </div>
@@ -23,7 +23,7 @@
                   <i class="fa fa-usd black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 text-danger mt-1 mb-25">92.6k</h2>
+              <h2 class="text-bold-700 text-danger mt-1 mb-25">Rp {{data.thari}}</h2>
               <p class="mb-2 clr-cl">Pembayaran menunggak hari ini</p>
             </div>
           </div>
@@ -36,7 +36,7 @@
                   <i class="fa fa-codepen black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">97.5K</h2>
+              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">{{data.tenant}}</h2>
               <p class="mb-2 clr-cl">Tenant disewa</p>
             </div>
           </div>
@@ -49,7 +49,7 @@
                   <i class="feather icon-users black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">97.5K</h2>
+              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">{{data.kolektor}}</h2>
               <p class="mb-2 clr-cl">Kolektor Aktif</p>
             </div>
           </div>
@@ -95,6 +95,7 @@ export default {
   data() {
     return {
       datacollection: null,
+      data: null,
     };
   },
   methods: {
@@ -136,6 +137,9 @@ export default {
     getRandomInt() {
       return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
     },
+    loadData() {
+      axios.get("api/dashboard").then((data) => (this.data = data.data));
+    },
   },
   mounted() {
     this.fillData();
@@ -147,6 +151,9 @@ export default {
         width: "100%",
       };
     },
+  },
+  created() {
+    this.loadData();
   },
 };
 </script>
