@@ -31,6 +31,22 @@ class PenyewaController extends Controller
         return \Auth::user()->penyewa()->where('status', true)->latest()->paginate(20);
     }
 
+    public function index2()
+    {
+        // $this->authorize('isAdmin');
+        // if (\Gate::allows('isAdmin')) {
+        // }
+        if (\Gate::allows('isAuthor')) {
+            return User::all()->latest()->take(100)->get();
+        }
+        if (\Gate::allows('isAdmin')) {
+            $id = \Auth::user();
+            $user = User2::findOrFail($id->user_id);
+            return $user->penyewa()->where(['status' => true, 'lokasi_id' => $id->lokasi->id])->latest()->get();
+        }
+        return \Auth::user()->penyewa()->where('status', true)->latest()->get();
+    }
+
     public function collector()
     {
         // $this->authorize('isAdmin');

@@ -387,7 +387,7 @@
                         >
                           <option :value="tenant.penyewa_id">{{tenant.penyewa}}</option>
                           <option
-                            v-for="user in users.data"
+                            v-for="user in users"
                             :key="user.id"
                             :value="user.id"
                           >{{user.nama}}</option>
@@ -587,7 +587,7 @@ export default {
         });
     },
     loadData() {
-      axios.get("/api/penyewa").then(({ data }) => (this.users = data));
+      axios.get("/api/penyewa2").then(({ data }) => (this.users = data));
       axios.get("/api/kategori").then(({ data }) => (this.kategoris = data));
       axios
         .get("/api/lokasitenan/" + this.$route.params.id)
