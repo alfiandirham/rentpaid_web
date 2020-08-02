@@ -22,6 +22,18 @@ class DashboardController extends Controller
                     'status' => 'lunas'
                 ])->sum('dibayar');
             
+            $bini = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+                ->where([
+                    'owner_id' => \Auth::user()->id,
+                    'status' => 'lunas'
+                ]);
+            
+            $blalu = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+                ->where([
+                    'owner_id' => \Auth::user()->id,
+                    'status' => 'lunas'
+                ]);
+            
             $thari = Transaksi::where('tanggal', 'like' ,substr(now(), 0,10))
                 ->where([
                     'owner_id' => \Auth::user()->id,
@@ -54,7 +66,9 @@ class DashboardController extends Controller
                 'phari' => $phari,
                 'thari' => $thari,
                 'tenant' => $tenant.' dari '.$tot,
-                'kolektor' => $user
+                'kolektor' => $user,
+                'bini' => $bini->sum('dibayar'),
+                'blalu' => $blalu->sum('dibayar'),
             ];
         }
     }

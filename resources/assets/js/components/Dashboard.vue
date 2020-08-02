@@ -70,11 +70,11 @@
               <div class="row">
                 <div class="col">
                   <span class="clr-cl">Bulan Ini</span>
-                  <h6 class="text-success mt-8">Rp 10k</h6>
+                  <h6 class="text-success mt-8">Rp {{data.bini}}</h6>
                 </div>
                 <div class="col">
                   <span class="clr-cl">Bulan Lalu</span>
-                  <h6 class="clr-bl mt-8">Rp 8k</h6>
+                  <h6 class="clr-bl mt-8">Rp {{data.blalu}}</h6>
                 </div>
               </div>
             </div>

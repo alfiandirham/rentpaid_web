@@ -86260,7 +86260,33 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(4)
+        _c("div", { staticClass: "col-md-7" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h4", { staticClass: "h4 mb-2 clr-bl" }, [
+                _vm._v("Pendapatan")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col" }, [
+                  _c("span", { staticClass: "clr-cl" }, [_vm._v("Bulan Ini")]),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "text-success mt-8" }, [
+                    _vm._v("Rp " + _vm._s(_vm.data.bini))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col" }, [
+                  _c("span", { staticClass: "clr-cl" }, [_vm._v("Bulan Lalu")]),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "clr-bl mt-8" }, [
+                    _vm._v("Rp " + _vm._s(_vm.data.blalu))
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
       ])
     ])
   ])
@@ -86303,32 +86329,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "avatar bg-rgba-success p-50 m-0" }, [
       _c("div", { staticClass: "avatar-content" }, [
         _c("i", { staticClass: "feather icon-users black font-medium-5" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-7" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("h4", { staticClass: "h4 mb-2 clr-bl" }, [_vm._v("Pendapatan")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col" }, [
-              _c("span", { staticClass: "clr-cl" }, [_vm._v("Bulan Ini")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-success mt-8" }, [_vm._v("Rp 10k")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col" }, [
-              _c("span", { staticClass: "clr-cl" }, [_vm._v("Bulan Lalu")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "clr-bl mt-8" }, [_vm._v("Rp 8k")])
-            ])
-          ])
-        ])
       ])
     ])
   }
