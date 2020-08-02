@@ -17,8 +17,8 @@
         .card {
             border: 1px solid #2C2C2C;
             box-sizing: border-box;
-            width: 390px;
-            height: 220px;
+            width: 410px;
+            height: 240px;
             border-radius: 14px;
             padding: 35px 30px;
         }
@@ -115,8 +115,7 @@
                 <div class="col ml">
                 <div class="head">{{$tenan->lokasi->lokasi}}</div>
                     <div class="title">{{$pr->name}}</div>
-                    <div class="isi mb">{{$tenan->penyewa->nama}}</div>
-                    <div class="isi">{{$tenan->penyewa->hp}}</div>
+                    <div class="isi mb">{{$tenan->kode}}</div>
                 </div>
             </div>
             <div class="row justify-content-between mt">

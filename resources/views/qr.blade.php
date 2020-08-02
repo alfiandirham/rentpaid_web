@@ -17,8 +17,8 @@
         .card {
             border: 1px solid #2C2C2C;
             box-sizing: border-box;
-            width: 390px;
-            height: 220px;
+            width: 410px;
+            height: 240px;
             border-radius: 14px;
             padding: 35px 30px;
         }
@@ -72,7 +72,7 @@
         }
 
         .m-2{
-            margin-left: 60px;
+            margin-left: 30px;
             margin-bottom: 60px;
         }
 
@@ -116,8 +116,7 @@
                     <div class="col ml">
                     <div class="head">{{$item->lokasi->lokasi}}</div>
                         <div class="title">{{$pr->name}}</div>
-                        <div class="isi mb">{{$item->penyewa->nama}}</div>
-                        <div class="isi">{{$item->penyewa->hp}}</div>
+                        <div class="isi mb">{{$item->kode}}</div>
                     </div>
                 </div>
                 <div class="row justify-content-between mt">

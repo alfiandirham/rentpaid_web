@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         $pr = Perusahaan::first();
         $data = explode(",", \Request::get('data'));
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             $tenan = [];
 
             foreach ($data as $id) {
@@ -43,7 +43,7 @@ class HomeController extends Controller
     public function qrcode2($id)
     {
         $pr = Perusahaan::first();
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             $tenan = Tenant::findOrfail($id);
             return view('qr2')->with([
                 "pr" => $pr,
