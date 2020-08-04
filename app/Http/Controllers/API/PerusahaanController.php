@@ -14,7 +14,9 @@ class PerusahaanController extends Controller
     }
     
     public function index(){
-        return User::first();
+        if (\Gate::allows('isOwner')) {
+            return \Auth::user()->perusahaan;
+        }
     }
 
     public function update(Request $request, $id)

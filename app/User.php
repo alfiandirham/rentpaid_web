@@ -51,4 +51,8 @@ class User extends Authenticatable
     public function kategori(){
         return $this->hasMany('App\Kategori');
     }
+
+    public function perusahaan(){
+        return $this->hasOne('App\Perusahaan');
+    }
 }

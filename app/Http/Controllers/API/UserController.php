@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Perusahaan;
 
 
 class UserController extends Controller
@@ -78,7 +79,7 @@ class UserController extends Controller
 
         ($request['status'] == 'false') ? $request->merge(['status' => 0]) : $request->merge(['status' => 1]);
 
-        return User::create([
+        $user = User::create([
             'photo' => $request['photo'] ? $request['photo'] : '',
             'lokasi_id' => $request['lokasi_id'] ? $request['lokasi_id'] : null,
             'name' => $request['name'],
@@ -90,6 +91,16 @@ class UserController extends Controller
             'ktp' => $request['ktp'],
             'password' => Hash::make($request['password']),
         ]);
+
+        if($user->type === 'owner'){
+            Perusahaan::create([
+                'name' => 'Nama Perusahaan',
+                'alamat' => 'Alamat Perusahaan',
+                'user_id' => $user->id,
+            ]);
+        }
+
+        return $user;
     }
 
 
