@@ -54,7 +54,7 @@ class TenantController extends Controller
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner') ) {
-            return TenantResource::collection(Lokasi::findOrFail($id)->tenant()->latest()->paginate(20));
+            return TenantResource::collection(Lokasi::findOrFail($id)->tenant()->latest()->paginate(5));
         }
     }
 

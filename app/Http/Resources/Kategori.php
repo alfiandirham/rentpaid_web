@@ -21,7 +21,6 @@ class Kategori extends JsonResource
             'tarif_id' => $this->tarif_id,
             'tarif' => ($this->tarif) ? ($this->tarif->bop
                             + $this->tarif->permeter
-                            + ($this->tarif->bop * 0.1) 
                             + $this->tarif->barang 
                             + $this->tarif->listrik 
                             + $this->tarif->sampah 

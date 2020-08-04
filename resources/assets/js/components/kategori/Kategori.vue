@@ -105,14 +105,6 @@
                         </div>
                         <div class="row">
                           <div class="col-5">
-                            <p class="lead">PPN BOP</p>
-                          </div>
-                          <div class="col-6">
-                            <h6>Rp. {{(tarif.bop || 0) * 0.1}}</h6>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-5">
                             <p class="lead">Air</p>
                           </div>
                           <div class="col-6">

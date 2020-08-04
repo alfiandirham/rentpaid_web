@@ -194,7 +194,7 @@
                   <thead>
                     <tr>
                       <th>Nama Tarif</th>
-                      <th>BOP / (PPN 10%)</th>
+                      <th>BOP</th>
                       <th>Permeter</th>
                       <th>Air</th>
                       <th>Listrik</th>
@@ -207,7 +207,7 @@
                   <tbody>
                     <tr v-for="tarif in tarifs.data" :key="tarif.id">
                       <td>{{tarif.nama}}</td>
-                      <td>Rp. {{tarif.bop}} / ({{tarif.bop + (tarif.bop * 0.1)}})</td>
+                      <td>Rp. {{tarif.bop}}</td>
                       <td>Rp. {{tarif.permeter}}</td>
                       <td>Rp. {{tarif.air}}</td>
                       <td>Rp. {{tarif.listrik}}</td>

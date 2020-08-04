@@ -44,8 +44,10 @@
                 </li>
                 <li class=" nav-item"><router-link to="/profile"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Profile">Profil Pengguna</span></router-link>
                 </li>
+                @cannot('isAdmin')
                 <li class=" nav-item"><router-link to="/perusahaan"><i class="feather icon-info"></i><span class="menu-title" data-i18n="Knowledge Base">Info Perusahaan</span></router-link>
                 </li>
+                @endcan
             </ul>
         </div>
     </div>

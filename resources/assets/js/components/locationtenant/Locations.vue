@@ -545,7 +545,6 @@ export default {
             .then(() => {
               getVal.className = "form-control after";
               swal("Disewa!", "Tenant berhasil disewa.", "success");
-              Fire.$emit("AfterCreate");
             })
             .catch(() => {
               swal("Failed!", "There was something wronge.", "warning");
