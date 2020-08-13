@@ -101,48 +101,30 @@ export default {
   methods: {
     fillData() {
       this.datacollection = {
-        labels: ["01", "05", "09", "13", "17", "21", "26", "31"],
+        labels: ["01", "05", "09", "13", "17", "21", "26", "30"],
         datasets: [
           {
             label: "Bulan Ini",
             backgroundColor: "#f87979",
-            data: [
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-            ],
+            data: this.data.pbini,
           },
           {
             label: "Bulan Lalu",
             backgroundColor: "#f5f655",
-            data: [
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-            ],
+            data: this.data.pblalu,
           },
         ],
       };
     },
-    getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
-    },
     loadData() {
-      axios.get("api/dashboard").then((data) => (this.data = data.data));
+      axios.get("api/dashboard").then((data) => {
+        this.data = data.data;
+        this.fillData();
+      });
     },
   },
   mounted() {
-    this.fillData();
+    // this.fillData();
   },
   computed: {
     myStyles() {
