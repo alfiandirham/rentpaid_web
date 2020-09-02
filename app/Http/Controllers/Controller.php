@@ -53,6 +53,7 @@ class Controller extends BaseController
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error("Update transaksi menunggak gagal!!");
+            throw new \Exception($exception->getMessage());
         }
         DB::commit();
     }
