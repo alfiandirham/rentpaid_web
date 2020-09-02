@@ -12,6 +12,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Controller extends BaseController
 {
@@ -20,6 +21,7 @@ class Controller extends BaseController
     static function cekTunggakan()
     {
         /*akses by cron only*/
+        Log::info('Cek Tenant Belum Ditagih');
         DB::beginTransaction();
         $tenants = Tenant::with('kategori')
             ->whereDate('created_at',Carbon::today())
@@ -50,6 +52,7 @@ class Controller extends BaseController
             }
         } catch (\Exception $exception) {
             DB::rollBack();
+            Log::error("Update transaksi menunggak gagal!!");
         }
         DB::commit();
     }
