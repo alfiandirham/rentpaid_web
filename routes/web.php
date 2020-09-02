@@ -8,6 +8,7 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/qrcode', 'HomeController@qrcode');
+Route::get('/wilayah/{id}', 'HomeController@pesewa');
 Route::get('/qrcode/{id}', 'HomeController@qrcode2');
 Route::get('/xl-transaksi', 'HomeController@transaksi');
 Route::get('/xl-tunggakan', 'HomeController@tunggakan');

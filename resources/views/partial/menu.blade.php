@@ -36,6 +36,10 @@
                 </li>
                 <li class=" nav-item"><router-link to="/transaksi"><i class="fa fa-usd"></i><span class="menu-title" data-i18n="Data List">Transaksi</span></router-link>
                 </li>
+                @can('isAdmin')
+                <li class=" nav-item"><router-link to="/pesewa"><i class="fa fa-list"></i><span class="menu-title" data-i18n="Data List">Daftar Penyewa</span></router-link>
+                </li>
+                @endcan
                 <li class=" nav-item"><router-link to="/tunggakan"><i class="feather icon-info"></i><span class="menu-title" data-i18n="Data List">Tunggakan Pembayaran</span></router-link>
                 </li>
                 <li class=" nav-item"><router-link to="/setor"><i class="fa fa-arrow-circle-o-down"></i><span class="menu-title" data-i18n="Data List">Setoran</span></router-link>
