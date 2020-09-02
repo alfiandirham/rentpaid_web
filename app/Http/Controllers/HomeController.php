@@ -8,6 +8,9 @@ use App\Tenant;
 use App\Exports\TransaksiExport;
 use App\Exports\TunggakanExport;
 use App\Exports\SetoranExport;
+use App\Tenant as Penyewa;
+use App\Penyewa as Pesewa;
+use App\Lokasi;
 
 class HomeController extends Controller
 {
@@ -19,6 +22,20 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function pesewa($id)
+    {
+        $sewa = Penyewa::where([
+            'status' => true,
+            'lokasi_id' => $id
+        ])->where('penyewa_id', "<>", NULL)->get();
+
+        return view('pesewa')->with([
+            'sewa' => $sewa,
+            'pesewa' => new Pesewa(),
+            'lokasi' => Lokasi::findOrFail($id)
+        ]);
     }
 
     public function qrcode()
