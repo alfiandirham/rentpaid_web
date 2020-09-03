@@ -41,14 +41,14 @@ class TunggakanController extends Controller
     public function update(Request $req, $id){
         $transaksi = Transaksi::findOrFail($id);
         $staff = auth('api')->user();
-        
+
         $this->validate($req, [
             'collector_id' => 'required',
             'tanggal' => 'required|date',
             'jumlah' => 'required',
         ]);
         $transaksi->update($req->all());
-        
+
         return ["message" => 'sukses'];
     }
 
