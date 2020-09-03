@@ -215,7 +215,7 @@
                       <td>Rp. {{tarif.sampah}}</td>
                       <td>
                         Rp. {{tarif.sampah + tarif.barang + tarif.listrik + tarif.air
-                        + tarif.bop + (tarif.bop * 0.1) + tarif.permeter}}
+                        + tarif.bop + tarif.permeter}}
                       </td>
                       <td>
                         <a @click="editModal(tarif)">
