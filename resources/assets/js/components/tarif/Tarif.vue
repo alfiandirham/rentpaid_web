@@ -147,8 +147,7 @@
                       <div class="col-12">
                         <label>Total Tarif</label>
                         <p class="lead" style="padding-left:0.2em; padding-top:1em;">
-                          Rp. {{(parseFloat(form.permeter || 0) + parseFloat(form.bop || 0)
-                          + parseFloat((form.bop || 0) * 0.1) + parseFloat(form.air || 0)
+                          Rp. {{(parseFloat(form.permeter || 0) + parseFloat(form.bop || 0) + parseFloat(form.air || 0)
                           + parseFloat(form.listrik || 0) + parseFloat(form.barang || 0) + parseFloat(form.sampah || 0))}}
                         </p>
                       </div>
