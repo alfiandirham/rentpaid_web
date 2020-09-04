@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Exports\LokasiTenantExport;
 use App\Perusahaan;
 use App\Tenant;
 use App\Exports\TransaksiExport;
@@ -11,6 +11,7 @@ use App\Exports\SetoranExport;
 use App\Tenant as Penyewa;
 use App\Penyewa as Pesewa;
 use App\Lokasi;
+use Barryvdh\DomPDF\Facade AS PDF;
 
 class HomeController extends Controller
 {
@@ -80,5 +81,13 @@ class HomeController extends Controller
 
     public function setoran(){
         return \Excel::download(new SetoranExport, now().'.xlsx');
+    }
+
+    public function lokasiTenant($id){
+        $tenant = Tenant::with('penyewa')->where('lokasi_id',$id)->get();
+        $lokasi = Lokasi::find($id);
+        $pdf = PDF::loadView('daftar-penyewa',compact('tenant','lokasi'));
+        return $pdf->stream('daftar-penyewa-'.$lokasi->lokasi.'.pdf');
+//        return \Excel::download(new LokasiTenantExport($id), now().'.xlsx');
     }
 }

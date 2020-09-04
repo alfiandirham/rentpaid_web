@@ -37,6 +37,8 @@ Route::post('photo/{id}', 'API\UserController@update');
 Route::post('profile', 'API\UserController@updateProfile');
 Route::get('penyewa2', 'API\PenyewaController@index2');
 
+Route::get('lokasi-tenant','API\LocationController@lokasiDanTenant');
+
 Route::get('findUser', 'API\UserController@search');
 Route::get('findTenan/{id}', 'API\TenantController@search');
 Route::get('findPenyewa', 'API\PenyewaController@search');

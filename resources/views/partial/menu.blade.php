@@ -34,8 +34,8 @@
                 </li>
                 <li class=" navigation-header"><span>REPORT</span>
                 </li>
-                <li class=" nav-item"><router-link to="/transaksi"><i class="fa fa-usd"></i><span class="menu-title" data-i18n="Data List">Transaksi</span></router-link>
-                </li>
+                <li class=" nav-item"><router-link to="/transaksi"><i class="fa fa-usd"></i><span class="menu-title" data-i18n="Data List">Transaksi</span></router-link></li>
+                <li class=" nav-item"><router-link to="/daftar-penyewa"><i class="fa fa-list"></i><span class="menu-title" data-i18n="Data List">Daftar Penyewa</span></router-link></li>
                 @can('isAdmin')
                 <li class=" nav-item"><router-link to="/pesewa"><i class="fa fa-list"></i><span class="menu-title" data-i18n="Data List">Daftar Penyewa</span></router-link>
                 </li>

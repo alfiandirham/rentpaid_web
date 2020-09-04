@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Resources\LocationTenant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Location;
 use App\Http\Resources\TenantCollections;
 use App\Lokasi;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class LocationController extends Controller
 {
@@ -35,12 +37,12 @@ class LocationController extends Controller
     {
 
         $this->validate($request,[
-            'lokasi' => 'required', 
-            'kode' => 'required|unique:lokasis', 
-            'luas' => 'required', 
-            'kecamatan' => 'required', 
-            'desa' => 'required', 
-            'alamat' => 'required', 
+            'lokasi' => 'required',
+            'kode' => 'required|unique:lokasis',
+            'luas' => 'required',
+            'kecamatan' => 'required',
+            'desa' => 'required',
+            'alamat' => 'required',
             'user_id' => 'required'
         ]);
 
@@ -55,12 +57,12 @@ class LocationController extends Controller
         $user = Lokasi::findOrFail($id);
 
         $this->validate($request,[
-            'lokasi' => 'required', 
-            'kode' => 'required|unique:lokasis,lokasi,'.$user->id, 
-            'luas' => 'required', 
-            'kecamatan' => 'required', 
-            'desa' => 'required', 
-            'alamat' => 'required', 
+            'lokasi' => 'required',
+            'kode' => 'required|unique:lokasis,lokasi,'.$user->id,
+            'luas' => 'required',
+            'kecamatan' => 'required',
+            'desa' => 'required',
+            'alamat' => 'required',
             'user_id' => 'required'
         ]);
 
@@ -172,5 +174,10 @@ class LocationController extends Controller
             }
         }
         return $users;
+    }
+
+    public function lokasiDanTenant(){
+        $data = Lokasi::select('id','lokasi','jumlah_tenant')->leftJoin(DB::raw("(SELECT count(id) AS jumlah_tenant, lokasi_id FROM tenants GROUP BY lokasi_id) AS tenants"),'tenants.lokasi_id','=','lokasis.id')->paginate(20);
+        return LocationTenant::collection($data);
     }
 }
