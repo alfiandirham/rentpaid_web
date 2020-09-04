@@ -177,7 +177,15 @@ class LocationController extends Controller
     }
 
     public function lokasiDanTenant(){
-        $data = Lokasi::select('id','lokasi','jumlah_tenant')->leftJoin(DB::raw("(SELECT count(id) AS jumlah_tenant, lokasi_id FROM tenants GROUP BY lokasi_id) AS tenants"),'tenants.lokasi_id','=','lokasis.id')->paginate(20);
+
+        $data = Lokasi::select('id','lokasi','jumlah_tenant')
+            ->where(function($q){
+                if (request()->has('q')){
+                    $q->where('lokasi','like','%'.request('q').'%');
+                }
+            })
+            ->leftJoin(DB::raw("(SELECT count(id) AS jumlah_tenant, lokasi_id FROM tenants GROUP BY lokasi_id) AS tenants"),'tenants.lokasi_id','=','lokasis.id')
+            ->paginate(20);
         return LocationTenant::collection($data);
     }
 }

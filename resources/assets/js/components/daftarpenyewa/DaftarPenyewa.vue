@@ -82,7 +82,6 @@ export default {
         getResults(page = 1) {
             axios.get("api/lokasi-tenant?page=" + page).then((response) => {
                 this.lokasi_tenant = response.data
-                console.log(this.lokasi_tenant);
             });
         },
         searchit: _.debounce(() => {
@@ -90,6 +89,15 @@ export default {
         }, 1000),
     },
     created() {
+        Fire.$on("searching", () => {
+            let query = this.search;
+            axios
+                .get("api/lokasi-tenant?q=" + query)
+                .then((response) => {
+                    this.lokasi_tenant = response.data;
+                })
+                .catch(() => {});
+        });
         Fire.$on("AfterCreate", () => {
             this.getResults();
         });
