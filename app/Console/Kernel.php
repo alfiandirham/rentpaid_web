@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('tunggakan:cek')->dailyAt('23:00');
          $schedule->call(function (){
-             Log::info("Scheduler Test");
-         })->everyMinute();
+             Log::info("Eksekusi Auto Menunggak");
+         })->dailyAt('23:00');
         //          ->hourly();
     }
 
