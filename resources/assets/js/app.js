@@ -85,6 +85,10 @@ let routes = [{
         component: require('./components/daftarpenyewa/DaftarPenyewa.vue')
     },
     {
+        path: '/contact-us',
+        component: require('./components/contact-us/ContactUs.vue')
+    },
+    {
         path: '/transaksi',
         component: require('./components/transaksi/Transaksi.vue')
     },

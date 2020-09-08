@@ -31,6 +31,7 @@
                 <li class=" nav-item"><router-link to="/users"><i class="feather icon-users"></i><span class="menu-title" data-i18n="Todo">Users</span></router-link>
                 </li>
                 <li class=" nav-item"><router-link to="/penyewa"><i class="feather icon-credit-card"></i><span class="menu-title" data-i18n="Todo">Penyewa</span></router-link>
+                <li class=" nav-item"><router-link to="/contact-us"><i class="feather icon-user-check"></i><span class="menu-title" data-i18n="Todo">Contact Us</span></router-link>
                 </li>
                 <li class=" navigation-header"><span>REPORT</span>
                 </li>
