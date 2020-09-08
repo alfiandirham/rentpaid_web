@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,7 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('tunggakan:cek')->dailyAt('23:55');
+         $schedule->command('tunggakan:cek')->dailyAt('23:00');
+         $schedule->call(function (){
+             Log::info("Scheduler Test");
+         })->everyMinute();
         //          ->hourly();
     }
 
