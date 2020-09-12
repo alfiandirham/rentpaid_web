@@ -24,7 +24,7 @@ class Controller extends BaseController
         Log::info('Cek Tenant Belum Ditagih');
         DB::beginTransaction();
         $tenants = Tenant::with('kategori')
-            ->whereDate('created_at',Carbon::today())
+//            ->whereDate('created_at',Carbon::today())
             ->where('status_tagih', 'Belum ditagih')
             ->get();
         try {
@@ -48,13 +48,22 @@ class Controller extends BaseController
                     'lokasi_id' => $tenant->lokasi_id,
                 ]);
                 $tenant->save();
-
             }
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error("Update transaksi menunggak gagal!!");
             throw new \Exception($exception->getMessage());
         }
+        try {
+            Tenant::update([
+                'status_tagih' => 'Belum ditagih'
+            ]);
+        } catch (\Exception $exception){
+            DB::rollBack();
+            Log::error("Update Tenant gagal");
+            throw new \Exception($exception->getMessage());
+        }
+        Log::info("Tambah row tunggakan dan update status tenant berhasil");
         DB::commit();
     }
 
