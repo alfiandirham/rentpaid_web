@@ -64,8 +64,7 @@ class Controller extends BaseController
     {
         Log::info("eksekusi update status tenant");
         try {
-            Tenant::where('status', 1)
-                ->where('disewa', 1)
+            Tenant::whereNotNull('id')
                 ->update([
                     'status_tagih' => 'Belum ditagih'
                 ]);
