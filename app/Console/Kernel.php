@@ -26,9 +26,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function (){
-            Log::info("cek new schedule");
-        })->everyMinute();
-        $schedule->call(function (){
             Log::info("Eksekusi Ubah Status Tenant Jadi Belum ditagih");
         })->dailyAt('00:00');
         $schedule->command('tenant:belum-ditagih')->dailyAt('00:01');
