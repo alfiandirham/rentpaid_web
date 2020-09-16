@@ -35,14 +35,14 @@
                     <tr>
                       <th>Lokasi</th>
                       <th>Jumlah Tenant</th>
-                      <th>Cetak Daftar Penyewa</th>
+                      <th class="text-right">Cetak Daftar Penyewa</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="user in users.data" :key="user.id">
                       <td>{{user.lokasi}}</td>
                       <td>{{user.jumlah}}</td>
-                      <td>
+                      <td class="text-right">
                         <a
                           :href="'/wilayah/'+user.id"
                           onclick="window.open(this.href).print()"
