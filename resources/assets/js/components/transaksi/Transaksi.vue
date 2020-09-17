@@ -179,6 +179,11 @@
                       <th>Nama Lokasi</th>
                       <th>Tanggal</th>
                       <th>Collector</th>
+                      <th>BOP</th>
+                      <th>Air</th>
+                      <th>Listrik</th>
+                      <th>Brg Masuk</th>
+                      <th>Sampah</th>
                       <th>Jumlah Setoran</th>
                     </tr>
                   </thead>
@@ -191,6 +196,11 @@
                       <td>{{transaksi.lokasi}}</td>
                       <td>{{transaksi.tanggal | myDate}}</td>
                       <td>{{transaksi.collector}}</td>
+                      <td>Rp. {{transaksi.detail.bop ? transaksi.detail.bop : 0}}</td>
+                      <td>Rp. {{transaksi.detail.air ? transaksi.detail.air : 0}}</td>
+                      <td>Rp. {{transaksi.detail.listrik ? transaksi.detail.listrik : 0}}</td>
+                      <td>Rp. {{transaksi.detail.barang ? transaksi.detail.barang : 0}}</td>
+                      <td>Rp. {{transaksi.detail.sampah ? transaksi.detail.sampah : 0}}</td>
                       <td>Rp. {{transaksi.setoran}}</td>
                     </tr>
                   </tbody>

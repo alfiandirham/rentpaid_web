@@ -179,7 +179,9 @@
                       <th>Nama Lokasi</th>
                       <th>Tanggal</th>
                       <th>Collector</th>
-                      <th>Jumlah Setoran</th>
+                      <th>Tunggakan</th>
+                      <th>Dibayar</th>
+                      <th>Sisa</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -191,7 +193,9 @@
                       <td>{{transaksi.lokasi}}</td>
                       <td>{{transaksi.tanggal | myDate}}</td>
                       <td>{{transaksi.collector}}</td>
+                      <td class="danger">Rp. {{transaksi.tunggakan}}</td>
                       <td class="danger">Rp. {{transaksi.setoran}}</td>
+                      <td class="danger">Rp. {{transaksi.sisa}}</td>
                     </tr>
                   </tbody>
                 </table>
