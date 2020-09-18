@@ -144,7 +144,15 @@ class PenyewaController extends Controller
                 })->paginate(20);
             }
         }else{
-            $users = User::where('status', true)->latest()->paginate(20);
+            $users = \Auth::user()->penyewa()->where('status', true)->latest()->paginate(20);
+            if (\Gate::allows('isAuthor')) {
+                $users = User::latest()->paginate(20);
+            }
+            if (\Gate::allows('isAdmin')) {
+                $id = \Auth::user();
+                $user = User2::findOrFail($id->user_id);
+                $users = $user->penyewa()->where(['status' => true, 'lokasi_id' => $id->lokasi->id])->latest()->paginate(20);
+            }
         }
         return $users;
     }

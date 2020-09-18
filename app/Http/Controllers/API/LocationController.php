@@ -147,13 +147,13 @@ class LocationController extends Controller
                     $users = TenantCollections::collection(Lokasi::latest()->paginate(20));
                 }
             }else{
-                $users = TenantCollections::collection(Lokasi::where('status', true)->where(function($query) use ($search){
-                    $query->where('lokasi','LIKE',"%$search%")
-                            ->orWhere('status','LIKE',"%$search%")
-                            ->orWhere('user_id','LIKE',"%$search%");
-                })->paginate(20));
-                if(\Gate::allows('isAuthor')){
-                    $users = TenantCollections::collection(Lokasi::where(function($query) use ($search){
+                $users = TenantCollections::collection(Lokasi::where(function($query) use ($search){
+                        $query->where('lokasi','LIKE',"%$search%")
+                                ->orWhere('status','LIKE',"%$search%")
+                                ->orWhere('user_id','LIKE',"%$search%");
+                    })->paginate(20));
+                if(\Gate::allows('isAdmin')){
+                    $users = TenantCollections::collection(Lokasi::where('status', true)->where('id', \Auth::user()->lokasi_id)->where(function($query) use ($search){
                         $query->where('lokasi','LIKE',"%$search%")
                                 ->orWhere('status','LIKE',"%$search%")
                                 ->orWhere('user_id','LIKE',"%$search%");
@@ -171,6 +171,9 @@ class LocationController extends Controller
             $users = TenantCollections::collection(Lokasi::where('status', true)->latest()->paginate(20));
             if(\Gate::allows('isOwner')){
                 $users = TenantCollections::collection(Lokasi::where('status', true)->where('user_id', \Auth::user()->id)->latest()->paginate(20));
+            }
+            if(\Gate::allows('isAdmin')){
+                $users = TenantCollections::collection(Lokasi::where('status', true)->where('id', \Auth::user()->lokasi_id)->latest()->paginate(20));
             }
         }
         return $users;

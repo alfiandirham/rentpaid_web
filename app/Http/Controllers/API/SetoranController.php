@@ -85,6 +85,13 @@ class SetoranController extends Controller
             })->paginate(20));
         }else{
             $setoran = SetoranCollection::collection(Setoran::latest()->paginate(20));
+            if (\Gate::allows('isAdmin')) {
+                $setoran = SetoranCollection::collection(Setoran::where('staff_id', \Auth::user()->id)->latest()->paginate(20));
+            }
+
+            if (\Gate::allows('isOwner')) {
+                $setoran = SetoranCollection::collection(Setoran::where('user_id', \Auth::user()->id)->latest()->paginate(20));
+            }
         }
 
         return $setoran;

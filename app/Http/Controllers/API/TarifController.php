@@ -103,8 +103,29 @@ class TarifController extends Controller
             $users = Tarif::where(function($query) use ($search){
                 $query->where('nama','LIKE', "%$search%");
             })->paginate(20);
+            if (\Gate::allows('isAdmin')) {
+                $users = Tarif::where(function($query) use ($search){
+                    $query->where('nama','LIKE', "%$search%")->where('lokasi_id',\Auth::user()->lokasi_id);
+                })->paginate(20);
+            }
+            if (\Gate::allows('isOwner')) {
+                $users = Tarif::where(function($query) use ($search){
+                    $query->where('nama','LIKE', "%$search%")->where('user_id',\Auth::user()->id);
+                })->paginate(20);
+                $users = \Auth::user()->tarif()->latest()->paginate(20);
+            }
         }else{
             $users = Tarif::latest()->paginate(20);
+
+            if (\Gate::allows('isAdmin')) {
+                $id = \Auth::user();
+                $user = User::findOrFail($id->user_id);
+                $users = $user->tarif()->where('lokasi_id',$id->lokasi_id)->latest()->paginate(20);
+            }
+
+            if (\Gate::allows('isOwner')) {
+                $users = \Auth::user()->tarif()->latest()->paginate(20);
+            }
         }
 
         return $users;
