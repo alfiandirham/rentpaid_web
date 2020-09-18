@@ -12,6 +12,7 @@ use App\Tenant as Penyewa;
 use App\Penyewa as Pesewa;
 use App\Lokasi;
 use Barryvdh\DomPDF\Facade AS PDF;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -41,7 +42,17 @@ class HomeController extends Controller
 
     public function qrcode()
     {
-        $pr = Perusahaan::first();
+        if(\Gate::allows('isAuthor')){
+            $pr = Perusahaan::first();
+        }
+
+        if(\Gate::allows('isOwner')){
+            $pr = \Auth::user()->perusahaan;
+        }
+
+        if(\Gate::allows('isAdmin')){
+            $pr = User::findOrFail(\Auth::user()->user_id)->perusahaan;
+        }
         $data = explode(",", \Request::get('data'));
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             $tenan = [];
@@ -60,7 +71,18 @@ class HomeController extends Controller
 
     public function qrcode2($id)
     {
-        $pr = Perusahaan::first();
+        if(\Gate::allows('isAuthor')){
+            $pr = Perusahaan::first();
+        }
+
+        if(\Gate::allows('isOwner')){
+            $pr = \Auth::user()->perusahaan;
+        }
+
+        if(\Gate::allows('isAdmin')){
+            $pr = User::findOrFail(\Auth::user()->user_id)->perusahaan;
+        }
+
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner')) {
             $tenan = Tenant::findOrfail($id);
             return view('qr2')->with([
