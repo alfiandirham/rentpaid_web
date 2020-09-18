@@ -69,10 +69,11 @@ class TenantController extends Controller
 
         $lokasi = Lokasi::findOrFail($request->lokasi_id);
         $kategori = Kategori::findOrFail($request->kategori_id);
+
+        $inc = Tenant::where('kode','like',"%$lokasi->kode"."$kategori->kode%")->count();
         
         for($i=1; $i<= $request->jumlah; $i++){
-            $inc = $lokasi->tenant()->orderBy('id', 'desc')->first();
-            $inc = $inc ? $inc->id + 1 : 1;
+            $inc +=1;
             $kode = $lokasi->kode.$kategori->kode.$inc;
             $lokasi->tenant()->create([
                 'kategori_id' => $request->kategori_id,
