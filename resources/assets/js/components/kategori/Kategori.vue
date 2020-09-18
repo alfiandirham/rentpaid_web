@@ -77,7 +77,7 @@
                           >
                             <option v-for="tarif in tarifs.data" :value="tarif.id" :key="tarif.id">
                               {{tarif.nama}} - Rp. {{tarif.sampah + tarif.barang + tarif.listrik
-                              + tarif.air + tarif.bop + (tarif.bop * 0.1) + tarif.permeter}}
+                              + tarif.air + tarif.bop + tarif.permeter}}
                             </option>
                           </select>
                           <has-error :form="form" field="tarif_id"></has-error>
@@ -142,7 +142,7 @@
                           <div class="col-6">
                             <h6>
                               Rp. {{(tarif.sampah + tarif.barang + tarif.listrik
-                              + tarif.air + tarif.bop + (tarif.bop * 0.1) + tarif.permeter) || 0}}
+                              + tarif.air + tarif.bop + tarif.permeter) || 0}}
                             </h6>
                           </div>
                         </div>
