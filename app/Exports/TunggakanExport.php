@@ -22,7 +22,7 @@ class TunggakanExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Id', 'Penyewa', 'Nama Lokasi', 'Tanggal', 'Kolektor', 'Jumlah Setoran'
+            'Id', 'Penyewa', 'Nama Lokasi', 'Tanggal', 'Kolektor', 'BOP', 'Air', 'Listrik', 'Barang Masuk', 'Sampah', 'Jumlah Setoran'
         ];
     }
 }

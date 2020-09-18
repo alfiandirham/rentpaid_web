@@ -14,7 +14,8 @@ class SetoranExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return St::collection(Setoran::latest()->get());
+        return St::collection(Setoran::where('user_id', \Auth::user()->id)
+        ->orWhere('staff_id', \Auth::user()->lokasi_id)->latest()->get());
     }
 
     public function headings(): array
