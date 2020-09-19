@@ -55,7 +55,7 @@
                               :class="{ 'is-invalid': form.errors.has('kode') }"
                               v-model="form.kode"
                               minlength="3"
-                              maxlength="3"
+                              maxlength="6"
                               name="kode"
                               placeholder="Kode Kategori"
                             />
