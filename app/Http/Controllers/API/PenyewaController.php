@@ -21,14 +21,14 @@ class PenyewaController extends Controller
         // if (\Gate::allows('isAdmin')) {
         // }
         if (\Gate::allows('isAuthor')) {
-            return User::latest()->paginate(20);
+            return User::orderBy('nama')->paginate(20);
         }
         if (\Gate::allows('isAdmin')) {
             $id = \Auth::user();
             $user = User2::findOrFail($id->user_id);
-            return $user->penyewa()->where(['status' => true, 'lokasi_id' => $id->lokasi->id])->latest()->paginate(20);
+            return $user->penyewa()->where(['status' => true, 'lokasi_id' => $id->lokasi->id])->orderBy('nama')->paginate(20);
         }
-        return \Auth::user()->penyewa()->where('status', true)->latest()->paginate(20);
+        return \Auth::user()->penyewa()->where('status', true)->orderBy('nama')->paginate(20);
     }
 
     public function index2()
@@ -37,21 +37,21 @@ class PenyewaController extends Controller
         // if (\Gate::allows('isAdmin')) {
         // }
         if (\Gate::allows('isAuthor')) {
-            return User::all()->latest()->take(100)->get();
+            return User::all()->orderBy('nama')->take(100)->get();
         }
         if (\Gate::allows('isAdmin')) {
             $id = \Auth::user();
             $user = User2::findOrFail($id->user_id);
-            return $user->penyewa()->where(['status' => true, 'lokasi_id' => $id->lokasi->id])->latest()->get();
+            return $user->penyewa()->where(['status' => true, 'lokasi_id' => $id->lokasi->id])->orderBy('nama')->get();
         }
-        return \Auth::user()->penyewa()->where('status', true)->latest()->get();
+        return \Auth::user()->penyewa()->where('status', true)->orderBy('nama')->get();
     }
 
     public function collector()
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return User::where('type', 'collector')->where("status", true)->latest()->paginate(20);
+            return User::where('type', 'collector')->where("status", true)->orderBy('nama')->paginate(20);
         }
 
     }
@@ -130,11 +130,11 @@ class PenyewaController extends Controller
 
         if ($search = \Request::get('q')) {
             if($search == "uvuvwe"  && \Gate::allows('isAuthor')){
-               $users = User::where('status', false)->latest()->paginate(20); 
+               $users = User::where('status', false)->orderBy('nama')->paginate(20); 
             }else if($search == "uvuvwu"){
-                $users = User::where('status', true)->latest()->paginate(20);
+                $users = User::where('status', true)->orderBy('nama')->paginate(20);
                 if(\Gate::allows('isAuthor')){
-                    $users = User::latest()->paginate(20);
+                    $users = User::orderBy('nama')->paginate(20);
                 }
             }else{
                 $users = User::where('status', true)->where(function($query) use ($search){
@@ -144,14 +144,14 @@ class PenyewaController extends Controller
                 })->paginate(20);
             }
         }else{
-            $users = \Auth::user()->penyewa()->where('status', true)->latest()->paginate(20);
+            $users = \Auth::user()->penyewa()->where('status', true)->orderBy('nama')->paginate(20);
             if (\Gate::allows('isAuthor')) {
-                $users = User::latest()->paginate(20);
+                $users = User::orderBy('nama')->paginate(20);
             }
             if (\Gate::allows('isAdmin')) {
                 $id = \Auth::user();
                 $user = User2::findOrFail($id->user_id);
-                $users = $user->penyewa()->where(['status' => true, 'lokasi_id' => $id->lokasi->id])->latest()->paginate(20);
+                $users = $user->penyewa()->where(['status' => true, 'lokasi_id' => $id->lokasi->id])->orderBy('nama')->paginate(20);
             }
         }
         return $users;
