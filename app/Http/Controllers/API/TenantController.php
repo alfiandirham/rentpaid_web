@@ -54,7 +54,7 @@ class TenantController extends Controller
     {
         // $this->authorize('isAdmin');
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor') || \Gate::allows('isOwner') ) {
-            return TenantResource::collection(Lokasi::findOrFail($id)->tenant()->latest()->paginate(20));
+            return TenantResource::collection(Lokasi::findOrFail($id)->tenant()->orderBy('kode')->paginate(20));
         }
     }
 
@@ -74,7 +74,7 @@ class TenantController extends Controller
         
         for($i=1; $i<= $request->jumlah; $i++){
             $inc +=1;
-            $kode = $lokasi->kode.$kategori->kode.$inc;
+            $kode = $lokasi->kode.$kategori->kode.str_pad($inc, 3, '0', STR_PAD_LEFT);
             $lokasi->tenant()->create([
                 'kategori_id' => $request->kategori_id,
                 'kode' => $kode
