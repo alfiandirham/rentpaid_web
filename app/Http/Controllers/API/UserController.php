@@ -210,15 +210,31 @@ class UserController extends Controller
                     $users = User::where("id", '!=', $id)->latest()->paginate(20);
                 }
             }else {
-                $users = User::where("status", true)->where("id", '!=', $id)->where(function($query) use ($search){
-                    $query->where('name','LIKE',"%$search%")
+                if (\Gate::allows('isAdmin')) {
+                    $users = User::where("type", 'collector')->where("status", true)->where('user_id', \Auth::user()->id)->where("id", '!=', $id)->where(function($query) use ($search){
+                        $query->where('name','LIKE',"%$search%")
                             ->orWhere('email','LIKE',"%$search%")
                             ->orWhere('status',$search)
                             ->orWhere('type',$search);
-                })->paginate(20);
+                    })->paginate(20);
+                }
+                if (\Gate::allows('isOwner')) {
+                    $users = User::where('user_id', \Auth::user()->id)->where("type", 'admin')->where("status", true)->where('user_id', \Auth::user()->id)->where("id", '!=', $id)->where(function($query) use ($search){
+                        $query->where('name','LIKE',"%$search%")
+                            ->orWhere('email','LIKE',"%$search%")
+                            ->orWhere('status',$search)
+                            ->orWhere('type',$search);
+                    })->paginate(20);
+                }
             }
         }else{
             $users = User::where("status", true)->where("id", '!=', $id)->latest()->paginate(20);
+            if (\Gate::allows('isAdmin')) {
+                return User::where("type", 'collector')->where("status", true)->where('user_id', \Auth::user()->id)->latest()->paginate(20);
+            }
+            if (\Gate::allows('isOwner')) {
+                return User::where('user_id', \Auth::user()->id)->where("type", 'admin')->where("status", true)->latest()->paginate(20);
+            }
         }
         return $users;
     }

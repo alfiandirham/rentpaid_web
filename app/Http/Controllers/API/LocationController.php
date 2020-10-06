@@ -132,6 +132,10 @@ class LocationController extends Controller
             if(\Gate::allows('isOwner')){
                 $users = Location::collection(Lokasi::where('status', true)->where('user_id', \Auth::user()->id)->latest()->paginate(20));
             }
+            if (\Gate::allows('isAdmin')) {
+                $id = \Auth::user()->lokasi_id;
+                $users = Location::collection(Lokasi::where(['status' => true, 'id' => $id])->latest()->paginate(20));
+            }
         }
 
         return $users;

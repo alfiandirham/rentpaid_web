@@ -80,7 +80,7 @@ class SetoranController extends Controller
 
     public function search(){
         if ($search = \Request::get('q')) {
-            $setoran = SetoranCollection::collection(Setoran::where(function($query) use ($search){
+            $setoran = SetoranCollection::collection(Setoran::where('user_id', \Auth::user()->id)->orWhere('lokasi_id', \Auth::user()->lokasi_id)->where(function($query) use ($search){
                 $query->where('tanggal','LIKE', "%$search%");
             })->paginate(20));
         }else{

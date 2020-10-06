@@ -69,7 +69,7 @@ class TransaksiController extends Controller
 
     public function search(){
         if ($search = \Request::get('q')) {
-            $transaksi = TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->where(function($query) use ($search){
+            $transaksi = TransaksiCollection::collection(Transaksi::where('owner_id', \Auth::user()->id)->orWhere('lokasi_id', \Auth::user()->lokasi_id)->where('status', '<>', 'menunggak')->where(function($query) use ($search){
                 $query->where('tanggal','LIKE', "%$search%")
                 ->orWhere('user_id', 'like', "%$search%")
                 ->orWhere('tenant_id', 'like', "%$search%");
@@ -79,6 +79,12 @@ class TransaksiController extends Controller
             }
         }else{
             $transaksi = TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->latest()->paginate(20));
+            if(\Gate::allows('isAdmin')){
+                $transaksi = TransaksiCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('status', '<>', 'menunggak')->latest()->paginate(20));
+            }
+            if(\Gate::allows('isOwner')){
+                $transaksi = TransaksiCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('status', '<>', 'menunggak')->latest()->paginate(20));
+            }
         }
         return $transaksi;
     }

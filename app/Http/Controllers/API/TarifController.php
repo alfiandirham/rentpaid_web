@@ -100,7 +100,7 @@ class TarifController extends Controller
     public function search(){
 
         if ($search = \Request::get('q')) {
-            $users = Tarif::where(function($query) use ($search){
+            $users = Tarif::where('user_id', \Auth::user()->id)->orWhere('lokasi_id', \Auth::user()->lokasi_id)->where(function($query) use ($search){
                 $query->where('nama','LIKE', "%$search%");
             })->paginate(20);
             if (\Gate::allows('isAdmin')) {

@@ -136,7 +136,7 @@ class TenantController extends Controller
                 })->paginate(20));
             }
         }else{
-            $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->latest()->paginate(20));
+            $users = TenantResource::collection(Lokasi::findOrFail($id)->tenant()->paginate(20));
         }
         return $users;
     }

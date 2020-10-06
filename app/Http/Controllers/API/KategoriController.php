@@ -93,11 +93,21 @@ class KategoriController extends Controller
     public function search(){
 
         if ($search = \Request::get('q')) {
-            $users = KategoriCollection::collection(Kategori::where(function($query) use ($search){
+            $users = KategoriCollection::collection(Kategori::where('user_id', \Auth::user()->id)->orWhere('lokasi_id', \Auth::user()->lokasi_id)->where(function($query) use ($search){
                 $query->where('nama','LIKE', "%$search%");
             })->paginate(20));
         }else{
-            $users = KategoriCollection::collection(Kategori::latest()->paginate(20));
+            if (\Gate::allows('isAuthor')) {
+                $users = KategoriCollection::collection(Kategori::latest()->paginate(20));
+            }
+            if (\Gate::allows('isAdmin')) {
+                $id = \Auth::user();
+                $user = User::findOrFail($id->user_id);
+                $users = KategoriCollection::collection($user->kategori()->where('lokasi_id', $id->lokasi_id)->latest()->paginate(20));
+            }
+            if (\Gate::allows('isOwner')) {
+                $users = KategoriCollection::collection(\Auth::user()->kategori()->latest()->paginate(20));
+            }
         }
 
         return $users;
