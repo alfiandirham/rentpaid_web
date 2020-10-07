@@ -425,7 +425,7 @@
                         </div>
                       </td>
                       <td>
-                        <!-- <select
+                        <select
                           :id="`tenant${tenant.id}`"
                           @change="upData(tenant.id)"
                           class="form-control before"
@@ -440,8 +440,8 @@
                           >
                             {{ user.nama }}
                           </option>
-                        </select> -->
-                        <div class="form-group">
+                        </select>
+                        <!-- <div class="form-group">
                           <label class="has-float-label">
                             <input
                               @keyup="searchid(tenant.id)"
@@ -453,7 +453,7 @@
                             />
                             <span class="clr-blue">Nama Penyewa</span>
                           </label>
-                        </div>
+                        </div> -->
                       </td>
                       <td>
                         <a @click="editModal(tenant)">
