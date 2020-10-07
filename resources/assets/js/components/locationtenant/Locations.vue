@@ -2,7 +2,7 @@
   <div class="location">
     <section class="users-list-wrapper">
       <div>
-        <h2 class="head-text">Tenant > {{tena.lokasi}}</h2>
+        <h2 class="head-text">Tenant > {{ tena.lokasi }}</h2>
       </div>
       <div class="head-title">
         <!-- Modal -->
@@ -92,7 +92,12 @@
                       <div class="col-3">
                         <div class="form-group">
                           <label class="has-float-label">
-                            <input type="text" class="form-control" disabled value="PPN 10%" />
+                            <input
+                              type="text"
+                              class="form-control"
+                              disabled
+                              value="PPN 10%"
+                            />
                             <span class="clr-blue">PPN</span>
                           </label>
                         </div>
@@ -118,14 +123,18 @@
                               class="form-control"
                               v-model="form.kategori_id"
                               @change="setTarif()"
-                              :class="{ 'is-invalid': form.errors.has('kategori') }"
+                              :class="{
+                                'is-invalid': form.errors.has('kategori'),
+                              }"
                             >
                               <option value="pilih">Pilih Kategori</option>
                               <option
                                 v-for="kategori in kategoris.data"
                                 :value="kategori.id"
                                 :key="kategori.id"
-                              >{{kategori.kode}}</option>
+                              >
+                                {{ kategori.kode }}
+                              </option>
                             </select>
                             <span class="clr-blue">Kategori</span>
                           </label>
@@ -155,7 +164,9 @@
                               class="form-control"
                               v-model="form.utara"
                               placeholder="Batas Utara"
-                              :class="{ 'is-invalid': form.errors.has('utara') }"
+                              :class="{
+                                'is-invalid': form.errors.has('utara'),
+                              }"
                             />
                             <span class="clr-blue">Batas Utara</span>
                           </label>
@@ -170,7 +181,9 @@
                               class="form-control"
                               v-model="form.timur"
                               placeholder="Batas Timur"
-                              :class="{ 'is-invalid': form.errors.has('timur') }"
+                              :class="{
+                                'is-invalid': form.errors.has('timur'),
+                              }"
                             />
                             <span class="clr-blue">Batas Timur</span>
                           </label>
@@ -185,7 +198,9 @@
                               class="form-control"
                               v-model="form.selatan"
                               placeholder="Batas Selatan"
-                              :class="{ 'is-invalid': form.errors.has('selatan') }"
+                              :class="{
+                                'is-invalid': form.errors.has('selatan'),
+                              }"
                             />
                             <span class="clr-blue">Batas Selatan</span>
                           </label>
@@ -200,7 +215,9 @@
                               class="form-control"
                               v-model="form.barat"
                               placeholder="Batas Barat"
-                              :class="{ 'is-invalid': form.errors.has('barat') }"
+                              :class="{
+                                'is-invalid': form.errors.has('barat'),
+                              }"
                             />
                             <span class="clr-blue">Batas Barat</span>
                           </label>
@@ -257,8 +274,16 @@
                   type="button"
                   @click="editmode ? updateData() : createData()"
                   class="btn btn-primary"
-                >Ok</button>
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+                >
+                  Ok
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-dismiss="modal"
+                >
+                  Batal
+                </button>
               </div>
             </div>
           </div>
@@ -279,7 +304,10 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="location-list-status">Status</label>
                     <fieldset class="form-group">
-                      <select @change="e =>filtering(e.target.value)" class="form-control">
+                      <select
+                        @change="(e) => filtering(e.target.value)"
+                        class="form-control"
+                      >
                         <option value="uvuvwu">All</option>
                         <option value="uvuvwi">Tersedia</option>
                         <option value="uvuvwe">Disewa</option>
@@ -300,7 +328,9 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
-                  <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
+                  <div
+                    class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
+                  >
                     <div class="mb-1 mb-sm-0">
                       <input
                         type="search"
@@ -321,7 +351,9 @@
                               data-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false"
-                            >Actions</button>
+                            >
+                              Actions
+                            </button>
                             <div class="dropdown-menu">
                               <button @click="nonAll" class="dropdown-item">
                                 <i class="feather">
@@ -367,38 +399,70 @@
                   <tbody>
                     <tr v-for="tenant in tenants.data" :key="tenant.id">
                       <th scope="row">
-                        <input type="checkbox" :value="tenant.disewa+' '+tenant.id" />
+                        <input
+                          type="checkbox"
+                          :value="tenant.disewa + ' ' + tenant.id"
+                        />
                       </th>
-                      <td>{{tenant.kode}}</td>
-                      <td>{{tenant.luas}}</td>
-                      <td>Rp. {{tenant.luas * tenant.permeter + tenant.luas * tenant.permeter * 0.1}}</td>
-                      <td>Rp. {{tenant.harga}}</td>
+                      <td>{{ tenant.kode }}</td>
+                      <td>{{ tenant.luas }}</td>
+                      <td>
+                        Rp.
+                        {{
+                          tenant.luas * tenant.permeter +
+                          tenant.luas * tenant.permeter * 0.1
+                        }}
+                      </td>
+                      <td>Rp. {{ tenant.harga }}</td>
                       <td v-if="tenant.disewa === 0">
-                        <div class="badge badge-pill badge-light-success">Tersedia</div>
+                        <div class="badge badge-pill badge-light-success">
+                          Tersedia
+                        </div>
                       </td>
                       <td v-if="tenant.disewa === 1">
-                        <div class="badge badge-pill badge-light-warning">Disewa</div>
+                        <div class="badge badge-pill badge-light-warning">
+                          Disewa
+                        </div>
                       </td>
                       <td>
-                        <select
+                        <!-- <select
                           :id="`tenant${tenant.id}`"
                           @change="upData(tenant.id)"
                           class="form-control before"
                         >
-                          <option :value="tenant.penyewa_id">{{tenant.penyewa}}</option>
+                          <option :value="tenant.penyewa_id">
+                            {{ tenant.penyewa }}
+                          </option>
                           <option
                             v-for="user in users"
                             :key="user.id"
                             :value="user.id"
-                          >{{user.nama}}</option>
-                        </select>
+                          >
+                            {{ user.nama }}
+                          </option>
+                        </select> -->
+                        <div class="form-group">
+                          <label class="has-float-label">
+                            <input
+                              @keyup="searchid(tenant.id)"
+                              class="form-control before"
+                              :id="`tenant${tenant.id}`"
+                              @="upData(tenant.id)"
+                              name="collector_id"
+                              placeholder="Nama Penyewa"
+                            />
+                            <span class="clr-blue">Nama Penyewa</span>
+                          </label>
+                        </div>
                       </td>
                       <td>
                         <a @click="editModal(tenant)">
-                          <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
+                          <i
+                            class="users-edit-icon feather icon-edit-1 mr-50"
+                          ></i>
                         </a>
                         <a
-                          :href="'/qrcode/'+tenant.id"
+                          :href="'/qrcode/' + tenant.id"
                           onclick="window.open(this.href).print()"
                           target="_blank"
                         >
@@ -425,7 +489,11 @@
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="tenants" @pagination-change-page="getResults"></pagination>
+                  <pagination
+                    :limit="5"
+                    :data="tenants"
+                    @pagination-change-page="getResults"
+                  ></pagination>
                 </div>
               </div>
             </div>
@@ -469,6 +537,109 @@ export default {
     };
   },
   methods: {
+    autocomplete(arr, inp = document.getElementById("myInput")) {
+      /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+      var currentFocus;
+      /*execute a function when someone writes in the text field:*/
+      inp.addEventListener("input", function (e) {
+        var a,
+          b,
+          i,
+          val = this.value;
+        /*close any already open lists of autocompleted values*/
+        closeAllLists();
+        if (!val) {
+          return false;
+        }
+        currentFocus = -1;
+        /*create a DIV element that will contain the items (values):*/
+        a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");
+        /*append the DIV element as a child of the autocomplete container:*/
+        this.parentNode.appendChild(a);
+        /*for each item in the array...*/
+        for (i = 0; i < arr.length; i++) {
+          /*check if the item starts with the same letters as the text field value:*/
+          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            /*create a DIV element for each matching element:*/
+            b = document.createElement("DIV");
+            /*make the matching letters bold:*/
+            b.innerHTML =
+              "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML += arr[i].substr(val.length);
+            /*insert a input field that will hold the current array item's value:*/
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            /*execute a function when someone clicks on the item value (DIV element):*/
+            b.addEventListener("click", function (e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+            });
+            a.appendChild(b);
+          }
+        }
+      });
+      /*execute a function presses a key on the keyboard:*/
+      inp.addEventListener("keydown", function (e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+          /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+          currentFocus++;
+          /*and and make the current item more visible:*/
+          addActive(x);
+        } else if (e.keyCode == 38) {
+          //up
+          /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+          currentFocus--;
+          /*and and make the current item more visible:*/
+          addActive(x);
+        } else if (e.keyCode == 13) {
+          /*If the ENTER key is pressed, prevent the form from being submitted,*/
+          e.preventDefault();
+          if (currentFocus > -1) {
+            /*and simulate a click on the "active" item:*/
+            if (x) x[currentFocus].click();
+          }
+        }
+      });
+      function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = x.length - 1;
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
+      }
+      function removeActive(x) {
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < x.length; i++) {
+          x[i].classList.remove("autocomplete-active");
+        }
+      }
+      function closeAllLists(elmnt) {
+        /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+          if (elmnt != x[i] && elmnt != inp) {
+            x[i].parentNode.removeChild(x[i]);
+          }
+        }
+      }
+      /*execute a function when someone clicks in the document:*/
+      document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+      });
+    },
     setTarif() {
       axios
         .get("/api/kategori/" + this.form.kategori_id)
@@ -618,6 +789,9 @@ export default {
     upluas: _.debounce(() => {
       Fire.$emit("upluas");
     }, 1000),
+    searchid: _.debounce((id) => {
+      Fire.$emit("searchid", id);
+    }, 1000),
   },
   created() {
     Fire.$on("searching", () => {
@@ -631,6 +805,20 @@ export default {
     });
     Fire.$on("AfterCreate", () => {
       this.loadData();
+    });
+    Fire.$on("searchid", (id) => {
+      let query = document.getElementById("tenant" + id);
+      axios
+        .get("/api/findPenyewa?q=" + query.value)
+        .then(({ data }) => {
+          let arr = [];
+          data.data.forEach((e) => {
+            arr.push(e.id + "/" + e.nama);
+          });
+          console.log(arr);
+          this.autocomplete(arr, query);
+        })
+        .catch(() => {});
     });
     Fire.$on("upluas", () => {
       document.getElementById("swb").value =

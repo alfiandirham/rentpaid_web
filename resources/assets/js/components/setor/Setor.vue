@@ -7,7 +7,9 @@
         <h2 class="head-text">Setoran > List Setoran</h2>
       </div>
       <div class="head-title">
-        <button type="button" @click="newModal" class="btn fixed-2 btn-primary">Tambah Setoran</button>
+        <button type="button" @click="newModal" class="btn fixed-2 btn-primary">
+          Tambah Setoran
+        </button>
         <!-- Modal -->
         <div
           class="modal fade"
@@ -23,7 +25,7 @@
           >
             <div class="modal-nav">
               <div class="modal-header modal-nav-header">
-                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} SETORAN</h2>
+                <h2>{{ editmode ? "EDIT" : "TAMBAH" }} SETORAN</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
               <div class="modal-body modal-nav-body">
@@ -37,7 +39,9 @@
                               class="form-control"
                               type="date"
                               id="datepicker"
-                              :class="{ 'is-invalid': form.errors.has('tanggal') }"
+                              :class="{
+                                'is-invalid': form.errors.has('tanggal'),
+                              }"
                               v-model="form.tanggal"
                               name="tanggal"
                               placeholder="Tanggal"
@@ -54,14 +58,19 @@
                               id="myInput"
                               @keyup="searchid"
                               class="form-control"
-                              :class="{ 'is-invalid': form.errors.has('collector_id') }"
+                              :class="{
+                                'is-invalid': form.errors.has('collector_id'),
+                              }"
                               v-model="id"
                               name="collector_id"
                               placeholder="Kolektor ID"
                             />
                             <span class="clr-blue">Kolektor ID</span>
                           </label>
-                          <has-error :form="form" field="collector_id"></has-error>
+                          <has-error
+                            :form="form"
+                            field="collector_id"
+                          ></has-error>
                         </div>
                       </div>
                       <div class="col-12">
@@ -70,7 +79,9 @@
                             <input
                               type="number"
                               class="form-control"
-                              :class="{ 'is-invalid': form.errors.has('jumlah') }"
+                              :class="{
+                                'is-invalid': form.errors.has('jumlah'),
+                              }"
                               v-model="form.jumlah"
                               name="jumlah"
                               placeholder="Jumlah Setoran"
@@ -89,8 +100,16 @@
                   type="button"
                   @click="editmode ? updateUser() : createUser()"
                   class="btn btn-primary"
-                >Ok</button>
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+                >
+                  Ok
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-dismiss="modal"
+                >
+                  Batal
+                </button>
               </div>
             </div>
           </div>
@@ -103,7 +122,9 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-6">
-                  <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
+                  <div
+                    class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
+                  >
                     <div class="mb-1 mb-sm-0">
                       <input
                         type="search"
@@ -121,7 +142,9 @@
                     class="float-right ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
                   >
                     <div class="mb-1 mb-sm-0">
-                      <a href="/xl-setoran" class="btn btn-success">Export Excel</a>
+                      <a href="/xl-setoran" class="btn btn-success"
+                        >Export Excel</a
+                      >
                     </div>
                   </div>
                 </div>
@@ -139,10 +162,10 @@
                   </thead>
                   <tbody>
                     <tr v-for="setor in setorans.data" :key="setor.id">
-                      <td>{{setor.tanggal}}</td>
-                      <td>{{setor.collector}}</td>
-                      <td>{{setor.lokasi}}</td>
-                      <td>Rp. {{setor.jumlah}}</td>
+                      <td>{{ setor.tanggal }}</td>
+                      <td>{{ setor.collector }}</td>
+                      <td>{{ setor.lokasi }}</td>
+                      <td>Rp. {{ setor.jumlah }}</td>
                       <td>
                         <a @click="editModal(setor)">
                           <i class="feather icon-edit-1 mr-50"></i>
@@ -152,7 +175,11 @@
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="setorans" @pagination-change-page="getResults"></pagination>
+                  <pagination
+                    :limit="5"
+                    :data="setorans"
+                    @pagination-change-page="getResults"
+                  ></pagination>
                 </div>
               </div>
             </div>
@@ -374,9 +401,9 @@ export default {
     searchit: _.debounce(() => {
       Fire.$emit("searching");
     }, 1000),
-    searchid() {
+    searchid: _.debounce(() => {
       Fire.$emit("searchid");
-    },
+    }, 1000),
   },
   created() {
     Fire.$on("searching", () => {
