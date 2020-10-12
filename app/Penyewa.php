@@ -14,6 +14,10 @@ class Penyewa extends Model
         return $this->hasMany('App\Tenant');
     }
 
+    public function transaksi() {
+        return $this->hasMany('App\Transaksi');
+    }
+
     public function user(){
         return $this->belongsTo('App\User');
     }

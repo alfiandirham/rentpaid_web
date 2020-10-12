@@ -21,7 +21,7 @@ class Transaksi extends JsonResource
         }
         return [
             'id' => $this->id,
-            'penyewa' => $this->tenant->penyewa->nama,
+            'penyewa' => $this->penyewa->nama,
             'lokasi' => 'Tenant '.$this->tenant->kode.', '.$this->tenant->lokasi->lokasi,
             'detail' => $detail,
             'tanggal' =>$this->tanggal,

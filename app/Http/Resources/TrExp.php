@@ -17,7 +17,7 @@ class TrExp extends JsonResource
         $detail = json_decode($this->detail);
         return [
             'id' => $this->id,
-            'penyewa' => $this->tenant->penyewa->nama,
+            'penyewa' => $this->penyewa->nama,
             'lokasi' => 'Tenant '.$this->tenant->kode.', '.$this->tenant->lokasi->lokasi,
             'tanggal' =>$this->tanggal,
             'collector' => $this->user->name,

@@ -48,6 +48,7 @@ class Controller extends BaseController
                     'detail' => json_encode($tarif),
                     'owner_id' => Lokasi::find($tenant->lokasi_id)->user_id,
                     'lokasi_id' => $tenant->lokasi_id,
+                    'penyewa_id' => $tenant->penyewa->id,
                 ]);
                 $tenant->save();
             }
