@@ -20,7 +20,7 @@ class DashboardController extends Controller
             $phari = Transaksi::where('tanggal', 'like' ,substr(now(), 0,10))
                 ->where([
                     'owner_id' => \Auth::user()->id,
-                    'status' => 'lunas'
+                    // 'status' => 'lunas'
                 ])->sum('dibayar');
             
             $bini = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))

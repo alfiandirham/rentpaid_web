@@ -1,7 +1,5 @@
 <template>
   <div class="user">
-    <!-- users list start -->
-    <!-- <section class="users-list-wrapper" v-if="$gate.isAdminOrAuthor()"> -->
     <section class="users-list-wrapper">
       <div>
         <h2 class="head-text">Transaksi</h2>
@@ -22,7 +20,7 @@
           >
             <div class="modal-nav">
               <div class="modal-header modal-nav-header">
-                <h2>{{editmode ? 'DETAIL' : 'TAMBAH'}} TRANSAKSI</h2>
+                <h2>{{ editmode ? "DETAIL" : "TAMBAH" }} TRANSAKSI</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
               <div class="modal-body modal-nav-body">
@@ -33,11 +31,11 @@
                         <div class="row">
                           <div class="col-4">
                             <label class="mb-2 labelin">ID Transaksi</label>
-                            <p class="teksin">{{form.id}}</p>
+                            <p class="teksin">{{ form.id }}</p>
                           </div>
                           <div class="col-6">
                             <label class="mb-2 labelin">Tanggal</label>
-                            <p class="teksin">{{form.tanggal | myDate}}</p>
+                            <p class="teksin">{{ form.tanggal | myDate }}</p>
                           </div>
                         </div>
                       </div>
@@ -45,27 +43,33 @@
                         <div class="row">
                           <div class="col-4">
                             <label class="mb-2 labelin">Nama Penyewa</label>
-                            <p class="teksin">{{form.penyewa}}</p>
+                            <p class="teksin">{{ form.penyewa }}</p>
                           </div>
                           <div class="col-6">
                             <label class="mb-2 labelin">Detail Lokasi</label>
-                            <p class="teksin">{{form.lokasi}}</p>
+                            <p class="teksin">{{ form.lokasi }}</p>
                           </div>
                         </div>
                       </div>
                       <div class="col-12 mt-2">
                         <div class="row">
                           <div class="col-4">
-                            <label class="mb-2 labelin">Detail Pembayaran</label>
+                            <label class="mb-2 labelin"
+                              >Detail Pembayaran</label
+                            >
                             <p
                               v-for="v in Object.keys(form.detail)"
                               :key="v"
                               class="teksin text-capitalize"
-                            >{{v}}</p>
+                            >
+                              {{ v }}
+                            </p>
                           </div>
                           <div class="col-6">
                             <label class="mb-2 labelin">&nbsp;</label>
-                            <p v-for="v in form.detail" :key="v" class="teksin">Rp. {{v}}</p>
+                            <p v-for="v in form.detail" :key="v" class="teksin">
+                              Rp. {{ v }}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -75,7 +79,7 @@
                             <p class="teksin-bold">Total</p>
                           </div>
                           <div class="col-6">
-                            <p class="teksin-bold">Rp. {{form.setoran}}</p>
+                            <p class="teksin-bold">Rp. {{ form.setoran }}</p>
                           </div>
                         </div>
                       </div>
@@ -83,7 +87,7 @@
                         <div class="row">
                           <div class="col-4">
                             <label class="mb-2 labelin">Nama Kolektor</label>
-                            <p class="teksin">{{form.collector}}</p>
+                            <p class="teksin">{{ form.collector }}</p>
                           </div>
                         </div>
                       </div>
@@ -107,30 +111,21 @@
             <div class="users-list-filter">
               <form>
                 <div class="row">
-                  <!-- <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="users-list-role">Lokasi</label>
-                    <fieldset class="form-group">
-                      <select @change="e =>filtering(e.target.value)" class="form-control">
-                        <option value="uvuvwu">All</option>
-                        <option v-for="p in lokasi.data" :key="p.id" :value="p.id">{{p}}</option>
-                      </select>
-                    </fieldset>
-                  </div>
-                  <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="users-list-role">Penyewa</label>
-                    <fieldset class="form-group">
-                      <select @change="e =>filtering(e.target.value)" class="form-control">
-                        <option value="uvuvwu">All</option>
-                        <option v-for="p in penyewa.data" :key="p.id" :value="p.id">{{p.nama}}</option>
-                      </select>
-                    </fieldset>
-                  </div>-->
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="users-list-role">Collector</label>
                     <fieldset class="form-group">
-                      <select @change="e =>filtering(e.target.value)" class="form-control">
+                      <select
+                        @change="(e) => filtering(e.target.value)"
+                        class="form-control"
+                      >
                         <option value="uvuvwu">All</option>
-                        <option v-for="p in collector.data" :key="p.id" :value="p.id">{{p.name}}</option>
+                        <option
+                          v-for="p in collector.data"
+                          :key="p.id"
+                          :value="p.id"
+                        >
+                          {{ p.name }}
+                        </option>
                       </select>
                     </fieldset>
                   </div>
@@ -147,8 +142,25 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-6">
-                  <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
-                    <div class="mb-1 mb-sm-0">
+                  <div class="ag-grid-btns d-flex flex-wrap mb-1">
+                    <div class="mb-1 mb-sm-0 mr-1">
+                      <fieldset class="form-group">
+                        <select
+                          @change="(e) => filtering(e.target.value)"
+                          class="form-control"
+                        >
+                          <option value="uvuvwu">All</option>
+                          <option
+                            v-for="p in collector.data"
+                            :key="p.id"
+                            :value="p.id"
+                          >
+                            {{ p.name }}
+                          </option>
+                        </select>
+                      </fieldset>
+                    </div>
+                    <div class="mb-1 mr-1 mb-sm-0">
                       <input
                         type="search"
                         @keyup="searchit"
@@ -158,6 +170,9 @@
                         placeholder="Search...."
                       />
                     </div>
+                    <div class="mb-1 mb-sm-0">
+                      <button class="btn btn-warning">Cari</button>
+                    </div>
                   </div>
                 </div>
                 <div class="col-6">
@@ -165,7 +180,9 @@
                     class="float-right ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
                   >
                     <div class="mb-1 mb-sm-0">
-                      <a href="/xl-transaksi" class="btn btn-success">Export Excel</a>
+                      <a href="/xl-transaksi" class="btn btn-success"
+                        >Export Excel</a
+                      >
                     </div>
                   </div>
                 </div>
@@ -188,25 +205,59 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="transaksi in transaksis.data" :key="transaksi.id">
+                    <tr
+                      v-for="transaksi in transaksis.data"
+                      :key="transaksi.id"
+                    >
                       <td>
-                        <a class="blue-underline" @click="editModal(transaksi)">{{transaksi.id}}</a>
+                        <a
+                          class="blue-underline"
+                          @click="editModal(transaksi)"
+                          >{{ transaksi.id }}</a
+                        >
                       </td>
-                      <td>{{transaksi.penyewa}}</td>
-                      <td>{{transaksi.lokasi}}</td>
-                      <td>{{transaksi.tanggal | myDate}}</td>
-                      <td>{{transaksi.collector}}</td>
-                      <td>Rp. {{transaksi.detail.bop ? transaksi.detail.bop : 0}}</td>
-                      <td>Rp. {{transaksi.detail.air ? transaksi.detail.air : 0}}</td>
-                      <td>Rp. {{transaksi.detail.listrik ? transaksi.detail.listrik : 0}}</td>
-                      <td>Rp. {{transaksi.detail.barang ? transaksi.detail.barang : 0}}</td>
-                      <td>Rp. {{transaksi.detail.sampah ? transaksi.detail.sampah : 0}}</td>
-                      <td>Rp. {{transaksi.setoran}}</td>
+                      <td>{{ transaksi.penyewa }}</td>
+                      <td>{{ transaksi.lokasi }}</td>
+                      <td>{{ transaksi.tanggal | myDate }}</td>
+                      <td>{{ transaksi.collector }}</td>
+                      <td>
+                        Rp.
+                        {{ transaksi.detail.bop ? transaksi.detail.bop : 0 }}
+                      </td>
+                      <td>
+                        Rp.
+                        {{ transaksi.detail.air ? transaksi.detail.air : 0 }}
+                      </td>
+                      <td>
+                        Rp.
+                        {{
+                          transaksi.detail.listrik
+                            ? transaksi.detail.listrik
+                            : 0
+                        }}
+                      </td>
+                      <td>
+                        Rp.
+                        {{
+                          transaksi.detail.barang ? transaksi.detail.barang : 0
+                        }}
+                      </td>
+                      <td>
+                        Rp.
+                        {{
+                          transaksi.detail.sampah ? transaksi.detail.sampah : 0
+                        }}
+                      </td>
+                      <td>Rp. {{ transaksi.setoran }}</td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="transaksis" @pagination-change-page="getResults"></pagination>
+                  <pagination
+                    :limit="5"
+                    :data="transaksis"
+                    @pagination-change-page="getResults"
+                  ></pagination>
                 </div>
               </div>
             </div>
@@ -215,10 +266,6 @@
       </div>
       <!-- Ag Grid users list section end -->
     </section>
-    <!-- users list ends -->
-    <!-- <div v-if="!$gate.isAdminOrAuthor()">
-      <not-found></not-found>
-    </div>-->
   </div>
 </template>
 
