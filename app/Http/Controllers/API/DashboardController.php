@@ -23,109 +23,109 @@ class DashboardController extends Controller
                     // 'status' => 'lunas'
                 ])->sum('dibayar');
             
-            $bini = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $bini = Transaksi::whereMonth('tanggal',now()->month)
                 ->where([
                     'owner_id' => \Auth::user()->id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ]);
             
-            $row = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row = Transaksi::whereMonth('tanggal',now()->month)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-01')->sum('dibayar');
             
-            $row1 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row1 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-05')->sum('dibayar');
             
-            $row2 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row2 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-09')->sum('dibayar');
             
-            $row3 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row3 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-13')->sum('dibayar');
             
-            $row4 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row4 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-17')->sum('dibayar');
             
-            $row5 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row5 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-21')->sum('dibayar');
             
-            $row6 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row6 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-26')->sum('dibayar');
             
-            $row7 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row7 = Transaksi::whereMonth('tanggal',now()->month)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-30')->sum('dibayar');
             
-            $blalu = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $blalu = Transaksi::whereMonth('tanggal' ,now()->month - 1)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ]);
             
-            $riw = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-01')->sum('dibayar');
             
-            $riw1 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw1 = Transaksi::whereMonth('tanggal', now()->month- 1)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-05')->sum('dibayar');
             
-            $riw2 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw2 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-09')->sum('dibayar');
             
-            $riw3 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw3 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-13')->sum('dibayar');
             
-            $riw4 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw4 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-17')->sum('dibayar');
             
-            $riw5 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw5 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-21')->sum('dibayar');
             
-            $riw6 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw6 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-26')->sum('dibayar');
 
-            $riw7 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw7 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'owner_id' => \Auth::user()->id,
                     'status' => 'lunas'
@@ -174,115 +174,115 @@ class DashboardController extends Controller
             $phari = Transaksi::where('tanggal', 'like' ,substr(now(), 0,10))
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->sum('dibayar');
             
-            $bini = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $bini = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ]);
             
-            $row = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-01')->sum('dibayar');
             
-            $row1 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row1 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-05')->sum('dibayar');
             
-            $row2 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row2 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-09')->sum('dibayar');
             
-            $row3 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row3 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-13')->sum('dibayar');
             
-            $row4 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row4 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-17')->sum('dibayar');
             
-            $row5 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row5 = Transaksi::whereMonth('tanggal',now()->month)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-21')->sum('dibayar');
             
-            $row6 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row6 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-26')->sum('dibayar');
             
-            $row7 = Transaksi::whereMonth('tanggal', '=' ,intval(substr(now(), 6,2)))
+            $row7 = Transaksi::whereMonth('tanggal', now()->month)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-30')->sum('dibayar');
             
-            $blalu = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $blalu = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ]);
             
-            $riw = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-01')->sum('dibayar');
             
-            $riw1 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw1 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-05')->sum('dibayar');
             
-            $riw2 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw2 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-09')->sum('dibayar');
             
-            $riw3 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw3 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-13')->sum('dibayar');
             
-            $riw4 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw4 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-17')->sum('dibayar');
             
-            $riw5 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw5 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-21')->sum('dibayar');
             
-            $riw6 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw6 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-26')->sum('dibayar');
 
-            $riw7 = Transaksi::whereMonth('tanggal', '=' ,(intval(substr(now(), 6,2)) - 1))
+            $riw7 = Transaksi::whereMonth('tanggal', now()->month - 1)
                 ->where([
                     'lokasi_id' => \Auth::user()->lokasi_id,
-                    'status' => 'lunas'
+                    //'status' => 'lunas'
                 ])->where('tanggal', 'like', '%-30')->sum('dibayar');
             
             $thari = Transaksi::where('tanggal', 'like' ,substr(now(), 0,10))
