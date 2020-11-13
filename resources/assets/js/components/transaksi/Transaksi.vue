@@ -112,22 +112,35 @@
               <form>
                 <div class="row">
                   <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="users-list-role">Collector</label>
+                    <label for="users-list-role">Tanggal Awal</label>
                     <fieldset class="form-group">
-                      <select
-                        @change="(e) => filtering(e.target.value)"
+                      <input
+                        v-model="awal"
+                        type="date"
+                        name="tawal"
                         class="form-control"
-                      >
-                        <option value="uvuvwu">All</option>
-                        <option
-                          v-for="p in collector.data"
-                          :key="p.id"
-                          :value="p.id"
-                        >
-                          {{ p.name }}
-                        </option>
-                      </select>
+                      />
                     </fieldset>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-role">Tanggal Akhir</label>
+                    <fieldset class="form-group">
+                      <input
+                        v-model="akhir"
+                        type="date"
+                        name="takhir"
+                        class="form-control"
+                      />
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <button
+                      type="button"
+                      @click="searchit"
+                      class="btn btn-primary mt-2 btn-small"
+                    >
+                      Tampilkan Data
+                    </button>
                   </div>
                 </div>
               </form>
@@ -145,25 +158,16 @@
                   <div class="ag-grid-btns d-flex flex-wrap mb-1">
                     <div class="mb-1 mb-sm-0 mr-1">
                       <fieldset class="form-group">
-                        <select
-                          @change="(e) => filtering(e.target.value)"
-                          class="form-control"
-                        >
-                          <option value="uvuvwu">All</option>
-                          <option
-                            v-for="p in collector.data"
-                            :key="p.id"
-                            :value="p.id"
-                          >
-                            {{ p.name }}
-                          </option>
+                        <select v-model="type" class="form-control">
+                          <option value="penyewa">Penyewa</option>
+                          <option value="lokasi">Lokasi</option>
+                          <option value="collector">Collector</option>
                         </select>
                       </fieldset>
                     </div>
                     <div class="mb-1 mr-1 mb-sm-0">
                       <input
                         type="search"
-                        @keyup="searchit"
                         v-model="search"
                         class="ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0"
                         id="filter-text-box"
@@ -171,7 +175,13 @@
                       />
                     </div>
                     <div class="mb-1 mb-sm-0">
-                      <button class="btn btn-warning">Cari</button>
+                      <button
+                        type="button"
+                        @click="searchit"
+                        class="btn btn-warning"
+                      >
+                        Cari
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -275,6 +285,9 @@ export default {
     return {
       cekall: false,
       search: "",
+      awal: false,
+      akhir: false,
+      type: "penyewa",
       editmode: false,
       transaksis: {},
       lokasi: {},
@@ -387,7 +400,16 @@ export default {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
-        .get("api/findTransaksi?q=" + query)
+        .get(
+          "api/findTransaksi?q=" +
+            query +
+            "&t=" +
+            this.type +
+            "&a=" +
+            this.awal +
+            "&l=" +
+            this.akhir
+        )
         .then((data) => {
           this.transaksis = data.data;
         })

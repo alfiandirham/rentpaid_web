@@ -17,12 +17,12 @@ class TransaksiController extends Controller
 
     public function index(){
         if(\Gate::allows('isAdmin')){
-            return TransaksiCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('status', '<>', 'menunggak')->latest()->paginate(20));
+            return TransaksiCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('dibayar', '>=', 0)->latest()->paginate(20));
         }
         if(\Gate::allows('isOwner')){
-            return TransaksiCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('status', '<>', 'menunggak')->latest()->paginate(20));
+            return TransaksiCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('dibayar', '>=', 0)->latest()->paginate(20));
         }
-        return TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->latest()->paginate(20));
+        return TransaksiCollection::collection(Transaksi::where('dibayar', '>=', 0)->latest()->paginate(20));
     }
 
     public function store(Request $req){
@@ -68,24 +68,42 @@ class TransaksiController extends Controller
     }
 
     public function search(){
-        if ($search = \Request::get('q')) {
-            $transaksi = TransaksiCollection::collection(Transaksi::where('owner_id', \Auth::user()->id)->orWhere('lokasi_id', \Auth::user()->lokasi_id)->where('status', '<>', 'menunggak')->where(function($query) use ($search){
-                $query->where('tanggal','LIKE', "%$search%")
-                ->orWhere('user_id', 'like', "%$search%")
-                ->orWhere('tenant_id', 'like', "%$search%");
-            })->paginate(20));
-            if($search == "uvuvwu"){
-                $transaksi = TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->latest()->paginate(20));
-            }
-        }else{
-            $transaksi = TransaksiCollection::collection(Transaksi::where('status', '<>', 'menunggak')->latest()->paginate(20));
+        if(\Request::get('a')){
             if(\Gate::allows('isAdmin')){
-                $transaksi = TransaksiCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('status', '<>', 'menunggak')->latest()->paginate(20));
+                return TransaksiCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('dibayar', '>=', 0)->whereBetween('tanggal',[\Request::get('a'),\Request::get('l')])->latest()->paginate(20));
             }
             if(\Gate::allows('isOwner')){
-                $transaksi = TransaksiCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('status', '<>', 'menunggak')->latest()->paginate(20));
+                return TransaksiCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('dibayar', '>=', 0)->whereBetween('tanggal',[\Request::get('a'),\Request::get('l')])->latest()->paginate(20));
             }
+        } else {
+            if ($search = \Request::get('q')) {
+                $preTransaksi = Transaksi::leftJoin('penyewas', 'transaksis.penyewa_id', '=', 'penyewas.id')->leftJoin('lokasis', 'transaksis.lokasi_id', '=', 'lokasis.id')->join('users', 'transaksis.user_id', '=', 'users.id');
+                
+                if(\Gate::allows('isAdmin')){
+                    $preTransaksi->where('transaksis.lokasi_id',\Auth::user()->lokasi_id);
+                }
+                if(\Gate::allows('isOwner')){
+                    $preTransaksi->where('transaksis.owner_id',\Auth::user()->id);
+                }
+
+                if (\Request::get('t') == 'penyewa'){
+                    $transaksi = TransaksiCollection::collection($preTransaksi->where('penyewas.nama','like', "%$search%")->select('transaksis.*', 'penyewas.nama', 'lokasis.lokasi', 'users.name')->paginate(20));
+                }
+                if (\Request::get('t') == 'lokasi'){
+                    $transaksi = TransaksiCollection::collection($preTransaksi->where('lokasis.lokasi', 'like', "%$search%")->select('transaksis.*', 'penyewas.nama', 'lokasis.lokasi', 'users.name')->paginate(20));
+                }
+                if (\Request::get('t') == 'collector'){
+                    $transaksi = TransaksiCollection::collection($preTransaksi->where('users.name', 'like', "%$search%")->select('transaksis.*', 'penyewas.nama', 'lokasis.lokasi', 'users.name')->paginate(20));
+                }
+            }else{
+                if(\Gate::allows('isAdmin')){
+                    $transaksi = TransaksiCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('dibayar', '>=', 0)->latest()->paginate(20));
+                }
+                if(\Gate::allows('isOwner')){
+                    $transaksi = TransaksiCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('dibayar', '>=', 0)->latest()->paginate(20));
+                }
+            }
+            return $transaksi;
         }
-        return $transaksi;
     }
 }
