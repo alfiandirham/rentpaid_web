@@ -137,7 +137,7 @@ class PenyewaController extends Controller
                     $users = User::orderBy('nama')->paginate(20);
                 }
             }else{
-                $users = User::where('status', true)->where('user_id', \Auth::user()->id)->orWhere('lokasi_id', \Auth::user()->lokasi_id)->where(function($query) use ($search){
+                $users = User::where('user_id', \Auth::user()->id)->orWhere('lokasi_id', \Auth::user()->lokasi_id)->where('status', true)->where(function($query) use ($search){
                     $query->where('nama','LIKE',"%$search%")
                             ->orWhere('ktp','LIKE',"%$search%")
                             ->orWhere('status',$search);

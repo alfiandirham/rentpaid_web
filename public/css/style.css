@@ -491,3 +491,15 @@ ul>li>a.router-link-active.antidup {
 .clr-cl {
     color: #979797;
 }
+
+.liku {
+    list-style: none !important;
+    padding: 12px !important;
+    background: #f4f4f4 !important;
+    cursor: pointer;
+}
+
+.liku:hover {
+    background-color: darkgrey !important;
+    color: #fff !important;
+}
