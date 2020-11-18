@@ -197,12 +197,45 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="cardc">
+                    <h6>Transaksi Keseluruhan</h6>
+                    <div class="row">
+                      <div class="col-6">
+                        <h5>Pendepatan</h5>
+                        <p>Rp {{ info.totalp }}</p>
+                      </div>
+                      <div class="col-6">
+                        <h5>Tunggakan</h5>
+                        <p>Rp {{ info.totalt }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="cardct">
+                    <h6>Transaksi Hari Ini</h6>
+                    <div class="row">
+                      <div class="col-6">
+                        <h5>Pendepatan</h5>
+                        <p>Rp {{ info.phari }}</p>
+                      </div>
+                      <div class="col-6">
+                        <h5>Tunggakan</h5>
+                        <p>Rp {{ info.thari }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="table-responsive">
                 <table class="table table-hover mb-0">
                   <thead>
                     <tr>
                       <th>Id</th>
                       <th>Penyewa</th>
+                      <th>Status</th>
                       <th>Nama Lokasi</th>
                       <th>Tanggal</th>
                       <th>Collector</th>
@@ -227,6 +260,7 @@
                         >
                       </td>
                       <td>{{ transaksi.penyewa }}</td>
+                      <td>{{ transaksi.status }}</td>
                       <td>{{ transaksi.lokasi }}</td>
                       <td>{{ transaksi.tanggal | myDate }}</td>
                       <td>{{ transaksi.collector }}</td>
@@ -286,6 +320,7 @@ export default {
       cekall: false,
       search: "",
       awal: false,
+      info: {},
       akhir: false,
       type: "penyewa",
       editmode: false,
@@ -374,6 +409,7 @@ export default {
       axios.get("api/lokasi").then(({ data }) => (this.lokasi = data));
       axios.get("/api/penyewa").then(({ data }) => (this.penyewa = data));
       axios.get("/api/kolektor").then(({ data }) => (this.collector = data));
+      axios.get("/api/infotr").then(({ data }) => (this.info = data));
     },
     createUser() {
       this.$Progress.start();
@@ -458,5 +494,41 @@ export default {
   line-height: 17px;
   padding-left: 5px;
   color: #174865;
+}
+
+.cardc {
+  background: aliceblue;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.25rem;
+}
+.cardc h6 {
+  color: darkgray;
+  font-weight: bold;
+}
+.cardc h5 {
+  font-size: small;
+  color: #3895cc;
+}
+.cardc p {
+  color: #3895cc;
+}
+
+.cardct {
+  background: #d7ffe7;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.25rem;
+}
+.cardct h6 {
+  color: darkgray;
+  font-weight: bold;
+}
+.cardct h5 {
+  font-size: small;
+  color: #3895cc;
+}
+.cardct p {
+  color: #3895cc;
 }
 </style>

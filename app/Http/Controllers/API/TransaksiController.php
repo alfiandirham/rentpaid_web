@@ -25,6 +25,36 @@ class TransaksiController extends Controller
         return TransaksiCollection::collection(Transaksi::where('dibayar', '>=', 0)->latest()->paginate(20));
     }
 
+    public function info(){
+        $thari = Transaksi::where('tanggal', 'like' ,substr(now(), 0,10))
+                ->where([
+                    'owner_id' => \Auth::user()->id,
+                    'status' => 'menunggak'
+                ])->sum('sisa');
+        $phari = Transaksi::where('tanggal', 'like' ,substr(now(), 0,10))
+            ->where([
+                'owner_id' => \Auth::user()->id,
+                // 'status' => 'lunas'
+            ])->sum('dibayar');
+
+        $totalp = Transaksi::where([
+                'owner_id' => \Auth::user()->id,
+                // 'status' => 'lunas'
+            ])->sum('dibayar');
+
+        $totalt = Transaksi::where([
+                    'owner_id' => \Auth::user()->id,
+                    'status' => 'menunggak'
+                ])->sum('sisa');
+        
+        return [
+            "phari" => $phari,
+            "thari" => $thari,
+            "totalp" => $totalp,
+            "totalt" => $totalt
+        ];
+    }
+
     public function store(Request $req){
         $staff = auth('api')->user();
 
