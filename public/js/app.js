@@ -100259,6 +100259,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_numeral__);
 //
 //
 //
@@ -100485,6 +100487,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -100505,6 +100545,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    rp: function rp(n) {
+      return __WEBPACK_IMPORTED_MODULE_0_numeral___default()(n).format("0,0");
+    },
     setTarif: function setTarif() {
       var _this = this;
 
@@ -100643,7 +100686,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.newModal }
           },
-          [_vm._v("Tambah Kategori")]
+          [_vm._v("\n        Tambah Kategori\n      ")]
         ),
         _vm._v(" "),
         _c(
@@ -100875,7 +100918,7 @@ var render = function() {
                                         _vm._v(
                                           "\n                            " +
                                             _vm._s(tarif.nama) +
-                                            " - Rp. " +
+                                            " - Rp.\n                            " +
                                             _vm._s(
                                               tarif.sampah +
                                                 tarif.barang +
@@ -100973,7 +101016,7 @@ var render = function() {
                               _c("div", { staticClass: "col-6" }, [
                                 _c("h6", [
                                   _vm._v(
-                                    "\n                            Rp. " +
+                                    "\n                            Rp.\n                            " +
                                       _vm._s(
                                         _vm.tarif.sampah +
                                           _vm.tarif.barang +
@@ -101005,7 +101048,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Ok")]
+                      [_vm._v("\n                Ok\n              ")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -101014,7 +101057,7 @@ var render = function() {
                         staticClass: "btn btn-outline-danger",
                         attrs: { type: "button", "data-dismiss": "modal" }
                       },
-                      [_vm._v("Batal")]
+                      [_vm._v("\n                Batal\n              ")]
                     )
                   ])
                 ])
@@ -101083,7 +101126,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(kategori.kode))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(kategori.tarif))]),
+                        _c("td", [
+                          _vm._v("Rp. " + _vm._s(_vm.rp(kategori.tarif)))
+                        ]),
                         _vm._v(" "),
                         _c("td", [
                           _c(
