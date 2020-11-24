@@ -10,7 +10,9 @@
                   <i class="fa fa-usd black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 text-success mt-1 mb-25">Rp {{data.phari}}</h2>
+              <h2 class="text-bold-700 text-success mt-1 mb-25">
+                Rp {{ rp(data.phari) }}
+              </h2>
               <p class="mb-2 clr-cl">Pendapatan hari ini</p>
             </div>
           </div>
@@ -23,7 +25,9 @@
                   <i class="fa fa-usd black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 text-danger mt-1 mb-25">Rp {{data.thari}}</h2>
+              <h2 class="text-bold-700 text-danger mt-1 mb-25">
+                Rp {{ rp(data.thari) }}
+              </h2>
               <p class="mb-2 clr-cl">Pembayaran menunggak hari ini</p>
             </div>
           </div>
@@ -36,7 +40,7 @@
                   <i class="fa fa-codepen black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">{{data.tenant}}</h2>
+              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">{{ data.tenant }}</h2>
               <p class="mb-2 clr-cl">Tenant disewa</p>
             </div>
           </div>
@@ -49,7 +53,9 @@
                   <i class="feather icon-users black font-medium-5"></i>
                 </div>
               </div>
-              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">{{data.kolektor}}</h2>
+              <h2 class="text-bold-700 mt-1 mb-25 clr-bl">
+                {{ data.kolektor }}
+              </h2>
               <p class="mb-2 clr-cl">Kolektor Aktif</p>
             </div>
           </div>
@@ -59,7 +65,10 @@
         <div class="col-md-5">
           <div class="card">
             <div class="card-body">
-              <line-chart :styles="myStyles" :chart-data="datacollection"></line-chart>
+              <line-chart
+                :styles="myStyles"
+                :chart-data="datacollection"
+              ></line-chart>
             </div>
           </div>
         </div>
@@ -70,11 +79,11 @@
               <div class="row">
                 <div class="col">
                   <span class="clr-cl">Bulan Ini</span>
-                  <h6 class="text-success mt-8">Rp {{data.bini}}</h6>
+                  <h6 class="text-success mt-8">Rp {{ rp(data.bini) }}</h6>
                 </div>
                 <div class="col">
                   <span class="clr-cl">Bulan Lalu</span>
-                  <h6 class="clr-bl mt-8">Rp {{data.blalu}}</h6>
+                  <h6 class="clr-bl mt-8">Rp {{ rp(data.blalu) }}</h6>
                 </div>
               </div>
             </div>
@@ -87,6 +96,7 @@
 
 <script>
 import LineChart from "./LineChart.js";
+import num from "numeral";
 
 export default {
   components: {
@@ -99,6 +109,9 @@ export default {
     };
   },
   methods: {
+    rp(n) {
+      return num(n).format("0,0");
+    },
     fillData() {
       this.datacollection = {
         labels: ["01", "05", "09", "13", "17", "21", "26", "30"],
