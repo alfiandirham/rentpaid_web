@@ -91907,6 +91907,8 @@ exports.push([module.i, "\n.before[data-v-534a1de5] {\n  background-color: #ecf3
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_numeral__);
 //
 //
 //
@@ -92424,6 +92426,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -92453,6 +92459,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    rp: function rp(n) {
+      return __WEBPACK_IMPORTED_MODULE_0_numeral___default()(n).format("0,0");
+    },
+
     setlist: _.debounce(function (id) {
       Fire.$emit("nice", id);
     }, 1000),
@@ -93546,14 +93556,18 @@ var render = function() {
                           _vm._v(
                             "\n                      Rp.\n                      " +
                               _vm._s(
-                                tenant.luas * tenant.permeter +
-                                  tenant.luas * tenant.permeter * 0.1
+                                _vm.rp(
+                                  tenant.luas * tenant.permeter +
+                                    tenant.luas * tenant.permeter * 0.1
+                                )
                               ) +
                               "\n                    "
                           )
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(tenant.harga))]),
+                        _c("td", [
+                          _vm._v("Rp. " + _vm._s(_vm.rp(tenant.harga)))
+                        ]),
                         _vm._v(" "),
                         tenant.disewa === 0
                           ? _c("td", [

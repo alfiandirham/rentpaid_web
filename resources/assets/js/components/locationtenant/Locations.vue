@@ -409,11 +409,13 @@
                       <td>
                         Rp.
                         {{
-                          tenant.luas * tenant.permeter +
-                          tenant.luas * tenant.permeter * 0.1
+                          rp(
+                            tenant.luas * tenant.permeter +
+                              tenant.luas * tenant.permeter * 0.1
+                          )
                         }}
                       </td>
-                      <td>Rp. {{ tenant.harga }}</td>
+                      <td>Rp. {{ rp(tenant.harga) }}</td>
                       <td v-if="tenant.disewa === 0">
                         <div class="badge badge-pill badge-light-success">
                           Tersedia
@@ -516,6 +518,8 @@
 </template>
 
 <script>
+import num from "numeral";
+
 export default {
   data() {
     return {
@@ -543,6 +547,9 @@ export default {
     };
   },
   methods: {
+    rp(n) {
+      return num(n).format("0,0");
+    },
     setlist: _.debounce((id) => {
       Fire.$emit("nice", id);
     }, 1000),
