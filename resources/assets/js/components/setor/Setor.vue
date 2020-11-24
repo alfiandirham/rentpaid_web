@@ -165,7 +165,7 @@
                       <td>{{ setor.tanggal }}</td>
                       <td>{{ setor.collector }}</td>
                       <td>{{ setor.lokasi }}</td>
-                      <td>Rp. {{ setor.jumlah }}</td>
+                      <td>Rp. {{ rp(setor.jumlah) }}</td>
                       <td>
                         <a @click="editModal(setor)">
                           <i class="feather icon-edit-1 mr-50"></i>
@@ -198,6 +198,7 @@
 <script>
 // requred("datepicker-bootstrap");
 // import datepicker from "datepicker-bootstrap";
+import num from "numeral";
 
 export default {
   data() {
@@ -216,6 +217,9 @@ export default {
     };
   },
   methods: {
+    rp(n) {
+      return num(n).format("0,0");
+    },
     autocomplete(arr, inp = document.getElementById("myInput")) {
       /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
