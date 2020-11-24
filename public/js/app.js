@@ -99059,6 +99059,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_numeral__);
 //
 //
 //
@@ -99302,6 +99304,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -99324,6 +99376,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    rp: function rp(n) {
+      return __WEBPACK_IMPORTED_MODULE_0_numeral___default()(n).format("0,0");
+    },
     checkall: function checkall() {
       this.cekall ? this.cekall = false : this.cekall = true;
     },
@@ -99450,7 +99505,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.newModal }
           },
-          [_vm._v("Tambah Tarif")]
+          [_vm._v("\n        Tambah Tarif\n      ")]
         ),
         _vm._v(" "),
         _c(
@@ -99907,7 +99962,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                        Rp. " +
+                                  "\n                        Rp.\n                        " +
                                     _vm._s(
                                       parseFloat(_vm.form.permeter || 0) +
                                         parseFloat(_vm.form.bop || 0) +
@@ -99938,7 +99993,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Ok")]
+                      [_vm._v("\n                Ok\n              ")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -99947,7 +100002,7 @@ var render = function() {
                         staticClass: "btn btn-outline-danger",
                         attrs: { type: "button", "data-dismiss": "modal" }
                       },
-                      [_vm._v("Batal")]
+                      [_vm._v("\n                Batal\n              ")]
                     )
                   ])
                 ])
@@ -100014,28 +100069,38 @@ var render = function() {
                       return _c("tr", { key: tarif.id }, [
                         _c("td", [_vm._v(_vm._s(tarif.nama))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(tarif.bop))]),
+                        _c("td", [_vm._v("Rp. " + _vm._s(_vm.rp(tarif.bop)))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(tarif.permeter))]),
+                        _c("td", [
+                          _vm._v("Rp. " + _vm._s(_vm.rp(tarif.permeter)))
+                        ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(tarif.air))]),
+                        _c("td", [_vm._v("Rp. " + _vm._s(_vm.rp(tarif.air)))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(tarif.listrik))]),
+                        _c("td", [
+                          _vm._v("Rp. " + _vm._s(_vm.rp(tarif.listrik)))
+                        ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(tarif.barang))]),
+                        _c("td", [
+                          _vm._v("Rp. " + _vm._s(_vm.rp(tarif.barang)))
+                        ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(tarif.sampah))]),
+                        _c("td", [
+                          _vm._v("Rp. " + _vm._s(_vm.rp(tarif.sampah)))
+                        ]),
                         _vm._v(" "),
                         _c("td", [
                           _vm._v(
-                            "\n                      Rp. " +
+                            "\n                      Rp.\n                      " +
                               _vm._s(
-                                tarif.sampah +
-                                  tarif.barang +
-                                  tarif.listrik +
-                                  tarif.air +
-                                  tarif.bop +
-                                  tarif.permeter
+                                _vm.rp(
+                                  tarif.sampah +
+                                    tarif.barang +
+                                    tarif.listrik +
+                                    tarif.air +
+                                    tarif.bop +
+                                    tarif.permeter
+                                )
                               ) +
                               "\n                    "
                           )

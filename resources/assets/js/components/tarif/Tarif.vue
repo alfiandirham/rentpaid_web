@@ -7,7 +7,9 @@
         <h2 class="head-text">Tenant > Tarif</h2>
       </div>
       <div class="head-title">
-        <button type="button" @click="newModal" class="btn btn-primary fixed-2">Tambah Tarif</button>
+        <button type="button" @click="newModal" class="btn btn-primary fixed-2">
+          Tambah Tarif
+        </button>
         <!-- Modal -->
         <div
           class="modal fade"
@@ -23,7 +25,7 @@
           >
             <div class="modal-nav">
               <div class="modal-header modal-nav-header">
-                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} TARIF</h2>
+                <h2>{{ editmode ? "EDIT" : "TAMBAH" }} TARIF</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
               <div class="modal-body modal-nav-body">
@@ -52,7 +54,9 @@
                             <input
                               type="number"
                               class="form-control"
-                              :class="{ 'is-invalid': form.errors.has('permeter') }"
+                              :class="{
+                                'is-invalid': form.errors.has('permeter'),
+                              }"
                               v-model="form.permeter"
                               name="permeter"
                               placeholder="Harga sewa per m2"
@@ -80,7 +84,12 @@
                       </div>
                       <div class="col-6">
                         <div class="form-group">
-                          <input type="number" class="form-control" disabled placeholder="PPN 10%" />
+                          <input
+                            type="number"
+                            class="form-control"
+                            disabled
+                            placeholder="PPN 10%"
+                          />
                         </div>
                       </div>
                       <div class="col-12">
@@ -105,7 +114,9 @@
                             <input
                               type="number"
                               class="form-control"
-                              :class="{ 'is-invalid': form.errors.has('listrik') }"
+                              :class="{
+                                'is-invalid': form.errors.has('listrik'),
+                              }"
                               v-model="form.listrik"
                               placeholder="Jumlah Tarif Listrik"
                             />
@@ -120,7 +131,9 @@
                             <input
                               type="number"
                               class="form-control"
-                              :class="{ 'is-invalid': form.errors.has('barang') }"
+                              :class="{
+                                'is-invalid': form.errors.has('barang'),
+                              }"
                               v-model="form.barang"
                               placeholder="Jumlah Tarif Barang Masuk"
                             />
@@ -135,7 +148,9 @@
                             <input
                               type="number"
                               class="form-control"
-                              :class="{ 'is-invalid': form.errors.has('sampah') }"
+                              :class="{
+                                'is-invalid': form.errors.has('sampah'),
+                              }"
                               v-model="form.sampah"
                               placeholder="Jumlah Tarif Sampah"
                             />
@@ -146,9 +161,19 @@
                       </div>
                       <div class="col-12">
                         <label>Total Tarif</label>
-                        <p class="lead" style="padding-left:0.2em; padding-top:1em;">
-                          Rp. {{(parseFloat(form.permeter || 0) + parseFloat(form.bop || 0) + parseFloat(form.air || 0)
-                          + parseFloat(form.listrik || 0) + parseFloat(form.barang || 0) + parseFloat(form.sampah || 0))}}
+                        <p
+                          class="lead"
+                          style="padding-left: 0.2em; padding-top: 1em"
+                        >
+                          Rp.
+                          {{
+                            parseFloat(form.permeter || 0) +
+                            parseFloat(form.bop || 0) +
+                            parseFloat(form.air || 0) +
+                            parseFloat(form.listrik || 0) +
+                            parseFloat(form.barang || 0) +
+                            parseFloat(form.sampah || 0)
+                          }}
                         </p>
                       </div>
                     </div>
@@ -160,8 +185,16 @@
                   type="button"
                   @click="editmode ? updateUser() : createUser()"
                   class="btn btn-primary"
-                >Ok</button>
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+                >
+                  Ok
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-dismiss="modal"
+                >
+                  Batal
+                </button>
               </div>
             </div>
           </div>
@@ -174,7 +207,9 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
-                  <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
+                  <div
+                    class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
+                  >
                     <div class="mb-1 mb-sm-0">
                       <input
                         type="search"
@@ -205,16 +240,25 @@
                   </thead>
                   <tbody>
                     <tr v-for="tarif in tarifs.data" :key="tarif.id">
-                      <td>{{tarif.nama}}</td>
-                      <td>Rp. {{tarif.bop}}</td>
-                      <td>Rp. {{tarif.permeter}}</td>
-                      <td>Rp. {{tarif.air}}</td>
-                      <td>Rp. {{tarif.listrik}}</td>
-                      <td>Rp. {{tarif.barang}}</td>
-                      <td>Rp. {{tarif.sampah}}</td>
+                      <td>{{ tarif.nama }}</td>
+                      <td>Rp. {{ rp(tarif.bop) }}</td>
+                      <td>Rp. {{ rp(tarif.permeter) }}</td>
+                      <td>Rp. {{ rp(tarif.air) }}</td>
+                      <td>Rp. {{ rp(tarif.listrik) }}</td>
+                      <td>Rp. {{ rp(tarif.barang) }}</td>
+                      <td>Rp. {{ rp(tarif.sampah) }}</td>
                       <td>
-                        Rp. {{tarif.sampah + tarif.barang + tarif.listrik + tarif.air
-                        + tarif.bop + tarif.permeter}}
+                        Rp.
+                        {{
+                          rp(
+                            tarif.sampah +
+                              tarif.barang +
+                              tarif.listrik +
+                              tarif.air +
+                              tarif.bop +
+                              tarif.permeter
+                          )
+                        }}
                       </td>
                       <td>
                         <a @click="editModal(tarif)">
@@ -225,7 +269,11 @@
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="tarifs" @pagination-change-page="getResults"></pagination>
+                  <pagination
+                    :limit="5"
+                    :data="tarifs"
+                    @pagination-change-page="getResults"
+                  ></pagination>
                 </div>
               </div>
             </div>
@@ -242,6 +290,8 @@
 </template>
 
 <script>
+import num from "numeral";
+
 export default {
   data() {
     return {
@@ -262,6 +312,9 @@ export default {
     };
   },
   methods: {
+    rp(n) {
+      return num(n).format("0,0");
+    },
     checkall() {
       this.cekall ? (this.cekall = false) : (this.cekall = true);
     },
