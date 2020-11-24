@@ -97805,6 +97805,8 @@ exports.push([module.i, "\n.blue-underline[data-v-3502b3d2] {\n  font-style: nor
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_numeral__);
 //
 //
 //
@@ -98023,6 +98025,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -98047,6 +98081,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    rp: function rp(n) {
+      return __WEBPACK_IMPORTED_MODULE_0_numeral___default()(n).format("0,0");
+    },
     filtering: function filtering(q) {
       var _this = this;
 
@@ -98291,7 +98328,13 @@ var render = function() {
                                         key: v,
                                         staticClass: "teksin text-capitalize"
                                       },
-                                      [_vm._v(_vm._s(v))]
+                                      [
+                                        _vm._v(
+                                          "\n                            " +
+                                            _vm._s(v) +
+                                            "\n                          "
+                                        )
+                                      ]
                                     )
                                   })
                                 ],
@@ -98310,7 +98353,13 @@ var render = function() {
                                     return _c(
                                       "p",
                                       { key: v, staticClass: "teksin" },
-                                      [_vm._v("Rp. " + _vm._s(v))]
+                                      [
+                                        _vm._v(
+                                          "\n                            Rp. " +
+                                            _vm._s(v) +
+                                            "\n                          "
+                                        )
+                                      ]
                                     )
                                   })
                                 ],
@@ -98388,7 +98437,13 @@ var render = function() {
                             return _c(
                               "option",
                               { key: p.id, domProps: { value: p.id } },
-                              [_vm._v(_vm._s(p.name))]
+                              [
+                                _vm._v(
+                                  "\n                        " +
+                                    _vm._s(p.name) +
+                                    "\n                      "
+                                )
+                              ]
                             )
                           })
                         ],
@@ -98486,15 +98541,15 @@ var render = function() {
                         _c("td", [_vm._v(_vm._s(transaksi.collector))]),
                         _vm._v(" "),
                         _c("td", { staticClass: "danger" }, [
-                          _vm._v("Rp. " + _vm._s(transaksi.tunggakan))
+                          _vm._v("Rp. " + _vm._s(_vm.rp(transaksi.tunggakan)))
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "danger" }, [
-                          _vm._v("Rp. " + _vm._s(transaksi.setoran))
+                          _vm._v("Rp. " + _vm._s(_vm.rp(transaksi.setoran)))
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "danger" }, [
-                          _vm._v("Rp. " + _vm._s(transaksi.sisa))
+                          _vm._v("Rp. " + _vm._s(_vm.rp(transaksi.sisa)))
                         ])
                       ])
                     }),
