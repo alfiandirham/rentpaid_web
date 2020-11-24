@@ -96557,6 +96557,8 @@ exports.push([module.i, "\n.blue-underline[data-v-2b05121a] {\n  font-style: nor
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_numeral__);
 //
 //
 //
@@ -96872,6 +96874,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -96900,6 +96912,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    rp: function rp(n) {
+      return __WEBPACK_IMPORTED_MODULE_0_numeral___default()(n).format("0,0");
+    },
     filtering: function filtering(q) {
       var _this = this;
 
@@ -97432,13 +97447,17 @@ var render = function() {
                       _c("div", { staticClass: "col-6" }, [
                         _c("h5", [_vm._v("Pendepatan")]),
                         _vm._v(" "),
-                        _c("p", [_vm._v("Rp " + _vm._s(_vm.info.totalp))])
+                        _c("p", [
+                          _vm._v("Rp " + _vm._s(_vm.rp(_vm.info.totalp)))
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-6" }, [
                         _c("h5", [_vm._v("Tunggakan")]),
                         _vm._v(" "),
-                        _c("p", [_vm._v("Rp " + _vm._s(_vm.info.totalt))])
+                        _c("p", [
+                          _vm._v("Rp " + _vm._s(_vm.rp(_vm.info.totalt)))
+                        ])
                       ])
                     ])
                   ])
@@ -97452,13 +97471,17 @@ var render = function() {
                       _c("div", { staticClass: "col-6" }, [
                         _c("h5", [_vm._v("Pendepatan")]),
                         _vm._v(" "),
-                        _c("p", [_vm._v("Rp " + _vm._s(_vm.info.phari))])
+                        _c("p", [
+                          _vm._v("Rp " + _vm._s(_vm.rp(_vm.info.phari)))
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-6" }, [
                         _c("h5", [_vm._v("Tunggakan")]),
                         _vm._v(" "),
-                        _c("p", [_vm._v("Rp " + _vm._s(_vm.info.thari))])
+                        _c("p", [
+                          _vm._v("Rp " + _vm._s(_vm.rp(_vm.info.thari)))
+                        ])
                       ])
                     ])
                   ])
@@ -97504,7 +97527,9 @@ var render = function() {
                           _vm._v(
                             "\n                      Rp.\n                      " +
                               _vm._s(
-                                transaksi.detail.bop ? transaksi.detail.bop : 0
+                                transaksi.detail.bop
+                                  ? _vm.rp(transaksi.detail.bop)
+                                  : 0
                               ) +
                               "\n                    "
                           )
@@ -97514,7 +97539,9 @@ var render = function() {
                           _vm._v(
                             "\n                      Rp.\n                      " +
                               _vm._s(
-                                transaksi.detail.air ? transaksi.detail.air : 0
+                                transaksi.detail.air
+                                  ? _vm.rp(transaksi.detail.air)
+                                  : 0
                               ) +
                               "\n                    "
                           )
@@ -97525,7 +97552,7 @@ var render = function() {
                             "\n                      Rp.\n                      " +
                               _vm._s(
                                 transaksi.detail.listrik
-                                  ? transaksi.detail.listrik
+                                  ? _vm.rp(transaksi.detail.listrik)
                                   : 0
                               ) +
                               "\n                    "
@@ -97537,7 +97564,7 @@ var render = function() {
                             "\n                      Rp.\n                      " +
                               _vm._s(
                                 transaksi.detail.barang
-                                  ? transaksi.detail.barang
+                                  ? _vm.rp(transaksi.detail.barang)
                                   : 0
                               ) +
                               "\n                    "
@@ -97549,14 +97576,16 @@ var render = function() {
                             "\n                      Rp.\n                      " +
                               _vm._s(
                                 transaksi.detail.sampah
-                                  ? transaksi.detail.sampah
+                                  ? _vm.rp(transaksi.detail.sampah)
                                   : 0
                               ) +
                               "\n                    "
                           )
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("Rp. " + _vm._s(transaksi.setoran))])
+                        _c("td", [
+                          _vm._v("Rp. " + _vm._s(_vm.rp(transaksi.setoran)))
+                        ])
                       ])
                     }),
                     0

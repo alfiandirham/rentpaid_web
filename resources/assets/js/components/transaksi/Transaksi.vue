@@ -204,11 +204,11 @@
                     <div class="row">
                       <div class="col-6">
                         <h5>Pendepatan</h5>
-                        <p>Rp {{ info.totalp }}</p>
+                        <p>Rp {{ rp(info.totalp) }}</p>
                       </div>
                       <div class="col-6">
                         <h5>Tunggakan</h5>
-                        <p>Rp {{ info.totalt }}</p>
+                        <p>Rp {{ rp(info.totalt) }}</p>
                       </div>
                     </div>
                   </div>
@@ -219,11 +219,11 @@
                     <div class="row">
                       <div class="col-6">
                         <h5>Pendepatan</h5>
-                        <p>Rp {{ info.phari }}</p>
+                        <p>Rp {{ rp(info.phari) }}</p>
                       </div>
                       <div class="col-6">
                         <h5>Tunggakan</h5>
-                        <p>Rp {{ info.thari }}</p>
+                        <p>Rp {{ rp(info.thari) }}</p>
                       </div>
                     </div>
                   </div>
@@ -266,33 +266,41 @@
                       <td>{{ transaksi.collector }}</td>
                       <td>
                         Rp.
-                        {{ transaksi.detail.bop ? transaksi.detail.bop : 0 }}
+                        {{
+                          transaksi.detail.bop ? rp(transaksi.detail.bop) : 0
+                        }}
                       </td>
                       <td>
                         Rp.
-                        {{ transaksi.detail.air ? transaksi.detail.air : 0 }}
+                        {{
+                          transaksi.detail.air ? rp(transaksi.detail.air) : 0
+                        }}
                       </td>
                       <td>
                         Rp.
                         {{
                           transaksi.detail.listrik
-                            ? transaksi.detail.listrik
+                            ? rp(transaksi.detail.listrik)
                             : 0
                         }}
                       </td>
                       <td>
                         Rp.
                         {{
-                          transaksi.detail.barang ? transaksi.detail.barang : 0
+                          transaksi.detail.barang
+                            ? rp(transaksi.detail.barang)
+                            : 0
                         }}
                       </td>
                       <td>
                         Rp.
                         {{
-                          transaksi.detail.sampah ? transaksi.detail.sampah : 0
+                          transaksi.detail.sampah
+                            ? rp(transaksi.detail.sampah)
+                            : 0
                         }}
                       </td>
-                      <td>Rp. {{ transaksi.setoran }}</td>
+                      <td>Rp. {{ rp(transaksi.setoran) }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -314,6 +322,8 @@
 </template>
 
 <script>
+import num from "numeral";
+
 export default {
   data() {
     return {
@@ -340,6 +350,9 @@ export default {
     };
   },
   methods: {
+    rp(n) {
+      return num(n).format("0,0");
+    },
     filtering(q) {
       axios
         .get("api/findTransaksi?q=" + q)
