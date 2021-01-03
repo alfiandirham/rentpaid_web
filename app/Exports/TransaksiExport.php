@@ -16,7 +16,7 @@ class TransaksiExport implements FromCollection, WithHeadings
     {
         return Tr::collection(Transaksi::where('owner_id', \Auth::user()->id)
         ->orWhere('lokasi_id', \Auth::user()->lokasi_id)
-        ->where('dibayar', '>=', 0)->latest()->get());
+        ->where('dibayar', '>=', 0)->latest()->take(1000)->get());
     }
 
     public function headings(): array

@@ -16,7 +16,7 @@ class TunggakanExport implements FromCollection, WithHeadings
     {
         return Tr::collection(Transaksi::where('owner_id', \Auth::user()->id)
         ->orWhere('lokasi_id', \Auth::user()->lokasi_id)
-        ->where('status', 'menunggak')->latest()->get());
+        ->where('status', 'menunggak')->latest()->take(1000)->get());
     }
 
     public function headings(): array
