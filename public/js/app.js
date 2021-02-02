@@ -97920,6 +97920,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -97945,7 +97957,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         lokasi: "",
         collector: "",
         detail: "",
-        status: ""
+        status: "",
+        tunggakan: ""
       })
     };
   },
@@ -98263,9 +98276,27 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "col-6" }, [
-                                _c("p", { staticClass: "teksin-bold" }, [
-                                  _vm._v("Rp. " + _vm._s(_vm.form.setoran))
-                                ])
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass: "teksin-bold",
+                                    class:
+                                      _vm.form.status === "menunggak"
+                                        ? "text-danger"
+                                        : ""
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            Rp.\n                            " +
+                                        _vm._s(
+                                          _vm.form.status === "menunggak"
+                                            ? _vm.form.tunggakan
+                                            : _vm.form.setoran
+                                        ) +
+                                        "\n                          "
+                                    )
+                                  ]
+                                )
                               ])
                             ])
                           ]),

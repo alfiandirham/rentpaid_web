@@ -86,7 +86,19 @@
                             </p>
                           </div>
                           <div class="col-6">
-                            <p class="teksin-bold">Rp. {{ form.setoran }}</p>
+                            <p
+                              :class="
+                                form.status === 'menunggak' ? 'text-danger' : ''
+                              "
+                              class="teksin-bold"
+                            >
+                              Rp.
+                              {{
+                                form.status === "menunggak"
+                                  ? form.tunggakan
+                                  : form.setoran
+                              }}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -354,6 +366,7 @@ export default {
         collector: "",
         detail: "",
         status: "",
+        tunggakan: "",
       }),
     };
   },
