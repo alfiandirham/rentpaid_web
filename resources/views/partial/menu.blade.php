@@ -45,6 +45,8 @@
                 </li>
                 <li class=" nav-item"><router-link to="/setor"><i class="fa fa-arrow-circle-o-down"></i><span class="menu-title" data-i18n="Data List">Setoran</span></router-link>
                 </li>
+                <li class=" nav-item"><router-link to="/pendapatan"><i class="fa fa-file-text-o"></i><span class="menu-title" data-i18n="Data List">Pendapatan</span></router-link>
+                </li>
                 <li class=" navigation-header"><span>Akun</span>
                 </li>
                 <li class=" nav-item"><router-link to="/profile"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Profile">Profil Pengguna</span></router-link>

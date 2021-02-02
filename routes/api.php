@@ -36,6 +36,7 @@ Route::get('auth', 'API\UserController@profile');
 Route::post('photo/{id}', 'API\UserController@update');
 Route::post('profile', 'API\UserController@updateProfile');
 Route::get('penyewa2', 'API\PenyewaController@index2');
+Route::get('pendapatan', 'API\PendapatanController@index');
 
 Route::get('contact-us','Api\Contactuscontroller@index');
 Route::get('lokasi-tenant','API\LocationController@lokasiDanTenant');

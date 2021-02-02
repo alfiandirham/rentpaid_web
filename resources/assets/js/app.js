@@ -93,6 +93,10 @@ let routes = [{
         component: require('./components/transaksi/Transaksi.vue')
     },
     {
+        path: '/pendapatan',
+        component: require('./components/pendapatan/Pendapatan.vue')
+    },
+    {
         path: '/tunggakan',
         component: require('./components/tunggakan/Tunggakan.vue')
     },
