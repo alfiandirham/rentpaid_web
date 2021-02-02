@@ -76,7 +76,14 @@
                       <div class="col-12 mt-2">
                         <div class="row">
                           <div class="col-4">
-                            <p class="teksin-bold">Total</p>
+                            <p
+                              :class="
+                                form.status === 'menunggak' ? 'text-danger' : ''
+                              "
+                              class="teksin-bold"
+                            >
+                              Total
+                            </p>
                           </div>
                           <div class="col-6">
                             <p class="teksin-bold">Rp. {{ form.setoran }}</p>
@@ -346,6 +353,7 @@ export default {
         lokasi: "",
         collector: "",
         detail: "",
+        status: "",
       }),
     };
   },
