@@ -158,10 +158,8 @@ export default {
       let query = this.search;
       axios
         .get(
-          "api/findTransaksi?q=" +
+          "api/findPendapatan?q=" +
             query +
-            "&t=" +
-            this.type +
             "&a=" +
             this.awal +
             "&l=" +

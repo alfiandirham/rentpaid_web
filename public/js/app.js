@@ -105676,7 +105676,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     Fire.$on("searching", function () {
       var query = _this4.search;
-      axios.get("api/findTransaksi?q=" + query + "&t=" + _this4.type + "&a=" + _this4.awal + "&l=" + _this4.akhir).then(function (data) {
+      axios.get("api/findPendapatan?q=" + query + "&a=" + _this4.awal + "&l=" + _this4.akhir).then(function (data) {
         _this4.transaksis = data.data;
       }).catch(function () {});
     });

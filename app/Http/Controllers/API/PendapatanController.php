@@ -45,4 +45,68 @@ class PendapatanController extends Controller
             ->groupBy('tanggal')
             ->orderBy('tanggal', 'desc')->paginate(20));
     }
+
+    public function search(){
+        if(\Request::get('a')){
+            if(\Gate::allows('isAdmin')){
+                return PendapatanCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('dibayar', '>=', 0)->whereBetween('tanggal',[\Request::get('a'),\Request::get('l')])->select(
+                'tanggal', \DB::raw('sum(dibayar) as pendapatan'), \DB::raw('sum(sisa) as tunggakan'),
+                \DB::raw('sum(case WHEN status="lunas" then 1 end) as t_bayar'),
+                \DB::raw("sum(case WHEN status<>'lunas' then 1 end) as t_tunggak"),
+            )
+            ->groupBy('tanggal')
+            ->orderBy('tanggal', 'desc')->paginate(20));
+            }
+            if(\Gate::allows('isOwner')){
+                return PendapatanCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('dibayar', '>=', 0)->whereBetween('tanggal',[\Request::get('a'),\Request::get('l')])->select(
+                'tanggal', \DB::raw('sum(dibayar) as pendapatan'), \DB::raw('sum(sisa) as tunggakan'),
+                \DB::raw('sum(case WHEN status="lunas" then 1 end) as t_bayar'),
+                \DB::raw("sum(case WHEN status<>'lunas' then 1 end) as t_tunggak"),
+            )
+            ->groupBy('tanggal')
+            ->orderBy('tanggal', 'desc')->paginate(20));
+            }
+        } else {
+            if ($search = \Request::get('q')) {
+                if(\Gate::allows('isAdmin')){
+                    return PendapatanCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('dibayar', '>=', 0)->where('tanggal','like',"%$search%")->select(
+                            'tanggal', \DB::raw('sum(dibayar) as pendapatan'), \DB::raw('sum(sisa) as tunggakan'),
+                            \DB::raw('sum(case WHEN status="lunas" then 1 end) as t_bayar'),
+                            \DB::raw("sum(case WHEN status<>'lunas' then 1 end) as t_tunggak"),
+                        )
+                        ->groupBy('tanggal')
+                        ->orderBy('tanggal', 'desc')->paginate(20));
+                    }
+                if(\Gate::allows('isOwner')){
+                    return PendapatanCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('dibayar', '>=', 0)->where('tanggal', 'like', "%$search%")->select(
+                        'tanggal', \DB::raw('sum(dibayar) as pendapatan'), \DB::raw('sum(sisa) as tunggakan'),
+                        \DB::raw('sum(case WHEN status="lunas" then 1 end) as t_bayar'),
+                        \DB::raw("sum(case WHEN status<>'lunas' then 1 end) as t_tunggak"),
+                    )
+                    ->groupBy('tanggal')
+                    ->orderBy('tanggal', 'desc')->paginate(20));
+                }
+            }else{
+                if(\Gate::allows('isAdmin')){
+                    $transaksi = PendapatanCollection::collection(Transaksi::where('lokasi_id',\Auth::user()->lokasi_id)->where('dibayar', '>=', 0)->select(
+                'tanggal', \DB::raw('sum(dibayar) as pendapatan'), \DB::raw('sum(sisa) as tunggakan'),
+                \DB::raw('sum(case WHEN status="lunas" then 1 end) as t_bayar'),
+                \DB::raw("sum(case WHEN status<>'lunas' then 1 end) as t_tunggak"),
+            )
+            ->groupBy('tanggal')
+            ->orderBy('tanggal', 'desc')->paginate(20));
+                }
+                if(\Gate::allows('isOwner')){
+                    $transaksi = PendapatanCollection::collection(Transaksi::where('owner_id',\Auth::user()->id)->where('dibayar', '>=', 0)->select(
+                'tanggal', \DB::raw('sum(dibayar) as pendapatan'), \DB::raw('sum(sisa) as tunggakan'),
+                \DB::raw('sum(case WHEN status="lunas" then 1 end) as t_bayar'),
+                \DB::raw("sum(case WHEN status<>'lunas' then 1 end) as t_tunggak"),
+            )
+            ->groupBy('tanggal')
+            ->orderBy('tanggal', 'desc')->paginate(20));
+                }
+            }
+            return $transaksi;
+        }
+    }
 }
