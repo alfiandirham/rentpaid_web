@@ -24,7 +24,7 @@ class Controller extends BaseController
         Log::info('Cek Tenant Belum Ditagih');
         DB::beginTransaction();
         $tenants = Tenant::with('kategori')
-//            ->whereDate('created_at',Carbon::today())
+            //            ->whereDate('created_at',Carbon::today())
             ->where('status', 1)
             ->where('disewa', 1)
             ->where('status_tagih', 'Belum ditagih')
@@ -43,7 +43,7 @@ class Controller extends BaseController
                     'status' => 'menunggak',
                     'dibayar' => 0,
                     'sisa' => $sisa,
-                    'tanggal' => Carbon::now()->toDateString(),
+                    'tanggal' => Carbon::now()->toDate(),
                     'shift' => 'shift_1',
                     'detail' => json_encode($tarif),
                     'owner_id' => Lokasi::find($tenant->lokasi_id)->user_id,
