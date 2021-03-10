@@ -43,7 +43,7 @@ class Controller extends BaseController
                     'status' => 'menunggak',
                     'dibayar' => 0,
                     'sisa' => $sisa,
-                    'tanggal' => Carbon::now()->toDate(),
+                    'tanggal' => Carbon::now(),
                     'shift' => 'shift_1',
                     'detail' => json_encode($tarif),
                     'owner_id' => Lokasi::find($tenant->lokasi_id)->user_id,
