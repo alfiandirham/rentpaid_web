@@ -15,7 +15,7 @@ class Pendapatan extends JsonResource
     public function toArray($request)
     {
         return [
-            'tanggal' => $this->updated_at,
+            'tanggal' => $this->modif,
             't_bayar' => $this->t_bayar ?? 0,
             'pendapatan' => $this->pendapatan,
             't_tunggak' => $this->t_tunggak ?? 0,
