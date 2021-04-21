@@ -623,7 +623,7 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form.disewa = 1;
-          this.form.penyewa_id = getVal.value.charAt(0);
+          this.form.penyewa_id = getVal.value.split("/")[0];
           this.form
             .put("/api/tenan/" + id)
             .then(() => {
