@@ -27,7 +27,7 @@
           >
             <div class="modal-nav">
               <div class="modal-header modal-nav-header">
-                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} PENYEWA</h2>
+                <h2>{{ editmode ? "EDIT" : "TAMBAH" }} PENYEWA</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
               <div class="modal-body modal-nav-body">
@@ -88,7 +88,9 @@
                             <input
                               v-model="form.alamat"
                               type="text"
-                              :class="{ 'is-invalid': form.errors.has('alamat') }"
+                              :class="{
+                                'is-invalid': form.errors.has('alamat'),
+                              }"
                               class="form-control"
                               name="alamat"
                               placeholder="Alamat"
@@ -148,8 +150,16 @@
                   type="button"
                   @click="editmode ? updateUser() : createUser()"
                   class="btn btn-primary"
-                >Ok</button>
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+                >
+                  Ok
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-dismiss="modal"
+                >
+                  Batal
+                </button>
               </div>
             </div>
           </div>
@@ -170,7 +180,10 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="users-list-status">Status</label>
                     <fieldset class="form-group">
-                      <select @change="e =>filtering(e.target.value)" class="form-control">
+                      <select
+                        @change="(e) => filtering(e.target.value)"
+                        class="form-control"
+                      >
                         <option value="uvuvwu">All</option>
                         <option value="1">Active</option>
                         <option value="uvuvwe">Deactivated</option>
@@ -186,12 +199,14 @@
       <!-- users filter end -->
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
-        <div class="card" :class="this.$gate.isAuthor() ? '': 'mt-7'">
+        <div class="card" :class="this.$gate.isAuthor() ? '' : 'mt-7'">
           <div class="card-content">
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
-                  <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
+                  <div
+                    class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
+                  >
                     <div class="mb-1 mb-sm-0">
                       <input
                         type="search"
@@ -212,10 +227,12 @@
                               data-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false"
-                            >Actions</button>
+                            >
+                              Actions
+                            </button>
                             <div class="dropdown-menu">
                               <button
-                                @click="nonAll('Disable data','penyewa')"
+                                @click="nonAll('Disable data', 'penyewa')"
                                 class="dropdown-item"
                               >
                                 <i class="feather icon-trash-2"></i>
@@ -256,19 +273,25 @@
                       <th scope="row">
                         <input type="checkbox" :value="user.id" />
                       </th>
-                      <td>{{user.nama}}</td>
-                      <td>{{user.ktp}}</td>
-                      <td>{{user.hp}}</td>
-                      <td>{{user.alamat}}</td>
+                      <td>{{ user.nama }}</td>
+                      <td>{{ user.ktp }}</td>
+                      <td>{{ user.hp }}</td>
+                      <td>{{ user.alamat }}</td>
                       <td v-if="user.status === 1">
-                        <div class="badge badge-pill badge-light-success">Active</div>
+                        <div class="badge badge-pill badge-light-success">
+                          Active
+                        </div>
                       </td>
                       <td v-if="user.status === 0">
-                        <div class="badge badge-pill badge-light-warning">Non Active</div>
+                        <div class="badge badge-pill badge-light-warning">
+                          Non Active
+                        </div>
                       </td>
                       <td>
                         <a @click="editModal(user)">
-                          <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
+                          <i
+                            class="users-edit-icon feather icon-edit-1 mr-50"
+                          ></i>
                         </a>
                         <a @click="deleteUser(user.id)">
                           <i class="users-delete-icon feather icon-trash-2"></i>
@@ -278,7 +301,11 @@
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="users" @pagination-change-page="getResults"></pagination>
+                  <pagination
+                    :limit="5"
+                    :data="users"
+                    @pagination-change-page="getResults"
+                  ></pagination>
                 </div>
               </div>
             </div>
