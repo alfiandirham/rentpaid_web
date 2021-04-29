@@ -622,12 +622,14 @@ export default {
       }).then((result) => {
         // Send request to the server
         if (result.value) {
+          let val = getVal.value.split("/")[1];
           this.form.disewa = 1;
           this.form.penyewa_id = getVal.value.split("/")[0];
           this.form
             .put("/api/tenan/" + id)
             .then(() => {
               getVal.className = "form-control after";
+              getVal.value = val;
               swal("Disewa!", "Tenant berhasil disewa.", "success");
             })
             .catch(() => {
