@@ -27,7 +27,7 @@
           >
             <div class="modal-nav">
               <div class="modal-header modal-nav-header">
-                <h2>{{editmode ? 'EDIT' : 'TAMBAH'}} USER</h2>
+                <h2>{{ editmode ? "EDIT" : "TAMBAH" }} USER</h2>
                 <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
               </div>
               <div class="modal-body modal-nav-body">
@@ -35,13 +35,21 @@
                   <div class="form-body">
                     <div class="row">
                       <div class="col-12">
-                        <div class="form-group lp">
-                          <label for="gambar" class="clr-blue">Gambar</label>
-                          <input
-                            type="file"
-                            @change="updateGambar"
-                            name="gambar"
-                            class="form-control fileup"
+                        <div class="row m-auto align-items-center">
+                          <div class="form-group lp">
+                            <label for="gambar" class="clr-blue">Gambar</label>
+                            <input
+                              type="file"
+                              @change="updateGambar"
+                              name="gambar"
+                              class="form-control fileup"
+                            />
+                          </div>
+                          <img
+                            :src="base + form.photo"
+                            alt="avatar"
+                            width="70"
+                            height="70"
                           />
                         </div>
                       </div>
@@ -99,7 +107,9 @@
                             <input
                               v-model="form.email"
                               type="email"
-                              :class="{ 'is-invalid': form.errors.has('email') }"
+                              :class="{
+                                'is-invalid': form.errors.has('email'),
+                              }"
                               class="form-control"
                               name="email"
                               placeholder="Email"
@@ -115,7 +125,9 @@
                             <input
                               type="password"
                               v-model="form.password"
-                              :class="{ 'is-invalid': form.errors.has('password') }"
+                              :class="{
+                                'is-invalid': form.errors.has('password'),
+                              }"
                               class="form-control"
                               name="contact"
                               placeholder="Password"
@@ -128,7 +140,10 @@
                       <div class="col-12 pl-2">
                         <p>Tipe User</p>
                         <ul class="list-unstyled mb-0">
-                          <li v-if="this.$gate.isAuthor()" class="d-inline-block mr-2">
+                          <li
+                            v-if="this.$gate.isAuthor()"
+                            class="d-inline-block mr-2"
+                          >
                             <fieldset>
                               <div class="vs-radio-con">
                                 <input
@@ -146,7 +161,10 @@
                               </div>
                             </fieldset>
                           </li>
-                          <li v-if="!this.$gate.isAdmin()" class="d-inline-block mr-2">
+                          <li
+                            v-if="!this.$gate.isAdmin()"
+                            class="d-inline-block mr-2"
+                          >
                             <fieldset>
                               <div class="vs-radio-con">
                                 <input
@@ -185,7 +203,10 @@
                               </div>
                             </fieldset>
                           </li>
-                          <li v-if="this.$gate.isAuthor()" class="d-inline-block mr-2">
+                          <li
+                            v-if="this.$gate.isAuthor()"
+                            class="d-inline-block mr-2"
+                          >
                             <fieldset>
                               <div class="vs-radio-con">
                                 <input
@@ -214,13 +235,17 @@
                             class="form-control"
                             v-model="form.lokasi_id"
                             placeholder="Pilih Lokasi"
-                            :class="{ 'is-invalid': form.errors.has('lokasi_id') }"
+                            :class="{
+                              'is-invalid': form.errors.has('lokasi_id'),
+                            }"
                           >
                             <option
                               v-for="lokasi in locations.data"
                               :value="lokasi.id"
                               :key="lokasi.id"
-                            >{{lokasi.lokasi}}</option>
+                            >
+                              {{ lokasi.lokasi }}
+                            </option>
                           </select>
                           <has-error :form="form" field="lokasi_id"></has-error>
                         </div>
@@ -275,8 +300,16 @@
                   type="button"
                   @click="editmode ? updateUser() : createUser()"
                   class="btn btn-primary"
-                >Ok</button>
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+                >
+                  Ok
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-dismiss="modal"
+                >
+                  Batal
+                </button>
               </div>
             </div>
           </div>
@@ -297,7 +330,10 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="users-list-role">Role</label>
                     <fieldset class="form-group">
-                      <select @change="e =>filtering(e.target.value)" class="form-control">
+                      <select
+                        @change="(e) => filtering(e.target.value)"
+                        class="form-control"
+                      >
                         <option value="uvuvwu">All</option>
                         <option value="owner">Owner</option>
                         <option value="collector">Collector</option>
@@ -309,7 +345,10 @@
                   <div class="col-12 col-sm-6 col-lg-3">
                     <label for="users-list-status">Status</label>
                     <fieldset class="form-group">
-                      <select @change="e =>filtering(e.target.value)" class="form-control">
+                      <select
+                        @change="(e) => filtering(e.target.value)"
+                        class="form-control"
+                      >
                         <option value="uvuvwu">All</option>
                         <option value="1">Active</option>
                         <option value="uvuvwe">Deactivated</option>
@@ -325,12 +364,14 @@
       <!-- users filter end -->
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
-        <div class="card" :class="!this.$gate.isAuthor() ? 'mt-7':''">
+        <div class="card" :class="!this.$gate.isAuthor() ? 'mt-7' : ''">
           <div class="card-content">
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
-                  <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
+                  <div
+                    class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
+                  >
                     <div class="mb-1 mb-sm-0">
                       <input
                         type="search"
@@ -351,9 +392,14 @@
                               data-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false"
-                            >Actions</button>
+                            >
+                              Actions
+                            </button>
                             <div class="dropdown-menu">
-                              <button @click="nonAll('Disable data','user')" class="dropdown-item">
+                              <button
+                                @click="nonAll('Disable data', 'user')"
+                                class="dropdown-item"
+                              >
                                 <i class="feather icon-trash-2"></i>
                                 Non Active
                               </button>
@@ -393,19 +439,25 @@
                       <th scope="row">
                         <input type="checkbox" :value="user.id" />
                       </th>
-                      <td>{{user.name}}</td>
-                      <td>{{user.email}}</td>
-                      <td>{{user.nohp}}</td>
-                      <td>{{user.type}}</td>
+                      <td>{{ user.name }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.nohp }}</td>
+                      <td>{{ user.type }}</td>
                       <td v-if="user.status === 1">
-                        <div class="badge badge-pill badge-light-success">Active</div>
+                        <div class="badge badge-pill badge-light-success">
+                          Active
+                        </div>
                       </td>
                       <td v-if="user.status === 0">
-                        <div class="badge badge-pill badge-light-warning">Non Active</div>
+                        <div class="badge badge-pill badge-light-warning">
+                          Non Active
+                        </div>
                       </td>
                       <td>
                         <a @click="editModal(user)">
-                          <i class="users-edit-icon feather icon-edit-1 mr-50"></i>
+                          <i
+                            class="users-edit-icon feather icon-edit-1 mr-50"
+                          ></i>
                         </a>
                         <a @click="deleteUser(user.id)">
                           <i class="users-delete-icon feather icon-trash-2"></i>
@@ -415,7 +467,11 @@
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="users" @pagination-change-page="getResults"></pagination>
+                  <pagination
+                    :limit="5"
+                    :data="users"
+                    @pagination-change-page="getResults"
+                  ></pagination>
                 </div>
               </div>
             </div>
@@ -436,6 +492,7 @@ export default {
   data() {
     return {
       search: "",
+      base: "/img/profile/",
       showLokasi: false,
       editmode: false,
       users: {},
@@ -554,6 +611,7 @@ export default {
     },
     editModal(user) {
       this.editmode = true;
+      this.showLokasi = true;
       this.form.reset();
       $("#addNew").modal("show");
       this.form.fill(user);
@@ -587,6 +645,7 @@ export default {
       }
 
       reader.onloadend = (file) => {
+        this.base = "";
         this.form.photo = reader.result;
       };
       reader.readAsDataURL(file);

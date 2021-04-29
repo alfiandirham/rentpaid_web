@@ -87971,6 +87971,62 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -87978,6 +88034,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     return {
       search: "",
+      base: "/img/profile/",
       showLokasi: false,
       editmode: false,
       users: {},
@@ -88091,6 +88148,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     editModal: function editModal(user) {
       this.editmode = true;
+      this.showLokasi = true;
       this.form.reset();
       $("#addNew").modal("show");
       this.form.fill(user);
@@ -88138,6 +88196,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       reader.onloadend = function (file) {
+        _this7.base = "";
         _this7.form.photo = reader.result;
       };
       reader.readAsDataURL(file);
@@ -88257,22 +88316,37 @@ var render = function() {
                       _c("div", { staticClass: "form-body" }, [
                         _c("div", { staticClass: "row" }, [
                           _c("div", { staticClass: "col-12" }, [
-                            _c("div", { staticClass: "form-group lp" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "clr-blue",
-                                  attrs: { for: "gambar" }
-                                },
-                                [_vm._v("Gambar")]
-                              ),
-                              _vm._v(" "),
-                              _c("input", {
-                                staticClass: "form-control fileup",
-                                attrs: { type: "file", name: "gambar" },
-                                on: { change: _vm.updateGambar }
-                              })
-                            ])
+                            _c(
+                              "div",
+                              { staticClass: "row m-auto align-items-center" },
+                              [
+                                _c("div", { staticClass: "form-group lp" }, [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "clr-blue",
+                                      attrs: { for: "gambar" }
+                                    },
+                                    [_vm._v("Gambar")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "form-control fileup",
+                                    attrs: { type: "file", name: "gambar" },
+                                    on: { change: _vm.updateGambar }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("img", {
+                                  attrs: {
+                                    src: _vm.base + _vm.form.photo,
+                                    alt: "avatar",
+                                    width: "70",
+                                    height: "70"
+                                  }
+                                })
+                              ]
+                            )
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [
@@ -88874,7 +88948,13 @@ var render = function() {
                                             key: lokasi.id,
                                             domProps: { value: lokasi.id }
                                           },
-                                          [_vm._v(_vm._s(lokasi.lokasi))]
+                                          [
+                                            _vm._v(
+                                              "\n                            " +
+                                                _vm._s(lokasi.lokasi) +
+                                                "\n                          "
+                                            )
+                                          ]
                                         )
                                       }),
                                       0
@@ -89024,7 +89104,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Ok")]
+                      [_vm._v("\n                Ok\n              ")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -89033,7 +89113,7 @@ var render = function() {
                         staticClass: "btn btn-outline-danger",
                         attrs: { type: "button", "data-dismiss": "modal" }
                       },
-                      [_vm._v("Batal")]
+                      [_vm._v("\n                Batal\n              ")]
                     )
                   ])
                 ])
@@ -89201,7 +89281,11 @@ var render = function() {
                                         "aria-expanded": "false"
                                       }
                                     },
-                                    [_vm._v("Actions")]
+                                    [
+                                      _vm._v(
+                                        "\n                            Actions\n                          "
+                                      )
+                                    ]
                                   ),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "dropdown-menu" }, [
@@ -89295,7 +89379,11 @@ var render = function() {
                                     staticClass:
                                       "badge badge-pill badge-light-success"
                                   },
-                                  [_vm._v("Active")]
+                                  [
+                                    _vm._v(
+                                      "\n                        Active\n                      "
+                                    )
+                                  ]
                                 )
                               ])
                             : _vm._e(),
@@ -89308,7 +89396,11 @@ var render = function() {
                                     staticClass:
                                       "badge badge-pill badge-light-warning"
                                   },
-                                  [_vm._v("Non Active")]
+                                  [
+                                    _vm._v(
+                                      "\n                        Non Active\n                      "
+                                    )
+                                  ]
                                 )
                               ])
                             : _vm._e(),
