@@ -337,6 +337,7 @@ export default {
       this.form.reset();
       $("#addNew").modal("show");
       this.form.fill(user);
+      this.setTarif();
     },
     newModal() {
       this.editmode = false;
