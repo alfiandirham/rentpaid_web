@@ -20,6 +20,7 @@ class Pendapatan extends JsonResource
             'pendapatan' => $this->pendapatan,
             't_tunggak' => $this->t_tunggak ?? 0,
             'tunggakan' => $this->tunggakan,
+            'total' => $this->total,
         ];
     }
 }
