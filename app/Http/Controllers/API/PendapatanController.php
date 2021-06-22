@@ -25,7 +25,7 @@ class PendapatanController extends Controller
                     \DB::raw('sum(sisa) as tunggakan'),
                     \DB::raw('sum(case WHEN status="lunas" then 1 end) as t_bayar'),
                     \DB::raw("sum(case WHEN status<>'lunas' then 1 end) as t_tunggak"),
-                    \DB::raw("sum(case WHEN status then 1 end) as total"),
+                    \DB::raw("count(id) as total"),
                 )
                 ->groupBy('modif')
                 ->orderBy('modif', 'desc')->paginate(20));
@@ -38,7 +38,7 @@ class PendapatanController extends Controller
                     \DB::raw('sum(sisa) as tunggakan'),
                     \DB::raw('sum(case WHEN status="lunas" then 1 end) as t_bayar'),
                     \DB::raw("sum(case WHEN status<>'lunas' then 1 end) as t_tunggak"),
-                    \DB::raw("sum(case WHEN status then 1 end) as total"),
+                    \DB::raw("count(id) as total"),
                 )
                 ->groupBy('modif')
                 ->orderBy('modif', 'desc')->paginate(20));
@@ -50,7 +50,7 @@ class PendapatanController extends Controller
                 \DB::raw('sum(sisa) as tunggakan'),
                 \DB::raw('sum(case WHEN status="lunas" then 1 end) as t_bayar'),
                 \DB::raw("sum(case WHEN status<>'lunas' then 1 end) as t_tunggak"),
-                \DB::raw("sum(case WHEN status then 1 end) as total"),
+                \DB::raw("count(id) as total"),
             )
             ->groupBy('modif')
             ->orderBy('modif', 'desc')->paginate(20));
