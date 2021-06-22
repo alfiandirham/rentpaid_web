@@ -61,14 +61,26 @@
               <div class="row">
                 <div class="col-12">
                   <div
-                    class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
+                    class="
+                      ag-grid-btns
+                      d-flex
+                      justify-content-between
+                      flex-wrap
+                      mb-1
+                    "
                   >
                     <div class="mb-1 mb-sm-0">
                       <input
                         type="search"
                         @keyup="searchit"
                         v-model="search"
-                        class="ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0"
+                        class="
+                          ag-grid-filter
+                          form-control
+                          w-100
+                          mr-1
+                          mb-1 mb-sm-0
+                        "
                         id="filter-text-box"
                         placeholder="Search...."
                       />
@@ -84,6 +96,7 @@
                       <th>Tenant Bayar</th>
                       <th>Jumlah Pendepatan</th>
                       <th>Tenant Menunggak</th>
+                      <th>Tenant Total</th>
                       <th>Jumlah Menunggak</th>
                     </tr>
                   </thead>
@@ -96,6 +109,7 @@
                       <td>{{ transaksi.t_bayar }}</td>
                       <td>{{ rp(transaksi.pendapatan) }}</td>
                       <td>{{ transaksi.t_tunggak }}</td>
+                      <td>{{ transaksi.total }}</td>
                       <td>Rp. {{ rp(transaksi.tunggakan) }}</td>
                     </tr>
                   </tbody>
