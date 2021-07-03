@@ -38,6 +38,8 @@ Route::post('profile', 'API\UserController@updateProfile');
 Route::get('penyewa2', 'API\PenyewaController@index2');
 Route::get('pendapatan', 'API\PendapatanController@index');
 Route::get('findPendapatan', 'API\PendapatanController@search');
+Route::get('landingpage-setting', 'API\LandingpageSettingController@index');
+Route::post('landingpage-setting', 'API\LandingpageSettingController@update');
 
 Route::get('contact-us','Api\Contactuscontroller@index');
 Route::get('lokasi-tenant','API\LocationController@lokasiDanTenant');

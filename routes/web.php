@@ -1,9 +1,11 @@
 <?php
 
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+//Route::get('/', function () {
+//    return redirect()->route('login');
+//});
+Route::get('/','Controller@index')->name('landing');
+Route::post('/contact-us','Controller@contactUs')->name('contact-us');
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');

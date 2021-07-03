@@ -89,6 +89,10 @@ let routes = [{
         component: require('./components/contact-us/ContactUs.vue')
     },
     {
+        path: '/landingpage-setting',
+        component: require('./components/landingpage-setting/LandingpageSetting.vue')
+    },
+    {
         path: '/transaksi',
         component: require('./components/transaksi/Transaksi.vue')
     },
