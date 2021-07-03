@@ -26,12 +26,12 @@
     <div class="container w-container">
         <a href="#" class="w-nav-brand"><img src="{{url('assets')}}/images/logov1.svg" loading="lazy" alt=""></a>
         <nav role="navigation" class="nav-menu w-nav-menu">
-            <a href="#" class="nav-link w-nav-link">Beranda</a>
+            <a href="#hero" class="nav-link w-nav-link">Beranda</a>
             <a href="#tentang" class="nav-link w-nav-link">Tentang</a>
-            <a href="#" class="nav-link w-nav-link">Fitur</a>
-            <a href="#" class="nav-link last w-nav-link">Hubungi Kami</a>
+            <a href="#fitur" class="nav-link w-nav-link">Fitur</a>
+            <a href="#bottom" class="nav-link last w-nav-link">Hubungi Kami</a>
             <div class="login">
-                <a href="{{$data['link_button_login'] ?? '#'}}" class="link-block w-inline-block">
+                <a href="{{$data['link_button_login'] ?? '/login'}}" class="link-block w-inline-block">
                     <div>Client Login</div>
                 </a>
             </div>
@@ -50,7 +50,7 @@
         <h1 class="h1 top-100 text-blue">Kontrol aset sewaan kamu kini lebih mudah dengan <span class="yellow-text">Rentpaid</span>
         </h1>
         <div class="wrapper-cta">
-            <a href="{{$data['link_dapatkan_penawaran'] ?? '#'}}" class="btn-cta w-inline-block">
+            <a href="{{$data['link_dapatkan_penawaran'] ?? '#bottom'}}" class="btn-cta w-inline-block">
                 <div>Dapatkan Penawaran</div>
             </a>
             <div class="text-20-reg top-bottom-24">atau</div>
