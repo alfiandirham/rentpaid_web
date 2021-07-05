@@ -41,7 +41,7 @@ Route::get('findPendapatan', 'API\PendapatanController@search');
 Route::get('landingpage-setting', 'API\LandingpageSettingController@index');
 Route::post('landingpage-setting', 'API\LandingpageSettingController@update');
 
-Route::get('contact-us','Api\Contactuscontroller@index');
+Route::get('contact-us','Api\ContactUsController@index');
 Route::get('lokasi-tenant','API\LocationController@lokasiDanTenant');
 
 Route::get('findUser', 'API\UserController@search');
