@@ -4,120 +4,7 @@
       <div>
         <h2 class="head-text">Transaksi</h2>
       </div>
-      <div class="head-title">
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="addNew"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalCenterTitle"
-          aria-hidden="true"
-        >
-          <div
-            class="modal-dialog float-right modal-dialog-scrollable modal-nav-dialog"
-            role="document"
-          >
-            <div class="modal-nav">
-              <div class="modal-header modal-nav-header">
-                <h2>{{ editmode ? "DETAIL" : "TAMBAH" }} TRANSAKSI</h2>
-                <i class="fa fa-2x fa-close" data-dismiss="modal"></i>
-              </div>
-              <div class="modal-body modal-nav-body">
-                <form class="form mt-1 form-vertical">
-                  <div class="form-body">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row">
-                          <div class="col-4">
-                            <label class="mb-2 labelin">ID Transaksi</label>
-                            <p class="teksin">{{ form.id }}</p>
-                          </div>
-                          <div class="col-6">
-                            <label class="mb-2 labelin">Tanggal</label>
-                            <p class="teksin">{{ form.tanggal | myDate }}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12 mt-2">
-                        <div class="row">
-                          <div class="col-4">
-                            <label class="mb-2 labelin">Nama Penyewa</label>
-                            <p class="teksin">{{ form.penyewa }}</p>
-                          </div>
-                          <div class="col-6">
-                            <label class="mb-2 labelin">Detail Lokasi</label>
-                            <p class="teksin">{{ form.lokasi }}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12 mt-2">
-                        <div class="row">
-                          <div class="col-4">
-                            <label class="mb-2 labelin"
-                              >Detail Pembayaran</label
-                            >
-                            <p
-                              v-for="v in Object.keys(form.detail)"
-                              :key="v"
-                              class="teksin text-capitalize"
-                            >
-                              {{ v }}
-                            </p>
-                          </div>
-                          <div class="col-6">
-                            <label class="mb-2 labelin">&nbsp;</label>
-                            <p v-for="v in form.detail" :key="v" class="teksin">
-                              Rp. {{ v }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12 mt-2">
-                        <div class="row">
-                          <div class="col-4">
-                            <p
-                              :class="
-                                form.status === 'menunggak' ? 'text-danger' : ''
-                              "
-                              class="teksin-bold"
-                            >
-                              Total
-                            </p>
-                          </div>
-                          <div class="col-6">
-                            <p
-                              :class="
-                                form.status === 'menunggak' ? 'text-danger' : ''
-                              "
-                              class="teksin-bold"
-                            >
-                              Rp.
-                              {{
-                                form.status === "menunggak"
-                                  ? form.tunggakan
-                                  : form.setoran
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12 mt-2">
-                        <div class="row">
-                          <div class="col-4">
-                            <label class="mb-2 labelin">Nama Kolektor</label>
-                            <p class="teksin">{{ form.collector }}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="head-title"></div>
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Filters</h4>
@@ -131,25 +18,18 @@
               <form>
                 <div class="row">
                   <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="users-list-role">Tanggal Awal</label>
+                    <label for="users-list-role">Pilih Tahun</label>
                     <fieldset class="form-group">
-                      <input
+                      <select
                         v-model="awal"
-                        type="date"
+                        type="text"
                         name="tawal"
                         class="form-control"
-                      />
-                    </fieldset>
-                  </div>
-                  <div class="col-12 col-sm-6 col-lg-3">
-                    <label for="users-list-role">Tanggal Akhir</label>
-                    <fieldset class="form-group">
-                      <input
-                        v-model="akhir"
-                        type="date"
-                        name="takhir"
-                        class="form-control"
-                      />
+                      >
+                        <option v-for="y in year" :key="y.year" :value="y.year">
+                          {{ y.year }}
+                        </option>
+                      </select>
                     </fieldset>
                   </div>
                   <div class="col-12 col-sm-6 col-lg-3">
@@ -172,41 +52,18 @@
         <div class="card">
           <div class="card-content">
             <div class="card-body">
-              <div class="row">
-                <div class="col-6">
-                  <div class="ag-grid-btns d-flex flex-wrap mb-1">
-                    <div class="mb-1 mb-sm-0 mr-1">
-                      <fieldset class="form-group">
-                        <select v-model="type" class="form-control">
-                          <option value="penyewa">Penyewa</option>
-                          <option value="lokasi">Lokasi</option>
-                          <option value="collector">Collector</option>
-                        </select>
-                      </fieldset>
-                    </div>
-                    <div class="mb-1 mr-1 mb-sm-0">
-                      <input
-                        type="search"
-                        v-model="search"
-                        class="ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0"
-                        id="filter-text-box"
-                        placeholder="Search...."
-                      />
-                    </div>
-                    <div class="mb-1 mb-sm-0">
-                      <button
-                        type="button"
-                        @click="searchit"
-                        class="btn btn-warning"
-                      >
-                        Cari
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <!-- <div class="row">
+                <div class="col-6"></div>
                 <div class="col-6">
                   <div
-                    class="float-right ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
+                    class="
+                      float-right
+                      ag-grid-btns
+                      d-flex
+                      justify-content-between
+                      flex-wrap
+                      mb-1
+                    "
                   >
                     <div class="mb-1 mb-sm-0">
                       <a href="/xl-transaksi" class="btn btn-success"
@@ -215,7 +72,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="row">
                 <div class="col-6">
                   <div class="cardc">
@@ -234,7 +91,7 @@
                 </div>
                 <div class="col-6">
                   <div class="cardct">
-                    <h6>Transaksi Hari Ini</h6>
+                    <h6>Transaksi Bulan Ini</h6>
                     <div class="row">
                       <div class="col-6">
                         <h5>Pendepatan</h5>
@@ -252,18 +109,10 @@
                 <table class="table table-hover mb-0">
                   <thead>
                     <tr>
-                      <th>Id</th>
-                      <th>Penyewa</th>
-                      <th>Status</th>
-                      <th>Nama Lokasi</th>
-                      <th>Tanggal</th>
-                      <th>Collector</th>
-                      <th>BOP</th>
-                      <th>Air</th>
-                      <th>Listrik</th>
-                      <th>Brg Masuk</th>
-                      <th>Sampah</th>
-                      <th>Jumlah Setoran</th>
+                      <th>Bulan</th>
+                      <th>Jumlah Pendapatan</th>
+                      <th>Jumlah Tunggakan</th>
+                      <th>Jumlah Tenant Disewakan</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -272,54 +121,27 @@
                       :key="transaksi.id"
                     >
                       <td>
-                        <a
-                          class="blue-underline"
-                          @click="editModal(transaksi)"
-                          >{{ transaksi.id }}</a
-                        >
+                        <a href="/">{{ transaksi.month | myMonth }}</a>
                       </td>
-                      <td>{{ transaksi.penyewa }}</td>
-                      <td>{{ transaksi.status }}</td>
-                      <td>{{ transaksi.lokasi }}</td>
-                      <td>{{ transaksi.tanggal | myDate }}</td>
-                      <td>{{ transaksi.collector }}</td>
                       <td>
                         Rp.
                         {{
-                          transaksi.detail.bop ? rp(transaksi.detail.bop) : 0
+                          transaksi.totalbayar ? rp(transaksi.totalbayar) : 0
                         }}
                       </td>
                       <td>
                         Rp.
                         {{
-                          transaksi.detail.air ? rp(transaksi.detail.air) : 0
-                        }}
-                      </td>
-                      <td>
-                        Rp.
-                        {{
-                          transaksi.detail.listrik
-                            ? rp(transaksi.detail.listrik)
+                          transaksi.totaltunggak
+                            ? rp(transaksi.totaltunggak)
                             : 0
                         }}
                       </td>
                       <td>
-                        Rp.
                         {{
-                          transaksi.detail.barang
-                            ? rp(transaksi.detail.barang)
-                            : 0
+                          transaksi.totaltenan ? rp(transaksi.totaltenan) : 0
                         }}
                       </td>
-                      <td>
-                        Rp.
-                        {{
-                          transaksi.detail.sampah
-                            ? rp(transaksi.detail.sampah)
-                            : 0
-                        }}
-                      </td>
-                      <td>Rp. {{ rp(transaksi.setoran) }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -350,13 +172,14 @@ export default {
       search: "",
       awal: false,
       info: {},
-      akhir: false,
+      year: {},
       type: "penyewa",
       editmode: false,
       transaksis: {},
       lokasi: {},
       penyewa: {},
       collector: {},
+      filterki: false,
       form: new Form({
         id: "",
         penyewa: "",
@@ -434,16 +257,25 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/transaksi?page=" + page).then((response) => {
-        this.transaksis = response.data;
-      });
+      axios
+        .get(
+          this.filterki
+            ? "api/transaksi-year?q=" + this.awal + "&page=" + page
+            : "api/transaksi-year?page=" + page
+        )
+        .then((response) => {
+          this.transaksis = response.data;
+        });
     },
     loadData() {
-      axios.get("api/transaksi").then(({ data }) => (this.transaksis = data));
+      axios
+        .get("api/transaksi-year")
+        .then(({ data }) => (this.transaksis = data));
       axios.get("api/lokasi").then(({ data }) => (this.lokasi = data));
       axios.get("/api/penyewa").then(({ data }) => (this.penyewa = data));
       axios.get("/api/kolektor").then(({ data }) => (this.collector = data));
-      axios.get("/api/infotr").then(({ data }) => (this.info = data));
+      axios.get("/api/infotr?q=bulan").then(({ data }) => (this.info = data));
+      axios.get("/api/year").then(({ data }) => (this.year = data));
     },
     createUser() {
       this.$Progress.start();
@@ -468,18 +300,9 @@ export default {
   },
   created() {
     Fire.$on("searching", () => {
-      let query = this.search;
+      this.filterki = true;
       axios
-        .get(
-          "api/findTransaksi?q=" +
-            query +
-            "&t=" +
-            this.type +
-            "&a=" +
-            this.awal +
-            "&l=" +
-            this.akhir
-        )
+        .get("api/transaksi-year?q=" + this.awal)
         .then((data) => {
           this.transaksis = data.data;
         })
@@ -489,6 +312,26 @@ export default {
       this.loadData();
     });
     this.loadData();
+  },
+  mounted() {
+    $(function () {
+      $("#datepicker").datepicker({
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: "yy",
+        onClose: function (dateText, inst) {
+          var year = $(
+            "#ui-datepicker-div .ui-datepicker-year :selected"
+          ).val();
+          $(this).datepicker("setDate", new Date(year, 1));
+        },
+      });
+
+      $("#datepicker").focus(function () {
+        $(".ui-datepicker-month").hide();
+        $(".ui-datepicker-calendar").hide();
+      });
+    });
   },
 };
 </script>
