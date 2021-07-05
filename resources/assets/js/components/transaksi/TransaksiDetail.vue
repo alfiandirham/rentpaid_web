@@ -2,9 +2,7 @@
   <div class="user">
     <section class="users-list-wrapper">
       <div>
-        <h2 class="head-text">
-          Pendapatan Bulan {{ parseInt(this.$route.params.id) | myMonth }}
-        </h2>
+        <h2 class="head-text">Transaksi</h2>
       </div>
       <div class="head-title">
         <!-- Modal -->
@@ -17,11 +15,7 @@
           aria-hidden="true"
         >
           <div
-            class="
-              modal-dialog
-              float-right
-              modal-dialog-scrollable modal-nav-dialog
-            "
+            class="modal-dialog float-right modal-dialog-scrollable modal-nav-dialog"
             role="document"
           >
             <div class="modal-nav">
@@ -124,12 +118,61 @@
           </div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Filters</h4>
+          <a class="heading-elements-toggle">
+            <i class="fa fa-ellipsis-v font-medium-3"></i>
+          </a>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <div class="users-list-filter">
+              <form>
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-role">Tanggal Awal</label>
+                    <fieldset class="form-group">
+                      <input
+                        v-model="awal"
+                        type="date"
+                        name="tawal"
+                        class="form-control"
+                      />
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <label for="users-list-role">Tanggal Akhir</label>
+                    <fieldset class="form-group">
+                      <input
+                        v-model="akhir"
+                        type="date"
+                        name="takhir"
+                        class="form-control"
+                      />
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <button
+                      type="button"
+                      @click="searchit"
+                      class="btn btn-primary mt-2 btn-small"
+                    >
+                      Tampilkan Data
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
         <div class="card">
           <div class="card-content">
             <div class="card-body">
-              <!-- <div class="row">
+              <div class="row">
                 <div class="col-6">
                   <div class="ag-grid-btns d-flex flex-wrap mb-1">
                     <div class="mb-1 mb-sm-0 mr-1">
@@ -145,13 +188,7 @@
                       <input
                         type="search"
                         v-model="search"
-                        class="
-                          ag-grid-filter
-                          form-control
-                          w-100
-                          mr-1
-                          mb-1 mb-sm-0
-                        "
+                        class="ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0"
                         id="filter-text-box"
                         placeholder="Search...."
                       />
@@ -169,14 +206,7 @@
                 </div>
                 <div class="col-6">
                   <div
-                    class="
-                      float-right
-                      ag-grid-btns
-                      d-flex
-                      justify-content-between
-                      flex-wrap
-                      mb-1
-                    "
+                    class="float-right ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
                   >
                     <div class="mb-1 mb-sm-0">
                       <a href="/xl-transaksi" class="btn btn-success"
@@ -185,7 +215,7 @@
                     </div>
                   </div>
                 </div>
-              </div> -->
+              </div>
               <div class="row">
                 <div class="col-6">
                   <div class="cardc">
@@ -222,10 +252,18 @@
                 <table class="table table-hover mb-0">
                   <thead>
                     <tr>
-                      <th>Nama</th>
-                      <th>Jumlah Tagihan</th>
-                      <th>Jumlah Dibayar</th>
-                      <th>Jumlah Tunggakan</th>
+                      <th>Id</th>
+                      <th>Penyewa</th>
+                      <th>Status</th>
+                      <th>Nama Lokasi</th>
+                      <th>Tanggal</th>
+                      <th>Collector</th>
+                      <th>BOP</th>
+                      <th>Air</th>
+                      <th>Listrik</th>
+                      <th>Brg Masuk</th>
+                      <th>Sampah</th>
+                      <th>Jumlah Setoran</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -233,26 +271,55 @@
                       v-for="transaksi in transaksis.data"
                       :key="transaksi.id"
                     >
-                      <td>{{ transaksi.nama }}</td>
+                      <td>
+                        <a
+                          class="blue-underline"
+                          @click="editModal(transaksi)"
+                          >{{ transaksi.id }}</a
+                        >
+                      </td>
+                      <td>{{ transaksi.penyewa }}</td>
+                      <td>{{ transaksi.status }}</td>
+                      <td>{{ transaksi.lokasi }}</td>
+                      <td>{{ transaksi.tanggal | myDate }}</td>
+                      <td>{{ transaksi.collector }}</td>
                       <td>
                         Rp.
                         {{
-                          rp(
-                            (transaksi.dibayar
-                              ? parseFloat(transaksi.dibayar)
-                              : 0) +
-                              (transaksi.sisa ? parseFloat(transaksi.sisa) : 0)
-                          )
+                          transaksi.detail.bop ? rp(transaksi.detail.bop) : 0
                         }}
                       </td>
                       <td>
                         Rp.
-                        {{ transaksi.dibayar ? rp(transaksi.dibayar) : 0 }}
+                        {{
+                          transaksi.detail.air ? rp(transaksi.detail.air) : 0
+                        }}
                       </td>
                       <td>
                         Rp.
-                        {{ transaksi.sisa ? rp(transaksi.sisa) : 0 }}
+                        {{
+                          transaksi.detail.listrik
+                            ? rp(transaksi.detail.listrik)
+                            : 0
+                        }}
                       </td>
+                      <td>
+                        Rp.
+                        {{
+                          transaksi.detail.barang
+                            ? rp(transaksi.detail.barang)
+                            : 0
+                        }}
+                      </td>
+                      <td>
+                        Rp.
+                        {{
+                          transaksi.detail.sampah
+                            ? rp(transaksi.detail.sampah)
+                            : 0
+                        }}
+                      </td>
+                      <td>Rp. {{ rp(transaksi.setoran) }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -309,7 +376,7 @@ export default {
     },
     filtering(q) {
       axios
-        .get("/api/transaksi-month?q=" + q)
+        .get("api/findTransaksi?q=" + q)
         .then((data) => {
           this.transaksis = data.data;
         })
@@ -319,7 +386,7 @@ export default {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("/api/transaksi/" + this.form.id)
+        .put("api/transaksi/" + this.form.id)
         .then(() => {
           // success
           $("#addNew").modal("hide");
@@ -344,7 +411,7 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form
-            .delete("/api/transaksi/" + id)
+            .delete("api/transaksi/" + id)
             .then(() => {
               swal("Disabled!", "Your data has been disabled.", "success");
               Fire.$emit("AfterCreate");
@@ -367,15 +434,13 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("/api/transaksi?page=" + page).then((response) => {
+      axios.get("api/transaksi?page=" + page).then((response) => {
         this.transaksis = response.data;
       });
     },
     loadData() {
-      axios
-        .get("/api/transaksi-month/" + this.$route.params.id)
-        .then(({ data }) => (this.transaksis = data));
-      axios.get("/api/lokasi").then(({ data }) => (this.lokasi = data));
+      axios.get("api/transaksi").then(({ data }) => (this.transaksis = data));
+      axios.get("api/lokasi").then(({ data }) => (this.lokasi = data));
       axios.get("/api/penyewa").then(({ data }) => (this.penyewa = data));
       axios.get("/api/kolektor").then(({ data }) => (this.collector = data));
       axios.get("/api/infotr").then(({ data }) => (this.info = data));
@@ -383,7 +448,7 @@ export default {
     createUser() {
       this.$Progress.start();
       this.form
-        .post("/api/transaksi")
+        .post("api/transaksi")
         .then(() => {
           Fire.$emit("AfterCreate");
           $("#addNew").modal("hide");
@@ -405,7 +470,16 @@ export default {
     Fire.$on("searching", () => {
       let query = this.search;
       axios
-        .get("/api/transaction-month/" + this.$route.params.id + "?q=" + query)
+        .get(
+          "api/findTransaksi?q=" +
+            query +
+            "&t=" +
+            this.type +
+            "&a=" +
+            this.awal +
+            "&l=" +
+            this.akhir
+        )
         .then((data) => {
           this.transaksis = data.data;
         })

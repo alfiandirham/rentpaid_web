@@ -121,7 +121,9 @@
                       :key="transaksi.id"
                     >
                       <td>
-                        <a href="/">{{ transaksi.month | myMonth }}</a>
+                        <router-link :to="'/transaksi/' + transaksi.month">{{
+                          transaksi.month | myMonth
+                        }}</router-link>
                       </td>
                       <td>
                         Rp.

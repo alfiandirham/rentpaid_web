@@ -96,7 +96,7 @@ let routes = [{
         path: '/transaksi',
         component: require('./components/transaksi/Transaksi.vue')
     }, {
-        path: '/transaksi:id',
+        path: '/transaksi/:id',
         component: require('./components/transaksi/TransaksiMonth.vue')
     },
     {

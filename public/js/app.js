@@ -19377,7 +19377,7 @@ var routes = [{
     path: '/transaksi',
     component: __webpack_require__(225)
 }, {
-    path: '/transaksi:id',
+    path: '/transaksi/:id',
     component: __webpack_require__(230)
 }, {
     path: '/pendapatan',
@@ -99291,6 +99291,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -99634,11 +99636,23 @@ var render = function() {
                     "tbody",
                     _vm._l(_vm.transaksis.data, function(transaksi) {
                       return _c("tr", { key: transaksi.id }, [
-                        _c("td", [
-                          _c("a", { attrs: { href: "/" } }, [
-                            _vm._v(_vm._s(_vm._f("myMonth")(transaksi.month)))
-                          ])
-                        ]),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: { to: "/transaksi/" + transaksi.month }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm._f("myMonth")(transaksi.month))
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c("td", [
                           _vm._v(
@@ -100121,73 +100135,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -100226,7 +100173,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     filtering: function filtering(q) {
       var _this = this;
 
-      axios.get("api/findTransaksi?q=" + q).then(function (data) {
+      axios.get("/api/transaksi-month?q=" + q).then(function (data) {
         _this.transaksis = data.data;
       }).catch(function () {});
     },
@@ -100235,7 +100182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$Progress.start();
       // console.log('Editing data');
-      this.form.put("api/transaksi/" + this.form.id).then(function () {
+      this.form.put("/api/transaksi/" + this.form.id).then(function () {
         // success
         $("#addNew").modal("hide");
         swal("Updated!", "Information has been updated.", "success");
@@ -100259,7 +100206,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (result) {
         // Send request to the server
         if (result.value) {
-          _this3.form.delete("api/transaksi/" + id).then(function () {
+          _this3.form.delete("/api/transaksi/" + id).then(function () {
             swal("Disabled!", "Your data has been disabled.", "success");
             Fire.$emit("AfterCreate");
           }).catch(function () {
@@ -100284,18 +100231,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-      axios.get("api/transaksi?page=" + page).then(function (response) {
+      axios.get("/api/transaksi?page=" + page).then(function (response) {
         _this4.transaksis = response.data;
       });
     },
     loadData: function loadData() {
       var _this5 = this;
 
-      axios.get("api/transaksi").then(function (_ref) {
+      axios.get("/api/transaksi-month/" + this.$route.params.id).then(function (_ref) {
         var data = _ref.data;
         return _this5.transaksis = data;
       });
-      axios.get("api/lokasi").then(function (_ref2) {
+      axios.get("/api/lokasi").then(function (_ref2) {
         var data = _ref2.data;
         return _this5.lokasi = data;
       });
@@ -100316,7 +100263,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this6 = this;
 
       this.$Progress.start();
-      this.form.post("api/transaksi").then(function () {
+      this.form.post("/api/transaksi").then(function () {
         Fire.$emit("AfterCreate");
         $("#addNew").modal("hide");
         toast({
@@ -100338,7 +100285,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     Fire.$on("searching", function () {
       var query = _this7.search;
-      axios.get("api/findTransaksi?q=" + query + "&t=" + _this7.type + "&a=" + _this7.awal + "&l=" + _this7.akhir).then(function (data) {
+      axios.get("/api/transaction-month/" + _this7.$route.params.id + "?q=" + query).then(function (data) {
         _this7.transaksis = data.data;
       }).catch(function () {});
     });
@@ -100359,7 +100306,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "user" }, [
     _c("section", { staticClass: "users-list-wrapper" }, [
-      _vm._m(0),
+      _c("div", [
+        _c("h2", { staticClass: "head-text" }, [
+          _vm._v(
+            "\n        Pendapatan Bulan " +
+              _vm._s(_vm._f("myMonth")(parseInt(this.$route.params.id))) +
+              "\n      "
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "head-title" }, [
         _c(
@@ -100379,7 +100334,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "modal-dialog float-right modal-dialog-scrollable modal-nav-dialog",
+                  "\n            modal-dialog\n            float-right\n            modal-dialog-scrollable modal-nav-dialog\n          ",
                 attrs: { role: "document" }
               },
               [
@@ -100581,205 +100536,10 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-content collapse show" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "users-list-filter" }, [
-              _c("form", [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "users-list-role" } }, [
-                      _vm._v("Tanggal Awal")
-                    ]),
-                    _vm._v(" "),
-                    _c("fieldset", { staticClass: "form-group" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.awal,
-                            expression: "awal"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "date", name: "tawal" },
-                        domProps: { value: _vm.awal },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.awal = $event.target.value
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c("label", { attrs: { for: "users-list-role" } }, [
-                      _vm._v("Tanggal Akhir")
-                    ]),
-                    _vm._v(" "),
-                    _c("fieldset", { staticClass: "form-group" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.akhir,
-                            expression: "akhir"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "date", name: "takhir" },
-                        domProps: { value: _vm.akhir },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.akhir = $event.target.value
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary mt-2 btn-small",
-                        attrs: { type: "button" },
-                        on: { click: _vm.searchit }
-                      },
-                      [
-                        _vm._v(
-                          "\n                    Tampilkan Data\n                  "
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
       _c("div", { attrs: { id: "basic-examples" } }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-content" }, [
             _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-6" }, [
-                  _c(
-                    "div",
-                    { staticClass: "ag-grid-btns d-flex flex-wrap mb-1" },
-                    [
-                      _c("div", { staticClass: "mb-1 mb-sm-0 mr-1" }, [
-                        _c("fieldset", { staticClass: "form-group" }, [
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.type,
-                                  expression: "type"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.type = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                }
-                              }
-                            },
-                            [
-                              _c("option", { attrs: { value: "penyewa" } }, [
-                                _vm._v("Penyewa")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "lokasi" } }, [
-                                _vm._v("Lokasi")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "collector" } }, [
-                                _vm._v("Collector")
-                              ])
-                            ]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mb-1 mr-1 mb-sm-0" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.search,
-                              expression: "search"
-                            }
-                          ],
-                          staticClass:
-                            "ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0",
-                          attrs: {
-                            type: "search",
-                            id: "filter-text-box",
-                            placeholder: "Search...."
-                          },
-                          domProps: { value: _vm.search },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.search = $event.target.value
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mb-1 mb-sm-0" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-warning",
-                            attrs: { type: "button" },
-                            on: { click: _vm.searchit }
-                          },
-                          [
-                            _vm._v(
-                              "\n                      Cari\n                    "
-                            )
-                          ]
-                        )
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(2)
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-6" }, [
                   _c("div", { staticClass: "cardc" }, [
@@ -100832,45 +100592,37 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "table-responsive" }, [
                 _c("table", { staticClass: "table table-hover mb-0" }, [
-                  _vm._m(3),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c(
                     "tbody",
                     _vm._l(_vm.transaksis.data, function(transaksi) {
                       return _c("tr", { key: transaksi.id }, [
-                        _c("td", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "blue-underline",
-                              on: {
-                                click: function($event) {
-                                  return _vm.editModal(transaksi)
-                                }
-                              }
-                            },
-                            [_vm._v(_vm._s(transaksi.id))]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(transaksi.penyewa))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(transaksi.status))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(transaksi.lokasi))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(_vm._f("myDate")(transaksi.tanggal)))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(transaksi.collector))]),
+                        _c("td", [_vm._v(_vm._s(transaksi.nama))]),
                         _vm._v(" "),
                         _c("td", [
                           _vm._v(
                             "\n                      Rp.\n                      " +
                               _vm._s(
-                                transaksi.detail.bop
-                                  ? _vm.rp(transaksi.detail.bop)
+                                _vm.rp(
+                                  (transaksi.dibayar
+                                    ? parseFloat(transaksi.dibayar)
+                                    : 0) +
+                                    (transaksi.sisa
+                                      ? parseFloat(transaksi.sisa)
+                                      : 0)
+                                )
+                              ) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                      Rp.\n                      " +
+                              _vm._s(
+                                transaksi.dibayar
+                                  ? _vm.rp(transaksi.dibayar)
                                   : 0
                               ) +
                               "\n                    "
@@ -100881,52 +100633,10 @@ var render = function() {
                           _vm._v(
                             "\n                      Rp.\n                      " +
                               _vm._s(
-                                transaksi.detail.air
-                                  ? _vm.rp(transaksi.detail.air)
-                                  : 0
+                                transaksi.sisa ? _vm.rp(transaksi.sisa) : 0
                               ) +
                               "\n                    "
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            "\n                      Rp.\n                      " +
-                              _vm._s(
-                                transaksi.detail.listrik
-                                  ? _vm.rp(transaksi.detail.listrik)
-                                  : 0
-                              ) +
-                              "\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            "\n                      Rp.\n                      " +
-                              _vm._s(
-                                transaksi.detail.barang
-                                  ? _vm.rp(transaksi.detail.barang)
-                                  : 0
-                              ) +
-                              "\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            "\n                      Rp.\n                      " +
-                              _vm._s(
-                                transaksi.detail.sampah
-                                  ? _vm.rp(transaksi.detail.sampah)
-                                  : 0
-                              ) +
-                              "\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v("Rp. " + _vm._s(_vm.rp(transaksi.setoran)))
                         ])
                       ])
                     }),
@@ -100958,77 +100668,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h2", { staticClass: "head-text" }, [_vm._v("Transaksi")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h4", { staticClass: "card-title" }, [_vm._v("Filters")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "heading-elements-toggle" }, [
-        _c("i", { staticClass: "fa fa-ellipsis-v font-medium-3" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "float-right ag-grid-btns d-flex justify-content-between flex-wrap mb-1"
-        },
-        [
-          _c("div", { staticClass: "mb-1 mb-sm-0" }, [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-success",
-                attrs: { href: "/xl-transaksi" }
-              },
-              [_vm._v("Export Excel")]
-            )
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Id")]),
+        _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Penyewa")]),
+        _c("th", [_vm._v("Jumlah Tagihan")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
+        _c("th", [_vm._v("Jumlah Dibayar")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Nama Lokasi")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Tanggal")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Collector")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("BOP")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Air")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Listrik")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Brg Masuk")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Sampah")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Jumlah Setoran")])
+        _c("th", [_vm._v("Jumlah Tunggakan")])
       ])
     ])
   }
