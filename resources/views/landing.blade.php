@@ -261,7 +261,7 @@
                         <div class="title-office">Head Office Makassar</div>
                         <p class="p-footer">{{$data['address_head_office_makassar'] ?? ''}}</p>
                         <div class="title-office">Head Office Makassar</div>
-                        <p class="p-footer">{{$data['address_head_office_makassar2'] ?? '#'}}</p>
+                        <p class="p-footer">{{$data['address_head_office_makassar2'] ?? ''}}</p>
                     </div>
                 </div>
             </div>
