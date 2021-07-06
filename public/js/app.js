@@ -19380,6 +19380,9 @@ var routes = [{
     path: '/transaksi/:id',
     component: __webpack_require__(230)
 }, {
+    path: '/transaksi/detail/:id',
+    component: __webpack_require__(264)
+}, {
     path: '/pendapatan',
     component: __webpack_require__(235)
 }, {
@@ -100135,6 +100138,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -100598,7 +100606,22 @@ var render = function() {
                     "tbody",
                     _vm._l(_vm.transaksis.data, function(transaksi) {
                       return _c("tr", { key: transaksi.id }, [
-                        _c("td", [_vm._v(_vm._s(transaksi.nama))]),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: {
+                                  to:
+                                    "/transaksi/detail/" + transaksi.penyewa_id
+                                }
+                              },
+                              [_vm._v(_vm._s(transaksi.nama))]
+                            )
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c("td", [
                           _vm._v(
@@ -107848,6 +107871,1176 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
+  }
+}
+
+/***/ }),
+/* 264 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(265)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(267)
+/* template */
+var __vue_template__ = __webpack_require__(268)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-46514c8b"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/transaksi/TransaksiDetail.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-46514c8b", Component.options)
+  } else {
+    hotAPI.reload("data-v-46514c8b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(266);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("25391dfe", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-46514c8b\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TransaksiDetail.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-46514c8b\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TransaksiDetail.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 266 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.blue-underline[data-v-46514c8b] {\n  font-style: normal !important;\n  font-weight: 600 !important;\n  font-size: 16px !important;\n  line-height: 17px !important;\n  text-decoration-line: underline !important;\n\n  color: #3895cc !important;\n}\n.labelin[data-v-46514c8b] {\n  font-style: normal;\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 17px;\n  color: #8f979b;\n}\n.teksin[data-v-46514c8b] {\n  font-style: normal;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 17px;\n  color: #606060;\n  padding-left: 5px;\n}\n.teksin-bold[data-v-46514c8b] {\n  font-style: normal;\n  font-weight: 800;\n  font-size: 16px;\n  line-height: 17px;\n  padding-left: 5px;\n  color: #174865;\n}\n.cardc[data-v-46514c8b] {\n  background: aliceblue;\n  padding: 1rem;\n  border-radius: 5px;\n  margin-bottom: 1.25rem;\n}\n.cardc h6[data-v-46514c8b] {\n  color: darkgray;\n  font-weight: bold;\n}\n.cardc h5[data-v-46514c8b] {\n  font-size: small;\n  color: #3895cc;\n}\n.cardc p[data-v-46514c8b] {\n  color: #3895cc;\n}\n.cardct[data-v-46514c8b] {\n  background: #d7ffe7;\n  padding: 1rem;\n  border-radius: 5px;\n  margin-bottom: 1.25rem;\n}\n.cardct h6[data-v-46514c8b] {\n  color: darkgray;\n  font-weight: bold;\n}\n.cardct h5[data-v-46514c8b] {\n  font-size: small;\n  color: #3895cc;\n}\n.cardct p[data-v-46514c8b] {\n  color: #3895cc;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 267 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_numeral___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_numeral__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      cekall: false,
+      search: "",
+      awal: false,
+      info: {},
+      akhir: false,
+      type: "penyewa",
+      editmode: false,
+      transaksis: {},
+      lokasi: {},
+      penyewa: {},
+      collector: {},
+      form: new Form({
+        id: "",
+        penyewa: "",
+        setoran: "",
+        tanggal: "",
+        lokasi: "",
+        collector: "",
+        detail: "",
+        status: "",
+        tunggakan: ""
+      })
+    };
+  },
+
+  methods: {
+    rp: function rp(n) {
+      return __WEBPACK_IMPORTED_MODULE_0_numeral___default()(n).format("0,0");
+    },
+    filtering: function filtering(q) {
+      var _this = this;
+
+      axios.get("/api/transaksi-detail/" + this.$route.params.id + "?q=" + q).then(function (data) {
+        _this.transaksis = data.data;
+      }).catch(function () {});
+    },
+    updateUser: function updateUser() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      // console.log('Editing data');
+      this.form.put("/api/transaksi/" + this.form.id).then(function () {
+        // success
+        $("#addNew").modal("hide");
+        swal("Updated!", "Information has been updated.", "success");
+        _this2.$Progress.finish();
+        Fire.$emit("AfterCreate");
+      }).catch(function () {
+        _this2.$Progress.fail();
+      });
+    },
+    deleteUser: function deleteUser(id) {
+      var _this3 = this;
+
+      swal({
+        title: "Are you sure?",
+        text: "Disable this data!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then(function (result) {
+        // Send request to the server
+        if (result.value) {
+          _this3.form.delete("/api/transaksi/" + id).then(function () {
+            swal("Disabled!", "Your data has been disabled.", "success");
+            Fire.$emit("AfterCreate");
+          }).catch(function () {
+            swal("Failed!", "There was something wronge.", "warning");
+          });
+        }
+      });
+    },
+    editModal: function editModal(user) {
+      this.editmode = true;
+      this.form.reset();
+      $("#addNew").modal("show");
+      this.form.fill(user);
+    },
+    newModal: function newModal() {
+      this.editmode = false;
+      this.form.reset();
+      $("#addNew").modal("show");
+    },
+    getResults: function getResults() {
+      var _this4 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      axios.get("/api/transaksi-detail/" + this.$route.params.id + "?page=" + page).then(function (response) {
+        _this4.transaksis = response.data;
+      });
+    },
+    loadData: function loadData() {
+      var _this5 = this;
+
+      axios.get("/api/transaksi-detail/" + this.$route.params.id).then(function (_ref) {
+        var data = _ref.data;
+        return _this5.transaksis = data;
+      });
+      axios.get("/api/lokasi").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.lokasi = data;
+      });
+      axios.get("/api/penyewa").then(function (_ref3) {
+        var data = _ref3.data;
+        return _this5.penyewa = data;
+      });
+      axios.get("/api/kolektor").then(function (_ref4) {
+        var data = _ref4.data;
+        return _this5.collector = data;
+      });
+      axios.get("/api/infotr").then(function (_ref5) {
+        var data = _ref5.data;
+        return _this5.info = data;
+      });
+    },
+    createUser: function createUser() {
+      var _this6 = this;
+
+      this.$Progress.start();
+      this.form.post("/api/transaksi").then(function () {
+        Fire.$emit("AfterCreate");
+        $("#addNew").modal("hide");
+        toast({
+          type: "success",
+          title: "Berhasil Menambah transaksi."
+        });
+        _this6.$Progress.finish();
+      }).catch(function () {
+        _this6.$Progress.fail();
+      });
+    },
+
+    searchit: _.debounce(function () {
+      Fire.$emit("searching");
+    }, 1000)
+  },
+  created: function created() {
+    var _this7 = this;
+
+    Fire.$on("searching", function () {
+      var query = _this7.search;
+      axios.get("/api/transaksi-detail/" + _this7.$route.params.id + "?q=" + query + "&t=" + _this7.type + "&a=" + _this7.awal + "&l=" + _this7.akhir).then(function (data) {
+        _this7.transaksis = data.data;
+      }).catch(function () {});
+    });
+    Fire.$on("AfterCreate", function () {
+      _this7.loadData();
+    });
+    this.loadData();
+  }
+});
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "user" }, [
+    _c("section", { staticClass: "users-list-wrapper" }, [
+      _c("div", [
+        _c("h2", { staticClass: "head-text" }, [
+          _vm._v(
+            "\n        History Pembayaran - " +
+              _vm._s(_vm.transaksis.data[0].penyewa) +
+              "\n      "
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "head-title" }, [
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "addNew",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalCenterTitle",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "\n            modal-dialog\n            float-right\n            modal-dialog-scrollable modal-nav-dialog\n          ",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-nav" }, [
+                  _c("div", { staticClass: "modal-header modal-nav-header" }, [
+                    _c("h2", [
+                      _vm._v(
+                        _vm._s(_vm.editmode ? "DETAIL" : "TAMBAH") +
+                          " TRANSAKSI"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fa fa-2x fa-close",
+                      attrs: { "data-dismiss": "modal" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body modal-nav-body" }, [
+                    _c("form", { staticClass: "form mt-1 form-vertical" }, [
+                      _c("div", { staticClass: "form-body" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("ID Transaksi")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.id))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Tanggal")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(
+                                    _vm._s(_vm._f("myDate")(_vm.form.tanggal))
+                                  )
+                                ])
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Nama Penyewa")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.penyewa))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Detail Lokasi")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.lokasi))
+                                ])
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c(
+                                "div",
+                                { staticClass: "col-4" },
+                                [
+                                  _c("label", { staticClass: "mb-2 labelin" }, [
+                                    _vm._v("Detail Pembayaran")
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(Object.keys(_vm.form.detail), function(
+                                    v
+                                  ) {
+                                    return _c(
+                                      "p",
+                                      {
+                                        key: v,
+                                        staticClass: "teksin text-capitalize"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                            " +
+                                            _vm._s(v) +
+                                            "\n                          "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-6" },
+                                [
+                                  _c("label", { staticClass: "mb-2 labelin" }, [
+                                    _vm._v(" ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.form.detail, function(v) {
+                                    return _c(
+                                      "p",
+                                      { key: v, staticClass: "teksin" },
+                                      [
+                                        _vm._v(
+                                          "\n                            Rp. " +
+                                            _vm._s(v) +
+                                            "\n                          "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass: "teksin-bold",
+                                    class:
+                                      _vm.form.status === "menunggak"
+                                        ? "text-danger"
+                                        : ""
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            Total\n                          "
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-6" }, [
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass: "teksin-bold",
+                                    class:
+                                      _vm.form.status === "menunggak"
+                                        ? "text-danger"
+                                        : ""
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            Rp.\n                            " +
+                                        _vm._s(
+                                          _vm.form.status === "menunggak"
+                                            ? _vm.form.tunggakan
+                                            : _vm.form.setoran
+                                        ) +
+                                        "\n                          "
+                                    )
+                                  ]
+                                )
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 mt-2" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _c("label", { staticClass: "mb-2 labelin" }, [
+                                  _vm._v("Nama Kolektor")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "teksin" }, [
+                                  _vm._v(_vm._s(_vm.form.collector))
+                                ])
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-content collapse show" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "users-list-filter" }, [
+              _c("form", [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
+                    _c("label", { attrs: { for: "users-list-role" } }, [
+                      _vm._v("Tanggal Awal")
+                    ]),
+                    _vm._v(" "),
+                    _c("fieldset", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.awal,
+                            expression: "awal"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", name: "tawal" },
+                        domProps: { value: _vm.awal },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.awal = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
+                    _c("label", { attrs: { for: "users-list-role" } }, [
+                      _vm._v("Tanggal Akhir")
+                    ]),
+                    _vm._v(" "),
+                    _c("fieldset", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.akhir,
+                            expression: "akhir"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", name: "takhir" },
+                        domProps: { value: _vm.akhir },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.akhir = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 col-sm-6 col-lg-3" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary mt-2 btn-small",
+                        attrs: { type: "button" },
+                        on: { click: _vm.searchit }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Tampilkan Data\n                  "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "basic-examples" } }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-content" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-6" }, [
+                  _c("div", { staticClass: "cardc" }, [
+                    _c("h6", [_vm._v("Transaksi Keseluruhan")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("h5", [_vm._v("Pendepatan")]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v("Rp " + _vm._s(_vm.rp(_vm.info.totalp)))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("h5", [_vm._v("Tunggakan")]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v("Rp " + _vm._s(_vm.rp(_vm.info.totalt)))
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [
+                  _c("div", { staticClass: "cardct" }, [
+                    _c("h6", [_vm._v("Transaksi Hari Ini")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("h5", [_vm._v("Pendepatan")]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v("Rp " + _vm._s(_vm.rp(_vm.info.phari)))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("h5", [_vm._v("Tunggakan")]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v("Rp " + _vm._s(_vm.rp(_vm.info.thari)))
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table table-hover mb-0" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.transaksis.data, function(transaksi) {
+                      return _c("tr", { key: transaksi.id }, [
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "blue-underline",
+                              on: {
+                                click: function($event) {
+                                  return _vm.editModal(transaksi)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(transaksi.id))]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(transaksi.penyewa))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(transaksi.status))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(transaksi.lokasi))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(_vm._f("myDate")(transaksi.tanggal)))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(transaksi.collector))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                      Rp.\n                      " +
+                              _vm._s(
+                                transaksi.detail.bop
+                                  ? _vm.rp(transaksi.detail.bop)
+                                  : 0
+                              ) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                      Rp.\n                      " +
+                              _vm._s(
+                                transaksi.detail.air
+                                  ? _vm.rp(transaksi.detail.air)
+                                  : 0
+                              ) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                      Rp.\n                      " +
+                              _vm._s(
+                                transaksi.detail.listrik
+                                  ? _vm.rp(transaksi.detail.listrik)
+                                  : 0
+                              ) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                      Rp.\n                      " +
+                              _vm._s(
+                                transaksi.detail.barang
+                                  ? _vm.rp(transaksi.detail.barang)
+                                  : 0
+                              ) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                      Rp.\n                      " +
+                              _vm._s(
+                                transaksi.detail.sampah
+                                  ? _vm.rp(transaksi.detail.sampah)
+                                  : 0
+                              ) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v("Rp. " + _vm._s(_vm.rp(transaksi.setoran)))
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mt-2 pl-1" },
+                  [
+                    _c("pagination", {
+                      attrs: { limit: 5, data: _vm.transaksis },
+                      on: { "pagination-change-page": _vm.getResults }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Filters")]),
+      _vm._v(" "),
+      _c("a", { staticClass: "heading-elements-toggle" }, [
+        _c("i", { staticClass: "fa fa-ellipsis-v font-medium-3" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Id")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Penyewa")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Nama Lokasi")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tanggal")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Collector")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("BOP")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Air")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Listrik")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Brg Masuk")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Sampah")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Jumlah Setoran")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-46514c8b", module.exports)
   }
 }
 

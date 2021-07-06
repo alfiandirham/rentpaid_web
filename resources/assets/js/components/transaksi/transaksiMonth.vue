@@ -233,7 +233,12 @@
                       v-for="transaksi in transaksis.data"
                       :key="transaksi.id"
                     >
-                      <td>{{ transaksi.nama }}</td>
+                      <td>
+                        <router-link
+                          :to="'/transaksi/detail/' + transaksi.penyewa_id"
+                          >{{ transaksi.nama }}</router-link
+                        >
+                      </td>
                       <td>
                         Rp.
                         {{

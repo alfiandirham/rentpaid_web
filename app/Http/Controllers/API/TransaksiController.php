@@ -8,6 +8,7 @@ use App\Http\Resources\Transaksi as TransaksiCollection;
 use App\Transaksi;
 use App\TransactionYear;
 use App\TransactionMonth;
+use App\Penyewa;
 
 class TransaksiController extends Controller
 {
@@ -55,6 +56,23 @@ class TransaksiController extends Controller
             return TransactionMonth::where('owner_id', \Auth::user()->id)->where('month', $id)->paginate(20);
         }
         return TransactionMonth::where('month', $id)->paginate(20);
+    }
+
+    public function indexByDetail($id)
+    {
+        if (\Gate::allows('isAdmin')) {
+            if ($q = \Request::get('q')) {
+                return TransactionMonth::where('lokasi_id', \Auth::user()->lokasi_id)->where('year', $q)->where('month', $id)->paginate(20);
+            }
+            return TransaksiCollection::collection(Penyewa::findOrFail($id)->transaksi()->where('lokasi_id', \Auth::user()->lokasi_id)->paginate(20));
+        }
+        if (\Gate::allows('isOwner')) {
+            if ($q = \Request::get('q')) {
+                return TransactionMonth::where('owner_id', \Auth::user()->id)->where('year', $q)->where('month', $id)->paginate(20);
+            }
+            return TransaksiCollection::collection(Penyewa::findOrFail($id)->transaksi()->paginate(20));
+        }
+        return TransaksiCollection::collection(Penyewa::findOrFail($id)->transaksi()->paginate(20));
     }
 
     public function index()

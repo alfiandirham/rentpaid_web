@@ -95,9 +95,14 @@ let routes = [{
     {
         path: '/transaksi',
         component: require('./components/transaksi/Transaksi.vue')
-    }, {
+    },
+    {
         path: '/transaksi/:id',
         component: require('./components/transaksi/TransaksiMonth.vue')
+    },
+    {
+        path: '/transaksi/detail/:id',
+        component: require('./components/transaksi/TransaksiDetail.vue')
     },
     {
         path: '/pendapatan',

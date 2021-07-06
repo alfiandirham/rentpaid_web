@@ -2,7 +2,9 @@
   <div class="user">
     <section class="users-list-wrapper">
       <div>
-        <h2 class="head-text">Transaksi</h2>
+        <h2 class="head-text">
+          History Pembayaran - {{ transaksis.data[0].penyewa }}
+        </h2>
       </div>
       <div class="head-title">
         <!-- Modal -->
@@ -15,7 +17,11 @@
           aria-hidden="true"
         >
           <div
-            class="modal-dialog float-right modal-dialog-scrollable modal-nav-dialog"
+            class="
+              modal-dialog
+              float-right
+              modal-dialog-scrollable modal-nav-dialog
+            "
             role="document"
           >
             <div class="modal-nav">
@@ -172,7 +178,7 @@
         <div class="card">
           <div class="card-content">
             <div class="card-body">
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-6">
                   <div class="ag-grid-btns d-flex flex-wrap mb-1">
                     <div class="mb-1 mb-sm-0 mr-1">
@@ -215,7 +221,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="row">
                 <div class="col-6">
                   <div class="cardc">
@@ -376,7 +382,7 @@ export default {
     },
     filtering(q) {
       axios
-        .get("api/findTransaksi?q=" + q)
+        .get("/api/transaksi-detail/" + this.$route.params.id + "?q=" + q)
         .then((data) => {
           this.transaksis = data.data;
         })
@@ -386,7 +392,7 @@ export default {
       this.$Progress.start();
       // console.log('Editing data');
       this.form
-        .put("api/transaksi/" + this.form.id)
+        .put("/api/transaksi/" + this.form.id)
         .then(() => {
           // success
           $("#addNew").modal("hide");
@@ -411,7 +417,7 @@ export default {
         // Send request to the server
         if (result.value) {
           this.form
-            .delete("api/transaksi/" + id)
+            .delete("/api/transaksi/" + id)
             .then(() => {
               swal("Disabled!", "Your data has been disabled.", "success");
               Fire.$emit("AfterCreate");
@@ -434,13 +440,17 @@ export default {
       $("#addNew").modal("show");
     },
     getResults(page = 1) {
-      axios.get("api/transaksi?page=" + page).then((response) => {
-        this.transaksis = response.data;
-      });
+      axios
+        .get("/api/transaksi-detail/" + this.$route.params.id + "?page=" + page)
+        .then((response) => {
+          this.transaksis = response.data;
+        });
     },
     loadData() {
-      axios.get("api/transaksi").then(({ data }) => (this.transaksis = data));
-      axios.get("api/lokasi").then(({ data }) => (this.lokasi = data));
+      axios
+        .get("/api/transaksi-detail/" + this.$route.params.id)
+        .then(({ data }) => (this.transaksis = data));
+      axios.get("/api/lokasi").then(({ data }) => (this.lokasi = data));
       axios.get("/api/penyewa").then(({ data }) => (this.penyewa = data));
       axios.get("/api/kolektor").then(({ data }) => (this.collector = data));
       axios.get("/api/infotr").then(({ data }) => (this.info = data));
@@ -448,7 +458,7 @@ export default {
     createUser() {
       this.$Progress.start();
       this.form
-        .post("api/transaksi")
+        .post("/api/transaksi")
         .then(() => {
           Fire.$emit("AfterCreate");
           $("#addNew").modal("hide");
@@ -471,7 +481,9 @@ export default {
       let query = this.search;
       axios
         .get(
-          "api/findTransaksi?q=" +
+          "/api/transaksi-detail/" +
+            this.$route.params.id +
+            "?q=" +
             query +
             "&t=" +
             this.type +

@@ -20,3 +20,4 @@ Route::get('/xl-lokasi-tenant/{id}', 'HomeController@lokasiTenant');
 Route::get('{path}', "HomeController@index")->where('path', '[A-Za-z\-]+');
 Route::get('/transaksi/{path}', "HomeController@index")->where('path', '[0-9]+');
 Route::get('/tenant/{path}', "HomeController@index")->where('path', '[0-9]+');
+Route::get('/transaksi/detail/{path}', "HomeController@index")->where('path', '[0-9]+');

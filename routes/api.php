@@ -67,3 +67,4 @@ Route::get('infotr', 'API\TransaksiController@info');
 Route::get('year', 'API\TransaksiController@years');
 Route::get('transaksi-year', 'API\TransaksiController@indexByYear');
 Route::get('transaksi-month/{id}', 'API\TransaksiController@indexByMonth');
+Route::get('transaksi-detail/{id}', 'API\TransaksiController@indexByDetail');
