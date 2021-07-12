@@ -20,7 +20,7 @@ class TransaksiController extends Controller
     public function years()
     {
         return Transaksi::where('dibayar', '>=', 0)->select(\DB::raw('YEAR(created_at) year'))
-            ->groupby('year')
+            ->groupby('year')->orderBy('year', 'asc')
             ->get();
     }
 
@@ -28,51 +28,51 @@ class TransaksiController extends Controller
     {
         if (\Gate::allows('isAdmin')) {
             if ($q = \Request::get('q')) {
-                return TransactionYear::where('lokasi_id', \Auth::user()->lokasi_id)->where('year', $q)->paginate(20);
+                return TransactionYear::where('lokasi_id', \Auth::user()->lokasi_id)->where('year', $q)->orderBy('year', 'desc')->orderBy('month', 'asc')->paginate(20);
             }
-            return TransactionYear::where('lokasi_id', \Auth::user()->lokasi_id)->paginate(20);
+            return TransactionYear::where('lokasi_id', \Auth::user()->lokasi_id)->orderBy('year', 'desc')->orderBy('month', 'asc')->paginate(20);
         }
         if (\Gate::allows('isOwner')) {
             if ($q = \Request::get('q')) {
-                return TransactionYear::where('owner_id', \Auth::user()->id)->where('year', $q)->paginate(20);
+                return TransactionYear::where('owner_id', \Auth::user()->id)->where('year', $q)->orderBy('year', 'desc')->orderBy('month', 'asc')->paginate(20);
             }
-            return TransactionYear::where('owner_id', \Auth::user()->id)->paginate(20);
+            return TransactionYear::where('owner_id', \Auth::user()->id)->orderBy('year', 'desc')->orderBy('month', 'asc')->paginate(20);
         }
-        return TransactionYear::paginate(20);
+        return TransactionYear::orderBy('year', 'desc')->orderBy('month', 'asc')->paginate(20);
     }
 
     public function indexByMonth($id)
     {
         if (\Gate::allows('isAdmin')) {
             if ($q = \Request::get('q')) {
-                return TransactionMonth::where('lokasi_id', \Auth::user()->lokasi_id)->where('year', $q)->where('month', $id)->paginate(20);
+                return TransactionMonth::where('lokasi_id', \Auth::user()->lokasi_id)->where('year', $q)->where('month', $id)->orderBy('month', 'desc')->paginate(20);
             }
-            return TransactionMonth::where('lokasi_id', \Auth::user()->lokasi_id)->where('month', $id)->paginate(20);
+            return TransactionMonth::where('lokasi_id', \Auth::user()->lokasi_id)->where('month', $id)->orderBy('month', 'desc')->paginate(20);
         }
         if (\Gate::allows('isOwner')) {
             if ($q = \Request::get('q')) {
-                return TransactionMonth::where('owner_id', \Auth::user()->id)->where('year', $q)->where('month', $id)->paginate(20);
+                return TransactionMonth::where('owner_id', \Auth::user()->id)->where('year', $q)->where('month', $id)->orderBy('month', 'desc')->paginate(20);
             }
-            return TransactionMonth::where('owner_id', \Auth::user()->id)->where('month', $id)->paginate(20);
+            return TransactionMonth::where('owner_id', \Auth::user()->id)->where('month', $id)->orderBy('month', 'desc')->paginate(20);
         }
-        return TransactionMonth::where('month', $id)->paginate(20);
+        return TransactionMonth::where('month', $id)->orderBy('month', 'desc')->paginate(20);
     }
 
     public function indexByDetail($id)
     {
         if (\Gate::allows('isAdmin')) {
             if ($q = \Request::get('q')) {
-                return TransactionMonth::where('lokasi_id', \Auth::user()->lokasi_id)->where('year', $q)->where('month', $id)->paginate(20);
+                return TransactionMonth::where('lokasi_id', \Auth::user()->lokasi_id)->where('year', $q)->where('month', $id)->orderBy('month', 'desc')->paginate(20);
             }
-            return TransaksiCollection::collection(Penyewa::findOrFail($id)->transaksi()->where('lokasi_id', \Auth::user()->lokasi_id)->paginate(20));
+            return TransaksiCollection::collection(Penyewa::findOrFail($id)->transaksi()->where('lokasi_id', \Auth::user()->lokasi_id)->latest()->paginate(20));
         }
         if (\Gate::allows('isOwner')) {
             if ($q = \Request::get('q')) {
-                return TransactionMonth::where('owner_id', \Auth::user()->id)->where('year', $q)->where('month', $id)->paginate(20);
+                return TransactionMonth::where('owner_id', \Auth::user()->id)->where('year', $q)->where('month', $id)->orderBy('month', 'desc')->paginate(20);
             }
-            return TransaksiCollection::collection(Penyewa::findOrFail($id)->transaksi()->paginate(20));
+            return TransaksiCollection::collection(Penyewa::findOrFail($id)->transaksi()->latest()->paginate(20));
         }
-        return TransaksiCollection::collection(Penyewa::findOrFail($id)->transaksi()->paginate(20));
+        return TransaksiCollection::collection(Penyewa::findOrFail($id)->transaksi()->latest()->paginate(20));
     }
 
     public function index()

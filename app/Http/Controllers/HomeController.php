@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exports\LokasiTenantExport;
+use App\Exports\PenYearExport;
+use App\Exports\PesewaExport;
 use App\Perusahaan;
 use App\Tenant;
 use App\Exports\TransaksiExport;
@@ -11,7 +13,7 @@ use App\Exports\SetoranExport;
 use App\Tenant as Penyewa;
 use App\Penyewa as Pesewa;
 use App\Lokasi;
-use Barryvdh\DomPDF\Facade AS PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
 
 class HomeController extends Controller
@@ -42,15 +44,15 @@ class HomeController extends Controller
 
     public function qrcode()
     {
-        if(\Gate::allows('isAuthor')){
+        if (\Gate::allows('isAuthor')) {
             $pr = Perusahaan::first();
         }
 
-        if(\Gate::allows('isOwner')){
+        if (\Gate::allows('isOwner')) {
             $pr = \Auth::user()->perusahaan;
         }
 
-        if(\Gate::allows('isAdmin')){
+        if (\Gate::allows('isAdmin')) {
             $pr = User::findOrFail(\Auth::user()->user_id)->perusahaan;
         }
         $data = explode(",", \Request::get('data'));
@@ -71,15 +73,15 @@ class HomeController extends Controller
 
     public function qrcode2($id)
     {
-        if(\Gate::allows('isAuthor')){
+        if (\Gate::allows('isAuthor')) {
             $pr = Perusahaan::first();
         }
 
-        if(\Gate::allows('isOwner')){
+        if (\Gate::allows('isOwner')) {
             $pr = \Auth::user()->perusahaan;
         }
 
-        if(\Gate::allows('isAdmin')){
+        if (\Gate::allows('isAdmin')) {
             $pr = User::findOrFail(\Auth::user()->user_id)->perusahaan;
         }
 
@@ -93,23 +95,37 @@ class HomeController extends Controller
         return abort(404);
     }
 
-    public function transaksi(){
-        return \Excel::download(new TransaksiExport, now().'.xlsx');
+    public function transaksi()
+    {
+        return \Excel::download(new TransaksiExport, now() . '.xlsx');
     }
 
-    public function tunggakan(){
-        return \Excel::download(new TunggakanExport, now().'.xlsx');
+    public function pesewa2()
+    {
+        return \Excel::download(new PesewaExport, now() . '.xlsx');
     }
 
-    public function setoran(){
-        return \Excel::download(new SetoranExport, now().'.xlsx');
+    public function penyear()
+    {
+        return \Excel::download(new PenYearExport, now() . '.xlsx');
     }
 
-    public function lokasiTenant($id){
-        $tenant = Tenant::with('penyewa')->where('lokasi_id',$id)->get();
+    public function tunggakan()
+    {
+        return \Excel::download(new TunggakanExport, now() . '.xlsx');
+    }
+
+    public function setoran()
+    {
+        return \Excel::download(new SetoranExport, now() . '.xlsx');
+    }
+
+    public function lokasiTenant($id)
+    {
+        $tenant = Tenant::with('penyewa')->where('lokasi_id', $id)->get();
         $lokasi = Lokasi::find($id);
-        $pdf = PDF::loadView('daftar-penyewa',compact('tenant','lokasi'));
-        return $pdf->stream('daftar-penyewa-'.$lokasi->lokasi.'.pdf');
-//        return \Excel::download(new LokasiTenantExport($id), now().'.xlsx');
+        $pdf = PDF::loadView('daftar-penyewa', compact('tenant', 'lokasi'));
+        return $pdf->stream('daftar-penyewa-' . $lokasi->lokasi . '.pdf');
+        //        return \Excel::download(new LokasiTenantExport($id), now().'.xlsx');
     }
 }

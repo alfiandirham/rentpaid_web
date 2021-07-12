@@ -97,16 +97,16 @@ let routes = [{
         component: require('./components/transaksi/Transaksi.vue')
     },
     {
-        path: '/transaksi/:id',
-        component: require('./components/transaksi/TransaksiMonth.vue')
+        path: '/pendapatan/:id/:year',
+        component: require('./components/pendapatan/TransaksiMonth.vue')
     },
     {
-        path: '/transaksi/detail/:id',
-        component: require('./components/transaksi/TransaksiDetail.vue')
+        path: '/history/detail/:id',
+        component: require('./components/pendapatan/TransaksiDetail.vue')
     },
     {
         path: '/pendapatan',
-        component: require('./components/pendapatan/Pendapatan.vue')
+        component: require('./components/pendapatan/Transaksi.vue')
     },
     {
         path: '/tunggakan',

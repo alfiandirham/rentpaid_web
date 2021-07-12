@@ -4,6 +4,7 @@
       <div>
         <h2 class="head-text">
           Pendapatan Bulan {{ parseInt(this.$route.params.id) | myMonth }}
+          {{ this.$route.params.year }}
         </h2>
       </div>
       <div class="head-title">
@@ -235,7 +236,7 @@
                     >
                       <td>
                         <router-link
-                          :to="'/transaksi/detail/' + transaksi.penyewa_id"
+                          :to="'/history/detail/' + transaksi.penyewa_id"
                           >{{ transaksi.nama }}</router-link
                         >
                       </td>
@@ -378,7 +379,12 @@ export default {
     },
     loadData() {
       axios
-        .get("/api/transaksi-month/" + this.$route.params.id)
+        .get(
+          "/api/transaksi-month/" +
+            this.$route.params.id +
+            "q=" +
+            this.$route.params.year
+        )
         .then(({ data }) => (this.transaksis = data));
       axios.get("/api/lokasi").then(({ data }) => (this.lokasi = data));
       axios.get("/api/penyewa").then(({ data }) => (this.penyewa = data));

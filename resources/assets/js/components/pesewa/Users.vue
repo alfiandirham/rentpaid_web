@@ -10,21 +10,53 @@
       <!-- users filter end -->
       <!-- Ag Grid users list section start -->
       <div id="basic-examples">
-        <div class="card" :class="this.$gate.isAuthor() ? '': 'mt-5'">
+        <div class="card" :class="this.$gate.isAuthor() ? '' : 'mt-5'">
           <div class="card-content">
             <div class="card-body">
               <div class="row">
-                <div class="col-12">
-                  <div class="ag-grid-btns d-flex justify-content-between flex-wrap mb-1">
+                <div class="col-6">
+                  <div
+                    class="
+                      ag-grid-btns
+                      d-flex
+                      justify-content-between
+                      flex-wrap
+                      mb-1
+                    "
+                  >
                     <div class="mb-1 mb-sm-0">
                       <input
                         type="search"
                         @keyup="searchit"
                         v-model="search"
-                        class="ag-grid-filter form-control w-100 mr-1 mb-1 mb-sm-0"
+                        class="
+                          ag-grid-filter
+                          form-control
+                          w-100
+                          mr-1
+                          mb-1 mb-sm-0
+                        "
                         id="filter-text-box"
                         placeholder="Search...."
                       />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div
+                    class="
+                      float-right
+                      ag-grid-btns
+                      d-flex
+                      justify-content-between
+                      flex-wrap
+                      mb-1
+                    "
+                  >
+                    <div class="mb-1 mb-sm-0">
+                      <a href="/xl-pesewa" class="btn btn-success"
+                        >Export Excel</a
+                      >
                     </div>
                   </div>
                 </div>
@@ -40,11 +72,11 @@
                   </thead>
                   <tbody>
                     <tr v-for="user in users.data" :key="user.id">
-                      <td>{{user.lokasi}}</td>
-                      <td>{{user.jumlah}}</td>
+                      <td>{{ user.lokasi }}</td>
+                      <td>{{ user.jumlah }}</td>
                       <td class="text-right">
                         <a
-                          :href="'/wilayah/'+user.id"
+                          :href="'/wilayah/' + user.id"
                           onclick="window.open(this.href).print()"
                           target="_blank"
                         >
@@ -69,7 +101,11 @@
                   </tbody>
                 </table>
                 <div class="mt-2 pl-1">
-                  <pagination :limit="5" :data="users" @pagination-change-page="getResults"></pagination>
+                  <pagination
+                    :limit="5"
+                    :data="users"
+                    @pagination-change-page="getResults"
+                  ></pagination>
                 </div>
               </div>
             </div>
