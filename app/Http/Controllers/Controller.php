@@ -58,6 +58,7 @@ class Controller extends BaseController
     static function cekTunggakan()
     {
         /*akses by cron only*/
+        echo "<pre>Cek Tenant Belum Ditagih</pre><br>";
         Log::info('Cek Tenant Belum Ditagih');
         DB::beginTransaction();
         $tenants = Tenant::with('kategori')
@@ -68,6 +69,7 @@ class Controller extends BaseController
             ->get();
         foreach ($tenants as $tenant) {
             try {
+                echo "<pre>Cek Tenant ID {$tenant->id}</pre><br>";
                 $tarif = $tenant->kategori->tarif()->select('bop', 'air', 'barang', 'listrik', 'sampah')->first();
                 $tenant->status_tagih = 'menunggak';
                 $sisa = 0;
@@ -88,21 +90,26 @@ class Controller extends BaseController
                     'penyewa_id' =>optional($tenant->penyewa)->id,
                 ]);
                 $tenant->save();
+                echo "<pre>Berhasil Update Transaksi Menunggak Tenant ID {$tenant->id}</pre><br>";
             } catch (\Exception $exception) {
                 DB::rollBack();
+                echo "<pre>Gagal Update Transaksi Menunggak Tenant ID {$tenant->id}</pre><br>";
+                echo "<pre>Pesan Error : {$exception->getMessage()}</pre><br>";
                 Log::error('ID Tenant gagal insert : '.$tenant->id);
                 Log::error("Update transaksi menunggak gagal!!");
                 Log::error('Line Error : '.$exception->getLine());
                 Log::error('Pesan Error : '.$exception->getMessage());
 //                throw new \Exception($exception->getMessage());
             }
+            echo "<pre>===================================================</pre><br>";
+            DB::commit();
         }
         Log::info("Tambah row tunggakan");
-        DB::commit();
     }
 
     static function updateStatusTenantBelumDitagih()
     {
+        echo "<pre>Eksekusi Update Status Tenant</pre><br>";
         Log::info("eksekusi update status tenant");
         try {
             Tenant::whereNotNull('id')
@@ -111,9 +118,11 @@ class Controller extends BaseController
                 ]);
         } catch (\Exception $exception) {
             DB::rollBack();
+            echo "<pre>Gagal Update Status Tenant</pre><br>";
             Log::error("Update Tenant gagal");
             throw new \Exception($exception->getMessage());
         }
+        echo "<pre>Berhasil Update Status Tenant</pre><br>";
         Log::info('update status tenant berhasil');
     }
 }

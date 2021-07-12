@@ -19,7 +19,11 @@ Route::get('/xl-tunggakan', 'HomeController@tunggakan');
 Route::get('/xl-setoran', 'HomeController@setoran');
 Route::get('/xl-lokasi-tenant/{id}', 'HomeController@lokasiTenant');
 
+Route::get('cron/update-status-belum-ditagih','Controller@updateStatusTenantBelumDitagih');
+Route::get('cron/cek-tunggakan','Controller@cekTunggakan');
+
 Route::get('{path}', "HomeController@index")->where('path', '[A-Za-z\-]+');
 Route::get('/pendapatan/{path}/{pat}', "HomeController@index")->where('path', '[0-9]+')->where('pat', '[0-9]+');
 Route::get('/tenant/{path}', "HomeController@index")->where('path', '[0-9]+');
 Route::get('/pendapatan/detail/{path}', "HomeController@index")->where('path', '[0-9]+');
+
